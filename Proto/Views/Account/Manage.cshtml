@@ -1,4 +1,4 @@
-﻿@model Proto.Models.LocalPasswordModel
+﻿@*@model Proto.Models.LocalPasswordModel
 @{
     ViewBag.Title = "Manage Account";
 }
@@ -26,6 +26,24 @@ else
     <h3>Add an external login</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+@model Proto.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-md-12">
+        @Html.Partial("_ChangePasswordPartial")
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
