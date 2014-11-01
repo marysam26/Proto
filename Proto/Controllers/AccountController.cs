@@ -63,7 +63,10 @@ namespace Proto.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterModel
+            {
+                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            });
         }
 
         //
@@ -77,9 +80,12 @@ namespace Proto.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
+                
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                  //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
+
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
