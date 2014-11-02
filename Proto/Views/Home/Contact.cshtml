@@ -1,23 +1,24 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact Us";
 }
 
-<hgroup class="title">
+@{
+    ViewBag.Message = "Please feel free to contact a Proto representative through one of the methods below";
+}
+
+<center><hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+    <h4>@ViewBag.Message</h4>
+</hgroup></center>
 
 <section class="contact">
     <header>
         <h3>Phone</h3>
     </header>
     <p>
+        <h5></br>Main</h5>
         <span class="label">Main:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
+        <span>800.936.0100</span>
     </p>
 </section>
 
@@ -27,15 +28,11 @@
     </header>
     <p>
         <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
+        <h5>Support</h5>
+        <span><a href="mailto:Education.Proto@gmail.com">Education.Proto@gmail.com</a></span>
         <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
+        <h5>General</h5>
+        <span><a href="mailto:Education.Proto@gmail.com">Education.Proto@gmail.com</a></span>
     </p>
 </section>
 
@@ -44,7 +41,8 @@
         <h3>Address</h3>
     </header>
     <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
+        <h5><br>Washington State University Vancouver</h5>
+        14204 NE Salmon Creek Ave<br />
+        Vancouver, WA 98686
     </p>
 </section>
