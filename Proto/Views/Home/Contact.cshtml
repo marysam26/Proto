@@ -3,46 +3,57 @@
 }
 
 @{
-    ViewBag.Message = "Please feel free to contact a Proto representative through one of the methods below";
+    ViewBag.Message = "Please feel free to contact a Proto representative for questions, comments, or support";
 }
 
-<center><hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h4>@ViewBag.Message</h4>
-</hgroup></center>
 
-<section class="contact">
-    <header>
-        <h3>Phone</h3>
-    </header>
-    <p>
-        <h5></br>Main</h5>
-        <span class="label">Main:</span>
-        <span>800.936.0100</span>
-    </p>
-</section>
+<body 
+        style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters1.50.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
 
-<section class="contact">
-    <header>
-        <h3>Email</h3>
-    </header>
-    <p>
-        <span class="label">Support:</span>
-        <h5>Support</h5>
-        <span><a href="mailto:Education.Proto@gmail.com">Education.Proto@gmail.com</a></span>
-        <span class="label">General:</span>
-        <h5>General</h5>
-        <span><a href="mailto:Education.Proto@gmail.com">Education.Proto@gmail.com</a></span>
-    </p>
-</section>
+</body>
 
-<section class="contact">
-    <header>
-        <h3>Address</h3>
-    </header>
-    <p>
-        <h5><br>Washington State University Vancouver</h5>
-        14204 NE Salmon Creek Ave<br />
-        Vancouver, WA 98686
-    </p>
-</section>
+<div class="content-wrapper">
+        <center>
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h4>@ViewBag.Message</h4>
+            </hgroup>
+        </center>
+    <div class="jumbotron" style="opacity: .70">
+        <section class="contact">
+            <header>
+                <h3>Phone</h3>
+            </header>
+            <p>
+                <span class="label"><font color="#950000">Toll Free:</font></span>
+                <span>800.936.0100</span>
+            </p>
+        </section>
+
+        <section class="contact">
+            <header>
+                <h3>Email</h3>
+            </header>
+            <p>
+                <span class="label"><font color="#950000">Support:</font></span>
+                <span><a href="mailto:Education.Proto@gmail.com">Education.Proto@gmail.com</a><br></span>
+                <span class="label"><font color="#950000">General:</font></span>
+                <span><a href="mailto:Education.Proto@gmail.com">Education.Proto@gmail.com</a></span>
+            </p>
+        </section>
+
+        <section class="contact">
+            <header>
+                <h3>Address</h3>
+            </header>
+            <p>
+                <h5><br>Washington State University Vancouver</h5>
+                14204 NE Salmon Creek Ave<br />
+                Vancouver, WA 98686
+            </p>
+        </section>
+    </div>
+</div>
