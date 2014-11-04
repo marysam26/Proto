@@ -36,28 +36,44 @@
     @Scripts.Render("~/bundles/jqueryval")
 }*@
 
-@model Proto.Models.RegisterModel
+@model Proto.Models.RegisterTeacherModel
 @{
     ViewBag.Title = "Complete Registration";
 }
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("RegisterTeacher", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Complete Manager Account Registration.</h4>
+    <h4>Complete Teacher Registration.</h4>
     <hr />
 
     @Html.ValidationSummary(true)
 
     <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
         <div class="col-md-4">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName)
         </div>
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+    </div>
+    
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-4">
@@ -74,10 +90,10 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.AccountType, "Account Type", new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Grade, "Grade", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.DropDownListFor(model => model.AccountType, Model.KeyList, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.AccountType)
+            @Html.DropDownListFor(model => model.Grade, Model.KeyList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Grade)
         </div>
     </div>
 

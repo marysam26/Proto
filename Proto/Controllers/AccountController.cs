@@ -63,7 +63,10 @@ namespace Proto.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterModel
+            {
+                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            });
         }
 
         //
@@ -77,10 +80,118 @@ namespace Proto.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
+                
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                  //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
+
                     WebSecurity.Login(model.UserName, model.Password);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterTeacher()
+        {
+            return View(new RegisterTeacherModel
+            {
+                KeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+            });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterTeacher(RegisterTeacherModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.Email, model.Password);
+                    //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
+
+                    WebSecurity.Login(model.Email, model.Password);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterStudent()
+        {
+            return View(new RegisterStudentModel
+            {
+                GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+            });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterStudent(RegisterStudentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.Email, model.Password);
+                    //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
+
+                    WebSecurity.Login(model.Email, model.Password);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterReviewer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterReviewer(RegisterReviewerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.Email, model.Password);
+                    //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
+
+                    WebSecurity.Login(model.Email, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
