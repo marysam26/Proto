@@ -195,11 +195,10 @@ namespace Proto.Models
 
         public SelectList GradeKeyList { get; set; }
 
-        [Display(Name = "Teacher")]
+        [Display(Name = "Confirmation Code")]
         [Required]
-        public string Teacher { get; set; }
+        public int ConfirmCode { get; set; }
 
-        public SelectList TeacherKeyList { get; set; }
     }
 
     public class ExternalLogin
