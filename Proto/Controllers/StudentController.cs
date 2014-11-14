@@ -10,11 +10,14 @@ namespace Proto.Controllers
     {
         //
         // GET: /Student/
-
         public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult Home()
+        {
+            return View();
+        }
     }
 }
