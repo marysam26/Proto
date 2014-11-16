@@ -246,6 +246,7 @@ C:\Users\Katie\Source\Repos\Proto\Proto\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\Katie\Source\Repos\Proto\Proto\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\Katie\Source\Repos\Proto\Proto\obj\Debug\Proto.dll
 C:\Users\Katie\Source\Repos\Proto\Proto\obj\Debug\Proto.pdb
+C:\Users\Katie\Source\Repos\Proto\Proto\obj\Debug\Proto.csprojResolveAssemblyReference.cache
 C:\Users\Katie\Source\Repos\Proto\Proto\bin\CKEditor.NET.dll
 C:\Users\Katie\Source\Repos\Proto\Proto\bin\CKEditor.NET.pdb
 C:\Users\troper\Source\Repos\Proto\Proto\bin\Proto.dll.config
