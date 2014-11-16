@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	<meta name="robots" content="noindex, nofollow">
 	<title>Setting editor size</title>
-	<script src="http://cdn.ckeditor.com/4.4.5/standard-all/ckeditor.js"></script>
+	<script src="//cdn.ckeditor.com/4.4.5/full/ckeditor.js"></script>
 </head>
 
 <body style="
@@ -22,8 +22,10 @@
 	<script>
 	    CKEDITOR.replace('editor1', {
 	        width: '50%',
-	        height: 100
+	        height: 100,
+	       // contentsCss: 'body{background:url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters1.50.png);}'
 	    });
+	    
 	</script>
 </body>
 
