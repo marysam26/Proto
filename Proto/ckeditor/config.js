@@ -11,4 +11,5 @@ CKEDITOR.editorConfig = function( config )
     height: 800;
     width: 300;
     config.extraCss += "body{background: url(http://encs.vancouver.wsu.edu/~t.roper/paper.jpg);}";
+
 };

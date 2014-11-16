@@ -15,9 +15,5 @@ namespace Proto.Controllers
             return View();
         }
 
-        public ActionResult Home()
-        {
-            return View();
-        }
     }
 }
