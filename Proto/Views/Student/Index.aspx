@@ -27,22 +27,21 @@
 	</textarea>
 	<script>
 	    CKEDITOR.replace('editor1', {
-	        width: '60%',
-	        height: 100,
+	        width: '80%',
+	        height: 200,
 	        contentsCss: "body{background: url(http://encs.vancouver.wsu.edu/~t.roper/paper.jpg) no-repeat; background-size: cover;}",
 	        toolbar: [
-    { name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Save', 'NewPage'] },
-    { name: 'clipboard', groups: ['clipboard', 'undo'], items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
-    { name: 'editing', groups: ['find', 'selection'], items: ['Find', '-', 'SelectAll', '-'] },
-    { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak'] },
-    '/',
-    { name: 'basicstyles', groups: ['basicstyles', 'cleanup'], items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
-    { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] },
-    '/',
-    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-    { name: 'colors', items: ['TextColor', 'BGColor'] },
-    { name: 'tools', items: ['Maximize', 'ShowBlocks'] },
-    { name: 'others', items: ['-'] },
+                { name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Save', 'NewPage'] },
+                { name: 'clipboard', groups: ['clipboard', 'undo'], items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
+                { name: 'editing', groups: ['find', 'selection'], items: ['Find', '-', 'SelectAll', '-'] },
+                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak'] },
+                { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] },
+                '/',
+                { name: 'basicstyles', groups: ['basicstyles', 'cleanup'], items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] },
+                { name: 'tools', items: ['Maximize', 'ShowBlocks'] },
+                { name: 'others', items: ['-'] },
 	        ]
 	    });
 	   
