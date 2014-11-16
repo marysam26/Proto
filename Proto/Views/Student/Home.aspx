@@ -23,7 +23,7 @@
 	    CKEDITOR.replace('editor1', {
 	        width: '50%',
 	        height: 100,
-	       // contentsCss: 'body{background:url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters1.50.png);}'
+	        contentsCss: "body{background: url(http://encs.vancouver.wsu.edu/~t.roper/paper.jpg) no-repeat; background-size: cover;}"
 	    });
 	    
 	</script>
