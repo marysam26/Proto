@@ -16,16 +16,17 @@
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
         background-repeat: no-repeat;
         background-size: cover">
-    <form>
-	<textarea cols="80" id="editor1" name="editor1" rows="10">
-        </textarea>
+
+	<textarea cols="80" id="editor1" name="editor1" rows="10" >
+	</textarea>
 	<script>
 	    CKEDITOR.replace('editor1', {
 	        width: '50%',
 	        height: 100,
+	        contentsCss: "body{background: url(http://encs.vancouver.wsu.edu/~t.roper/paper.jpg) no-repeat; background-size: cover;}"
 	    });
+	    
 	</script>
-    </form>
 </body>
 
 </html>
