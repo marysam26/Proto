@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CKEditor.NET">
-      <HintPath>..\..\..\..\Downloads\ckeditor_aspnet_3.6.6.2 (1)\bin\Release\CKEditor.NET.dll</HintPath>
+      <HintPath>..\..\..\bin\Release\CKEditor.NET.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -188,8 +188,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Reviewer\ReviewerAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\SystemAdministrator\SystemAdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -611,13 +613,16 @@
     <Content Include="font-awesome-4.1.0\scss\_spinning.scss" />
     <Content Include="font-awesome-4.1.0\scss\_stacked.scss" />
     <Content Include="font-awesome-4.1.0\scss\_variables.scss" />
-
     <Content Include="Areas\Teacher\Views\Web.config" />
     <Content Include="Areas\Reviewer\Views\Web.config" />
     <Content Include="Areas\Student\Views\Web.config" />
-
     <Content Include="ckeditor\.htaccess" />
-
+    <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\Web.config" />
+    <Content Include="Areas\Reviewer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Student\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -630,7 +635,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Views\Student\Index.aspx" />
+    <Content Include="Views\Student2\Index2.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -662,21 +667,18 @@
     <Content Include="Views\Account\RegisterStudent.cshtml" />
     <Content Include="Views\Account\RegisterReviewer.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Student2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
     <Folder Include="Areas\Reviewer\Controllers\" />
     <Folder Include="Areas\Reviewer\Models\" />
-    <Folder Include="Areas\Reviewer\Views\Shared\" />
-    <Folder Include="Areas\Student\Controllers\" />
     <Folder Include="Areas\Student\Models\" />
-    <Folder Include="Areas\Student\Views\Shared\" />
+    <Folder Include="Areas\SystemAdministrator\Controllers\" />
+    <Folder Include="Areas\SystemAdministrator\Models\" />
     <Folder Include="Areas\Teacher\Controllers\" />
     <Folder Include="Areas\Teacher\Models\" />
-    <Folder Include="Areas\Teacher\Views\Shared\" />
-
-    <Folder Include="App_GlobalResources\" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
