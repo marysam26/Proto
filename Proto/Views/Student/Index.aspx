@@ -29,7 +29,7 @@
 	<script>
 	    CKEDITOR.replace('editor1', {
 	        width: '81%',
-	        height: 200,
+	        height: 300,
 	        contentsCss: "body{background: url(http://encs.vancouver.wsu.edu/~t.roper/paper.jpg) no-repeat; background-size: cover;}",
 	        toolbar: [
                 { name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Save', 'NewPage'] },
