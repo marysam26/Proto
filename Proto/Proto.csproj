@@ -188,16 +188,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Reviewer\Models\ReviewerModels.cs" />
     <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Reviewer\ReviewerAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\SystemAdministrator\Models\SystemAdministratorModels.cs" />
     <Compile Include="Areas\SystemAdministrator\SystemAdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherModels.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReviewerController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Reviewer\Controllers\ReviewerController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -623,6 +625,14 @@
     <Content Include="Areas\SystemAdministrator\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\Student\Index.cshtml" />
+    <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reviewer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\AddStudent.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\ViewStory.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\ViewReviews.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -635,7 +645,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Views\Student2\Index2.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -667,18 +676,12 @@
     <Content Include="Views\Account\RegisterStudent.cshtml" />
     <Content Include="Views\Account\RegisterReviewer.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Student2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
-    <Folder Include="Areas\Reviewer\Controllers\" />
-    <Folder Include="Areas\Reviewer\Models\" />
     <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\SystemAdministrator\Controllers\" />
-    <Folder Include="Areas\SystemAdministrator\Models\" />
-    <Folder Include="Areas\Teacher\Controllers\" />
-    <Folder Include="Areas\Teacher\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

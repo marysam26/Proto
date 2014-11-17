@@ -42,7 +42,7 @@
 }
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("RegisterTeacher", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("RegisterStudent", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Complete Teacher Registration.</h4>

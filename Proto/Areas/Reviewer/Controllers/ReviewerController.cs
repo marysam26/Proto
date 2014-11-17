@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Controllers
+namespace Proto.Areas.Reviewer.Controllers
 {
-    public class TeacherController : Controller
+    public class ReviewerController : Controller
     {
         //
-        // GET: /Teacher/
+        // GET: /Reviewer/
 
         public ActionResult Index()
         {
