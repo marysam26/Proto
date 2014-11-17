@@ -621,7 +621,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Views\Reviewer\Index.aspx" />
     <Content Include="Views\Student\Index.aspx" />
+    <Content Include="Views\Teacher\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
