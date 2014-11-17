@@ -19,7 +19,8 @@
         Educational Video Regarding the Writing Assignment
         <br>
         <asp:Label runat="server">
-            <iframe width="500" height="300" src="//www.youtube.com/embed/pQcnLGBi7WE" frameborder="0" allowfullscreen></iframe>
+            <iframe width="500" height="300" src="//www.youtube.com/embed/pQcnLGBi7WE" frameborder="0" allowfullscreen></iframe><br>
+            <iframe width="900" height="625" src="http://mudcu.be/sketchpad/" frameborder="0"></iframe>
         </asp:Label>
         <br><br>
     <form>
