@@ -28,7 +28,7 @@
 	</textarea>
 	<script>
 	    CKEDITOR.replace('editor1', {
-	        width: '80%',
+	        width: '81%',
 	        height: 200,
 	        contentsCss: "body{background: url(http://encs.vancouver.wsu.edu/~t.roper/paper.jpg) no-repeat; background-size: cover;}",
 	        toolbar: [
