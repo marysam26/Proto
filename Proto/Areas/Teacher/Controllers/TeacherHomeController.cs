@@ -7,7 +7,7 @@ using Proto.Areas.Teacher.Models;
 
 namespace Proto.Areas.Teacher.Controllers
 {
-    public class TeacherController : Controller
+    public class TeacherHomeController : Controller
     {
         //
         // GET: /Teacher/

@@ -123,7 +123,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { area = "Teacher" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -159,7 +159,8 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { area = "Student" });
+                
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -192,7 +193,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { area = "Reviewer" });
                 }
                 catch (MembershipCreateUserException e)
                 {
