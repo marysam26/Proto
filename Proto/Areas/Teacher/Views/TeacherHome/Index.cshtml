@@ -12,7 +12,7 @@
             <h2><strong>Please Add a Student</strong> </h2>
             <p>Students will be able to view videos, brain storm, and then perform writing exercises.</p>
             <p>
-                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddStudent", "Teacher")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddStudent", "TeacherHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
             </p>
         </div>
 
@@ -22,7 +22,7 @@
 
     <div>
         <div class="pull-right">
-            <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddStudent", "Teacher")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
+            <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddStudent", "TeacherHOme")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
         </div>
         <h2>@ViewBag.Title</h2>
         <table class="table">
@@ -40,9 +40,9 @@
                 {
                     <tr>
                         <td><strong>@student.Name</strong></td>
-                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStory", "Teacher", new {studentId = student.Id})' ;return false; ">Stories</button></p></td>
+                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStory", "TeacherHome", new {studentId = student.Id})' ;return false; ">Stories</button></p></td>
                         <td>@student.NumReviews</td>
-                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "Teacher", new {studentId = student.Id})' ;return false; ">Reviews</button></p></td>
+                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "TeacherHome", new {studentId = student.Id})' ;return false; ">Reviews</button></p></td>
                         <td>@student.Confirmed</td>
                     </tr>
 

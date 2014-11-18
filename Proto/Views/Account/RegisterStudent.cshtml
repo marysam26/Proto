@@ -100,7 +100,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmCode, "Confirm Code", new { @class = "col-md-2 control-label" })
         <div class="col-md-4">
-            @Html.PasswordFor(m => m.ConfirmCode, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.ConfirmCode, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.ConfirmCode)
         </div>
     </div>

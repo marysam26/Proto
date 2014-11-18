@@ -123,11 +123,11 @@ namespace Proto.Models
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Grade")]
-        [Required]
-        public string Grade { get; set; }
+        //[Display(Name = "Grade")]
+        //[Required]
+        //public string Grade { get; set; }
 
-        public SelectList KeyList { get; set; }
+        //public SelectList GradeKeyList { get; set; }
     }
 
     public class RegisterReviewerModel

@@ -102,10 +102,11 @@ namespace Proto.Controllers
         [AllowAnonymous]
         public ActionResult RegisterTeacher()
         {
-            return View(new RegisterTeacherModel
-            {
-                KeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
-            });
+            //return View(new RegisterTeacherModel
+            //{
+            //    GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+            //});
+            return View();
         }
 
         [HttpPost]
@@ -123,7 +124,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home", new { area = "Teacher" });
+                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -159,7 +160,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home", new { area = "Student" });
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 
                 }
                 catch (MembershipCreateUserException e)
@@ -193,7 +194,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home", new { area = "Reviewer" });
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
                 }
                 catch (MembershipCreateUserException e)
                 {
