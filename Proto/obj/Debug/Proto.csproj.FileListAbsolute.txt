@@ -96,13 +96,10 @@ D:\dev\CapstoneProject\Proto\Proto\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\Microsoft.Web.WebPages.OAuth.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\Newtonsoft.Json.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Data.Entity.dll
-D:\dev\CapstoneProject\Proto\Proto\bin\System.Net.Http.Formatting.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Spatial.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Entity.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Helpers.dll
-D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Http.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Http.OData.dll
-D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Http.WebHost.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Mvc.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Optimization.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Razor.dll
@@ -114,10 +111,7 @@ D:\dev\CapstoneProject\Proto\Proto\bin\WebMatrix.Data.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\WebMatrix.WebData.dll
 D:\dev\CapstoneProject\Proto\Proto\bin\EntityFramework.xml
 D:\dev\CapstoneProject\Proto\Proto\bin\Newtonsoft.Json.xml
-D:\dev\CapstoneProject\Proto\Proto\bin\System.Net.Http.Formatting.xml
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Helpers.xml
-D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Http.xml
-D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Http.WebHost.xml
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Mvc.xml
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.Razor.xml
 D:\dev\CapstoneProject\Proto\Proto\bin\System.Web.WebPages.xml
@@ -247,3 +241,4 @@ C:\Users\Katie\Source\Repos\Proto\Proto\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\Katie\Source\Repos\Proto\Proto\obj\Debug\Proto.csprojResolveAssemblyReference.cache
 C:\Users\Katie\Source\Repos\Proto\Proto\obj\Debug\Proto.dll
 C:\Users\Katie\Source\Repos\Proto\Proto\obj\Debug\Proto.pdb
+D:\dev\CapstoneProject\Proto\Proto\obj\Debug\Proto.csprojResolveAssemblyReference.cache
