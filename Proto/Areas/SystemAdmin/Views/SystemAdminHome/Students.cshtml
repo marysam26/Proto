@@ -1,0 +1,47 @@
+﻿@model List<Proto.Areas.SystemAdmin.Models.StudentView>
+
+@{
+    ViewBag.Title = "Teacher-Home";
+}
+
+
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2>No Students Currently Enrolled </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Stories</th>
+                        <th>Number of Reviews</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                        <tr>
+                            <td><strong>@student.Name</strong></td>
+                            <td>@student.Confirmed</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

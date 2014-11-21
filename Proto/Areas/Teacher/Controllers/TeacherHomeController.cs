@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.SystemAdministrator.Models;
 using Proto.Areas.Teacher.Models;
 
 

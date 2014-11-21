@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.SystemAdministrator.Models;
+using Proto.Areas.SystemAdmin.Models;
 
-namespace Proto.Areas.SystemAdministrator.Controllers
+namespace Proto.Areas.SystemAdmin.Controllers
 {
-    public class SystemAdminController : Controller
+    public class SystemAdminHomeController : Controller
     {
         public ActionResult Index()
         {
@@ -12,22 +13,26 @@ namespace Proto.Areas.SystemAdministrator.Controllers
         }
         public ActionResult Students()
         {
-            return View();
+            var students = new List<StudentView>();
+            return View(students);
         }
 
         public ActionResult Teachers()
         {
-            return View();
+            var teachers = new List<TeacherView>();
+            return View(teachers);
         }
 
         public ActionResult Reviewers()
         {
-            return View();
+            var reviewers = new List<ReviewerView>();
+            return View(reviewers);
         }
 
         public ActionResult ViewStudentsByTeacher()
         {
-            return View();
+            var students = new List<StudentView>();
+            return View(students);
         }
 
         public ActionResult ConfirmTeacher(Guid id)
@@ -42,7 +47,8 @@ namespace Proto.Areas.SystemAdministrator.Controllers
 
         public ActionResult ViewReviewsByReviewers(Guid id)
         {
-            return View();
+            var reviews = new List<ReviewsView>();
+            return View(reviews);
         }
 
         public ActionResult ConfirmReviewer(Guid id)
@@ -56,7 +62,8 @@ namespace Proto.Areas.SystemAdministrator.Controllers
         }
         public ActionResult EditReviewerVideos()
         {
-            return View();
+            var videos = new List<VideoView>();
+            return View(videos);
         }
 
         public ActionResult AddVideo()
@@ -77,7 +84,8 @@ namespace Proto.Areas.SystemAdministrator.Controllers
 
         public ActionResult ViewStoriesByStudent(Guid id)
         {
-            return View();
+            var stories = new List<StoriesView>();
+            return View(stories);
         }
 
         public ActionResult ConfirmStudent(Guid id)
@@ -92,7 +100,8 @@ namespace Proto.Areas.SystemAdministrator.Controllers
 
         public ActionResult EditStudentVideos()
         {
-            return View();
+            var videos = new List<VideoView>();
+            return View(videos);
         }
 
         //public ActionResult AddStudentVideo()

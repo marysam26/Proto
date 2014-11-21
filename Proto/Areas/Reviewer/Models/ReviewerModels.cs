@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Reviewer.Controllers
+namespace Proto.Areas.Reviewer.Models
 {
-    public class StudentViewModel
+    public class StoryViewModel
     {
         public string Name { get; set; }
         public DateTime DatePublished { get; set; }
         public int NumReviews { get; set; }
-        public bool Confirmed { get; set; }
     }
 
     public class ReviewViewModel

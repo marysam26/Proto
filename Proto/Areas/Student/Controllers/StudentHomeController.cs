@@ -11,5 +11,10 @@ namespace Proto.Areas.Student.Controllers
             return View();
         }
 
+        public ActionResult Reviews()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

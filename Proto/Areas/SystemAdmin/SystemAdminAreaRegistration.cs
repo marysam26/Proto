@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Areas.SystemAdministrator
+namespace Proto.Areas.SystemAdmin
 {
-    public class SystemAdministratorAreaRegistration : AreaRegistration
+    public class SystemAdminAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "SystemAdministrator";
+                return "SystemAdmin";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "SystemAdministrator_default",
-                "SystemAdministrator/{controller}/{action}/{id}",
+                "SystemAdmin_default",
+                "SystemAdmin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

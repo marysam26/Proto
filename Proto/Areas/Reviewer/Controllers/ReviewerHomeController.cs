@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Proto.Areas.Reviewer.Models;
 
 namespace Proto.Areas.Reviewer.Controllers
 {
@@ -17,11 +18,6 @@ namespace Proto.Areas.Reviewer.Controllers
             return View();
         }
 
-        public ActionResult Review()
-        {
-            return View();
-        }
-
         public ActionResult PastReviews()
         {
             return View();
@@ -32,12 +28,24 @@ namespace Proto.Areas.Reviewer.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ReviewStory(ReviewInput input)
+        {
+            return View();
+        }
+
         public ActionResult ViewPastReviews()
         {
             return View();
         }
 
         public ActionResult Discuss()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Discuss(CommentInput input)
         {
             return View();
         }

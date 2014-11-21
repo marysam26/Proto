@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.SystemAdministrator.Models
+namespace Proto.Areas.SystemAdmin.Models
 {
     public class TeacherView
     {
@@ -42,4 +42,16 @@ namespace Proto.Areas.SystemAdministrator.Models
         [DisplayName("Link for Video")]
         public string Link { get; set; }
     }
+
+    public class ReviewsView
+    {
+        
+    }
+
+    public class StoriesView
+    {
+        
+    }
+
+
 }
