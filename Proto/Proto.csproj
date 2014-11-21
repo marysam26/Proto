@@ -192,6 +192,7 @@
     <Compile Include="Areas\Student\Controllers\StudentHomeController.cs" />
     <Compile Include="Areas\Reviewer\ReviewerAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\SystemAdministrator\Controllers\SystemAdminController.cs" />
     <Compile Include="Areas\SystemAdministrator\Controllers\SystemAdminHomeController.cs" />
     <Compile Include="Areas\SystemAdministrator\Models\SystemAdministratorModels.cs" />
     <Compile Include="Areas\SystemAdministrator\SystemAdministratorAreaRegistration.cs" />
@@ -207,6 +208,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Objects\Comment.cs" />
+    <Compile Include="Objects\Review.cs" />
+    <Compile Include="Objects\Reviewer.cs" />
+    <Compile Include="Objects\Story.cs" />
+    <Compile Include="Objects\Student.cs" />
+    <Compile Include="Objects\Teacher.cs" />
+    <Compile Include="Objects\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -636,6 +644,22 @@
     <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviews.cshtml" />
     <Content Include="Areas\SystemAdministrator\Views\SystemAdminHome\Index.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Index.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Review.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviews.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ViewPastReviews.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Discuss.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\Index.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\ViewStudentsByTeacher.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\ViewReviewsByReviewers.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\EditReviewerVideos.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\AddVideo.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\ViewStoriesByStudent.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\EditStudentVideos.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\Students.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\Teachers.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdmin\Reviewers.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

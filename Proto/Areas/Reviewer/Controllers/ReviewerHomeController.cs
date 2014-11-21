@@ -12,5 +12,34 @@ namespace Proto.Areas.Reviewer.Controllers
             return View();
         }
 
+        public ActionResult Train()
+        {
+            return View();
+        }
+
+        public ActionResult Review()
+        {
+            return View();
+        }
+
+        public ActionResult PastReviews()
+        {
+            return View();
+        }
+
+        public ActionResult ReviewStory()
+        {
+            return View();
+        }
+
+        public ActionResult ViewPastReviews()
+        {
+            return View();
+        }
+
+        public ActionResult Discuss()
+        {
+            return View();
+        }
     }
 }
