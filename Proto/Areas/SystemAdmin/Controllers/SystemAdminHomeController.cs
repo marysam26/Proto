@@ -13,19 +13,44 @@ namespace Proto.Areas.SystemAdmin.Controllers
         }
         public ActionResult Students()
         {
-            var students = new List<StudentView>();
+            var students = new List<StudentView>()
+            {
+                new StudentView()
+                {
+                    Name = "Alan Turing",
+                    Email = "turing@email.com",
+                    Confirmed = true,
+                    Teacher = "Dr. Mocas"
+                }
+            };
             return View(students);
         }
 
         public ActionResult Teachers()
         {
-            var teachers = new List<TeacherView>();
+            var teachers = new List<TeacherView>()
+            {
+                new TeacherView()   
+                {
+                    Name = "Dr. Mocas",
+                    Email = "mocas@email.com",
+                    Confirmed = true,
+                }
+            };
             return View(teachers);
         }
 
         public ActionResult Reviewers()
         {
-            var reviewers = new List<ReviewerView>();
+            var reviewers = new List<ReviewerView>()
+            {
+                new ReviewerView()
+                {
+                    Name = "The Best Reviewer",
+                    Email = "reviewer@email.com",
+                    Confirmed = true
+                }
+            };
             return View(reviewers);
         }
 
@@ -66,15 +91,15 @@ namespace Proto.Areas.SystemAdmin.Controllers
             return View(videos);
         }
 
-        public ActionResult AddVideo()
+        public ActionResult AddReviewerVideo()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddVideo(AddVideoInput input)
+        public ActionResult AddReviewerVideo(AddVideoInput input)
         {
-            return RedirectToAction("EditStudentVideos");
+            return RedirectToAction("EditReviewerVideos");
         }
 
         public ActionResult DeleteVideo(Guid id)
@@ -104,16 +129,16 @@ namespace Proto.Areas.SystemAdmin.Controllers
             return View(videos);
         }
 
-        //public ActionResult AddStudentVideo()
-        //{
-        //    return View();
-        //}
+        public ActionResult AddStudentVideo()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public ActionResult AddStudentVideo(AddVideoInput input)
-        //{
-        //    return RedirectToAction("EditStudentVideos");
-        //}
+        [HttpPost]
+        public ActionResult AddStudentVideo(AddVideoInput input)
+        {
+            return RedirectToAction("EditStudentVideos");
+        }
 
         //public ActionResult DeleteStudentVideo()
         //{

@@ -652,12 +652,13 @@
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStudentsByTeacher.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewReviewsByReviewers.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\EditReviewerVideos.cshtml" />
-    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddVideo.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddReviewerVideo.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStoriesByStudent.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\EditStudentVideos.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Students.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Teachers.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Reviewers.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddStudentVideo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

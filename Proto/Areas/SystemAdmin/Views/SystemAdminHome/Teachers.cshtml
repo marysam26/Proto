@@ -1,7 +1,7 @@
 ﻿@model List<Proto.Areas.SystemAdmin.Models.TeacherView>
 
 @{
-    ViewBag.Title = "Teacher-Home";
+    ViewBag.Title = "Teachers";
 }
 
 
@@ -23,18 +23,21 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Stories</th>
-                        <th>Number of Reviews</th>
-                        <th>&nbsp;</th>
+                        <th>Email</th>
+                        <th>Students</th>
+                        <th>Confirmed</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var student in Model)
+                    @foreach (var teacher in Model)
                     {
                         <tr>
-                            <td><strong>@student.Name</strong></td>
-                            <td>@student.Confirmed</td>
+                            <td><strong>@teacher.Name</strong></td>
+                            <td>@teacher.Email</td>
+                            <td>[ViewButton]</td>
+                            <td>@teacher.Confirmed</td>
+                            <td>[deleteButton]</td>
                         </tr>
 
                     }
