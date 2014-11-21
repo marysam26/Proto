@@ -24,7 +24,10 @@ namespace Proto.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(new LoginModel
+            {
+                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            });
         }
 
         //
@@ -37,7 +40,15 @@ namespace Proto.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
+                if (model.AccountType == "Teacher")
+                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+                if(model.AccountType == "Student")
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                else
+                {
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+                }
+                //return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
@@ -102,10 +113,11 @@ namespace Proto.Controllers
         [AllowAnonymous]
         public ActionResult RegisterTeacher()
         {
-            return View(new RegisterTeacherModel
-            {
-                KeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
-            });
+            //return View(new RegisterTeacherModel
+            //{
+            //    GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+            //});
+            return View();
         }
 
         [HttpPost]
@@ -123,7 +135,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -159,7 +171,8 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -192,7 +205,7 @@ namespace Proto.Controllers
                     //  WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { AccountType = model.AccountType });
 
                     WebSecurity.Login(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
                 }
                 catch (MembershipCreateUserException e)
                 {
