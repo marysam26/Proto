@@ -70,6 +70,12 @@ namespace Proto.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Display(Name = "Account Type")]
+        [Required]
+        public string AccountType { get; set; }
+
+        public SelectList KeyList { get; set; }
     }
 
     public class RegisterModel

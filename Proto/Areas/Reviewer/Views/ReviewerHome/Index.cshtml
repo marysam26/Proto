@@ -1,56 +1,23 @@
-﻿@model List<Proto.Areas.Teacher.Models.StudentViewModel>
-@{
-    ViewBag.Title = "Teacher-Home";
-}
+﻿    <!DOCTYPE HTML>
 
+    <html>
+    <head runat="server">
+        <meta name="viewport" content="width=device-width" />
+        <title>Reviewer</title>
+    </head>
+    <body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
 
-<div class="content-wrapper">
+        Training Video
+        <br>
+        <asp:label runat="server">
+            <iframe width="500" height="300" src="//www.youtube.com/embed/AnVv0RkiG4U" frameborder="0" allowfullscreen></iframe>
+        </asp:label>
+        <br><br>
+        <div>
 
-    @if (!Model.Any())
-    {
-        <div class="jumbotron">
-            <h2><strong>Please Add a Student</strong> </h2>
-            <p>Students will be able to view videos, brain storm, and then perform writing exercises.</p>
-            <p>
-                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddStudent", "Teacher")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
-            </p>
         </div>
-
-    }
-@if (Model.Any())
-{
-
-    <div>
-        <div class="pull-right">
-            <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddStudent", "Teacher")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
-        </div>
-        <h2>@ViewBag.Title</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Stories</th>
-                    <th>Number of Reviews</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var student in Model)
-                {
-                    <tr>
-                        <td><strong>@student.Name</strong></td>
-                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStory", "Teacher", new {studentId = student.Id})' ;return false; ">Stories</button></p></td>
-                        <td>@student.NumReviews</td>
-                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "Teacher", new {studentId = student.Id})' ;return false; ">Reviews</button></p></td>
-                        <td>@student.Confirmed</td>
-                    </tr>
-
-                }
-            </tbody>
-        </table>
-    </div>
-
-
-}
-</div>
+    </body>
+</html>

@@ -24,7 +24,10 @@ namespace Proto.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(new LoginModel
+            {
+                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            });
         }
 
         //
@@ -37,7 +40,15 @@ namespace Proto.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
+                if (model.AccountType == "Teacher")
+                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+                if(model.AccountType == "Student")
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                else
+                {
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+                }
+                //return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form

@@ -22,9 +22,9 @@
                 @if (Request.IsAuthenticated) { 
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Train", "Train", "Reviewer")</li>
-                    <li>@Html.ActionLink("Review", "Review", "Reviewer")</li>
-                    <li>@Html.ActionLink("Past Reviews", "PastReviews", "Reviewer")</li>
+                    <li>@Html.ActionLink("Train", "Index", "ReviewerHome")</li>
+                    <li>@Html.ActionLink("Review", "Index", "ReviewerHome")</li>
+                    <li>@Html.ActionLink("Past Reviews", "Index", "ReviewerHome")</li>
 
                 </ul>
                 }
