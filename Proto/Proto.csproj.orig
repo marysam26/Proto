@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CKEditor.NET">
-      <HintPath>..\..\..\..\Downloads\ckeditor_aspnet_3.6.6.2 (1)\bin\Release\CKEditor.NET.dll</HintPath>
+      <HintPath>..\..\..\bin\Release\CKEditor.NET.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -188,14 +188,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Reviewer\Models\ReviewerModels.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentHomeController.cs" />
     <Compile Include="Areas\Reviewer\ReviewerAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\SystemAdministrator\Controllers\SystemAdminHomeController.cs" />
+    <Compile Include="Areas\SystemAdministrator\Models\SystemAdministratorModels.cs" />
+    <Compile Include="Areas\SystemAdministrator\SystemAdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherModels.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReviewerController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Reviewer\Controllers\ReviewerHomeController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherHomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -611,13 +616,26 @@
     <Content Include="font-awesome-4.1.0\scss\_spinning.scss" />
     <Content Include="font-awesome-4.1.0\scss\_stacked.scss" />
     <Content Include="font-awesome-4.1.0\scss\_variables.scss" />
-<<<<<<< HEAD
     <Content Include="Areas\Teacher\Views\Web.config" />
     <Content Include="Areas\Reviewer\Views\Web.config" />
     <Content Include="Areas\Student\Views\Web.config" />
-=======
     <Content Include="ckeditor\.htaccess" />
->>>>>>> 73ed61d47bcbb297778444ff19ea2493f0e2f4f4
+    <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\Web.config" />
+    <Content Include="Areas\Reviewer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\Index.cshtml" />
+    <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reviewer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\AddStudent.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewStory.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviews.cshtml" />
+    <Content Include="Areas\SystemAdministrator\Views\SystemAdminHome\Index.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -630,7 +648,12 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+<<<<<<< HEAD
+=======
+    <Content Include="Views\Reviewer\Index.aspx" />
     <Content Include="Views\Student\Index.aspx" />
+    <Content Include="Views\Teacher\Index.aspx" />
+>>>>>>> 1215f2118e4fec27e47e2e9e132bdb3d0e9b78fe
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -665,19 +688,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-    <Folder Include="Areas\Reviewer\Controllers\" />
-    <Folder Include="Areas\Reviewer\Models\" />
-    <Folder Include="Areas\Reviewer\Views\Shared\" />
-    <Folder Include="Areas\Student\Controllers\" />
-    <Folder Include="Areas\Student\Models\" />
-    <Folder Include="Areas\Student\Views\Shared\" />
-    <Folder Include="Areas\Teacher\Controllers\" />
-    <Folder Include="Areas\Teacher\Models\" />
-    <Folder Include="Areas\Teacher\Views\Shared\" />
-=======
     <Folder Include="App_GlobalResources\" />
->>>>>>> 73ed61d47bcbb297778444ff19ea2493f0e2f4f4
+    <Folder Include="Areas\Student\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
