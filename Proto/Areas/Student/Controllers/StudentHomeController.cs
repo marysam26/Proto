@@ -13,8 +13,14 @@ namespace Proto.Areas.Student.Controllers
 
         public ActionResult Reviews()
         {
-            throw new System.NotImplementedException();
+            //TODO: this should return a list of ReviewView modles
+            return View();
         }
 
+        public ActionResult StoryReview()
+        {
+            //TODO: this should return a list of StoryReviewViews
+            return View();
+        }
     }
 }

@@ -45,12 +45,15 @@ namespace Proto.Areas.SystemAdmin.Models
 
     public class ReviewsView
     {
+        //TODO: create a model to hold the information necessary for displaying reviews
         
     }
 
     public class StoriesView
     {
-        
+        public string Title { get; set; }
+        public string Story { get; set; }
+        public string Author { get; set; }
     }
 
 
