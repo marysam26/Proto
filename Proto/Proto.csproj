@@ -659,6 +659,8 @@
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Teachers.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Reviewers.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddStudentVideo.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\Reviews.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\StoryReview.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -39,9 +39,10 @@ namespace Proto.Areas.Reviewer.Models
         public string Comments { get; set; }
     }
 
-    public class TrainView
+    public class TrainVideoView
     {
-        public string[] VideoLinks { get; set; }
+        public string Link { get; set; }
+        public string Title { get; set; }
     }
 
     public class PastReviewHome
