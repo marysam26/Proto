@@ -1,6 +1,5 @@
-﻿
-@*We're going to need to do something here, either split this in to three pages or
-as Katie suggested make this into Tabs.*@ 
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
 <!DOCTYPE HTML>
 
@@ -44,7 +43,26 @@ as Katie suggested make this into Tabs.*@
                         { name: 'others', items: ['-'] },
                     ]
                 });
+                var editor = CKEDITOR.replace('editor1');
+                Debug.WriteLine("Data");
+                // The "save" event is fired whenever a change is made in the editor.
+                editor.on('save', function (evt) {
+                    // getData() returns CKEditor's HTML content.
+                    //console.log('data: ' + evt.editor.getData());
+                    var data = evt.editor.getData();
+                    Debug.WriteLine("Data");
+                    // var data = evt.editor.getData();
+                    // Save data
+                });
 
+                // The "change" event is fired whenever a change is made in the editor.
+                editor.on('change', function (evt) {
+                    // getData() returns CKEditor's HTML content.
+                    //console.log('data: ' + evt.editor.getData());
+                    var data = evt.editor.getData();
+                    Debug.WriteLine("Data");
+                    // Save data
+                });
             </script>
         </form>
         <div>
@@ -52,3 +70,4 @@ as Katie suggested make this into Tabs.*@
         </div>
     </body>
 </html>
+
