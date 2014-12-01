@@ -633,7 +633,6 @@
     <Content Include="ckeditor\.htaccess" />
     <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\Web.config" />
-    <Content Include="Areas\Reviewer\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
@@ -662,6 +661,8 @@
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddStudentVideo.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\Reviews.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\StoryReview.cshtml" />
+    <Content Include="Areas\Reviewer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviewsHome.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

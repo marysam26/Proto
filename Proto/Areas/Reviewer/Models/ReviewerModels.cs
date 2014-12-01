@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proto.Areas.Reviewer.Models
 {
-    public class StoryViewModel
+    public class ViewModel
     {
         public string Name { get; set; }
         public DateTime DatePublished { get; set; }
@@ -14,6 +14,10 @@ namespace Proto.Areas.Reviewer.Models
     {
         public string Title { get; set; }
         public string Story { get; set; }
+        public DateTime DatePublished { get; set; }
+        public string Name { get; set; }
+        public int NumReviews { get; set; }
+    
     }
 
     public class ReviewInput

@@ -27,6 +27,18 @@ namespace Proto.Areas.Reviewer.Controllers
             return View(trainingVideos);
         }
 
+        public ActionResult PastReviewsHome()
+        {
+            //Default review, will pull reviews from database but will use this as default for now.
+            var pastReviewsHome = new List<PastReviewHome>(){
+                new PastReviewHome(){
+                       Title = "Finished Story ~ Reviewed",
+                       DateReviewer = System.DateTime.Now
+                }
+            };
+            return View(pastReviewsHome);
+        }
+
         public ActionResult PastReviews()
         {
             //Default review, will pull reviews from database but will use this as default for now.
@@ -48,8 +60,10 @@ namespace Proto.Areas.Reviewer.Controllers
         public ActionResult ReviewStory()
         {
             //Return view of a story for review
-            var reviewStory = new StoryViewModel()
+            var reviewStory = new ReviewViewModel()
             {
+                Title = "A Really Great Story",
+                Story = "A really great story has really great stories inside.",
                 DatePublished = System.DateTime.Now,
                 Name = "Samantha B. Rutherferdmanskin",
                 NumReviews = 0
