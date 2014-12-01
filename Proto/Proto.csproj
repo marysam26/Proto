@@ -218,6 +218,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Student\Views\StudentHome\Index.aspx" />
     <Content Include="ckeditor\adapters\jquery.js" />
     <Content Include="ckeditor\CHANGES.html" />
     <Content Include="ckeditor\ckeditor.js" />
@@ -625,7 +626,9 @@
     <Content Include="font-awesome-4.1.0\scss\_stacked.scss" />
     <Content Include="font-awesome-4.1.0\scss\_variables.scss" />
     <Content Include="Areas\Teacher\Views\Web.config" />
-    <Content Include="Areas\Reviewer\Views\Web.config" />
+    <Content Include="Areas\Reviewer\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Student\Views\Web.config" />
     <Content Include="ckeditor\.htaccess" />
     <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
@@ -633,7 +636,6 @@
     <Content Include="Areas\Reviewer\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Student\Views\StudentHome\Index.cshtml" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
@@ -643,7 +645,6 @@
     <Content Include="Areas\Teacher\Views\TeacherHome\ViewStory.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviews.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Index.cshtml" />
-    <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviews.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ViewPastReviews.cshtml" />
@@ -661,6 +662,7 @@
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddStudentVideo.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\Reviews.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\StoryReview.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

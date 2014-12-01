@@ -73,7 +73,7 @@ namespace Proto.Models
 
         [Display(Name = "Account Type")]
         [Required]
-        public string AccountType { get; set; }
+        public String AccountType { get; set; }
 
         public SelectList KeyList { get; set; }
     }
