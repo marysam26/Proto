@@ -53,6 +53,7 @@ namespace Proto.Controllers
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");
             return View(model);
         }
 

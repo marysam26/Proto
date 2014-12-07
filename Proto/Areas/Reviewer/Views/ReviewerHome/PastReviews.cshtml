@@ -1,11 +1,59 @@
-﻿@model List<Proto.Areas.Reviewer.Models.PastReviewView>
+﻿@using Proto.Objects
+@model List<Proto.Areas.Reviewer.Models.PastReviewView>
 
 @*This view should look like the bottom screen on the left 
 for the reviewer mockups. Look at the Index view for 
 teachers for an example*@
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Past Reviews";
 }
 
-<h2>title</h2>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2>No Reviews made by this Reviewer. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Story</th>
+                        <th>Title</th>
+                        <th>Character Score</th>
+                        <th>Plot Score</th>
+                        <th>Setting Score</th>
+                        <th>Comment</th>
+                        <th>Story</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reviewer in Model)
+                    {
+                        <tr>
+                            <td>@reviewer.ReviewerName</td>
+                            <td>@reviewer.Story</td>
+                            <td>@reviewer.Title</td>
+                            <td>@reviewer.ScoreCharacter</td>
+                            <td>@reviewer.ScorePlot</td>
+                            <td>@reviewer.ScoreSetting</td>
+                            <td>@reviewer.Comment</td>
+                            <td>@reviewer.Story</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

@@ -35,9 +35,9 @@
                         <tr>
                             <td><strong>@teacher.Name</strong></td>
                             <td>@teacher.Email</td>
-                            <td>[ViewButton]</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudentsByTeacher", "SystemAdminHome", new{id = new Guid()} )' ;return false; ">Students</button></p></td>
                             <td>@teacher.Confirmed</td>
-                            <td>[deleteButton]</td>
+                            <td><a style="color:red">Delete</a></td>
                         </tr>
 
                     }
