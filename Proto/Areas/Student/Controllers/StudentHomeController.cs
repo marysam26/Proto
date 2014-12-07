@@ -11,6 +11,21 @@ namespace Proto.Areas.Student.Controllers
             return View();
         }
 
+        public ActionResult Train()
+        {
+            return View();
+        }
+
+        public ActionResult BrainStorm()
+        {
+            return View();
+        }
+
+        public ActionResult Write()
+        {
+            return View();
+        }
+
         public ActionResult Reviews()
         {
             //TODO: this should return a list of ReviewView modles

@@ -2,6 +2,9 @@
 
 @*This screen should maybe just welcome the reviewer or
 explain what a reviewer does*@
+<<<<<<< HEAD
+<h2>Welcom to the Reviewer Page.</h2>
+=======
 
 @{
     ViewBag.Title = "Reviewer";
@@ -14,3 +17,4 @@ explain what a reviewer does*@
         background-size: cover">
 
 </body>
+>>>>>>> 7e6d227e1a8b3d0eb70c005b145eca776899b751

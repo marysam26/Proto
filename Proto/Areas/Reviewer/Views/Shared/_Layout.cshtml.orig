@@ -16,7 +16,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+<<<<<<< HEAD
                 @Html.ActionLink("Proto", "Index", "ReviewerHome", new { area = "Reviewer" }, new { @class = "navbar-brand" })
+=======
+                @Html.ActionLink("Proto", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+>>>>>>> 7e6d227e1a8b3d0eb70c005b145eca776899b751
             </div>
             <div class="navbar-collapse collapse">
                 @if (Request.IsAuthenticated)
