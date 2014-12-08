@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proto.Areas.Student.Models
 {
@@ -14,7 +15,8 @@ namespace Proto.Areas.Student.Models
     public class ReviewView
     {
         public string Title { get; set; }
-        public int NumReviews { get; set; }
+        public StoryReviewView ReviewOne { get; set; }
+        public StoryReviewView ReviewTwo { get; set; }
     }
 
     public class StoryReviewView
