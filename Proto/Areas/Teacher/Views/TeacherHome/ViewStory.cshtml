@@ -4,11 +4,16 @@
     ViewBag.Title = "Story";
 }
 
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
 
+</body>
 <div class="content-wrapper">
+    <h2>@ViewBag.Title</h2><br>
 
-    <div>
-        <h2>@ViewBag.Title</h2>
+    <div class="jumbotron" style="opacity: .90">
 
         @foreach (var story in Model)
         {

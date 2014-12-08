@@ -3,21 +3,27 @@
     ViewBag.Title = "Reviews";
 }
 
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
 
+</body>
 <div class="content-wrapper">
+    <h2>@ViewBag.Title</h2><br>
+    <div class ="jumbotron" style="opacity: .90">
 
-        <div>
-            <h2>@ViewBag.Title</h2>
-            
-            @foreach (var review in Model)
-            {
-                <h2>Reviewed by: @review.ReviewerName</h2>
-                <div> Plot: @review.ScorePlot </div>
-                <div> Setting: @review.ScoreSetting </div>
-                <div> Character: @review.ScoreCharacter </div>
-                <div>Comment: @review.Comment</div>
-                
-            }
-         </div>
+        @foreach (var review in Model)
+        {
+            <h2>Reviewed by: @review.ReviewerName</h2>
+            <div> Plot: @review.ScorePlot </div>
+            <div> Setting: @review.ScoreSetting </div>
+            <div> Character: @review.ScoreCharacter </div>
+            <div>Comment: @review.Comment</div>
+
+        }
+    </divclass>
+
+
 
 </div>
