@@ -1,4 +1,5 @@
-﻿@model List<Proto.Areas.Reviewer.Models.PastReviewView>
+﻿@using Proto.Objects
+@model List<Proto.Areas.Reviewer.Models.PastReviewView>
 
 @*This view should look like the bottom screen on the left 
 for the reviewer mockups. Look at the Index view for 
@@ -8,11 +9,8 @@ teachers for an example*@
     ViewBag.Title = "Past Reviews";
 }
 
-<h2>Past Reviews</h2>
-<body style="
-        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
-        background-repeat: no-repeat;
-        background-size: cover">
+<<<<<<< HEAD
+<div class="content-wrapper">
 
     @if (!Model.Any())
     {
@@ -60,3 +58,12 @@ teachers for an example*@
 
     }
 </div>
+=======
+<h2>Past Reviews</h2>
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+>>>>>>> 7e6d227e1a8b3d0eb70c005b145eca776899b751

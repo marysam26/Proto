@@ -102,7 +102,13 @@ namespace Proto.Areas.SystemAdmin.Controllers
         [HttpPost]
         public ActionResult AddReviewerVideo(AddVideoInput input)
         {
-            return RedirectToAction("EditReviewerVideos");
+            var video = new VideoView()
+            {
+               Link = input.Link,
+               Title = input.Title
+            };
+            var videos = new List<VideoView> { video };
+            return View("EditReviewerVideos", videos);
         }
 
         public ActionResult DeleteVideo(Guid id)
@@ -140,7 +146,13 @@ namespace Proto.Areas.SystemAdmin.Controllers
         [HttpPost]
         public ActionResult AddStudentVideo(AddVideoInput input)
         {
-            return RedirectToAction("EditStudentVideos");
+            var video = new VideoView()
+            {
+                Link = input.Link,
+                Title = input.Title
+            };
+            var videos = new List<VideoView> { video };
+            return View("EditStudentVideos", videos);
         }
 
      

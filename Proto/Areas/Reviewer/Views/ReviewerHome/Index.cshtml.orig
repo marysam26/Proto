@@ -1,0 +1,20 @@
+﻿@model Proto.Areas.Reviewer.Models.ReviewViewModel
+
+@*This screen should maybe just welcome the reviewer or
+explain what a reviewer does*@
+<<<<<<< HEAD
+<h2>Welcom to the Reviewer Page.</h2>
+=======
+
+@{
+    ViewBag.Title = "Reviewer";
+}
+
+<h2>Welcome Reviewer</h2>
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+>>>>>>> 7e6d227e1a8b3d0eb70c005b145eca776899b751
