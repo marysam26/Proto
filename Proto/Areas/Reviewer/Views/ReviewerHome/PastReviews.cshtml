@@ -16,16 +16,15 @@ teachers for an example*@
 
     @if (!Model.Any())
     {
-        <div class="jumbotron">
-            <h2>No Reviews made by this Reviewer. </h2>
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Reviews made by this Reviewer </h2>
         </div>
 
     }
     @if (Model.Any())
     {
-
-        <div>
-            <h2>@ViewBag.Title</h2>
+        <h2>@ViewBag.Title</h2>
+        <div class="jumbotron" style="opacity: .90">
             <table class="table">
                 <thead>
                     <tr>
