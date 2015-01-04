@@ -667,6 +667,8 @@
     <Content Include="Areas\Student\Views\StudentHome\BrainStorm.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\Index.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\Write.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\StoryReviewsView.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\StoryView.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

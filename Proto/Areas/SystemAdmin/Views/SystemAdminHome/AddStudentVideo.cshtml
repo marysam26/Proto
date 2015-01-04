@@ -4,7 +4,11 @@
     ViewBag.Title = "Add Student Video";
 }
 
-
+<<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
 <div class="content-wrapper">
     @using (Html.BeginForm("AddStudentVideo", "SystemAdminHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {

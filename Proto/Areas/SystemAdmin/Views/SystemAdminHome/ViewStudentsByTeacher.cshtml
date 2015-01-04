@@ -1,15 +1,19 @@
 ﻿@model List<Proto.Areas.SystemAdmin.Models.StudentView>
 
 @{
-    ViewBag.Title = "Teacher-Home";
+    ViewBag.Title = "Teacher's Students";
 }
 
-
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
 <div class="content-wrapper">
 
     @if (!Model.Any())
     {
-        <div class="jumbotron">
+        <div class="jumbotron" style="opacity: .90">
             <h2>No Students associated with this teacher. </h2>
         </div>
 
@@ -17,7 +21,7 @@
     @if (Model.Any())
     {
 
-        <div>
+        <div class="jumbotron" style="opacity:.90">
             <h2>@ViewBag.Title</h2>
             <table class="table">
                 <thead>

@@ -4,12 +4,16 @@
     ViewBag.Title = "Teachers";
 }
 
-
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
 <div class="content-wrapper">
 
     @if (!Model.Any())
     {
-        <div class="jumbotron">
+        <div class="jumbotron" style="opacity: .90">
             <h2>No Teachers Currently Enrolled </h2>
         </div>
 
@@ -17,7 +21,7 @@
     @if (Model.Any())
     {
 
-        <div>
+        <div class="jumbotron" style="opacity: .90">
             <h2>@ViewBag.Title</h2>
             <table class="table">
                 <thead>
