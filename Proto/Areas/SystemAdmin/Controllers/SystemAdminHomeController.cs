@@ -163,7 +163,7 @@ namespace Proto.Areas.SystemAdmin.Controllers
             {
                 new StoryView()
                 {
-                    Author = "Unicorn Cat",
+                    Author = "Alan Turing",
                     StoryOne = new StoriesView()
                     {
                         Title = "The Magnificent Unicorn",
