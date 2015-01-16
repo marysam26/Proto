@@ -26,7 +26,7 @@ Proto is an interactive educational application designed to improve student qual
 
 The project has a front end that is mostly finished. There are still some features and models/controllers that need implemented. Some tweaking to align with design mockups needs to be done as well.
 
-The project is ready for database implementation in order to unitlize the functionality of the front end.
+The project is ready for database implementation in order to utilize the functionality of the front end.
 
 ## Build / Install
 
@@ -37,7 +37,7 @@ There are no build or install instructions at this time.
 * Needed Tools: CKEditor, ...
 
 ```
-     Shell commands, code examples ar helpful
+     Shell commands, code examples are helpful
 ```
 
 ## Configuration and Run Info
