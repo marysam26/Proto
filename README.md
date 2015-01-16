@@ -1,18 +1,13 @@
-Proto
-=====
-
-Capstone project
 ![Your Logo Text](http://ezekiel.vancouver.wsu.edu/~cs421/readme/logo.png)
 
-# Project Name
+# Proto
 
+``` Not implemented yet. Is running off localhost ```
 [Your Web Site](http://example.net/)
 
-A brief, high-level description of the project goes here.
-Thus should be understandable to someone unfamiliar with the project. 
-This is the most important text in the entire project -- craft it well!
+Proto is an interactive educational application designed to improve student quality of reading, writing and spelling skills.
 
-[Dr. Michael Dunn](http://example.net/)
+[Dr. Michael Dunn](http://education.wsu.edu/directory/faculty/dunnm)
 
 ## Authors
 
