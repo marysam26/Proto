@@ -12,7 +12,7 @@ Proto is an interactive educational application designed to improve student qual
 
 ## Authors
 
-[Casey Gilray](mailto:jdoe@wsu.edu)
+[Casey Gilray](mailto:cgilray@gmail.com)
 
 [Katie Gonzalez](mailto:kathrynn.gonzalez@gmail.com)
 
@@ -26,7 +26,7 @@ Proto is an interactive educational application designed to improve student qual
 
 The project has a front end that is mostly finished. There are still some features and models/controllers that need implemented. Some tweaking to align with design mockups needs to be done as well.
 
-The project is ready for database implementation in order to utilize the functionality of the front end.
+The project is ready for database implementation in order to utilize the functionality of the front end. Once the database is hooked up phase 1 of testing begins wherein we are looking for major flaws in design & programming.
 
 ## Build / Install
 
