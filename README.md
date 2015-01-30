@@ -44,6 +44,9 @@ Centralized
 
 ### Main components
 
+* Model View Controller
+* ASP .NET
+
 ### Dependencies, Tools, Libraries needed
 
 * Use of Microsoft Azure for deployment
