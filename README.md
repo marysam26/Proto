@@ -1,5 +1,7 @@
 ![Your Logo Text](http://ezekiel.vancouver.wsu.edu/~cs421/readme/logo.png)
 
+Meeting with Dr. Dunn next week to discuss logo design options as well as change in project name
+
 # Proto
 
 Proto is an interactive educational application designed to improve student quality of reading, writing and spelling skills.
@@ -36,8 +38,6 @@ There are no build or install instructions at this time.
 
 There are no configuration or run instructions at this time.
 
-## Contributing
-
 ### Structure of repo
 
 Centralized
@@ -45,6 +45,10 @@ Centralized
 ### Main components
 
 ### Dependencies, Tools, Libraries needed
+
+* Use of Microsoft Azure for deployment
+* Use of a SQL Server to interact with the database
+* Database
 
 ### Git access
 
