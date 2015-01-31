@@ -3,12 +3,16 @@
     ViewBag.Title = "Reviewers";
 }
 
-
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
 <div class="content-wrapper">
 
     @if (!Model.Any())
     {
-        <div class="jumbotron">
+        <div class="jumbotron" style="opacity: .90">
             <h2>No Reviewers Currently Enrolled </h2>
         </div>
 
@@ -16,7 +20,7 @@
     @if (Model.Any())
     {
 
-        <div>
+        <div class="jumbotron" style="opacity: .90">
             <div class="pull-right">
                 <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("EditReviewerVideos", "SystemAdminHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Edit Videos</button>
             </div>

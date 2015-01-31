@@ -46,6 +46,18 @@ namespace Proto.Areas.SystemAdmin.Models
     public class ReviewsView
     {
         //TODO: create a model to hold the information necessary for displaying reviews
+        public string Title { get; set; }
+        public StoryReviewsView ReviewOne { get; set; }
+        public StoryReviewsView ReviewTwo { get; set; }
+
+    }
+
+    public class StoryView
+    {
+        //TODO: create a model to hold the information necessary for displaying stories
+        public string Author { get; set; }
+        public StoriesView StoryOne { get; set; }
+        public StoriesView StoryTwo { get; set; }
     }
 
     public class StoriesView
@@ -55,5 +67,11 @@ namespace Proto.Areas.SystemAdmin.Models
         public string Author { get; set; }
     }
 
-
+    public class StoryReviewsView
+    {
+        public int ScorePlot { get; set; }
+        public int ScoreCharacter { get; set; }
+        public int ScoreSetting { get; set; }
+        public string Comments { get; set; }
+    }
 }

@@ -1,14 +1,41 @@
-﻿@model Proto.Areas.Student.Models.StoryReviewView
+﻿@model List<Proto.Areas.Student.Models.StoryReviewView>
 
 @*See the bottom left/middle mockup for how this view should look*@
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Scores out of 7";
 
 }
 
-<h2>Story Review</h2>
 <body style="
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
         background-repeat: no-repeat;
-        background-size: cover"></body>
+        background-size: cover">
+        
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2>No Reviews</h2>
+        </div>
+
+    }
+            @if (Model.Any())
+            {
+                <h2>@ViewBag.Title</h2><br>
+                <div class="content-wrapper">
+                    <div class="jumbotron" style="opacity: .90">
+                        @foreach (var student in Model)
+                {
+
+                            <text><b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;@student.ScorePlot</text><br><br>
+                            <text><b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@student.ScoreCharacter</text><br><br>
+                            <text><b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@student.ScoreSetting</text><br><br>
+                            <text><b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@student.Comments</text><br><br>
+
+                }
+                    </div>
+                </div>
+                }
+
+</body>

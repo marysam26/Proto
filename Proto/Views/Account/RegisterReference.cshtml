@@ -41,6 +41,12 @@
     ViewBag.Title = "Complete Registration";
 }
 <h2>@ViewBag.Title</h2>
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
