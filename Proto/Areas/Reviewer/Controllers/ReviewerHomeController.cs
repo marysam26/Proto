@@ -1,13 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Proto.Areas.Reviewer.Models;
+using Raven.Client;
+using Raven.Client.Document;
+using Raven.Client.Indexes;
 
 namespace Proto.Areas.Reviewer.Controllers
 {
     public class ReviewerHomeController : Controller
     {
+        private IDocumentSession session;
         //
         // GET: /Reviewer/
+
+        public ReviewerHomeController()
+        {
+            session = RavenSingleton.GetSession();
+        }
 
         public ActionResult Index()
         {
@@ -41,20 +52,14 @@ namespace Proto.Areas.Reviewer.Controllers
 
         public ActionResult PastReviews()
         {
-            //Default review, will pull reviews from database but will use this as default for now.
-            var pastReviews = new List<PastReviewView>(){
-                new PastReviewView(){
-                       Title = "Finished Story ~ Reviewed",
-                       Story = "THiS WaS a ReAlLy GooDD SORTY.",
-                       ReviewerName = "Dr. Pompus",
-                       ReviewerNames = new string[]{"Dr.Pompus"},
-                       Comment = "Capitilization was abhorrent, no plot, and not long enough to qualify as a story.",
-                       ScoreCharacter = 0,
-                       ScorePlot = 0,
-                       ScoreSetting = 0
-                }
-            };
-            return View(pastReviews);
+            var userName = "kblooie";
+
+            
+            var pastReviews = session.Query<PastReviewView, PastReviewIndex>()
+                .Where(r => r.OwnerUserId == userName && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
+                .ToList();
+
+                return View(pastReviews);
         }
 
         public ActionResult ReviewStory()
@@ -74,24 +79,33 @@ namespace Proto.Areas.Reviewer.Controllers
         [HttpPost]
         public ActionResult ReviewStory(ReviewInput input)
         {
-            //This will respond to a fom being completed and will eventually be saved to a database
-            //This could return a view of all past reviews which would then include the submitted review
-            //Or take them to a reviewer conformation page, I will assume the former for now.
-            List<PastReviewView> pastReviews = new List<PastReviewView>();
-            pastReviews.Add(new PastReviewView()
+            PastReviewView pastReviews;
+            
+            pastReviews = new PastReviewView
             {
                 //Information for the new review will be parsed and added to the database here
                 //TODO: Parse title,story,and reviewer names from avabile information
                 Title = "Reviewed Story",
                 Story = "A long long long long but not so long time ago....",
                 ReviewerName = "Uidentfied reviewer",
-                ReviewerNames = new string[]{"Dr. Pompus"},
+                ReviewerNames = new string[] { "Dr. Pompus" },
                 Comment = input.Comments,
                 ScoreCharacter = input.ScoreCharacter,
                 ScorePlot = input.ScorePlot,
-                ScoreSetting = input.ScoreSetting
-            });
-            return View(pastReviews);
+                ScoreSetting = input.ScoreSetting,
+                OwnerUserId = input.Username,
+                PublishDate = DateTime.UtcNow
+            };
+
+            session.Store(pastReviews);
+
+            session.SaveChanges();
+
+            return Content("It saved!");
+            //This will respond to a fom being completed and will eventually be saved to a database
+            //This could return a view of all past reviews which would then include the submitted review
+            //Or take them to a reviewer conformation page, I will assume the former for now.
+
         }
 
         public ActionResult ViewPastReviews()
@@ -130,6 +144,31 @@ namespace Proto.Areas.Reviewer.Controllers
             //TODO: eventually this will respond to a post of a comment and the comment will be saved to database
             //similar to above, assuming this takes reviewer to list of full discussion
             return RedirectToAction("Discuss");
+        }
+    }
+
+    public static class RavenSingleton
+    {
+        private static IDocumentStore store;
+
+        static RavenSingleton()
+        {
+            store = new DocumentStore {ConnectionStringName = "RavenDB"}.Initialize();
+            IndexCreation.CreateIndexes(typeof(RavenSingleton).Assembly, store);
+        }
+
+        public static IDocumentSession GetSession()
+        {
+            return store.OpenSession();
+        }
+    }
+
+    public class PastReviewIndex : AbstractIndexCreationTask<PastReviewView>
+    {
+        public PastReviewIndex()
+        {
+            Map = docs => from review in docs
+                select new { PublishDate = review.PublishDate, OwnerUserId = review.OwnerUserId, NickName = "Sally" };
         }
     }
 }
