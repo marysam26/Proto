@@ -50,8 +50,8 @@ Centralized
 ### Dependencies, Tools, Libraries needed
 
 * Use of Microsoft Azure for deployment
-* Use of a SQL Server to interact with the database
-* Database
+* RavenHQ
+* RavenDB
 
 ### Git access
 
@@ -63,7 +63,6 @@ Centralized
 
 ## TODO
 
-* Prepopulate tables at database and connect to the database. 
 * Implement database dependent functionalities.
 * Implement timer for planning pages.
 * Confirmation email if possible to let Dr. Dunn know when he needs to approve a request.
