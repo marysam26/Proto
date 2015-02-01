@@ -2,6 +2,8 @@
 Thumbs.db
 
 #Visual Studio
+*.mdf
+*.ldf
 *.orig
 *.idea
 *.obj

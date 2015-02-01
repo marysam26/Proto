@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Proto.Areas.Reviewer.Indexes;
 using Proto.Areas.Reviewer.Models;
 using Raven.Client;
 using Raven.Client.Document;
-using Raven.Client.Indexes;
 
 namespace Proto.Areas.Reviewer.Controllers
 {
@@ -140,31 +140,6 @@ namespace Proto.Areas.Reviewer.Controllers
             //TODO: eventually this will respond to a post of a comment and the comment will be saved to database
             //similar to above, assuming this takes reviewer to list of full discussion
             return RedirectToAction("Discuss");
-        }
-    }
-
-    public static class RavenSingleton
-    {
-        private static IDocumentStore store;
-
-        static RavenSingleton()
-        {
-            store = new DocumentStore {ConnectionStringName = "RavenDB"}.Initialize();
-            IndexCreation.CreateIndexes(typeof(RavenSingleton).Assembly, store);
-        }
-
-        public static IDocumentSession GetSession()
-        {
-            return store.OpenSession();
-        }
-    }
-
-    public class PastReviewIndex : AbstractIndexCreationTask<PastReviewView>
-    {
-        public PastReviewIndex()
-        {
-            Map = docs => from review in docs
-                select new { PublishDate = review.PublishDate, OwnerUserId = review.OwnerUserId, NickName = "Sally" };
         }
     }
 }
