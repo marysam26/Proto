@@ -48,10 +48,10 @@ namespace Proto.App_Start {
             //This sets up structuremap
             IContainer container = IoC.Initialize();
 
-            ////These lines hookup structuremap with MVC so that controllers are now built using structuremap
-            //StructureMapDependencyScope = new StructureMapDependencyScope(container);
-            //DependencyResolver.SetResolver(StructureMapDependencyScope);
-            //DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
+            //These lines hookup structuremap with MVC so that controllers are now built using structuremap
+            StructureMapDependencyScope = new StructureMapDependencyScope(container);
+            DependencyResolver.SetResolver(StructureMapDependencyScope);
+            DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
         }
 
         #endregion

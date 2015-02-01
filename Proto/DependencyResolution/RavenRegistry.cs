@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Raven.Client;
+﻿using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
 using StructureMap.Configuration.DSL;
@@ -14,19 +10,21 @@ namespace Proto.DependencyResolution
     {
         public RavenRegistry()
         {
-            var store = new DocumentStore { ConnectionStringName = "RavenDB" }.Initialize();
-            IndexCreation.CreateIndexes(this.GetType().Assembly, store);
-
             For<IDocumentStore>()
-                .Singleton().Use(store);
+                .Singleton().Use(() => CreateDocumentStore());
 
             For<IDocumentSession>()
                 .LifecycleIs<HttpContextLifecycle>()
-                .Use(store.OpenSession());
+                .Use(c => c.GetInstance<IDocumentStore>().OpenSession());
+            
+            Policies.SetAllProperties(c => c.OfType<IDocumentSession>());
+        }
 
-            Policies
-                .FillAllPropertiesOfType<IDocumentSession>()
-                .Use(c => c.GetInstance<IDocumentSession>());
+        private IDocumentStore CreateDocumentStore()
+        {
+            var store = new DocumentStore {ConnectionStringName = "RavenDB"}.Initialize();
+            IndexCreation.CreateIndexes(this.GetType().Assembly, store);
+            return store;
         }
     }
 }

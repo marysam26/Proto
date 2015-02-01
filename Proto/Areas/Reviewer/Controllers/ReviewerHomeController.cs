@@ -11,15 +11,11 @@ namespace Proto.Areas.Reviewer.Controllers
 {
     public class ReviewerHomeController : Controller
     {
-        private IDocumentSession session;
+        //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
+        public IDocumentSession DocumentSession { get; set; }
         //
         // GET: /Reviewer/
-
-        public ReviewerHomeController()
-        {
-            session = RavenSingleton.GetSession();
-        }
-
+        
         public ActionResult Index()
         {
             return View();
@@ -55,7 +51,7 @@ namespace Proto.Areas.Reviewer.Controllers
             var userName = "kblooie";
 
             
-            var pastReviews = session.Query<PastReviewView, PastReviewIndex>()
+            var pastReviews = DocumentSession.Query<PastReviewView, PastReviewIndex>()
                 .Where(r => r.OwnerUserId == userName && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
                 .ToList();
 
@@ -97,9 +93,9 @@ namespace Proto.Areas.Reviewer.Controllers
                 PublishDate = DateTime.UtcNow
             };
 
-            session.Store(pastReviews);
+            DocumentSession.Store(pastReviews);
 
-            session.SaveChanges();
+            DocumentSession.SaveChanges();
 
             return Content("It saved!");
             //This will respond to a fom being completed and will eventually be saved to a database
