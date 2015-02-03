@@ -39,8 +39,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BuildingBlocks.Common">
+      <HintPath>..\packages\BuildingBlocks.Common.1.0.0.63\lib\net40\BuildingBlocks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Membership">
+      <HintPath>..\packages\BuildingBlocks.Membership.1.0.0.63\lib\net40\BuildingBlocks.Membership.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Membership.RavenDB">
+      <HintPath>..\packages\BuildingBlocks.Membership.RavenDB.1.0.0.63\lib\net40\BuildingBlocks.Membership.RavenDB.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Store">
+      <HintPath>..\packages\BuildingBlocks.Store.1.0.0.63\lib\net40\BuildingBlocks.Store.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Store.RavenDB">
+      <HintPath>..\packages\BuildingBlocks.Store.RavenDB.1.0.0.63\lib\net40\BuildingBlocks.Store.RavenDB.dll</HintPath>
+    </Reference>
     <Reference Include="CKEditor.NET">
       <HintPath>..\..\..\bin\Release\CKEditor.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -49,6 +67,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity">
       <Private>True</Private>
