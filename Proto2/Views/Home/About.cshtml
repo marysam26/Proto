@@ -1,7 +1,43 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Proto";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+@{
+    ViewBag.Message = "Proto is an interactive educational application designed to improve student quality of reading, writing and spelling skills.";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+<center>
+    <hgroup class="title">
+        <h1>@ViewBag.Title</h1>
+        <h4>@ViewBag.Message</h4>
+    </hgroup>
+</center>
+
+<div class="content-wrapper">
+    <div class="jumbotron" style="opacity: .90">
+        <article>
+            <ul>
+                <li>33% of eigth-graders and 24% of 12th graders cannot write at or above proficiency (2012 National Assessment of Education Progress).</li>
+                <li>Only 60% of students can write at a benchmark level (2011-2012 Washington State's Measures of Student Progress).</li>
+                <li>4-6% of school children have an identified learning disability (Vital Health Statistics, 2008).</li>
+            </ul>
+        </article>
+
+        <aside>
+            <h3>Vision</h3>
+            <p>
+                At Proto we aim to change the statistics relating to students and their educational progress.
+                Through targeting the user experience to those of all skill levels we hope to see improvements for students with learning disabilities as well as those without.
+            </p>
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+        </aside>
+    </div>
+</div>
