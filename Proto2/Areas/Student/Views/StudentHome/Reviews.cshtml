@@ -1,0 +1,47 @@
+﻿@model List<Proto.Areas.Student.Models.ReviewView>
+
+@*See the bottom left mockup in Students for how this should look*@
+
+@{
+    ViewBag.Title = "Reviews";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Reviews</h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+        <h2>@ViewBag.Title</h2><br>
+    <div class="jumbotron" style="opacity: .90">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Review One</th>
+                    <th>Review Two</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.Title</td>
+                        @*This is fudged right now to just link to the review page for demo purposes, not dynamic yet*@
+                        <td><a href="~/Student/StudentHome/StoryReview">Review 1</a></td>
+                        @*<td><a href="@student.ReviewOne">Review 1</a></td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+</body>
