@@ -107,7 +107,7 @@ namespace Proto2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.FirstName };
+                var user = new ApplicationUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -136,7 +136,7 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterTeacher(RegisterModel model)
+        public async Task<ActionResult> RegisterTeacher(RegisterTeacherModel model)
         {
             if (ModelState.IsValid)
             {
@@ -160,7 +160,7 @@ namespace Proto2.Controllers
         [AllowAnonymous]
         public ActionResult RegisterStudent()
         {
-            return View(new RegisterModel
+            return View(new RegisterStudentModel
             {
                 GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
             });
@@ -169,7 +169,7 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterStudent(RegisterModel model)
+        public async Task<ActionResult> RegisterStudent(RegisterStudentModel model)
         {
             if (ModelState.IsValid)
             {
@@ -199,12 +199,12 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterReviewer(RegisterModel model)
+        public async Task<ActionResult> RegisterReviewer(RegisterReviewerModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.FirstName };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
