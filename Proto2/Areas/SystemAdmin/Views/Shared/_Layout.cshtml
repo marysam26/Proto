@@ -19,13 +19,14 @@
                 @Html.ActionLink("Home", "Index", "SystemAdminHome", new { area = "SystemAdmin" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @if (Request.IsAuthenticated) { 
-                <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Students", "Students", "SystemAdminHome")</li>
-                    <li>@Html.ActionLink("Teachers", "Teachers", "SystemAdminHome")</li>
-                    <li>@Html.ActionLink("Reviewers", "Reviewers", "SystemAdminHome")</li>
-                </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                        <li>@Html.ActionLink("Students", "Students", "SystemAdminHome")</li>
+                        <li>@Html.ActionLink("Teachers", "Teachers", "SystemAdminHome")</li>
+                        <li>@Html.ActionLink("Reviewers", "Reviewers", "SystemAdminHome")</li>
+                    </ul>
                 }
                 @*@Html.Partial("_LoginPartial")*@
             </div>

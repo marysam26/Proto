@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.SystemAdmin.Models;
+using Proto2.Areas.SystemAdmin.Models;
 
-namespace Proto.Areas.SystemAdmin.Controllers
+namespace Proto2.Areas.SystemAdmin.Controllers
 {
     public class SystemAdminHomeController : Controller
     {
@@ -99,7 +99,8 @@ namespace Proto.Areas.SystemAdmin.Controllers
             return View(reviews);
         }
 
-        public ActionResult ViewReviewsByReviewers(Guid id){
+        public ActionResult ViewReviewsByReviewers(Guid id)
+        {
             var reviews = new List<ReviewsView>(){
                 new ReviewsView(){
                     Title = "The Best Story Ever",
@@ -145,8 +146,8 @@ namespace Proto.Areas.SystemAdmin.Controllers
         {
             var video = new VideoView()
             {
-               Link = input.Link,
-               Title = input.Title
+                Link = input.Link,
+                Title = input.Title
             };
             var videos = new List<VideoView> { video };
             return View("EditReviewerVideos", videos);

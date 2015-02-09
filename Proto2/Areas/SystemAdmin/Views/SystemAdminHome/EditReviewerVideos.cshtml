@@ -1,4 +1,4 @@
-﻿@model List<Proto.Areas.SystemAdmin.Models.VideoView>
+﻿@model List<Proto2.Areas.SystemAdmin.Models.VideoView>
 
 @{
     ViewBag.Title = "Videos for Reviewers";
@@ -17,7 +17,7 @@
             <h2><strong>Please Add a Video</strong> </h2>
             <p>Reviewers will be able to view videos as training exerciese.</p>
             <p>
-                <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("AddReviewerVideo", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Video</button>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddReviewerVideo", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Video</button>
             </p>
         </div>
 
@@ -27,7 +27,7 @@
 
         <div>
             <div class="pull-right">
-                <button type="button" class="btn btn-success pull-right" onclick=" location.href = '@Url.Action("AddReviewerVideo", "SystemAdminHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Video</button>
+                <button type="button" class="btn btn-success pull-right" onclick=" location.href='@Url.Action("AddReviewerVideo", "SystemAdminHome")' ;return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Video</button>
             </div>
             <h2>@ViewBag.Title</h2>
             <table class="table">
