@@ -631,13 +631,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Teacher\Views\TeacherHome\AddStudent.cshtml" />
-    <Content Include="Areas\Teacher\Views\TeacherHome\Index.cshtml" />
-    <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviews.cshtml" />
-    <Content Include="Areas\Teacher\Views\TeacherHome\ViewStory.cshtml" />
-    <Content Include="Areas\Teacher\Views\Web.config" />
     <Content Include="font-awesome-4.1.0\fonts\fontawesome-webfont.eot" />
     <Content Include="font-awesome-4.1.0\fonts\fontawesome-webfont.ttf" />
     <Content Include="font-awesome-4.1.0\fonts\fontawesome-webfont.woff" />
@@ -708,6 +701,13 @@
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStoriesByStudent.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStudentsByTeacher.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\web.config" />
+    <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\AddStudent.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviews.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewStory.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

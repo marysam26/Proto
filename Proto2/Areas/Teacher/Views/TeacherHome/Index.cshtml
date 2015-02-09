@@ -1,4 +1,4 @@
-﻿@model List<Proto.Areas.Teacher.Models.StudentViewModel>
+﻿@model List<Proto2.Areas.Teacher.Models.StudentViewModel>
 @{
     ViewBag.Title = "Welcome Teacher";
 }
@@ -23,42 +23,42 @@
         </div>
 
     }
-@if (Model.Any())
-{
+    @if (Model.Any())
+    {
 
-    <div>
-        <div class="pull-right">
-            <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddStudent", "TeacherHOme")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
+        <div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddStudent", "TeacherHOme")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Student</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Stories</th>
+                            <th>Number of Reviews</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var student in Model)
+                        {
+                            <tr>
+                                <td><strong>@student.Name</strong></td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStory", "TeacherHome", new {studentId = student.Id})' ;return false; ">Stories</button></p></td>
+                                <td>@student.NumReviews</td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "TeacherHome", new {studentId = student.Id})' ;return false; ">Reviews</button></p></td>
+                                <td>@student.Confirmed</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <h2>@ViewBag.Title</h2>
-        <div class="jumbotron" style="opacity: .90">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Stories</th>
-                    <th>Number of Reviews</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var student in Model)
-                {
-                    <tr>
-                        <td><strong>@student.Name</strong></td>
-                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStory", "TeacherHome", new {studentId = student.Id})' ;return false; ">Stories</button></p></td>
-                        <td>@student.NumReviews</td>
-                        <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "TeacherHome", new {studentId = student.Id})' ;return false; ">Reviews</button></p></td>
-                        <td>@student.Confirmed</td>
-                    </tr>
-
-                }
-            </tbody>
-        </table>
-    </div>
-    </div>
 
 
-}
+    }
 </div>

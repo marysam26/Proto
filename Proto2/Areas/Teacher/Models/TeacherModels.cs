@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Teacher.Models
+namespace Proto2.Areas.Teacher.Models
 {
- 
+
     public class StudentViewModel
     {
         public Guid Id { get; set; }
@@ -25,7 +25,7 @@ namespace Proto.Areas.Teacher.Models
 
         [Required]
         [DisplayName("Email")]
-        [DataType(DataType.EmailAddress)]   
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public Guid Id { get; set; }
     }

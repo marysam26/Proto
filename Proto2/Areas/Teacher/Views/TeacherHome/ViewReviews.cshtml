@@ -1,4 +1,4 @@
-﻿@model List<Proto.Areas.Teacher.Models.ReviewView>
+﻿@model List<Proto2.Areas.Teacher.Models.ReviewView>
 @{
     ViewBag.Title = "Reviews";
 }
@@ -11,7 +11,7 @@
 </body>
 <div class="content-wrapper">
     <h2>@ViewBag.Title</h2><br>
-    <div class ="jumbotron" style="opacity: .90">
+    <div class="jumbotron" style="opacity: .90">
 
         @foreach (var review in Model)
         {
@@ -22,8 +22,8 @@
             <div>Comment: @review.Comment</div>
 
         }
-    </divclass>
+        </divclass>
 
 
 
-</div>
+    </div>

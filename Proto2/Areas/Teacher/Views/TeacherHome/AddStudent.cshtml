@@ -1,4 +1,4 @@
-﻿@model Proto.Areas.Teacher.Models.AddStudentInput
+﻿@model Proto2.Areas.Teacher.Models.AddStudentInput
 @{
     ViewBag.Title = "Teacher";
 }
@@ -23,7 +23,7 @@
                     @Html.ValidationMessageFor(model => model.FirstName)
                 </div>
             </div>
-            
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.LastName, "Last Name", new { @class = "control-label col-md-2" })
@@ -32,7 +32,7 @@
                     @Html.ValidationMessageFor(model => model.LastName)
                 </div>
             </div>
-            
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, "Email", new { @class = "control-label col-md-2" })

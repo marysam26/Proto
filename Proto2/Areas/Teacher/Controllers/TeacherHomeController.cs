@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.Teacher.Models;
+using Proto2.Areas.Teacher.Models;
 
 
-namespace Proto.Areas.Teacher.Controllers
+namespace Proto2.Areas.Teacher.Controllers
 {
     public class TeacherHomeController : Controller
     {
@@ -32,7 +32,7 @@ namespace Proto.Areas.Teacher.Controllers
                 Name = input.FirstName + " " + input.LastName,
                 NumReviews = 0
             };
-            var students = new List<StudentViewModel> {student};
+            var students = new List<StudentViewModel> { student };
             return View("Index", students);
 
         }

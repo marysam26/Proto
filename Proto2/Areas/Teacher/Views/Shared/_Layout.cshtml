@@ -19,7 +19,8 @@
                 @Html.ActionLink("Proto", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @if (Request.IsAuthenticated) { 
+                @if (Request.IsAuthenticated)
+                {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Teacher Home", "Index", "TeacherHome")</li>
                     </ul>
