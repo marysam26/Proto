@@ -41,11 +41,16 @@
     ViewBag.Title = "Complete Registration";
 }
 <h2>@ViewBag.Title</h2>
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
 
-@using (Html.BeginForm("RegisterTeacher", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+</body>
+
+@using (Html.BeginForm("RegisterStudent", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Complete Teacher Registration.</h4>
     <hr />
 
     @Html.ValidationSummary(true)
@@ -100,7 +105,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmCode, "Confirm Code", new { @class = "col-md-2 control-label" })
         <div class="col-md-4">
-            @Html.PasswordFor(m => m.ConfirmCode, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.ConfirmCode, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.ConfirmCode)
         </div>
     </div>

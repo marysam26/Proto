@@ -39,8 +39,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BuildingBlocks.Common">
+      <HintPath>..\packages\BuildingBlocks.Common.1.0.0.63\lib\net40\BuildingBlocks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Membership">
+      <HintPath>..\packages\BuildingBlocks.Membership.1.0.0.63\lib\net40\BuildingBlocks.Membership.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Membership.RavenDB">
+      <HintPath>..\packages\BuildingBlocks.Membership.RavenDB.1.0.0.63\lib\net40\BuildingBlocks.Membership.RavenDB.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Store">
+      <HintPath>..\packages\BuildingBlocks.Store.1.0.0.63\lib\net40\BuildingBlocks.Store.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildingBlocks.Store.RavenDB">
+      <HintPath>..\packages\BuildingBlocks.Store.RavenDB.1.0.0.63\lib\net40\BuildingBlocks.Store.RavenDB.dll</HintPath>
+    </Reference>
     <Reference Include="CKEditor.NET">
-      <HintPath>..\..\..\..\Downloads\ckeditor_aspnet_3.6.6.2 (1)\bin\Release\CKEditor.NET.dll</HintPath>
+      <HintPath>..\..\..\bin\Release\CKEditor.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -49,6 +67,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.0\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity">
       <Private>True</Private>
@@ -188,17 +209,33 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Reviewer\Models\ReviewerModels.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentHomeController.cs" />
+    <Compile Include="Areas\Reviewer\ReviewerAreaRegistration.cs" />
+    <Compile Include="Areas\Student\Models\StudentModels.cs" />
+    <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\SystemAdmin\Controllers\SystemAdminHomeController.cs" />
+    <Compile Include="Areas\SystemAdmin\Models\SystemAdminModels.cs" />
+    <Compile Include="Areas\SystemAdmin\SystemAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherModels.cs" />
+    <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReviewerController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
-    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Reviewer\Controllers\ReviewerHomeController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherHomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Objects\Comment.cs" />
+    <Compile Include="Objects\Review.cs" />
+    <Compile Include="Objects\Reviewer.cs" />
+    <Compile Include="Objects\Story.cs" />
+    <Compile Include="Objects\Student.cs" />
+    <Compile Include="Objects\Teacher.cs" />
+    <Compile Include="Objects\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -608,7 +645,51 @@
     <Content Include="font-awesome-4.1.0\scss\_spinning.scss" />
     <Content Include="font-awesome-4.1.0\scss\_stacked.scss" />
     <Content Include="font-awesome-4.1.0\scss\_variables.scss" />
+    <Content Include="Areas\Teacher\Views\Web.config" />
+    <Content Include="Areas\Reviewer\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Student\Views\Web.config" />
     <Content Include="ckeditor\.htaccess" />
+    <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\Web.config" />
+    <Content Include="Areas\SystemAdmin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reviewer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\AddStudent.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewStory.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviews.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Index.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviews.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ViewPastReviews.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Discuss.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Index.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStudentsByTeacher.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewReviewsByReviewers.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\EditReviewerVideos.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddReviewerVideo.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStoriesByStudent.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\EditStudentVideos.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Students.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Teachers.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\Reviewers.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddStudentVideo.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\Reviews.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\StoryReview.cshtml" />
+    <Content Include="Areas\Reviewer\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviewsHome.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\Train.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\BrainStorm.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\Index.cshtml" />
+    <Content Include="Areas\Student\Views\StudentHome\Write.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\StoryReviewsView.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\StoryView.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -621,9 +702,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Views\Reviewer\Index.aspx" />
-    <Content Include="Views\Student\Index.aspx" />
-    <Content Include="Views\Teacher\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -641,7 +719,7 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterReference.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -651,6 +729,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Account\RegisterTeacher.cshtml" />
+    <Content Include="Views\Account\RegisterStudent.cshtml" />
+    <Content Include="Views\Account\RegisterReviewer.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

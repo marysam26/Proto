@@ -12,8 +12,9 @@
             <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         </ul>
     }*@
-
-@if (Request.IsAuthenticated)
+@*Just commenting this out for now, because it doesn't take you to the users home page. 
+    If you're already logged in, there's no way to get to your home page, and i wasn;t able to fix that before final*@
+@*@if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -28,9 +29,9 @@
     }
 }
 else
-{
+{*@
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
     </ul>
-}
+@*}*@
