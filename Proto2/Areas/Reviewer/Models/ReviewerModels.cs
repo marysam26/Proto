@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Reviewer.Models
+namespace Proto2.Areas.Reviewer.Models
 {
     public class ViewModel
     {
@@ -17,7 +17,7 @@ namespace Proto.Areas.Reviewer.Models
         public DateTime DatePublished { get; set; }
         public string Name { get; set; }
         public int NumReviews { get; set; }
-    
+
     }
 
     public class ReviewInput

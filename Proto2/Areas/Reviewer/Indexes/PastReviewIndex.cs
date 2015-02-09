@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Proto.Areas.Reviewer.Models;
+using Proto2.Areas.Reviewer.Models;
 using Raven.Client.Indexes;
 
-namespace Proto.Areas.Reviewer.Indexes
+namespace Proto2.Areas.Reviewer.Indexes
 {
     public class PastReviewIndex : AbstractIndexCreationTask<PastReviewView>
     {

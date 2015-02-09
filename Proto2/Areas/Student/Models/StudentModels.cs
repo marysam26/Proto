@@ -21,6 +21,7 @@ namespace Proto.Areas.Student.Models
 
     public class StoryReviewView
     {
+        public int name { get; set; }
         public int ScorePlot { get; set; }
         public int ScoreCharacter { get; set; }
         public int ScoreSetting { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Security;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -52,7 +53,10 @@ namespace Proto2.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(new LoginViewModel
+            {
+                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            });
         }
 
         //
@@ -60,23 +64,24 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
-                {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
-                }
+                if (model.AccountType == "Teacher")
+                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+                if (model.AccountType == "Student")
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
                 }
+                //return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            model.KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType");
             return View(model);
         }
 

@@ -1,18 +1,18 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Areas.Reviewer
+namespace Proto2.Areas.Reviewer
 {
-    public class ReviewerAreaRegistration : AreaRegistration
+    public class ReviewerAreaRegistration : AreaRegistration 
     {
-        public override string AreaName
+        public override string AreaName 
         {
-            get
+            get 
             {
                 return "Reviewer";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context)
+        public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
                 "Reviewer_default",

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Proto.Areas.Reviewer.Indexes;
-using Proto.Areas.Reviewer.Models;
+using Proto2.Areas.Reviewer.Indexes;
+using Proto2.Areas.Reviewer.Models;
 using Raven.Client;
 using Raven.Client.Document;
 
-namespace Proto.Areas.Reviewer.Controllers
+namespace Proto2.Areas.Reviewer.Controllers
 {
     public class ReviewerHomeController : Controller
     {
@@ -15,7 +15,7 @@ namespace Proto.Areas.Reviewer.Controllers
         public IDocumentSession DocumentSession { get; set; }
         //
         // GET: /Reviewer/
-        
+
         public ActionResult Index()
         {
             return View();
@@ -50,12 +50,12 @@ namespace Proto.Areas.Reviewer.Controllers
         {
             var userName = "kblooie";
 
-            
+
             var pastReviews = DocumentSession.Query<PastReviewView, PastReviewIndex>()
                 .Where(r => r.OwnerUserId == userName && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
                 .ToList();
 
-                return View(pastReviews);
+            return View(pastReviews);
         }
 
         public ActionResult ReviewStory()
@@ -76,7 +76,7 @@ namespace Proto.Areas.Reviewer.Controllers
         public ActionResult ReviewStory(ReviewInput input)
         {
             PastReviewView pastReviews;
-            
+
             pastReviews = new PastReviewView
             {
                 //Information for the new review will be parsed and added to the database here
