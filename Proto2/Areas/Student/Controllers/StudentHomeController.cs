@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Web;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.Student.Models;
+using Proto2.Areas.Student.Models;
 
-namespace Proto.Areas.Student.Controllers
+namespace Proto2.Areas.Student.Controllers
 {
     public class StudentHomeController : Controller
     {

@@ -1,18 +1,18 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Areas.Student
+namespace Proto2.Areas.Student
 {
-    public class StudentAreaRegistration : AreaRegistration
+    public class StudentAreaRegistration : AreaRegistration 
     {
-        public override string AreaName
+        public override string AreaName 
         {
-            get
+            get 
             {
                 return "Student";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context)
+        public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
                 "Student_default",

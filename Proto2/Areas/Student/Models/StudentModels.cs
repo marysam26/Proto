@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Student.Models
+namespace Proto2.Areas.Student.Models
 {
     public class VideoView
     {
@@ -32,7 +33,7 @@ namespace Proto.Areas.Student.Models
     {
         //TODO: if we're going to save their picture, we should try
         //to associate it with the model if possible
-        
+
     }
 
     public class StoryInput

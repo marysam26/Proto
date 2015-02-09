@@ -12,6 +12,7 @@ using Proto2.Models;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
 
+
 namespace Proto2.Controllers
 {
     [Authorize]
@@ -53,7 +54,7 @@ namespace Proto2.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View(new LoginViewModel
+            return View(new LoginModel
             {
                 KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
             });
@@ -64,10 +65,11 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
+                // TODO: This needs to froward based on the usertype not on the drop down like we used for demo
                 if (model.AccountType == "Teacher")
                     return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
                 if (model.AccountType == "Student")
@@ -90,7 +92,10 @@ namespace Proto2.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterModel
+            {
+                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            });
         }
 
         //
@@ -98,16 +103,112 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.FirstName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterTeacher()
+        {
+            //return View(new RegisterTeacherModel
+            //{
+            //    GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+            //});
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterTeacher(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser() { UserName = model.FirstName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterStudent()
+        {
+            return View(new RegisterModel
+            {
+                GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+            });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterStudent(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser() { UserName = model.FirstName };
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterReviewer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterReviewer(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser() { UserName = model.FirstName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
                 }
                 else
                 {
@@ -238,7 +339,7 @@ namespace Proto2.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = loginInfo.DefaultUserName });
             }
         }
 
@@ -274,7 +375,7 @@ namespace Proto2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
