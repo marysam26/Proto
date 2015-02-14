@@ -23,7 +23,6 @@ namespace Proto2.DependencyResolution
         private IDocumentStore CreateDocumentStore()
         {
             var store = new DocumentStore {ConnectionStringName = "RavenDB"}.Initialize();
-            IndexCreation.CreateIndexes(this.GetType().Assembly, store);
             return store;
         }
     }

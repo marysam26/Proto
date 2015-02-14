@@ -20,9 +20,11 @@ namespace Proto2.DependencyResolution {
     using StructureMap;
 	
     public static class IoC {
+
+        public static IContainer Container { get; private set; }
         public static IContainer Initialize()
         {
-            return new Container(c => c
+            return Container = new Container(c => c
                 .Scan(a =>
                 {
                     a.LookForRegistries();

@@ -1,4 +1,4 @@
-﻿@model Proto2.Models.RegisterStudentModel
+﻿@model Proto2.Areas.Account.RegisterReviewerModel
 @{
     ViewBag.Title = "Complete Registration";
 }
@@ -10,7 +10,7 @@
 
 </body>
 
-@using (Html.BeginForm("RegisterStudent", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("RegisterReviewer", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <hr />
@@ -42,6 +42,14 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.Psuedonym, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.Psuedonym, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Psuedonym)
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-4">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
@@ -56,21 +64,7 @@
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Grade, "Grade", new { @class = "control-label col-md-2" })
-        <div class="col-md-4">
-            @Html.DropDownListFor(model => model.Grade, Model.GradeKeyList, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Grade)
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmCode, "Confirm Code", new { @class = "col-md-2 control-label" })
-        <div class="col-md-4">
-            @Html.TextBoxFor(m => m.ConfirmCode, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ConfirmCode)
-        </div>
-    </div>
     @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @Html.CheckBoxFor(m => m.RememberMe)
