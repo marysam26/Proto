@@ -113,10 +113,13 @@ namespace Proto.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Psuedonym")]
+        public string Psuedonym { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -128,6 +131,16 @@ namespace Proto.Models
         [Display(Name = "Confirm password")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Grade")]
+        [Required]
+        public string Grade { get; set; }
+
+        public SelectList GradeKeyList { get; set; }
+
+        [Display(Name = "Confirmation Code")]
+        [Required]
+        public int ConfirmCode { get; set; }
 
         //[Display(Name = "Grade")]
         //[Required]

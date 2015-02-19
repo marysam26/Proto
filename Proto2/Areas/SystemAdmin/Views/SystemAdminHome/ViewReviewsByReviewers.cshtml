@@ -1,0 +1,52 @@
+﻿@model List<Proto2.Areas.SystemAdmin.Models.ReviewsView>
+
+@{
+    ViewBag.Title = "Reviews";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Reviews made by this Reviewer. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Reviews</th>
+                        <th>Number of Reviews</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                        <tr>
+                            <td>@student.Title</td>
+                            @*This is fudged right now to just link to the review page for demo purposes, not dynamic yet*@
+                            <td><a href="~/SystemAdmin/SystemAdminHome/StoryReviewsView">Review 1</a></td>
+                            @*<td><a href="@student.ReviewOne">Review 1</a></td>*@
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>
