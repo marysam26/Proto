@@ -36,12 +36,12 @@ namespace Proto2.Areas.Account
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 
-        [Display(Name = "Account Type")]
-        [Required]
+        //[Display(Name = "Account Type")]
+        //[Required]
 
-        public string AccountType { get; set; }
+        //public string AccountType { get; set; }
 
-        public SelectList KeyList { get; set; }
+        //public SelectList KeyList { get; set; }
     }
 
     //TODO: This needs to be optimized to include all options of registration into 1. Our views can specify which attribute
@@ -49,8 +49,17 @@ namespace Proto2.Areas.Account
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
