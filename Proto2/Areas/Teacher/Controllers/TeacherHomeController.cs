@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Proto2.Areas.Teacher.Models;
+using System.Linq;
+using Raven.Client;
+using Raven.Client.Document;
+using Proto2.Areas.Teacher.Indexes;
 
 
 namespace Proto2.Areas.Teacher.Controllers
 {
     public class TeacherHomeController : Controller
     {
-        //
-        // GET: /Teacher/
+        //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
+        public IDocumentSession DocumentSession { get; set; }
 
         public ActionResult Index()
         {
             var models = new List<StudentViewModel>();
             return View(models);
+            //return View();
         }
 
         public ActionResult AddStudent()
@@ -32,11 +37,30 @@ namespace Proto2.Areas.Teacher.Controllers
                 Name = input.FirstName + " " + input.LastName,
                 NumReviews = 0
             };
-            var students = new List<StudentViewModel> { student };
-            return View("Index", students);
+            DocumentSession.Store(student);
+            DocumentSession.SaveChanges();
+
+            return View(student);
 
         }
+        //TODO:  Pulling data from the database using fake data until the class view for teacher is implemented
+        public ActionResult ViewStudents()
+        {
+            var students = DocumentSession.Query<StudentViewModel, ViewStudentsIndex>()
+                                .Where(r => r.Name == "12345 67890")
+                                .ToList();
 
+            return View(students);
+
+        }
+      /*  public ActionResult StudentView()
+        {
+            var Name = "Tina Roper";
+
+            var studentViews = DocumentSession.Query<StudentViewModel>().Where(r => r.Name == Name);
+            return View(studentViews);
+
+        }*/
         public ActionResult ViewStory(Guid studentId)
         {
             var model = new List<StoryView>
