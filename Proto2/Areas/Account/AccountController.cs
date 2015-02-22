@@ -49,7 +49,6 @@ namespace Proto2.Areas.Account
             ViewBag.ReturnUrl = returnUrl;
             return View(new LoginModel
             {
-                //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
             });
         }
 
@@ -67,27 +66,24 @@ namespace Proto2.Areas.Account
                 if (user == null)
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                    //model.KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType");
                     return View(model);
                 }
                 
-                //TODO:Don't ask the user logging in what role he's in!
                 if (user.Roles.Contains(ProtoRoles.Teacher))
                     return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
                 else
                 {
                     return View(new LoginModel
                     {
-                        //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
                     });
                 }
+
                 if (user.Roles.Contains(ProtoRoles.Student))
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 else
                 {
                     return View(new LoginModel
                     {
-                        //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
                     });
                 }
                 if (user.Roles.Contains(ProtoRoles.Reviewer))
@@ -96,7 +92,6 @@ namespace Proto2.Areas.Account
                 {
                     return View(new LoginModel
                     {
-                        //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
                     });
                 }
 
@@ -105,7 +100,6 @@ namespace Proto2.Areas.Account
             // If we got this far, something failed, redisplay form
             return View(new LoginModel
             {
-                //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
             });
         }
 
@@ -132,8 +126,7 @@ namespace Proto2.Areas.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ProtoUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName };
-                // How to choose from the down down list to add the role
+                var user = new ProtoUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName};
                 if (model.AccountType == "Teacher")
                 {
                     user.Roles.Add(ProtoRoles.Teacher);
@@ -196,9 +189,9 @@ namespace Proto2.Areas.Account
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterTeacher(RegisterTeacherInput model)
         {
-            if (model.ConfirmCode != "ImaTeacher")
+            if (model.ConfirmCode != "01234")
             {
-                ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                ModelState.AddModelError("", "The confirmation code is invalid.");
             }
 
             if (ModelState.IsValid)

@@ -35,17 +35,8 @@ namespace Proto2.Areas.Account
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-
-        //[Display(Name = "Account Type")]
-        //[Required]
-
-        //public string AccountType { get; set; }
-
-        //public SelectList KeyList { get; set; }
     }
 
-    //TODO: This needs to be optimized to include all options of registration into 1. Our views can specify which attribute
-    // Are seen and utilized
     public class RegisterModel
     {
         [Required]
@@ -77,8 +68,14 @@ namespace Proto2.Areas.Account
         public string AccountType { get; set; }
 
         public SelectList KeyList { get; set; }
+
+        [Display(Name = "Confirmation Code")]
+        [Required]
+        public string ConfirmCode { get; set; }
+
     }
 
+    // Can probably just be removed
     public class RegisterTeacherInput
     {
         [Required]
@@ -110,6 +107,7 @@ namespace Proto2.Areas.Account
         public string ConfirmCode { get; set; }
     }
 
+    // Can probably just be removed
     public class RegisterReviewerModel
     {
         [Required]
@@ -142,6 +140,7 @@ namespace Proto2.Areas.Account
         public string ConfirmPassword { get; set; }
     }
 
+    // Can probably just be removed
     public class RegisterStudentModel
     {
         [Required]
