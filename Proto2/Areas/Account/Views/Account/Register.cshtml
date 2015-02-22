@@ -1,49 +1,83 @@
-﻿@{
-    ViewBag.Title = "Register As...";
+﻿@model Proto2.Areas.Account.RegisterModel
+@{
+    ViewBag.Title = "Complete Registration";
 }
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2>@ViewBag.Title</h2>
 <body style="
-        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
         background-repeat: no-repeat;
         background-size: cover">
+
 </body>
-<div class="content-wrapper">
-    <div class="panel panel-default col-md-3 " style="opacity: .9">
-        <div class="panel-heading">
-            <h3 class="panel-title">Student</h3>
-        </div>
-        <div class="panel-body" style="height: 300px">
-            <p>Student users must be referred by a teacher. They will have the opportunity to watch educational videos, plan their story idea with pictures and voice recording, and then write their story. Once their story is finished, the student may submit it for at least two reviewer users to review it.</p>
-            <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("RegisterStudent", "Account", new { area = "Account" })' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Register</button>
-        </div>
 
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
     </div>
 
-    <div class="panel panel-default col-md-3 col-md-push-1" style="opacity: .9">
-        <div class="panel-heading">
-            <h3 class="panel-title">Teacher</h3>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName)
         </div>
-        <div class="panel-body" style="height: 300px">
-            <p>Teacher users may register and then submit a list of students for site access. Once complete, the teacher may access the stories submitted by their students as well as reviewer feedback and scores.</p>
-            <br><br><br><button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("RegisterTeacher", "Account", new { area = "Account" })' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Register</button>
-
-        </div>
-
     </div>
 
-    <div class="panel panel-default col-md-3 col-md-push-2" style="opacity: .9">
-        <div class="panel-heading">
-            <h3 class="panel-title">Reviewer</h3>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
         </div>
-        <div class="panel-body" style="height: 300px">
-            <p>Reviewer users will recieve a short training video and then have the option to select student stories for review. Once a story is reviewed by two reviewers, the reviewers will be able to discuss any score discrepancies and agree on a final score.</p>
-            <br><button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("RegisterReviewer", "Account", new { area = "Account" })' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Register</button>
-
-        </div>
-
     </div>
-</div>
-</div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, "Confirm Password", new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.AccountType, "Account Type", new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DropDownListFor(model => model.AccountType, Model.KeyList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AccountType)
+        </div>
+    </div>
+    @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { style = "font-weight:normal" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Register" />
+        </div>
+    </div>
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

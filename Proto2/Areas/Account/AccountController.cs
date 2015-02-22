@@ -49,7 +49,7 @@ namespace Proto2.Areas.Account
             ViewBag.ReturnUrl = returnUrl;
             return View(new LoginModel
             {
-                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+                //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
             });
         }
 
@@ -67,7 +67,7 @@ namespace Proto2.Areas.Account
                 if (user == null)
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                    model.KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType");
+                    //model.KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType");
                     return View(model);
                 }
                 
@@ -78,15 +78,34 @@ namespace Proto2.Areas.Account
                 {
                     return View(new LoginModel
                     {
-                        KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+                        //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
                     });
                 }
+                if (user.Roles.Contains(ProtoRoles.Student))
+                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                else
+                {
+                    return View(new LoginModel
+                    {
+                        //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+                    });
+                }
+                if (user.Roles.Contains(ProtoRoles.Reviewer))
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+                else
+                {
+                    return View(new LoginModel
+                    {
+                        //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+                    });
+                }
+
             }
 
             // If we got this far, something failed, redisplay form
             return View(new LoginModel
             {
-                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+                //KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
             });
         }
 
@@ -99,6 +118,67 @@ namespace Proto2.Areas.Account
             {
                 KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
             });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterModel model)
+        {
+            //if (model.ConfirmCode != "ImaTeacher")
+            //{
+            //    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            //}
+
+            if (ModelState.IsValid)
+            {
+                var user = new ProtoUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                // How to choose from the down down list to add the role
+                if (model.AccountType == "Teacher")
+                {
+                    user.Roles.Add(ProtoRoles.Teacher);
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }
+                if (model.AccountType == "Student"){
+                    user.Roles.Add(ProtoRoles.Student);
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }                  
+                else
+                {
+                    user.Roles.Add(ProtoRoles.Reviewer);
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         [AllowAnonymous]
@@ -147,7 +227,7 @@ namespace Proto2.Areas.Account
         {
             return View(new RegisterStudentModel
             {
-                GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
+                //GradeKeyList = new SelectList(new[] { "1st", "2nd", "3rd" }, "Grade"),
             });
         }
 
@@ -519,5 +599,7 @@ namespace Proto2.Areas.Account
     public class ProtoRoles
     {
         public const string Teacher = "Proto/Teacher";
+        public const string Student = "Proto/Student";
+        public const string Reviewer = "Proto/Reviewer";
     }
 }
