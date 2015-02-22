@@ -242,6 +242,7 @@
     <Compile Include="Areas\SystemAdmin\Models\SystemAdminModels.cs" />
     <Compile Include="Areas\SystemAdmin\SystemAdminAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\TeacherHomeController.cs" />
+    <Compile Include="Areas\Teacher\Indexes\ViewStudentsIndex.cs" />
     <Compile Include="Areas\Teacher\Models\TeacherModels.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Areas\Account\AccountController.cs" />
