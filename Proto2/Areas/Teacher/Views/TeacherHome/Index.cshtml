@@ -1,0 +1,57 @@
+﻿@model List<Proto2.Areas.Teacher.Models.ClassViewModel>
+@{
+    ViewBag.Title = "Welcome Teacher";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2><strong>Please Add a Course</strong> </h2>
+            <p>Once you add courses, your students can begin to enroll.</p>
+            <p>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddClass", "TeacherHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+            </p>
+        </div>
+        
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddClass", "TeacherHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var course in Model)
+                        {
+                            <tr>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudents", "TeacherHome", new {classID = course.classID})' ;return false; ">@course.className</button></p></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }
+</div>

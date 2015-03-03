@@ -1,0 +1,51 @@
+﻿@model List<Proto.Areas.SystemAdmin.Models.StoryView>
+
+@{
+    ViewBag.Title = "Student Stories";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No stories composed by this student. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Stories</th>
+                        <th>Number of Reviews</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Story in Model)
+                    {
+                        <tr>
+                            <td>@Story.Author</td>
+                            <td><a href="~/SystemAdmin/SystemAdminHome/StoryView">Story 1</a></td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

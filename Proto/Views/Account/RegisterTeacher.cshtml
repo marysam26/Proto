@@ -41,11 +41,16 @@
     ViewBag.Title = "Complete Registration";
 }
 <h2>@ViewBag.Title</h2>
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
 
 @using (Html.BeginForm("RegisterTeacher", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Complete Teacher Registration.</h4>
     <hr />
 
     @Html.ValidationSummary(true)
@@ -89,13 +94,13 @@
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         @Html.LabelFor(model => model.Grade, "Grade", new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.DropDownListFor(model => model.Grade, Model.KeyList, new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Grade, Model.GradeKeyList, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Grade)
         </div>
-    </div>
+    </div>*@
 
     @*<div class="form-group">
         <div class="col-md-offset-2 col-md-10">

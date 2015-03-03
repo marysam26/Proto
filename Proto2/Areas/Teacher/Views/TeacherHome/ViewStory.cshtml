@@ -1,0 +1,25 @@
+﻿@using Proto2.Areas.Student
+@model List<Proto2.Areas.Teacher.Models.StoryView>
+@{
+    ViewBag.Title = "Story";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<div class="content-wrapper">
+    <h2>@ViewBag.Title</h2><br>
+
+    <div class="jumbotron" style="opacity: .90">
+
+        @foreach (var story in Model)
+        {
+            <h2>Title: @story.Title</h2>
+            <div class="col-md-12"> @story.Stories</div>
+        }
+    </div>
+
+</div>
