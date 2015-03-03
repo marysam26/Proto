@@ -170,7 +170,7 @@ namespace Proto2.Areas.Account
                 }
             }
 
-            model.KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+            model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -596,5 +596,6 @@ namespace Proto2.Areas.Account
         public const string Teacher = "Proto/Teacher";
         public const string Student = "Proto/Student";
         public const string Reviewer = "Proto/Reviewer";
+        public const string SystemAdmin = "Proto/SystemAdmin";
     }
 }

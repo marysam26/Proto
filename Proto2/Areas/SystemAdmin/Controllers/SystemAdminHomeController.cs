@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Web.Mvc;
+using System.Web.Security;
+using Proto2.Areas.Account;
 using Proto2.Areas.SystemAdmin.Models;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
@@ -10,6 +13,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         //TODO: Feel free to add 'fake data' anywhere an empty
         //list is being returned see Students below for an example
+        //[Authorize(Roles = ProtoRoles.SystemAdmin)]
         public ActionResult Index()
         {
             return View();
@@ -34,7 +38,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         {
             var teachers = new List<TeacherView>()
             {
-                new TeacherView()   
+                new TeacherView()
                 {
                     Name = "Dr. Mocas",
                     Email = "mocas@email.com",
@@ -76,10 +80,13 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult StoryView()
         {
-            var stories = new List<StoriesView>{
-                new StoriesView(){
+            var stories = new List<StoriesView>
+            {
+                new StoriesView()
+                {
                     Title = "The Magnificent Unicorn",
-                    Story = "The magnificent unicorn (TMU) is the rarest of all creatures on earth. This beast stands over 6 feet tall, has a mane of rainbow colored hair, eyes that shine like two amethysts, and a horn of pure gold. TMU has been spotted in regions of the world such as Atlantis, The North Pole, and Imagination Land.",
+                    Story =
+                        "The magnificent unicorn (TMU) is the rarest of all creatures on earth. This beast stands over 6 feet tall, has a mane of rainbow colored hair, eyes that shine like two amethysts, and a horn of pure gold. TMU has been spotted in regions of the world such as Atlantis, The North Pole, and Imagination Land.",
                     Author = "Unicorn Cat"
                 }
             };
@@ -88,8 +95,10 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult StoryReviewsView()
         {
-            var reviews = new List<StoryReviewsView>{
-                new StoryReviewsView(){
+            var reviews = new List<StoryReviewsView>
+            {
+                new StoryReviewsView()
+                {
                     ScorePlot = 5,
                     ScoreCharacter = 4,
                     ScoreSetting = 5,
@@ -101,10 +110,13 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult ViewReviewsByReviewers(Guid id)
         {
-            var reviews = new List<ReviewsView>(){
-                new ReviewsView(){
+            var reviews = new List<ReviewsView>()
+            {
+                new ReviewsView()
+                {
                     Title = "The Best Story Ever",
-                    ReviewOne = new StoryReviewsView(){
+                    ReviewOne = new StoryReviewsView()
+                    {
                         ScorePlot = 5,
                         ScoreCharacter = 4,
                         ScoreSetting = 5,
@@ -130,6 +142,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         {
             return RedirectToAction("Reviewers");
         }
+
         public ActionResult EditReviewerVideos()
         {
             var videos = new List<VideoView>();
@@ -149,7 +162,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 Link = input.Link,
                 Title = input.Title
             };
-            var videos = new List<VideoView> { video };
+            var videos = new List<VideoView> {video};
             return View("EditReviewerVideos", videos);
         }
 
@@ -168,7 +181,8 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                     StoryOne = new StoriesView()
                     {
                         Title = "The Magnificent Unicorn",
-                        Story = "The magnificent unicorn (TMU) is the rarest of all creatures on earth. This beast stands over 6 feet tall, has a mane of rainbow colored hair, eyes that shine like two amethysts, and a horn of pure gold. TMU has been spotted in regions of the world such as Atlantis, The North Pole, and Imagination Land.",
+                        Story =
+                            "The magnificent unicorn (TMU) is the rarest of all creatures on earth. This beast stands over 6 feet tall, has a mane of rainbow colored hair, eyes that shine like two amethysts, and a horn of pure gold. TMU has been spotted in regions of the world such as Atlantis, The North Pole, and Imagination Land.",
                         Author = "Unicorn Cat"
                     }
                 }
@@ -205,7 +219,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 Link = input.Link,
                 Title = input.Title
             };
-            var videos = new List<VideoView> { video };
+            var videos = new List<VideoView> {video};
             return View("EditStudentVideos", videos);
         }
 
@@ -214,5 +228,21 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         //{
         //    return RedirectToAction("EditStudentVideos");
         //}
+
+        public ActionResult AddPass()
+        {
+            return View();
+        }
+
+        public ActionResult AddPassGenerate()
+        {
+            var random = new Random();
+            var code = random.Next(1000, 9999);
+            var codeView = new AddPassView
+            {
+                PassCode = code
+            };
+            return View(codeView);
+        }
     }
 }

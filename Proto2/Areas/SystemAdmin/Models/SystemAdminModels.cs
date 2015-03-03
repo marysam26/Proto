@@ -74,4 +74,9 @@ namespace Proto2.Areas.SystemAdmin.Models
         public int ScoreSetting { get; set; }
         public string Comments { get; set; }
     }
+
+    public class AddPassView
+    {
+        public int PassCode { get; set; }
+    }
 }
