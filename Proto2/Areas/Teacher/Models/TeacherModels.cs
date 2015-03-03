@@ -8,7 +8,7 @@ namespace Proto2.Areas.Teacher.Models
     public class ClassViewModel
     {
         public string teacherID { get; set; }
-        public string classID { get; set; }
+        public Guid id { get; set; }
         // List of students
         //public string[] studentNames { get; set; }
         // List of reviewers

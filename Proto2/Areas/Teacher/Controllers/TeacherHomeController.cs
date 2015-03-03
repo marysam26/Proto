@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Proto2.Areas.Reviewer.Indexes;
+using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Teacher.Models;
 using System.Linq;
 using Raven.Client;
@@ -21,7 +24,7 @@ namespace Proto2.Areas.Teacher.Controllers
             //var models = new List<ClassViewModel>();
             var courses = DocumentSession.Query<ClassViewModel, ViewClassesIndex>()
                 // How to make it pull based on teacherID?
-                               .Where(r => r.teacherID == "Teacher1")// How to pull all classes for this teacher?
+                               .Where(r => r.teacherID == User.Identity.GetUserId())// How to pull all classes for this teacher?
                                .ToList();
 
             return View(courses);
@@ -36,16 +39,17 @@ namespace Proto2.Areas.Teacher.Controllers
         [HttpPost]
         public ActionResult AddClass(AddClassInput input)
         {
+            
             var course = new ClassViewModel()
             {
-                classID = input.classID,
+                id = Guid.NewGuid(),
                 className = input.className,
-                teacherID = input.teacherID
+                teacherID = User.Identity.GetUserId(),
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
 
-            return View();// Want to return to index, but it is NULL on the (!model.any())
+            return RedirectToAction("Index");
 
         }
 
