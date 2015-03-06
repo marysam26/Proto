@@ -1,0 +1,17 @@
+﻿@model Proto2.Areas.SystemAdmin.Models.AddPassView
+
+@{
+    ViewBag.Title = "Generate Passcode";
+}
+
+<<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+        <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddPassGenerate", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
+        <p>@Model.PassCode</p>
+    
+</div>

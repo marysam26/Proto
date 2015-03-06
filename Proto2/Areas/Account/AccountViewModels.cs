@@ -70,7 +70,7 @@ namespace Proto2.Areas.Account
         public SelectList KeyList { get; set; }
 
         [Display(Name = "Confirmation Code")]
-        //[Required]
+       // [Required]
         public string ConfirmCode { get; set; }
 
     }

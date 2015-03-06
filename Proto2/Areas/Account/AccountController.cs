@@ -150,7 +150,7 @@ namespace Proto2.Areas.Account
                         return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                     }
                     else
-                    {
+                    {   
                         AddErrors(result);
                     }
                 }                  
@@ -169,6 +169,8 @@ namespace Proto2.Areas.Account
                     }
                 }
             }
+
+            model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");
 
             // If we got this far, something failed, redisplay form
             var errorModel = new RegisterModel()
@@ -603,5 +605,6 @@ namespace Proto2.Areas.Account
         public const string Teacher = "Proto/Teacher";
         public const string Student = "Proto/Student";
         public const string Reviewer = "Proto/Reviewer";
+        public const string SystemAdmin = "Proto/SystemAdmin";
     }
 }
