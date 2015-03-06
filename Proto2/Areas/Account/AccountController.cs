@@ -171,7 +171,16 @@ namespace Proto2.Areas.Account
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            var errorModel = new RegisterModel()
+            {
+                AccountType = model.AccountType,
+                ConfirmCode = model.ConfirmCode,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType"),
+            };
+            return View(errorModel);
         }
 
         [AllowAnonymous]

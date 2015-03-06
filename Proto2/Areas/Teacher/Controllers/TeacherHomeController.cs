@@ -45,7 +45,7 @@ namespace Proto2.Areas.Teacher.Controllers
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
 
-            return View();// Want to return to index, but it is NULL on the (!model.any())
+            return RedirectToAction("Index"); ;// Want to return to index, but it is NULL on the (!model.any())
 
         }
 
