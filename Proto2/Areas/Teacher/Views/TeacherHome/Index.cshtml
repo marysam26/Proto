@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.Teacher.Models.ClassViewModel>
+﻿@model List<Proto2.Areas.Teacher.Models.ClassModel>
 @{
     ViewBag.Title = "Welcome Teacher";
 }
@@ -37,13 +37,23 @@
                     <thead>
                         <tr>
                             <th>Course</th>
+                            <th>End Date</th>
+                            <th>Confirmation Code</th>
+                            <th>Students</th>
+                            <th>Reviewers</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var course in Model)
                         {
                             <tr>
-                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudents", "TeacherHome", new {classID = course.id})' ;return false; ">@course.className</button></p></td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "TeacherHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
+                                <td>@course.EndDate.Date</td>
+                                <td>@course.ConfirmCode</td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudents", "TeacherHome", new {classID = course.id})' ;return false; ">Students</button></p></td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "TeacherHome", new {classID = course.id})' ;return false; ">Reviewers</button></p></td>
+
                             </tr>
 
                         }

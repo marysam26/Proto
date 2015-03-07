@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas.Reviewer.Indexes;
-using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Teacher.Models;
 using System.Linq;
 using Raven.Client;
-using Raven.Client.Document;
 using Proto2.Areas.Teacher.Indexes;
 
 
@@ -22,13 +19,12 @@ namespace Proto2.Areas.Teacher.Controllers
         public ActionResult Index()
         {
             //var models = new List<ClassViewModel>();
-            var courses = DocumentSession.Query<ClassViewModel, ViewClassesIndex>()
+            var courses = DocumentSession.Query<ClassModel>()
                 // How to make it pull based on teacherID?
-                               .Where(r => r.teacherID == User.Identity.GetUserId())// How to pull all classes for this teacher?
+                               .Where(r => r.teacherId == User.Identity.GetUserId())// How to pull all classes for this teacher?
                                .ToList();
 
             return View(courses);
-            //return View();
         }
 
         public ActionResult AddClass()
@@ -39,12 +35,17 @@ namespace Proto2.Areas.Teacher.Controllers
         [HttpPost]
         public ActionResult AddClass(AddClassInput input)
         {
+            var random = new Random();
+            var code = random.Next(1000, 9999);
             
-            var course = new ClassViewModel()
+            var course = new ClassModel()
             {
                 id = Guid.NewGuid(),
-                className = input.className,
-                teacherID = User.Identity.GetUserId(),
+                ClassName = input.ClassName,
+                teacherId = User.Identity.GetUserId(),
+                EndDate = input.EndDate,
+                ConfirmCode = code
+                
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
@@ -92,9 +93,9 @@ namespace Proto2.Areas.Teacher.Controllers
         // I need to make this teacher specific
         public ActionResult ViewClasses(string teacherID)
         {
-            var courses = DocumentSession.Query<ClassViewModel, ViewStudentsIndex>()
+            var courses = DocumentSession.Query<ClassModel, ViewStudentsIndex>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.teacherID == teacherID)// classID associated with the link from the class button
+                                .Where(r => r.teacherId == teacherID)// classID associated with the link from the class button
                                 .ToList();
 
             return View(courses);
@@ -137,6 +138,28 @@ namespace Proto2.Areas.Teacher.Controllers
                 }
             };
             return View(model);
+        }
+
+        public ActionResult ViewAssignments(Guid classid)
+        {
+           // var assignments = DocumentSession.Query<AssignmentAddInput>().ToList();
+            var assignments = new List<AssignmentAddInput>()
+            {
+                new AssignmentAddInput()
+                {
+                    AssignmentName = "First Assignment",
+                    Description = "This is the description",
+                    Link = "This is the link",
+                    Id = Guid.NewGuid()
+                }
+            };
+
+            return View(assignments);
+        }
+
+        public ActionResult ViewAssignmentDetails(Guid classid)
+        {
+            throw new NotImplementedException();
         }
     }
 
