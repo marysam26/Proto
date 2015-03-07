@@ -12,11 +12,27 @@ namespace Proto2.Areas.Student.Models
         public string Link { get; set; }
     }
 
-    public class ReviewView
+    public class StudentAddClass
+    {
+        public string classCode { get; set; }
+    }
+
+    public class StudentReviewView
     {
         public string Title { get; set; }
         public StoryReviewView ReviewOne { get; set; }
         public StoryReviewView ReviewTwo { get; set; }
+    }
+
+    public class SubmissionView
+    {
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+        public DateTime SubmissionDate { get; set; }
+        public string StudentId { get; set; }
+        public Guid StoryId { get; set; }
+        public string Title { get; set; }
+        public string Story { get; set; }
     }
 
     public class StoryReviewView
@@ -36,6 +52,8 @@ namespace Proto2.Areas.Student.Models
 
     public class StoryInput
     {
+        public string StudentId { get; set; }
+        public Guid StoryId { get; set; }
         public string Title { get; set; }
         public string Story { get; set; }
     }

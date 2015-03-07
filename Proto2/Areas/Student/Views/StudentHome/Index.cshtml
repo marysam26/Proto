@@ -1,14 +1,57 @@
-﻿@*This screen should maybe just welcome the Student or
-    explain what a reviewer does*@
-
+﻿@model List<Proto2.Areas.Teacher.Models.ClassViewModel>
 @{
-    ViewBag.Title = "Student";
+    ViewBag.Title = "Welcome Student";
 }
 
-
-<h2>Welcome Student</h2>
 <body style="
-        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
         background-repeat: no-repeat;
         background-size: cover">
+
 </body>
+
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2><strong>Please enroll for a course</strong> </h2>
+            <p>Once you add courses, you will be able to work on assignments.</p>
+            <p>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("StudentAddClass", "StudentHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+            </p>
+        </div>
+
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("StudentAddClass", "StudentHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var course in Model)
+                        {
+                            <tr>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.id})' ;return false; ">@course.className</button></p></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }
+</div>

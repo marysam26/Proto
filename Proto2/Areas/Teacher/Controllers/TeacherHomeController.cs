@@ -5,10 +5,10 @@ using Microsoft.AspNet.Identity;
 using Proto2.Areas.Reviewer.Indexes;
 using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Teacher.Models;
+using Proto2.Areas.Teacher.Indexes;
 using System.Linq;
 using Raven.Client;
 using Raven.Client.Document;
-using Proto2.Areas.Teacher.Indexes;
 
 
 namespace Proto2.Areas.Teacher.Controllers

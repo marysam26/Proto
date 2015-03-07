@@ -9,10 +9,14 @@ namespace Proto2.Areas.Teacher.Models
     {
         public string teacherID { get; set; }
         public Guid id { get; set; }
+        public int ConfirmCode { get; set; }
+        public DateTime EndDate { get; set; }
         // List of students
-        //public string[] studentNames { get; set; }
+        // When student adds guid on their page, it adds their names to this list
+        public string[] Students { get; set; }
         // List of reviewers
-        //public string[] reviewNames { get; set; }
+        // When a reviewer agrees to review for this class it adds them to this list
+        public string[] Reviewers { get; set; }
         public string className { get; set; }
     }
 
