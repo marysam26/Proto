@@ -672,7 +672,7 @@
     <Content Include="Areas\Reviewer\Views\web.config" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Discuss.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviews.cshtml" />
-    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStoryView.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ViewPastReviews.cshtml" />
     <Content Include="Areas\Reviewer\Views\_ViewStart.cshtml" />
@@ -720,6 +720,7 @@
     <Content Include="Areas\Teacher\Views\TeacherHome\AddClass.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddPass.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddPassGenerate.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\ViewAssignments.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\StudentAddClass.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

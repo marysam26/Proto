@@ -39,6 +39,8 @@ namespace Proto2.Areas.Teacher.Models
         public string classID { get; set; }
         public int NumReviews { get; set; }
         public string Confirmed { get; set; }
+        public string teacherID { get; set; }
+
     }
 
     public class AddStudentInput
