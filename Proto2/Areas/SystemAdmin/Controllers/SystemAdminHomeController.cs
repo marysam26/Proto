@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Linq;
+using System.Web;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Web.Mvc;
 using System.Web.Security;
 using Proto2.Areas.Account;
 using Proto2.Areas.SystemAdmin.Models;
+using Raven.Client;
+using Raven.Client.Document;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
 {
     public class SystemAdminHomeController : Controller
     {
+        //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
+        public IDocumentSession DocumentSession { get; set; }
 
         //TODO: Feel free to add 'fake data' anywhere an empty
         //list is being returned see Students below for an example
@@ -234,6 +240,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return View();
         }
 
+
         public ActionResult AddPassGenerate()
         {
             var random = new Random();
@@ -242,7 +249,46 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             {
                 PassCode = code
             };
+            DocumentSession.Store(codeView);
+            DocumentSession.SaveChanges();
             return View(codeView);
+        }
+
+        public ActionResult AddAssignment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddAssignment(AssignmentView input)
+        {
+            var splitLink = input.Link.Split('=');
+            var videoID = splitLink[1];
+            var asgn = new AssignmentView()
+            {
+                Id = Guid.NewGuid(),
+                AssignmentName = input.AssignmentName,
+                Description = input.Description,
+                Link = videoID
+            };
+
+            DocumentSession.Store(asgn);
+            DocumentSession.SaveChanges();
+            return RedirectToAction("ViewAssignment");
+        }
+
+        public ActionResult ViewAssignment()
+        {
+            var assignment = DocumentSession.Query<AssignmentView>()
+                                   .Where(r => r.Id != null)
+                                   .ToList();
+
+            return View(assignment);
+        }
+
+        public ActionResult ViewAssignmentDetailed(AssignmentView asgn)
+        {
+            return View(asgn);
         }
     }
 }

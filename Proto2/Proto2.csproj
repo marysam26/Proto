@@ -236,7 +236,6 @@
     <Compile Include="Areas\Reviewer\Models\ReviewerModels.cs" />
     <Compile Include="Areas\Reviewer\ReviewerAreaRegistration.cs" />
     <Compile Include="Areas\Student\Controllers\StudentHomeController.cs" />
-    <Compile Include="Areas\Student\Indexes\StudentIndexes.cs" />
     <Compile Include="Areas\Student\Models\StudentModels.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\SystemAdmin\Controllers\SystemAdminHomeController.cs" />
@@ -672,7 +671,7 @@
     <Content Include="Areas\Reviewer\Views\web.config" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Discuss.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviews.cshtml" />
-    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStoryView.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ViewPastReviews.cshtml" />
     <Content Include="Areas\Reviewer\Views\_ViewStart.cshtml" />
@@ -720,11 +719,9 @@
     <Content Include="Areas\Teacher\Views\TeacherHome\AddClass.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddPass.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddPassGenerate.cshtml" />
-    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
-    <Content Include="Areas\Student\Views\StudentHome\ViewAssignments.cshtml" />
-    <Content Include="Areas\Student\Views\StudentHome\StudentAddClass.cshtml" />
-    <Content Include="Areas\Teacher\Views\TeacherHome\ViewAssignments.cshtml" />
-    <Content Include="Areas\Teacher\Views\TeacherHome\ViewClasses.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\AddAssignment.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewAssignment.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewAssignmentDetailed.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

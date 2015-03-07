@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proto2.Areas.SystemAdmin.Models
@@ -79,4 +80,33 @@ namespace Proto2.Areas.SystemAdmin.Models
     {
         public int PassCode { get; set; }
     }
+
+    public class AssignmentInput
+    {
+        //Model for generating a new assignment. Assignments are recognized by their guid generated at time of createion and stored in RavenDB
+        public Guid Id { get; set; }
+
+        [Required]
+        [DisplayName("Name of Assignment")]
+        public string AssignmentName { get; set; }
+
+        [Required]
+        [DisplayName("Description of Assignment")]
+        public string Description { get; set; }
+
+        [Required]
+        [DisplayName("Link for Stratagy Video")]
+        public string Link { get; set; }
+
+    }
+
+    public class AssignmentView
+    {
+        public Guid Id { get; set; }
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+        public string Link { get; set; }
+    }
+
+
 }
