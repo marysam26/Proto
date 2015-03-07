@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas.Reviewer.Indexes;
-using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Teacher.Models;
 using Proto2.Areas.Teacher.Indexes;
 using System.Linq;
 using Raven.Client;
-using Raven.Client.Document;
 
 
 namespace Proto2.Areas.Teacher.Controllers
@@ -63,7 +60,7 @@ namespace Proto2.Areas.Teacher.Controllers
         }
 
         // Students are enrolling themselves by adding classCodes
-        [HttpPost]
+       /* [HttpPost]
         public ActionResult AddStudent(AddStudentInput input)
         {
             var student = new StudentViewModel()
@@ -78,7 +75,7 @@ namespace Proto2.Areas.Teacher.Controllers
 
             return View(student);
 
-        }
+        }*/
 
         //TODO:  Pulling data from the database using fake data until the class view for teacher is implemented
         public ActionResult ViewStudents(String classID)
@@ -161,6 +158,11 @@ namespace Proto2.Areas.Teacher.Controllers
         }
 
         public ActionResult ViewAssignmentDetails(Guid classid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult AddAssignment(AssignmentAddInput course)
         {
             throw new NotImplementedException();
         }

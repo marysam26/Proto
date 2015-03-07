@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto2.Areas.Student
+namespace Proto2.Areas.Teacher
 {
     public class TeacherAreaRegistration : AreaRegistration
     {

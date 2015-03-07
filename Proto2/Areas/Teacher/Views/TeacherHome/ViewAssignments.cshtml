@@ -5,14 +5,14 @@
     teachers for an example*@
 
 @{
-    ViewBag.Title = "Students";
+    ViewBag.Title = "Assignments";
 }
 
 
 <body style="
-                                      background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
-                                      background-repeat: no-repeat;
-                                      background-size: cover">
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
 
     @if (!Model.Any())
     {
@@ -36,14 +36,8 @@
                     @foreach (var a in Model)
                     {
                         <tr>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentDetails", "TeacherHome", new {assignmentId = a.Id})' ;return false; ">@a.AssignmentName</button></p>
-                            <td><button type="button" class="btn btn-sm btn-default" onclick="DisplayMore(@a.Id.ToString())">Display Details</button></td>
-                            <div id="@a.Id.ToString()"class="hidden">
-                                <p>@a.Description</p>
-                                <div>@a.Link</div>
-                            </div>
-
-                            
+                            <td>@a.AssignmentName</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("AddAssignment", "TeacherHome", new {assignment = a })' ;return false; ">Assignment Details</button></p></td>
 
                         </tr>
                     }
@@ -54,9 +48,3 @@
 
     }
 </body>
-
-<script>
-    function DisplayMore(arg) {
-        $('#'+arg+'\'').toggleClass('active');
-    };
-</script>

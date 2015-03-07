@@ -23,7 +23,7 @@ namespace Proto2.Areas.Student.Controllers
         public ActionResult Index()
         {
 
-            var models = new List<ClassViewModel>();
+            var models = new List<ClassModel>();
             // TODO: Need to query database, and only return classes where student ID is in 
             /*var courses = DocumentSession.Query<ClassViewModel, ViewClassesIndex>()
                 // How to make it pull based on teacherID?

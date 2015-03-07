@@ -723,6 +723,8 @@
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\ViewAssignments.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\StudentAddClass.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewAssignments.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewClasses.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
