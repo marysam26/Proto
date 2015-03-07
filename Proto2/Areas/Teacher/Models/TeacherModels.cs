@@ -14,6 +14,7 @@ namespace Proto2.Areas.Teacher.Models
         //List of students
         public string[] Students { get; set; }
         // List of reviewers
+        // When a reviewer agrees to review for this class it adds them to this list
         public string[] Reviewers { get; set; }
         public string ClassName { get; set; }
     }
@@ -37,6 +38,8 @@ namespace Proto2.Areas.Teacher.Models
         public string classID { get; set; }
         public int NumReviews { get; set; }
         public string Confirmed { get; set; }
+        public string teacherID { get; set; }
+
     }
 
     public class AddStudentInput

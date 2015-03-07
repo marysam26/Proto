@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Proto2.Areas.Reviewer.Indexes;
+using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Teacher.Models;
+using Proto2.Areas.Teacher.Indexes;
 using System.Linq;
 using Raven.Client;
-using Proto2.Areas.Teacher.Indexes;
+using Raven.Client.Document;
 
 
 namespace Proto2.Areas.Teacher.Controllers
@@ -82,7 +85,7 @@ namespace Proto2.Areas.Teacher.Controllers
         {
             var students = DocumentSession.Query<StudentViewModel, ViewStudentsIndex>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.Name == "12345 67890")
+                                .Where(r => r.teacherID == User.Identity.GetUserId())
                                 .Where(r => r.classID == classID)// classID associated with the link from the class button
                                 .ToList();
 
