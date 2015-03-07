@@ -81,7 +81,7 @@ namespace Proto2.Areas.Teacher.Controllers
         {
             var students = DocumentSession.Query<StudentViewModel, ViewStudentsIndex>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.Name == "12345 67890")
+                                .Where(r => r.teacherID == User.Identity.GetUserId())
                                 .Where(r => r.classID == classID)// classID associated with the link from the class button
                                 .ToList();
 

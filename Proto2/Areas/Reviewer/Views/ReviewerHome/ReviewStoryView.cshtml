@@ -1,0 +1,76 @@
+﻿@model Proto2.Areas.Reviewer.Models.ReviewInput
+
+@*This view is the second from the top on the right in the mockups.
+THe Left side that is visible will be a form that is completed,
+see AddStudent in the Teacher view for an example*@
+
+@{
+    ViewBag.Title = "Review Story";
+}
+
+<h2>Review Story</h2>
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+@* The drop down for the scores still needs to be implemented*@
+<div class="content-wrapper">
+    @using (Html.BeginForm("Review", "Story", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-horizontal">
+            <h4>Review a story</h4>
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StoryId, "Story ID", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.StoryId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StoryId)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScorePlot, "Score for plot", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ScorePlot, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScorePlot)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreCharacter, "Score for character", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ScoreCharacter, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreCharacter)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreSetting, "Score for setting", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.ScoreSetting, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreSetting)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comments, "Comments", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.Comments, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Comments)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Add Student" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+    </
