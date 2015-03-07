@@ -3,17 +3,59 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Raven.Client;
+using Microsoft.AspNet.Identity;
+using Raven.Client.Document;
+using Proto2.Areas.Teacher.Models;
+using Proto2.Areas.Reviewer.Models;
+using Proto2.Areas.Student.Indexes;
 using Proto2.Areas.Student.Models;
 
 namespace Proto2.Areas.Student.Controllers
 {
     public class StudentHomeController : Controller
     {
+        //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
+        public IDocumentSession DocumentSession { get; set; }    
+
         //
         // GET: /Student/
         public ActionResult Index()
         {
+
+            var models = new List<ClassModel>();
+            // TODO: Need to query database, and only return classes where student ID is in 
+            /*var courses = DocumentSession.Query<ClassViewModel, ViewClassesIndex>()
+                // How to make it pull based on teacherID?
+                               //.Where(User.Identity.GetUserId() in r=> r.Students)// How to pull all classes for this teacher?
+                               .ToList();
+
+            return View(courses);*/
+
+            return View(models);
+        }
+
+        public ActionResult StudentAddClass()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult StudentAddClass(String confCode)
+        {
+            //TODO query classes for this confCode and then add student to the list
+            // Update class viewmodel that has this confirmation code with StudentID(UserId)
+            /*var courseAdd = new ClassViewModel()
+            {
+                id = Guid.NewGuid(),
+                className = input.className,
+                teacherID = User.Identity.GetUserId(),
+            };*/
+            //DocumentSession.Store(courseAdd);
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("Index");
+
         }
 
         public ActionResult Train()
@@ -35,8 +77,8 @@ namespace Proto2.Areas.Student.Controllers
         {
             //TODO: this should return a list of ReviewView modles
             //Default review, will pull reviews from database but will use this as default for now.
-            var ReviewsList = new List<ReviewView>(){
-                new ReviewView(){
+            var ReviewsList = new List<StudentReviewView>(){
+                new StudentReviewView(){
                     Title = "The Best Story Ever",
                     ReviewOne = new StoryReviewView(){
                         ScorePlot = 5,
