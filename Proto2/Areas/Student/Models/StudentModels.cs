@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Proto2.Areas.Teacher.Models;
+
 
 namespace Proto2.Areas.Student.Models
 {
@@ -15,6 +17,7 @@ namespace Proto2.Areas.Student.Models
         public string Name { get; set; }
         // list of classIDs
         public string[] ClassIDs { get; set; }
+        public SubmissionView[] Submissions { get; set; }
     }
 
     public class VideoView
@@ -52,6 +55,26 @@ namespace Proto2.Areas.Student.Models
         public int ScoreCharacter { get; set; }
         public int ScoreSetting { get; set; }
         public string Comments { get; set; }
+    }
+
+    public class AssignmentsView
+    {
+        public AssignmentView[] Current { get; set; }
+        public SubmissionView[] Submitted { get; set; }
+    }
+
+    public class CurrentAssignments
+    {
+        public int AssignmentID { get; set; }
+        public string CurrentName { get; set; }
+        public int CurrentCount { get; set; }
+    }
+
+    public class SubmittedAssignments
+    {
+        public string ID { get; set; }
+        public string SubmittedName { get; set; }
+        public int SubmittedCount { get; set; }
     }
 
     public class BrainStormInput

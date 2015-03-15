@@ -29,6 +29,8 @@ namespace Proto2.Areas.Student.Controllers
                          .ToList();
 
             // TODO: There has to be a better way than this
+            // TODO: Think it would be better to pull classes from the student's profile
+            // then find infor on the classes that pull...need the log in model to be fixed for that
             // If there are a lot of courses this could take a long time to run
             // Calling the .Contains in the query did not work though
             for (int i = 0; i < courses.Count; i++)
@@ -99,9 +101,30 @@ namespace Proto2.Areas.Student.Controllers
 
         }
 
-        public ActionResult ViewAssignments()
+        public ActionResult ViewAssignments(Guid classID)
         {
-            return View();
+            var assigns = new List<AssignmentsView>();
+            var courses = DocumentSession.Query<ClassModel>()
+                         .Where(c => c.id == classID)
+                         .ToList();
+
+            var student = DocumentSession.Query<StudentModel>()
+                               .Where(s => s.StudentID == User.Identity.GetUserId())
+                               .ToList();
+
+            if (courses.Count != 0 && student.Count != 0)
+            {
+                AssignmentsView av = new AssignmentsView()
+                {
+                    // Guessing at this since assignments seem to be unrelated still
+                    //Current = courses[0].Assignments;
+                    Submitted = student[0].Submissions
+
+                };
+                assigns.Add(av);
+            }
+
+            return View(assigns);
         }
 
         [HttpPost]
