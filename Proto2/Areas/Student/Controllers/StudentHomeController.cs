@@ -41,27 +41,27 @@ namespace Proto2.Areas.Student.Controllers
         }
 
         [HttpPost]
-        public ActionResult StudentAddClass(int confCode)
+        public ActionResult StudentAddClass(StudentAddClass input)
         {
-            int hardcodedIDForTesting = 1234;
-            //TODO query classes for this confCode and then add student to the list
-            var course = DocumentSession.Load<ClassModel>()
-                               .Where(c => c.ConfirmCode == confCode);
-            if(course != null){
-                // Update class viewmodel that has this confirmation code with StudentID(UserId)
-                /*var courseAdd = new ClassViewModel()
-                {
-                    id = Guid.NewGuid(),
-                    className = input.className,
-                    teacherID = User.Identity.GetUserId(),
-                };*/
-                //DocumentSession.Store(courseAdd);
+            string hardcodedIDForTesting = "1234";
+            // Query classes for this confCode and then add student to the list
+            // If there is one, then add load that specific object and add the student to the array
+            var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
+                         .Where(c => c.ConfirmCode == input.classCode)
+                         .ToList();
+            if(courses.Count != 0){
+
+                string id = courses[0].Id;
+                ClassModel course = DocumentSession.Load<ClassModel>(id);
+                List<string> list = course.Students.ToList();
+                list.Add(hardcodedIDForTesting);
+                course.Students = list.ToArray();
                 DocumentSession.SaveChanges();
 
                 return RedirectToAction("Index");
             }
             else
-            {
+           {
                 return View();
             }
 

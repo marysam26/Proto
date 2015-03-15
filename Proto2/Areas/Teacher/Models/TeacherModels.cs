@@ -7,9 +7,10 @@ namespace Proto2.Areas.Teacher.Models
 
     public class ClassModel
     {
+        public string Id { get; set; }
         public string teacherId { get; set; }
         public Guid id { get; set; }
-        public int ConfirmCode { get; set; }
+        public string ConfirmCode { get; set; }
         public DateTime EndDate { get; set; }
         //List of students
         public string[] Students { get; set; }

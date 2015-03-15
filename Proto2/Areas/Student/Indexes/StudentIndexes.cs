@@ -10,7 +10,16 @@ namespace Proto2.Areas.Student.Indexes
         public ViewClassesIndex()
         {
             Map = docs => from course in docs
-                          select new { className = course.ClassName, Students = course.Students};
+                          select new { ClassName = course.ClassName, Students = course.Students};
+        }
+    }
+
+    public class StudentAddClassIndex : AbstractIndexCreationTask<ClassModel>
+    {
+        public StudentAddClassIndex()
+        {
+            Map = docs => from course in docs
+                          select new { ConfirmCode = course.ConfirmCode, Id = course.Id };
         }
     }
 }

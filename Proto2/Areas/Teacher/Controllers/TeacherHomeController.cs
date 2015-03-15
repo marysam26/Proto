@@ -36,15 +36,17 @@ namespace Proto2.Areas.Teacher.Controllers
         {
             var random = new Random();
             var code = random.Next(1000, 9999);
-            
+            List<string> students = new List<string>();
+            List<string> reviewers = new List<string>();
             var course = new ClassModel()
             {
                 id = Guid.NewGuid(),
                 ClassName = input.ClassName,
                 teacherId = User.Identity.GetUserId(),
                 EndDate = input.EndDate,
-                ConfirmCode = code
-                
+                ConfirmCode = code.ToString(),
+                Students = students.ToArray(),
+                Reviewers = reviewers.ToArray(),
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();

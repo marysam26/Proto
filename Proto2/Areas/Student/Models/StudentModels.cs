@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proto2.Areas.Student.Models
@@ -12,7 +13,7 @@ namespace Proto2.Areas.Student.Models
         public string StudentID { get; set; }
         public string Name { get; set; }
         // list of classIDs
-        public string[] ClassIDs { get; set; }
+        public int[] ClassIDs { get; set; }
     }
 
     public class VideoView
