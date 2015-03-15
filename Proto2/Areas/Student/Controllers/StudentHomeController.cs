@@ -22,16 +22,21 @@ namespace Proto2.Areas.Student.Controllers
         // GET: /Student/
         public ActionResult Index()
         {
-
+            // Hardcoded for tesing because login is broken
+            string userID = "1234";
             var models = new List<ClassModel>();
-            // TODO: Need to query database, and only return classes where student ID is in 
-            /*var courses = DocumentSession.Query<ClassViewModel, ViewClassesIndex>()
-                // How to make it pull based on teacherID?
-                               //.Where(User.Identity.GetUserId() in r=> r.Students)// How to pull all classes for this teacher?
-                               .ToList();
+            var courses = DocumentSession.Query<ClassModel>()
+                         .ToList();
 
-            return View(courses);*/
-
+            // TODO: There has to be a better way than this
+            // If there are a lot of courses this could take a long time to run
+            // Calling the .Contains in the query did not work though
+            for (int i = 0; i < courses.Count; i++)
+            {
+                if(courses[i].Students.Contains(userID)){
+                    models.Add(courses[i]);
+                }
+            }
             return View(models);
         }
 
@@ -49,9 +54,12 @@ namespace Proto2.Areas.Student.Controllers
             var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
                          .Where(c => c.ConfirmCode == input.classCode)
                          .ToList();
+
             if(courses.Count != 0){
 
                 string id = courses[0].Id;
+                // Having this Id attribute that gets set by RavenDb 
+                // allows for retrieval of the exact object that can be updated or deleted
                 ClassModel course = DocumentSession.Load<ClassModel>(id);
                 List<string> list = course.Students.ToList();
                 list.Add(hardcodedIDForTesting);

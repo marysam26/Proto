@@ -19,7 +19,7 @@ namespace Proto2.Areas.Student.Indexes
         public StudentAddClassIndex()
         {
             Map = docs => from course in docs
-                          select new { ConfirmCode = course.ConfirmCode, Id = course.Id };
+                          select new { ConfirmCode = course.ConfirmCode };
         }
     }
 }
