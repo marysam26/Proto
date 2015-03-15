@@ -7,6 +7,7 @@ using Microsoft.Owin.Security;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
+using StructureMap.Pipeline;
 
 namespace Proto2.Areas.Account
 {
@@ -74,20 +75,23 @@ namespace Proto2.Areas.Account
                 
                 if (user.Roles.Contains(ProtoRoles.Teacher))
                     return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
-                else
-                {
-                    return View(new LoginModel
-                    {
-                    });
-                }
 
+                if (user.Roles.Contains(ProtoRoles.Reviewer))
+                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+
+                if (user.Roles.Contains(ProtoRoles.SystemAdmin))
+                    return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
+               
                 if (user.Roles.Contains(ProtoRoles.Student)){
                     // Check if there is a student model with this User.Identity and if not make one
                     // (On first log in, create the student a student model)
                     // TODO: Haven't been able to test this, need to fix log in
-                    var student = DocumentSession.Query<StudentModel>()
-                               .Where(s => s.StudentID == User.Identity.GetUserId());
-                    if(student == null){
+                  
+                    //I moved this code to creating a student account as it seemed to make more sense there
+                    /* var student = DocumentSession.Query<StudentModel>().FirstOrDefault(s => s.StudentID == User.Identity.GetUserId());
+
+                     * if(student == null){
+                     * 
                         var s = new StudentModel()
                         {
                             StudentID = User.Identity.GetUserId(),
@@ -95,22 +99,8 @@ namespace Proto2.Areas.Account
                         };
                         DocumentSession.Store(s);
                         DocumentSession.SaveChanges();
-                    }
+                    }*/
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
-                }
-                else
-                {
-                    return View(new LoginModel
-                    {
-                    });
-                }
-                if (user.Roles.Contains(ProtoRoles.Reviewer))
-                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
-                else
-                {
-                    return View(new LoginModel
-                    {
-                    });
                 }
 
             }
@@ -164,6 +154,13 @@ namespace Proto2.Areas.Account
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        var s = new StudentModel()
+                        {
+                            StudentID = User.Identity.GetUserId(),
+                            Name = user.FirstName
+                        };
+                        DocumentSession.Store(s);
+                        DocumentSession.SaveChanges();
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                     }
