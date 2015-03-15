@@ -6,6 +6,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Proto2.Areas.Student.Models
 {
+
+    public class StudentModel
+    {
+        public string StudentID { get; set; }
+        public string Name { get; set; }
+        // list of classIDs
+        public string[] ClassIDs { get; set; }
+    }
+
     public class VideoView
     {
         public string Title { get; set; }

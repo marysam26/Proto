@@ -20,8 +20,8 @@ namespace Proto2.Areas.Teacher.Controllers
         {
             //var models = new List<ClassViewModel>();
             var courses = DocumentSession.Query<ClassModel>()
-                // How to make it pull based on teacherID?
-                               .Where(r => r.teacherId == User.Identity.GetUserId())// How to pull all classes for this teacher?
+                // How to make it pull based on teacherID
+                               .Where(r => r.teacherId == User.Identity.GetUserId())
                                .ToList();
 
             return View(courses);
