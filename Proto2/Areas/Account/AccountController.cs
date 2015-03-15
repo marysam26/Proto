@@ -82,7 +82,7 @@ namespace Proto2.Areas.Account
                 }
 
                 if (user.Roles.Contains(ProtoRoles.Student)){
-                    // Just if their is a student model with this User.Identity and if not make one
+                    // Check if there is a student model with this User.Identity and if not make one
                     // (On first log in, create the student a student model)
                     // TODO: Haven't been able to test this, need to fix log in
                     var student = DocumentSession.Query<StudentModel>()

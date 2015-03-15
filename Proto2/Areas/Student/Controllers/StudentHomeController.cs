@@ -41,20 +41,29 @@ namespace Proto2.Areas.Student.Controllers
         }
 
         [HttpPost]
-        public ActionResult StudentAddClass(String confCode)
+        public ActionResult StudentAddClass(int confCode)
         {
+            int hardcodedIDForTesting = 1234;
             //TODO query classes for this confCode and then add student to the list
-            // Update class viewmodel that has this confirmation code with StudentID(UserId)
-            /*var courseAdd = new ClassViewModel()
-            {
-                id = Guid.NewGuid(),
-                className = input.className,
-                teacherID = User.Identity.GetUserId(),
-            };*/
-            //DocumentSession.Store(courseAdd);
-            DocumentSession.SaveChanges();
+            var course = DocumentSession.Load<ClassModel>()
+                               .Where(c => c.ConfirmCode == confCode);
+            if(course != null){
+                // Update class viewmodel that has this confirmation code with StudentID(UserId)
+                /*var courseAdd = new ClassViewModel()
+                {
+                    id = Guid.NewGuid(),
+                    className = input.className,
+                    teacherID = User.Identity.GetUserId(),
+                };*/
+                //DocumentSession.Store(courseAdd);
+                DocumentSession.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
 
         }
 
