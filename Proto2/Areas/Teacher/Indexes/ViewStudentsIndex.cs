@@ -13,12 +13,12 @@ namespace Proto2.Areas.Teacher.Indexes
         }
     }
 
-    public class ViewClassesIndex : AbstractIndexCreationTask<ClassViewModel>
+    public class ViewClassesIndex : AbstractIndexCreationTask<ClassModel>
     {
         public ViewClassesIndex()
         {
             Map = docs => from course in docs
-                          select new { className = course.className, teacherID = course.teacherID};
+                          select new { className = course.ClassName, TeacherID = course.teacherId};
         }
     }
 }

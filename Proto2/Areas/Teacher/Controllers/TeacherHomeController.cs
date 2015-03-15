@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas.Reviewer.Indexes;
-using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Teacher.Models;
+using Proto2.Areas.Teacher.Indexes;
 using System.Linq;
 using Raven.Client;
-using Raven.Client.Document;
-using Proto2.Areas.Teacher.Indexes;
 
 
 namespace Proto2.Areas.Teacher.Controllers
@@ -22,13 +19,11 @@ namespace Proto2.Areas.Teacher.Controllers
         public ActionResult Index()
         {
             //var models = new List<ClassViewModel>();
-            var courses = DocumentSession.Query<ClassViewModel, ViewClassesIndex>()
-                // How to make it pull based on teacherID?
-                               .Where(r => r.teacherID == User.Identity.GetUserId())// How to pull all classes for this teacher?
+            var courses = DocumentSession.Query<ClassModel>()
+                // How to make it pull based on teacherID
+                               .Where(r => r.teacherId == User.Identity.GetUserId())
                                .ToList();
-
             return View(courses);
-            //return View();
         }
 
         public ActionResult AddClass()
@@ -39,12 +34,19 @@ namespace Proto2.Areas.Teacher.Controllers
         [HttpPost]
         public ActionResult AddClass(AddClassInput input)
         {
-            
-            var course = new ClassViewModel()
+            var random = new Random();
+            var code = random.Next(1000, 9999);
+            List<string> students = new List<string>();
+            List<string> reviewers = new List<string>();
+            var course = new ClassModel()
             {
                 id = Guid.NewGuid(),
-                className = input.className,
-                teacherID = User.Identity.GetUserId(),
+                ClassName = input.ClassName,
+                teacherId = User.Identity.GetUserId(),
+                EndDate = input.EndDate,
+                ConfirmCode = code.ToString(),
+                Students = students.ToArray(),
+                Reviewers = reviewers.ToArray(),
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
@@ -59,7 +61,7 @@ namespace Proto2.Areas.Teacher.Controllers
         }
 
         // Students are enrolling themselves by adding classCodes
-        [HttpPost]
+       /* [HttpPost]
         public ActionResult AddStudent(AddStudentInput input)
         {
             var student = new StudentViewModel()
@@ -74,14 +76,14 @@ namespace Proto2.Areas.Teacher.Controllers
 
             return View(student);
 
-        }
+        }*/
 
         //TODO:  Pulling data from the database using fake data until the class view for teacher is implemented
         public ActionResult ViewStudents(String classID)
         {
             var students = DocumentSession.Query<StudentViewModel, ViewStudentsIndex>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.Name == "12345 67890")
+                                .Where(r => r.teacherID == User.Identity.GetUserId())
                                 .Where(r => r.classID == classID)// classID associated with the link from the class button
                                 .ToList();
 
@@ -92,9 +94,9 @@ namespace Proto2.Areas.Teacher.Controllers
         // I need to make this teacher specific
         public ActionResult ViewClasses(string teacherID)
         {
-            var courses = DocumentSession.Query<ClassViewModel, ViewStudentsIndex>()
+            var courses = DocumentSession.Query<ClassModel, ViewStudentsIndex>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.teacherID == teacherID)// classID associated with the link from the class button
+                                .Where(r => r.teacherId == teacherID)// classID associated with the link from the class button
                                 .ToList();
 
             return View(courses);
@@ -137,6 +139,33 @@ namespace Proto2.Areas.Teacher.Controllers
                 }
             };
             return View(model);
+        }
+
+        public ActionResult ViewAssignments(Guid classid)
+        {
+           // var assignments = DocumentSession.Query<AssignmentAddInput>().ToList();
+            var assignments = new List<AssignmentAddInput>()
+            {
+                new AssignmentAddInput()
+                {
+                    AssignmentName = "First Assignment",
+                    Description = "This is the description",
+                    Link = "This is the link",
+                    Id = Guid.NewGuid()
+                }
+            };
+
+            return View(assignments);
+        }
+
+        public ActionResult ViewAssignmentDetails(Guid classid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult AddAssignment(AssignmentAddInput course)
+        {
+            throw new NotImplementedException();
         }
     }
 

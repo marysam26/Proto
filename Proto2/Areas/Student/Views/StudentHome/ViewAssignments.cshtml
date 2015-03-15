@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Assignments";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+<div class="content-wrapper">
+        <div>
+            <h2>@ViewBag.Title</h2>
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                        <table class="table">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model)
+                                {
+                                    <tr>
+                                        <td><p><button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("CurrentAssignments", "StudentHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

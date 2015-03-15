@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
+using Proto2.Areas.Student.Models;
 
 namespace Proto2.Areas.Account
 {
@@ -59,6 +61,7 @@ namespace Proto2.Areas.Account
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
+            // TODO: Not recognizing proper log in, always just relaods the view
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
@@ -78,8 +81,23 @@ namespace Proto2.Areas.Account
                     });
                 }
 
-                if (user.Roles.Contains(ProtoRoles.Student))
+                if (user.Roles.Contains(ProtoRoles.Student)){
+                    // Check if there is a student model with this User.Identity and if not make one
+                    // (On first log in, create the student a student model)
+                    // TODO: Haven't been able to test this, need to fix log in
+                    var student = DocumentSession.Query<StudentModel>()
+                               .Where(s => s.StudentID == User.Identity.GetUserId());
+                    if(student == null){
+                        var s = new StudentModel()
+                        {
+                            StudentID = User.Identity.GetUserId(),
+                            Name = user.FirstName
+                        };
+                        DocumentSession.Store(s);
+                        DocumentSession.SaveChanges();
+                    }
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                }
                 else
                 {
                     return View(new LoginModel
@@ -173,7 +191,16 @@ namespace Proto2.Areas.Account
             model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            var errorModel = new RegisterModel()
+            {
+                AccountType = model.AccountType,
+                ConfirmCode = model.ConfirmCode,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType"),
+            };
+            return View(errorModel);
         }
 
         [AllowAnonymous]

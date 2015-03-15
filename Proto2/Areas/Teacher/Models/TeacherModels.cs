@@ -5,15 +5,19 @@ using System.ComponentModel.DataAnnotations;
 namespace Proto2.Areas.Teacher.Models
 {
 
-    public class ClassViewModel
+    public class ClassModel
     {
-        public string teacherID { get; set; }
+        public string Id { get; set; }
+        public string teacherId { get; set; }
         public Guid id { get; set; }
-        // List of students
-        //public string[] studentNames { get; set; }
+        public string ConfirmCode { get; set; }
+        public DateTime EndDate { get; set; }
+        //List of students
+        public string[] Students { get; set; }
         // List of reviewers
-        //public string[] reviewNames { get; set; }
-        public string className { get; set; }
+        // When a reviewer agrees to review for this class it adds them to this list
+        public string[] Reviewers { get; set; }
+        public string ClassName { get; set; }
     }
 
     public class TeacherModel
@@ -35,6 +39,8 @@ namespace Proto2.Areas.Teacher.Models
         public string classID { get; set; }
         public int NumReviews { get; set; }
         public string Confirmed { get; set; }
+        public string teacherID { get; set; }
+
     }
 
     public class AddStudentInput
@@ -57,17 +63,12 @@ namespace Proto2.Areas.Teacher.Models
     public class AddClassInput
     {
         [Required]
-        [DisplayName("Class ID")]
-        public string classID { get; set; }
+        [DisplayName("End Date")]
+        public DateTime EndDate { get; set; }
 
         [Required]
         [DisplayName("Class Name")]
-        public string className { get; set; }
-        
-        // This should not be required, we need to get the teacherID automatically by whos logged into the area
-        [Required]
-        [DisplayName("Your ID")]
-        public String teacherID { get; set; }
+        public string ClassName { get; set; }
 
     }
 
@@ -87,5 +88,29 @@ namespace Proto2.Areas.Teacher.Models
         public string Comment { get; set; }
         public string ReviewerName { get; set; }
     }
+
+    public class AssignmentAddInput
+    {
+        public Guid Id { get; set; }
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+        public string Link { get; set; }
+
+    }
+
+    public class AssignmentView
+    {
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+        public string Link { get; set; }
+
+        [Required]
+        [DisplayName("Due Date")]
+        public DateTime DueDate { get; set; }
+
+
+    }
+
+
 
 }

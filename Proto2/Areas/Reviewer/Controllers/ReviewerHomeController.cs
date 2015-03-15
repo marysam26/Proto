@@ -6,6 +6,7 @@ using Proto2.Areas.Reviewer.Indexes;
 using Proto2.Areas.Reviewer.Models;
 using Raven.Client;
 using Raven.Client.Document;
+using Microsoft.AspNet.Identity;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
@@ -48,14 +49,47 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult PastReviews()
         {
-            var userName = "kblooie";
+            //var userName = "kblooie";
 
 
             var pastReviews = DocumentSession.Query<PastReviewView, PastReviewIndex>()
-                .Where(r => r.OwnerUserId == userName && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
+                .Where(r => r.OwnerUserId == User.Identity.GetUserId() && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
                 .ToList();
 
             return View(pastReviews);
+        }
+
+        public ActionResult ReviewStoryView()
+        {
+            //Return a view to review a story
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ReviewStoryView(ReviewInput input)
+        {
+            var newReview = new ReviewInput
+
+            {
+                //Information for the new review will be parsed and added to the database here
+                //TODO: Parse title,story,and reviewer names from avabile information
+                StoryId = input.StoryId,
+                ScorePlot = input.ScorePlot,
+                Comments = input.Comments,
+                ScoreCharacter = input.ScoreCharacter,
+                ScoreSetting = input.ScoreSetting,
+                Username = User.Identity.GetUserId(),
+            };
+
+            DocumentSession.Store(newReview);
+
+            DocumentSession.SaveChanges();
+
+            return Content("It saved!");
+            //This will respond to a fom being completed and will eventually be saved to a database
+            //This could return a view of all past reviews which would then include the submitted review
+            //Or take them to a reviewer conformation page, I will assume the former for now.
+
         }
 
         public ActionResult ReviewStory()
@@ -72,7 +106,7 @@ namespace Proto2.Areas.Reviewer.Controllers
             return View(reviewStory);
         }
 
-        [HttpPost]
+       [HttpPost]
         public ActionResult ReviewStory(ReviewInput input)
         {
             PastReviewView pastReviews;
@@ -89,7 +123,7 @@ namespace Proto2.Areas.Reviewer.Controllers
                 ScoreCharacter = input.ScoreCharacter,
                 ScorePlot = input.ScorePlot,
                 ScoreSetting = input.ScoreSetting,
-                OwnerUserId = input.Username,
+                //  OwnerUserId = input.OwnerUserId,
                 PublishDate = DateTime.UtcNow
             };
 

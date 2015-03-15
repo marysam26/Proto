@@ -44,9 +44,7 @@
                 // The "save" event is fired whenever a change is made in the editor.
                 editor.on('save', function (evt) {
                     // getData() returns CKEditor's HTML content.
-                    //console.log('data: ' + evt.editor.getData());
                     var data = evt.editor.getData();
-                    Debug.WriteLine("Data");
                     // var data = evt.editor.getData();
                     // Save data
                 });
@@ -54,9 +52,7 @@
                 // The "change" event is fired whenever a change is made in the editor.
                 editor.on('change', function (evt) {
                     // getData() returns CKEditor's HTML content.
-                    //console.log('data: ' + evt.editor.getData());
                     var data = evt.editor.getData();
-                    Debug.WriteLine("Data");
                     // Save data
                 });
             </script>

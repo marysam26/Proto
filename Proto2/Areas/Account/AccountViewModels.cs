@@ -103,7 +103,7 @@ namespace Proto2.Areas.Account
         public string ConfirmPassword { get; set; }
         
         [Display(Name = "Confirmation Code")]
-        [Required]
+        //[Required]
         public string ConfirmCode { get; set; }
     }
 
