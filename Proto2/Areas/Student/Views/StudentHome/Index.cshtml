@@ -43,7 +43,7 @@
                         @foreach (var course in Model)
                         {
                             <tr>
-                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.id})' ;return false; ">@course.className</button></p></td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
                             </tr>
 
                         }
