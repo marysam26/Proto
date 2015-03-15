@@ -88,12 +88,10 @@ namespace Proto2.Areas.Account
                     var student = DocumentSession.Query<StudentModel>()
                                .Where(s => s.StudentID == User.Identity.GetUserId());
                     if(student == null){
-                        int[] classes;
                         var s = new StudentModel()
                         {
                             StudentID = User.Identity.GetUserId(),
-                            Name = user.FirstName,
-                            ClassIDs = classes
+                            Name = user.FirstName
                         };
                         DocumentSession.Store(s);
                         DocumentSession.SaveChanges();

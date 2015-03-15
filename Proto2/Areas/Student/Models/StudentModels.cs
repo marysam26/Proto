@@ -10,10 +10,11 @@ namespace Proto2.Areas.Student.Models
 
     public class StudentModel
     {
+        public string Id { get; set; }
         public string StudentID { get; set; }
         public string Name { get; set; }
         // list of classIDs
-        public int[] ClassIDs { get; set; }
+        public string[] ClassIDs { get; set; }
     }
 
     public class VideoView

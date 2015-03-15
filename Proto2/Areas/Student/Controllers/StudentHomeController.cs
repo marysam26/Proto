@@ -55,7 +55,14 @@ namespace Proto2.Areas.Student.Controllers
                          .Where(c => c.ConfirmCode == input.classCode)
                          .ToList();
 
-            if(courses.Count != 0){
+            /*var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
+                // Log in is broken
+                //.Where(s => s.StudentID == User.Identity.GetUserId())
+                          .Where(s => s.StudentID == hardcodedIDForTesting)
+                          .ToList();*/
+
+            if (courses.Count != 0)// && student.Count != 0)
+            {
 
                 string id = courses[0].Id;
                 // Having this Id attribute that gets set by RavenDb 
@@ -66,14 +73,44 @@ namespace Proto2.Areas.Student.Controllers
                 course.Students = list.ToArray();
                 DocumentSession.SaveChanges();
 
+                /*
+                string ids = student[0].Id;
+                // Having this Id attribute that gets set by RavenDb 
+                // allows for retrieval of the exact object that can be updated or deleted
+                StudentModel st = DocumentSession.Load<StudentModel>(id);
+                if(st.ClassIDs != null)
+                    List<string> listS = st.ClassIDs.ToList();
+                    listS.Add(input.classCode);
+                    st.ClassIDs = listS.ToArray();
+                }
+                else{
+                    List<string> listS = new List<string>();
+                    listS.Add(input.classCode);
+                    st.ClassIDs = listS.ToArray();
+                }
+                DocumentSession.SaveChanges();*/
+
                 return RedirectToAction("Index");
             }
             else
-           {
+            {
                 return View();
             }
 
         }
+
+        public ActionResult ViewAssignments()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ViewAssignments(AssignmentView input)
+        {
+            return View();
+
+        }
+
 
         public ActionResult Train()
         {
