@@ -22,7 +22,13 @@
                 @if (Request.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav">
+                        <!--make these send some identifying info to the appropriate page based on the model
+                            in order to load correct assignment data-->
                         <li>@Html.ActionLink("Student Home", "Index", "StudentHome")</li>
+                        <li>@Html.ActionLink("Strategy Videos", "Train", "StudentHome")</li>
+                        <li>@Html.ActionLink("Brainstorm", "BrainStorm", "StudentHome")</li>
+                        <li>@Html.ActionLink("Write", "Write", "StudentHome")</li>
+                        <li>@Html.ActionLink("Reviews", "Reviews", "StudentHome")</li>
                     </ul>
                 }
                 @*@Html.Partial("_LoginPartial")*@

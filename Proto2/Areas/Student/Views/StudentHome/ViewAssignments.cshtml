@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Proto2.Areas.Student.Models.AssignmentsView>
+@{
     ViewBag.Title = "Assignments";
 }
 
@@ -15,16 +16,38 @@
             <div class="row">
                 <div class="col-xs-10">
                     <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                        <h1>Current Assignments</h1>
                         <table class="table">
                             <thead>
                             </thead>
                             <tbody>
-                                @foreach (var course in Model)
+                                @foreach (var assign in Model)
                                 {
-                                    <tr>
-                                        <td><p><button type="button" class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("CurrentAssignments", "StudentHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
-                                    </tr>
-
+                                    foreach(var a in assign.Current){
+                                        <tr>
+                                            <!-- Can't build this link yet until I know how the assignments will be related in the courses..will there be an assignment ID accessible?-->
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><div class="row">
+                <div class="col-xs-10">
+                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                        <h1>Submitted Assignments</h1>
+                        <table class="table">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                @foreach (var submit in Model)
+                                {
+                                    foreach (var s in submit.Submitted) {
+                                        <tr>
+                                            <td><p><a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {input = s})' ;return false; ">@s.AssignmentName</a></p></td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
