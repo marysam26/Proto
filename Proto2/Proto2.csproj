@@ -729,6 +729,10 @@
     <Content Include="Areas\Student\Views\StudentHome\PastSubmissions.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\ViewAssignments.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\ViewClasses.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\AddAssignment.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewAssignmentDetailed.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewAddAssignments.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewAddAssignmentDetailed.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

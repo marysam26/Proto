@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Proto2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Microsoft.AspNet.Identity;
 using Raven.Client.Document;
@@ -35,7 +36,7 @@ namespace Proto2.Areas.Student.Controllers
             // Calling the .Contains in the query did not work though
             for (int i = 0; i < courses.Count; i++)
             {
-                if(courses[i].Students.Contains(userID)){
+                if(courses[i].Students!= null && courses[i].Students.Contains(userID)){
                     models.Add(courses[i]);
                 }
             }

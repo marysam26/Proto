@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Proto2.Areas.SystemAdmin.Models;
 
 namespace Proto2.Areas.Teacher.Models
 {
@@ -89,7 +91,7 @@ namespace Proto2.Areas.Teacher.Models
         public string ReviewerName { get; set; }
     }
 
-    public class AssignmentAddInput
+    public class AssignmentInput
     {
         public Guid Id { get; set; }
         public string AssignmentName { get; set; }
@@ -98,7 +100,20 @@ namespace Proto2.Areas.Teacher.Models
 
     }
 
-    public class AssignmentView
+
+    public class AssignmentAddInput
+    {
+        public List<AssignmentView> Assignments { get; set; }
+        public Guid CourseId { get; set; }
+    }
+
+    public class AssignmentViewList
+    {
+        public List<AssignmentInputView> Assignments { get; set; }
+        public Guid CourseId { get; set; }
+    }
+
+    public class AssignmentInputView
     {
         public string AssignmentName { get; set; }
         public string Description { get; set; }
@@ -107,6 +122,9 @@ namespace Proto2.Areas.Teacher.Models
         [Required]
         [DisplayName("Due Date")]
         public DateTime DueDate { get; set; }
+
+        public Guid CourseId { get; set; }
+        public Guid Id { get; set; }
 
 
     }

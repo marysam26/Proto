@@ -49,7 +49,7 @@
                         {
                             <tr>
                                 <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "TeacherHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
-                                <td>@course.EndDate.Date.Date</td>
+                                <td>@course.EndDate.ToShortDateString()</td>
                                 <td>@course.ConfirmCode</td>
                                 <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudents", "TeacherHome", new {classID = course.id})' ;return false; ">Students</button></p></td>
                                 <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviews", "TeacherHome", new {classID = course.id})' ;return false; ">Reviewers</button></p></td>
