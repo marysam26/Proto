@@ -1,4 +1,4 @@
-﻿
+﻿@model Proto2.Areas.Student.Models.StoryInput
 <!DOCTYPE html>
 
 @{
@@ -17,9 +17,14 @@
         background-size: cover">
     <center><h2>@ViewBag.Title</h2></center>
     <br>
-    <div>
-        <form>
-            <textarea style="text-align:center" cols="80" id="editor1" name="editor1" rows="10"></textarea>
+    <div class="form-group">
+        <form method="post">
+            <p>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </p>
+            @Html.TextAreaFor(s => s.Story, new { @id = "editor1" })
+            <!--<textarea style="text-align:center" cols="80" id="editor1" name="editor1" rows="10"></textarea>-->
+            
             <script>
                 CKEDITOR.replace('editor1', {
                     width: '100%',
@@ -40,12 +45,10 @@
                     ]
                 });
                 var editor = CKEDITOR.replace('editor1');
-                Debug.WriteLine("Data");
                 // The "save" event is fired whenever a change is made in the editor.
                 editor.on('save', function (evt) {
                     // getData() returns CKEditor's HTML content.
                     var data = evt.editor.getData();
-                    // var data = evt.editor.getData();
                     // Save data
                 });
 

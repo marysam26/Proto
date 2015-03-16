@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Microsoft.AspNet.Identity;
 using Raven.Client.Document;
@@ -36,7 +35,7 @@ namespace Proto2.Areas.Student.Controllers
             // Calling the .Contains in the query did not work though
             for (int i = 0; i < courses.Count; i++)
             {
-                if(courses[i].Students!= null && courses[i].Students.Contains(userID)){
+                if(courses[i].Students.Contains(userID)){
                     models.Add(courses[i]);
                 }
             }
@@ -128,13 +127,43 @@ namespace Proto2.Areas.Student.Controllers
             return View(assigns);
         }
 
-        [HttpPost]
-        public ActionResult ViewAssignments(AssignmentView input)
+        /*public ActionResult CurrentAssignment(AssignmentView input)
         {
-            return View();
+            var assignment = new List<AssignmentView>();
+            assignment.Add(input);
 
+            return View(assignment);
+        }*/
+
+        public ActionResult submissionView(SubmissionView input)
+        {
+            var submission = new List<SubmissionView>();
+            submission.Add(input);
+
+            return View(submission);
         }
 
+        public ActionResult Write()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Write(StoryInput input)
+        {
+            string hardCodedId = "1234";
+            StoryInput story = new StoryInput()
+            {
+                //StudentId = User.Identity.GetUserId(),
+                StudentId = hardCodedId,
+                Story = input.Story
+            };
+            DocumentSession.Store(story);
+            DocumentSession.SaveChanges();
+
+            return View();
+        }
 
         public ActionResult Train()
         {
@@ -142,11 +171,6 @@ namespace Proto2.Areas.Student.Controllers
         }
 
         public ActionResult BrainStorm()
-        {
-            return View();
-        }
-
-        public ActionResult Write()
         {
             return View();
         }

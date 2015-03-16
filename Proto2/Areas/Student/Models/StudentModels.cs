@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Proto2.Areas.SystemAdmin.Models;
 using Proto2.Areas.Teacher.Models;
 
 
@@ -41,12 +40,12 @@ namespace Proto2.Areas.Student.Models
 
     public class SubmissionView
     {
+        public string StoryId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
         public DateTime SubmissionDate { get; set; }
-        public string StudentId { get; set; }
-        public Guid StoryId { get; set; }
-        public string Title { get; set; }
+        //public string StudentId { get; set; }
+        //public string Title { get; set; }
         public string Story { get; set; }
     }
 
@@ -60,22 +59,8 @@ namespace Proto2.Areas.Student.Models
 
     public class AssignmentsView
     {
-        public AssignmentView[] Current { get; set; }
+        //public AssignmentView[] Current { get; set; }
         public SubmissionView[] Submitted { get; set; }
-    }
-
-    public class CurrentAssignments
-    {
-        public int AssignmentID { get; set; }
-        public string CurrentName { get; set; }
-        public int CurrentCount { get; set; }
-    }
-
-    public class SubmittedAssignments
-    {
-        public string ID { get; set; }
-        public string SubmittedName { get; set; }
-        public int SubmittedCount { get; set; }
     }
 
     public class BrainStormInput
@@ -87,9 +72,9 @@ namespace Proto2.Areas.Student.Models
 
     public class StoryInput
     {
-        public string StudentId { get; set; }
-        public Guid StoryId { get; set; }
-        public string Title { get; set; }
+        public string Id { get; set; }
         public string Story { get; set; }
+        public string StudentId { get; set; }
+        //public string Title { get; set; }
     }
 }
