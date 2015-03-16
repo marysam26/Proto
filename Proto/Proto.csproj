@@ -233,6 +233,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Reviewer\Controllers\ReviewerHomeController.cs" />
     <Compile Include="Areas\Reviewer\Indexes\PastReviewIndex.cs" />
     <Compile Include="Areas\Reviewer\Models\ReviewerModels.cs" />
     <Compile Include="Areas\Student\Controllers\StudentHomeController.cs" />
@@ -246,7 +247,6 @@
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Areas\Reviewer\Controllers\ReviewerHomeController.cs" />
     <Compile Include="Areas\Teacher\Controllers\TeacherHomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
