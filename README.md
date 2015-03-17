@@ -59,6 +59,8 @@ Centralized
 
 ## Known Bugs / Caveats
 
+* Bug in login, where calling User.Identity.GetUserId() is returning an id for a different user other than the one you logged in with. A log out link would solve this probably for testing if that can be implemented. Maybe even a logout command that is called before the login starts to parse data...
+
 * We had a bug where if we were logged in it would not let you get back to the home page to log in for another user.  Currently we have the commented out so that now you always have to log in. 
 
 ## TODO
