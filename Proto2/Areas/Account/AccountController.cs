@@ -88,13 +88,17 @@ namespace Proto2.Areas.Account
                     // TODO: Haven't been able to test this, need to fix log in
                   
                     //I moved this code to creating a student account as it seemed to make more sense there
-                    /* var student = DocumentSession.Query<StudentModel>().FirstOrDefault(s => s.StudentID == User.Identity.GetUserId());
+                    // var student = DocumentSession.Query<StudentModel>().FirstOrDefault(s => s.StudentID == User.Identity.GetUserId());
 
-                     * if(student == null){
-                     * 
+                     /* if(student == null){ 
                         var s = new StudentModel()
                         {
-                            StudentID = User.Identity.GetUserId(),
+                            // It did make sense to have it in registration
+                            // but This would be email. It should be User.Identity so I can find the model 
+                            // for the current logged in student later on when I need it
+                            // but they're not logged in yet to get it that way. It always goes through null
+                            // This is where I had it before moving it to log in.
+                            StudentID = model.UserName,
                             Name = user.FirstName
                         };
                         DocumentSession.Store(s);
