@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -83,27 +84,6 @@ namespace Proto2.Areas.Account
                     return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
                
                 if (user.Roles.Contains(ProtoRoles.Student)){
-                    // Check if there is a student model with this User.Identity and if not make one
-                    // (On first log in, create the student a student model)
-                    // TODO: Haven't been able to test this, need to fix log in
-                  
-                    //I moved this code to creating a student account as it seemed to make more sense there
-                    // var student = DocumentSession.Query<StudentModel>().FirstOrDefault(s => s.StudentID == User.Identity.GetUserId());
-
-                     /* if(student == null){ 
-                        var s = new StudentModel()
-                        {
-                            // It did make sense to have it in registration
-                            // but This would be email. It should be User.Identity so I can find the model 
-                            // for the current logged in student later on when I need it
-                            // but they're not logged in yet to get it that way. It always goes through null
-                            // This is where I had it before moving it to log in.
-                            StudentID = model.UserName,
-                            Name = user.FirstName
-                        };
-                        DocumentSession.Store(s);
-                        DocumentSession.SaveChanges();
-                    }*/
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 }
 
@@ -158,14 +138,18 @@ namespace Proto2.Areas.Account
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        await SignInAsync(user, isPersistent: false);
+                        // Make the studen't first model
                         var s = new StudentModel()
                         {
-                            StudentID = User.Identity.GetUserId(),
-                            Name = user.FirstName
+                            StudentID = "ProtoUsers/" + user.UserName,
+                            Name = user.FirstName,
+                            ClassIDs = new List<string>().ToArray(),
+                            Submissions = new List<SubmissionView>().ToArray()
                         };
                         DocumentSession.Store(s);
                         DocumentSession.SaveChanges();
-                        await SignInAsync(user, isPersistent: false);
+
                         return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                     }
                     else
