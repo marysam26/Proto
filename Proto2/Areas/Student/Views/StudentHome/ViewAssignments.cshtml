@@ -12,31 +12,35 @@
 
 <div class="content-wrapper">
         <div>
-            <h2>@ViewBag.Title</h2>
+            <h2>Current Assignments</h2>
             <div class="row">
                 <div class="col-xs-10">
                     <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
-                        <h1>Current Assignments</h1>
+                        <!--<h3>Current Assignments</h3>-->
                         <table class="table">
                             <thead>
                             </thead>
                             <tbody>
                                 @foreach (var assign in Model)
                                 {
-                                    foreach(var a in assign.Current){
-                                        <tr>
+                                    <!--foreach(var a in assign.Current){
+                                <tr>-->
                                             <!-- Can't build this link yet until I know how the assignments will be related in the courses..will there be an assignment ID accessible?-->
-                                        </tr>
-                                    }
+                                    <!--</tr>
+                            }-->
                                 }
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+            <p></p><p></p>
+            <div class="content-wrapper">
+                <h2>Submitted Assignments</h2>
             </div><div class="row">
                 <div class="col-xs-10">
                     <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
-                        <h1>Submitted Assignments</h1>
+                        <!--<h3>Submitted Assignments</h3>-->
                         <table class="table">
                             <thead>
                             </thead>

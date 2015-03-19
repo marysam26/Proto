@@ -101,15 +101,17 @@ namespace Proto2.Areas.Student.Controllers
         public ActionResult ViewAssignments(Guid classID)
         {
             var assigns = new List<AssignmentsView>();
-            var courses = DocumentSession.Query<ClassModel>()
-                         .Where(c => c.id == classID)
-                         .ToList();
+            // TODO: Finish implementation after some sore of class relation is added 
+            // after adding assignments to courses on teacher end
+            //var courses = DocumentSession.Query<ClassModel>()
+            //             .Where(c => c.id == classID)
+            //             .ToList();
 
             var student = DocumentSession.Query<StudentModel>()
                                .Where(s => s.StudentID == User.Identity.GetUserId())
                                .ToList();
 
-            if (courses.Count != 0 && student.Count != 0)
+            if (/*courses.Count != 0 && */student.Count != 0)
             {
                 AssignmentsView av = new AssignmentsView()
                 {
