@@ -1,10 +1,11 @@
 ![Your Logo Text](http://ezekiel.vancouver.wsu.edu/~cs421/readme/logo.png)
 
-Meeting with Dr. Dunn next week to discuss logo design options as well as change in project name
+Meeting with Dr. Dunn next week to discuss logo design options.
+He has decided to change the project name to WriteItUp!
 
-# Proto
+# WriteItUp!
 
-Proto is an interactive educational application designed to improve student quality of reading, writing and spelling skills.
+WriteItUp! is an interactive educational application designed to improve student quality of reading, writing and spelling skills.
 
 [Dr. Michael Dunn](http://education.wsu.edu/directory/faculty/dunnm)
 
