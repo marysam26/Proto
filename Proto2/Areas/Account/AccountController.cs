@@ -65,7 +65,9 @@ namespace Proto2.Areas.Account
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
-            // TODO: Not recognizing proper log in, always just relaods the view
+            // TODO: Not logging in, just using last recognized log in, it recognizes the user, and then fowards to correct page
+            // but then that USer.Identity.GetUserID is that of the last authenticated user, through registration.
+            // Even when clearing browser cache first, which shouldn't even be necessary
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
@@ -77,19 +79,15 @@ namespace Proto2.Areas.Account
                 }
                 
                 if (user.Roles.Contains(ProtoRoles.Teacher))
-                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
 
                 if (user.Roles.Contains(ProtoRoles.Reviewer))
-                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
 
                 if (user.Roles.Contains(ProtoRoles.SystemAdmin))
-                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
                
                 if (user.Roles.Contains(ProtoRoles.Student)){
-                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 }
 
