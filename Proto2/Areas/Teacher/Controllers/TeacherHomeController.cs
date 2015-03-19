@@ -21,11 +21,11 @@ namespace Proto2.Areas.Teacher.Controllers
         // This is also the classView, the teacher home defaults to viewing their classes
         public ActionResult Index()
         {
-            //var models = new List<ClassViewModel>();
             var courses = DocumentSession.Query<ClassModel>()
                 // How to make it pull based on teacherID
                                .Where(r => r.teacherId == User.Identity.GetUserId())
                                .ToList();
+
             return View(courses);
         }
 
@@ -39,8 +39,6 @@ namespace Proto2.Areas.Teacher.Controllers
         {
             var random = new Random();
             var code = random.Next(1000, 9999);
-            List<string> students = new List<string>();
-            List<string> reviewers = new List<string>();
             var course = new ClassModel()
             {
                 id = Guid.NewGuid(),
@@ -48,8 +46,8 @@ namespace Proto2.Areas.Teacher.Controllers
                 teacherId = User.Identity.GetUserId(),
                 EndDate = input.EndDate,
                 ConfirmCode = code.ToString(),
-                Students = students.ToArray(),
-                Reviewers = reviewers.ToArray(),
+                Students =  new List<string>().ToArray(),
+                Reviewers = new List<string>().ToArray(),
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();

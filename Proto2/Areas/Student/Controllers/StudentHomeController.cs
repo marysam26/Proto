@@ -83,8 +83,8 @@ namespace Proto2.Areas.Student.Controllers
                 // allows for retrieval of the exact object that can be updated or deleted
                 // by using the Load command that uses a document Id
                 StudentModel st = DocumentSession.Load<StudentModel>(ids);
-                List<string> listS = st.ClassIDs.ToList();
-                listS.Add(input.classCode);
+                List<Guid> listS = st.ClassIDs.ToList();
+                listS.Add(course.id);
                 st.ClassIDs = listS.ToArray();
                 
                 DocumentSession.SaveChanges();

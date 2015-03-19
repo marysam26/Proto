@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Raven.Client;
+using Raven.Client.Document;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
 using StructureMap.Pipeline;
@@ -75,15 +77,19 @@ namespace Proto2.Areas.Account
                 }
                 
                 if (user.Roles.Contains(ProtoRoles.Teacher))
+                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
 
                 if (user.Roles.Contains(ProtoRoles.Reviewer))
+                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
 
                 if (user.Roles.Contains(ProtoRoles.SystemAdmin))
+                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
                
                 if (user.Roles.Contains(ProtoRoles.Student)){
+                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 }
 
@@ -144,7 +150,7 @@ namespace Proto2.Areas.Account
                         {
                             StudentID = "ProtoUsers/" + user.UserName,
                             Name = user.FirstName,
-                            ClassIDs = new List<string>().ToArray(),
+                            ClassIDs = new List<Guid>().ToArray(),
                             Submissions = new List<SubmissionView>().ToArray()
                         };
                         DocumentSession.Store(s);
