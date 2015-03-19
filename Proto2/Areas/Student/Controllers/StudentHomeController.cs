@@ -144,6 +144,10 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult Write()
         {
+            // Gather the assignment name and description from page that came here,
+            // So both the traning page will need to pass on this data when clicking the training tab(in case the skip brainstorm)
+            // And brainstorm will need to also
+            // Might go to buttons instead of tabs for consistent UI design
             return View();
         }
 
