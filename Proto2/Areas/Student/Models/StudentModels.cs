@@ -59,7 +59,7 @@ namespace Proto2.Areas.Student.Models
 
     public class AssignmentsView
     {
-        //public AssignmentView[] Current { get; set; }
+        public AssignmentInputView[] Current { get; set; }
         public SubmissionView[] Submitted { get; set; }
     }
 

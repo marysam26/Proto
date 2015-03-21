@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.Student.Models.AssignmentsView>
+﻿@model Proto2.Areas.Student.Models.AssignmentsView
 @{
     ViewBag.Title = "Assignments";
 }
@@ -21,14 +21,11 @@
                             <thead>
                             </thead>
                             <tbody>
-                                @foreach (var assign in Model)
-                                {
-                                    <!--foreach(var a in assign.Current){
-                                <tr>-->
-                                            <!-- Can't build this link yet until I know how the assignments will be related in the courses..will there be an assignment ID accessible?-->
-                                    <!--</tr>
-                            }-->
-                                }
+                                    @foreach(var a in Model.Current){
+                                <tr>
+                                    <td><p><a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</a></p></td>
+                                </tr>
+                                    }
                             </tbody>
                         </table>
                     </div>
@@ -45,14 +42,11 @@
                             <thead>
                             </thead>
                             <tbody>
-                                @foreach (var submit in Model)
-                                {
-                                    foreach (var s in submit.Submitted) {
+                                    @foreach (var s in Model.Submitted) {
                                         <tr>
                                             <td><p><a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {input = s})' ;return false; ">@s.AssignmentName</a></p></td>
                                         </tr>
                                     }
-                                }
                             </tbody>
                         </table>
                     </div>
