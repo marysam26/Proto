@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model Proto2.Areas.Teacher.Models.AssignmentInputView
+<!DOCTYPE html>
 
 @{
     ViewBag.Title = "Strategy Videos";
@@ -17,7 +18,7 @@
     <div style="text-align:center">
         <br>
         <asp:label runat="server">
-            <iframe width="500" height="300" src="//www.youtube.com/embed/pQcnLGBi7WE" frameborder="0"></iframe>
+            <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
             <br>
         </asp:label>
     </div>

@@ -100,27 +100,24 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult ViewAssignments(Guid classID)
         {
-            var assigns = new List<AssignmentsView>();
-            // TODO: Finish implementation after some sore of class relation is added 
-            // after adding assignments to courses on teacher end
-            //var courses = DocumentSession.Query<ClassModel>()
-            //             .Where(c => c.id == classID)
-            //             .ToList();
+            var assigns = new AssignmentsView();
+
+            var assign = DocumentSession.Query<AssignmentInputView>()
+                          .Where(a => a.CourseId == classID)
+                          .ToList();
 
             var student = DocumentSession.Query<StudentModel>()
                                .Where(s => s.StudentID == User.Identity.GetUserId())
                                .ToList();
 
-            if (/*courses.Count != 0 && */student.Count != 0)
+            if (assign.Count() != 0)
             {
-                AssignmentsView av = new AssignmentsView()
-                {
-                    // Guessing at this since assignments seem to be unrelated still
-                    //Current = courses[0].Assignments;
-                    Submitted = student[0].Submissions
+                assigns.Current = assign.ToArray();
+            }
 
-                };
-                assigns.Add(av);
+            if (student.Count != 0)
+            {
+                assigns.Submitted = student[0].Submissions;
             }
 
             return View(assigns);
@@ -168,9 +165,10 @@ namespace Proto2.Areas.Student.Controllers
             return View();
         }
 
-        public ActionResult Train()
+        public ActionResult Train(Guid Id)
         {
-            return View();
+            var assign = DocumentSession.Load<AssignmentInputView>(Id);
+            return View(assign);
         }
 
         public ActionResult BrainStorm()
