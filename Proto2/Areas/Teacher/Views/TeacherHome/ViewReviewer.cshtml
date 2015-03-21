@@ -1,0 +1,49 @@
+﻿@model List<Proto2.Areas.Teacher.Models.ReviewerViewModel>
+
+@*This view should look like the bottom screen on the left
+    for the reviewer mockups. Look at the Index view for
+    teachers for an example*@
+
+@{
+    ViewBag.Title = "Students";
+}
+
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Reviewers enrolled</h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+        <h2>@ViewBag.Title</h2>
+        <div class="jumbotron" style="opacity: .90">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model)
+                    {
+                        <tr>
+                            <td>@s.Name</td>
+                            <td>@s.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</body>

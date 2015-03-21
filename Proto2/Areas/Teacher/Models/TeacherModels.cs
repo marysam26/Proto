@@ -45,6 +45,14 @@ namespace Proto2.Areas.Teacher.Models
 
     }
 
+    public class ReviewerViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string classID { get; set; }
+    }
+
     public class AddStudentInput
     {
         [Required]

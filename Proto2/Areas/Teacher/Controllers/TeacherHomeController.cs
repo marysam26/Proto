@@ -82,14 +82,24 @@ namespace Proto2.Areas.Teacher.Controllers
         //TODO:  Pulling data from the database using fake data until the class view for teacher is implemented
         public ActionResult ViewStudents(String classID)
         {
-            var students = DocumentSession.Query<StudentViewModel, ViewStudentsIndex>()
+            var students = DocumentSession.Query<StudentViewModel>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.teacherID == User.Identity.GetUserId())
-                                .Where(r => r.classID == classID)// classID associated with the link from the class button
+                                .Where(r => r.teacherID == User.Identity.GetUserId() &&
+                                 r.classID == classID)// classID associated with the link from the class button
                                 .ToList();
 
             return View(students);
 
+        }
+
+        public ActionResult ViewReviewer(string clasId)
+        {
+            var reviewers = DocumentSession.Query<ReviewerViewModel>()
+                // How to make it pull based on teacherID?
+                            .Where(r => r.classID == User.Identity.GetUserId())
+                            .ToList();
+
+            return View(reviewers);
         }
         
         public ActionResult ViewClasses(string teacherId)
