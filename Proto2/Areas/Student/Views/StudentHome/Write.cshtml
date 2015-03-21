@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Write";
+    Layout = "~/Areas/Student/Views/Shared/_AssignmentLayout.cshtml";
 }
 
 <html>
@@ -20,9 +21,9 @@
     <div class="form-group">
         <form method="post">
             <p>
-                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn btn-primary"/>
             </p>
-            @Html.TextAreaFor(s => s.Story, new { @id = "editor1" })
+            @Html.TextAreaFor(s => s.Story, new { @id = "editor1" }))
             <!--<textarea style="text-align:center" cols="80" id="editor1" name="editor1" rows="10"></textarea>-->
             
             <script>
@@ -44,6 +45,7 @@
                         { name: 'others', items: ['-'] },
                     ]
                 });
+
                 var editor = CKEDITOR.replace('editor1');
                 // The "save" event is fired whenever a change is made in the editor.
                 editor.on('save', function (evt) {

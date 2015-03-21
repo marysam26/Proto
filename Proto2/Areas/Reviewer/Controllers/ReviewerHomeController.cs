@@ -19,6 +19,24 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult Index()
         {
+            // Hardcoded for tesing because login is broken
+            string userID = "1234";
+            var models = new List<ViewModel>();
+            var classes = DocumentSession.Query<ViewModel>()
+                         .ToList();
+
+            for (int i = 0; i < classes.Count; i++)
+            {
+                if (classes[i].ClassIDs.Contains(userID))
+                {
+                    models.Add(classes[i]);
+                }
+            }
+            return View(models);
+        }
+
+        public ActionResult ReviewerAddClass()
+        {
             return View();
         }
 

@@ -18,7 +18,7 @@ see AddStudent in the Teacher view for an example*@
 
 @* The drop down for the scores still needs to be implemented*@
 <div class="content-wrapper">
-    @using (Html.BeginForm("Review", "Story", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("ReviewStoryView", "ReviewerHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="form-horizontal">
             <h4>Review a story</h4>
@@ -73,4 +73,4 @@ see AddStudent in the Teacher view for an example*@
             </div>
         </div>
     }
-    </
+</div>

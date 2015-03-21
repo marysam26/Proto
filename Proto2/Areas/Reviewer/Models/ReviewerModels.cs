@@ -6,6 +6,9 @@ namespace Proto2.Areas.Reviewer.Models
     public class ViewModel
     {
         public string Name { get; set; }
+        public Guid id { get; set; }
+        public string[] ClassIDs { get; set; }
+        public string ClassName { get; set; }
         public DateTime DatePublished { get; set; }
         public int NumReviews { get; set; }
     }
@@ -18,6 +21,11 @@ namespace Proto2.Areas.Reviewer.Models
         public string Name { get; set; }
         public int NumReviews { get; set; }
 
+    }
+
+    public class ReviewerAddClass
+    {
+        public string classCode { get; set; }
     }
 
     public class ReviewInput

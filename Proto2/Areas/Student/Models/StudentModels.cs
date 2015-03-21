@@ -16,7 +16,7 @@ namespace Proto2.Areas.Student.Models
         public string StudentID { get; set; }
         public string Name { get; set; }
         // list of classIDs
-        public string[] ClassIDs { get; set; }
+        public Guid[] ClassIDs { get; set; }
         public SubmissionView[] Submissions { get; set; }
     }
 

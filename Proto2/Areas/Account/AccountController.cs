@@ -1,10 +1,13 @@
 ﻿using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Raven.Client;
+using Raven.Client.Document;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
 using StructureMap.Pipeline;
@@ -62,7 +65,9 @@ namespace Proto2.Areas.Account
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
-            // TODO: Not recognizing proper log in, always just relaods the view
+            // TODO: Not logging in, just using last recognized log in, it recognizes the user, and then fowards to correct page
+            // but then that USer.Identity.GetUserID is that of the last authenticated user, through registration.
+            // Even when clearing browser cache first, which shouldn't even be necessary
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
@@ -83,23 +88,6 @@ namespace Proto2.Areas.Account
                     return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
                
                 if (user.Roles.Contains(ProtoRoles.Student)){
-                    // Check if there is a student model with this User.Identity and if not make one
-                    // (On first log in, create the student a student model)
-                    // TODO: Haven't been able to test this, need to fix log in
-                  
-                    //I moved this code to creating a student account as it seemed to make more sense there
-                    /* var student = DocumentSession.Query<StudentModel>().FirstOrDefault(s => s.StudentID == User.Identity.GetUserId());
-
-                     * if(student == null){
-                     * 
-                        var s = new StudentModel()
-                        {
-                            StudentID = User.Identity.GetUserId(),
-                            Name = user.FirstName
-                        };
-                        DocumentSession.Store(s);
-                        DocumentSession.SaveChanges();
-                    }*/
                     return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                 }
 
@@ -154,14 +142,18 @@ namespace Proto2.Areas.Account
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        await SignInAsync(user, isPersistent: false);
+                        // Make the studen't first model
                         var s = new StudentModel()
                         {
-                            StudentID = User.Identity.GetUserId(),
-                            Name = user.FirstName
+                            StudentID = "ProtoUsers/" + user.UserName,
+                            Name = user.FirstName,
+                            ClassIDs = new List<Guid>().ToArray(),
+                            Submissions = new List<SubmissionView>().ToArray()
                         };
                         DocumentSession.Store(s);
                         DocumentSession.SaveChanges();
-                        await SignInAsync(user, isPersistent: false);
+
                         return RedirectToAction("Index", "StudentHome", new { area = "Student" });
                     }
                     else

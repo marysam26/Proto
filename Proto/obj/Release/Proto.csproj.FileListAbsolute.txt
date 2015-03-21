@@ -104,3 +104,4 @@ D:\dev\CapstoneProject\Proto\Proto\bin\zh-Hant\System.Spatial.resources.dll
 D:\dev\CapstoneProject\Proto\Proto\obj\Release\Proto.csprojResolveAssemblyReference.cache
 D:\dev\CapstoneProject\Proto\Proto\obj\Release\Proto.dll
 D:\dev\CapstoneProject\Proto\Proto\obj\Release\Proto.pdb
+C:\Users\troper\Source\Repos\Proto\Proto\obj\Release\Proto.csprojResolveAssemblyReference.cache
