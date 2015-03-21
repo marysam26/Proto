@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Linq;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
 using StructureMap.Pipeline;
@@ -77,26 +78,27 @@ namespace Proto2.Areas.Account
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                     return View(model);
                 }
-                
+
+                await SignInAsync(user, model.RememberMe);
+              
                 if (user.Roles.Contains(ProtoRoles.Teacher))
-                    return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+                    return RedirectToAction("Index", "TeacherHome", new {area = "Teacher"});
 
                 if (user.Roles.Contains(ProtoRoles.Reviewer))
-                    return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+                    return RedirectToAction("Index", "ReviewerHome", new {area = "Reviewer"});
 
                 if (user.Roles.Contains(ProtoRoles.SystemAdmin))
-                    return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
-               
-                if (user.Roles.Contains(ProtoRoles.Student)){
-                    return RedirectToAction("Index", "StudentHome", new { area = "Student" });
+                    return RedirectToAction("Index", "SystemAdminHome", new {area = "SystemAdmin"});
+
+                if (user.Roles.Contains(ProtoRoles.Student))
+                {
+                    return RedirectToAction("Index", "StudentHome", new {area = "Student"});
                 }
 
             }
 
             // If we got this far, something failed, redisplay form
-            return View(new LoginModel
-            {
-            });
+            return View();
         }
 
         //
@@ -491,7 +493,7 @@ namespace Proto2.Areas.Account
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new {area = ""});
         }
 
         //
