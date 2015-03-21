@@ -21,10 +21,12 @@
                             <thead>
                             </thead>
                             <tbody>
-                                    @foreach(var a in Model.Current){
-                                <tr>
-                                    <td><p><a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</a></p></td>
-                                </tr>
+                                    @if(Model.Current != null){
+                                        foreach(var a in Model.Current){
+                                        <tr>
+                                            <td><p><a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</a></p></td>
+                                        </tr>
+                                        }
                                     }
                             </tbody>
                         </table>

@@ -101,11 +101,6 @@ namespace Proto2.Areas.Student.Controllers
         public ActionResult ViewAssignments(Guid classID)
         {
             var assigns = new AssignmentsView();
-            // TODO: Finish implementation after some sore of class relation is added 
-            // after adding assignments to courses on teacher end
-            //var courses = DocumentSession.Query<ClassModel>()
-            //             .Where(c => c.id == classID)
-            //             .ToList();
 
             var assign = DocumentSession.Query<AssignmentInputView>()
                           .Where(a => a.CourseId == classID)
