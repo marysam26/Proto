@@ -35,6 +35,11 @@ namespace Proto2.Areas.Reviewer.Controllers
             return View(models);
         }
 
+        public ActionResult ReviewerAddClass()
+        {
+            return View();
+        }
+
         public ActionResult Train()
         {
             var trainingVideos = new List<TrainVideoView>()

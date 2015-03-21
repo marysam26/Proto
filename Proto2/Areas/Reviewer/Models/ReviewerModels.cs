@@ -23,6 +23,11 @@ namespace Proto2.Areas.Reviewer.Models
 
     }
 
+    public class ReviewerAddClass
+    {
+        public string classCode { get; set; }
+    }
+
     public class ReviewInput
     {
         [Required]
