@@ -24,7 +24,7 @@
                                     @if(Model.Current != null){
                                         foreach(var a in Model.Current){
                                         <tr>
-                                            <td><p><a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</a></p></td>
+                                            <td><p><a onclick="location.href='@Url.Action("CurrentAssignment", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</a></p></td>
                                         </tr>
                                         }
                                     }

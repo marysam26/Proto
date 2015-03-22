@@ -26,19 +26,21 @@ namespace Proto2.Areas.Student.Controllers
             //string userID = "1234";
             var models = new List<ClassModel>();
             var courses = DocumentSession.Query<ClassModel>()
+                         //.Where(c => c.Students.Contains(User.Identity.GetUserId()))
                          .ToList();
 
             // TODO: There has to be a better way than this
             // TODO: Think it would be better to pull classes from the student's profile
             // then find infor on the classes that pull...need the log in model to be fixed for that
             // If there are a lot of courses this could take a long time to run
-            // Calling the .Contains in the query did not work though
+            // Calling the .Contains in the query did not work though TODO: try again since log in is fixed
             for (int i = 0; i < courses.Count; i++)
             {
                 if(courses[i].Students.Contains(User.Identity.GetUserId())){
                     models.Add(courses[i]);
                 }
             }
+            //return View(courses);
             return View(models);
         }
 
@@ -50,16 +52,11 @@ namespace Proto2.Areas.Student.Controllers
         [HttpPost]
         public ActionResult StudentAddClass(StudentAddClass input)
         {
-            //string hardcodedIDForTesting = "1234";
              //Query classes for this confCode and then add student to the list
              //If there is one, then add load that specific object and add the student to the array
             var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
                          .Where(c => c.ConfirmCode == input.classCode)
                          .ToList();
-
-
-            // This not working because log in is not tracking who the actual logged in identity is.
-            string stu = User.Identity.GetUserId();
 
             var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
                           .Where(s => s.StudentID == User.Identity.GetUserId())
@@ -123,13 +120,12 @@ namespace Proto2.Areas.Student.Controllers
             return View(assigns);
         }
 
-        /*public ActionResult CurrentAssignment(AssignmentView input)
+        public ActionResult CurrentAssignment(Guid Id)
         {
-            var assignment = new List<AssignmentView>();
-            assignment.Add(input);
+            var assignment = DocumentSession.Load<AssignmentInputView>(Id);
 
             return View(assignment);
-        }*/
+        }
 
         public ActionResult submissionView(SubmissionView input)
         {
@@ -139,30 +135,53 @@ namespace Proto2.Areas.Student.Controllers
             return View(submission);
         }
 
-        public ActionResult Write()
+        public ActionResult Write(Guid Id)
         {
-            // Gather the assignment name and description from page that came here,
-            // So both the traning page will need to pass on this data when clicking the training tab(in case the skip brainstorm)
-            // And brainstorm will need to also
-            // Might go to buttons instead of tabs for consistent UI design
-            return View();
+
+            // Get SubmissionView that matches this assignment id and user
+            var prev = DocumentSession.Query<SubmissionView>()
+                       .Where(a => a.StudentId == User.Identity.GetUserId() && a.AssignmentId == Id)
+                       .ToList();
+            
+            // If first time loading write page, make a StoryInput Model and return it
+            if(prev.Count == 0){
+                // Load assignmentInputView with this Id
+                var assign = DocumentSession.Load<AssignmentInputView>(Id);
+                var writeData = new SubmissionView()
+                {
+                    AssignmentId = assign.Id,
+                    StudentId = User.Identity.GetUserId(),
+                    AssignmentName = assign.AssignmentName,
+                    Description = assign.Description,
+                    Story = ""
+                };
+                DocumentSession.Store(writeData);
+                DocumentSession.SaveChanges();
+                return View(writeData);
+            }
+            // Else return the SubmissionView from query
+            return View(prev[0]);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Write(StoryInput input)
+        public ActionResult Write(SubmissionView input)
         {
-            string hardCodedId = "1234";
-            StoryInput story = new StoryInput()
-            {
-                //StudentId = User.Identity.GetUserId(),
-                StudentId = hardCodedId,
-                Story = input.Story
-            };
-            DocumentSession.Store(story);
+            // Load the submissionView with the Id of the one from input
+            var sv = DocumentSession.Load<SubmissionView>(input.Id);
+
+            // Update the story data
+            sv.Story = input.Story;
+            //StoryInput story = new StoryInput()
+            //{
+            //    StudentId = User.Identity.GetUserId(),
+            //    Story = input.Story
+            //};
+
+            DocumentSession.Store(sv);
             DocumentSession.SaveChanges();
 
-            return View();
+            return RedirectToAction("Write", new { Id = sv.AssignmentId });
         }
 
         public ActionResult Train(Guid Id)
@@ -171,9 +190,10 @@ namespace Proto2.Areas.Student.Controllers
             return View(assign);
         }
 
-        public ActionResult BrainStorm()
+        public ActionResult BrainStorm(Guid Id)
         {
-            return View();
+            var assign = DocumentSession.Load<AssignmentInputView>(Id);
+            return View(assign);
         }
 
         public ActionResult Reviews()

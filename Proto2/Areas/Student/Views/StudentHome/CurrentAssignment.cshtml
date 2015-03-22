@@ -1,6 +1,6 @@
-﻿@{
+﻿@model Proto2.Areas.Teacher.Models.AssignmentInputView
+@{
     ViewBag.Title = "Current Assignment";
-    Layout = "~/Areas/Student/Views/Shared/_AssignmentLayout.cshtml";
 }
 
 <body style="
@@ -10,14 +10,29 @@
 
 </body>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
+<div class="content-wrapper">
     <div>
+        <div class="row">
+            <div class="col-xs-8">
+                <center><h2>@Model.AssignmentName</h2></center>
+                <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                    <p></p>
+                    <center><h3>@Model.Description</h3></center>
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><p><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = Model.Id})' ;return false; ">Watch Strategy Video</button></p></td>
 
+                                <td><p><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Brainstorm", "StudentHome", new {Id = Model.Id})' ;return false; ">Brainstorm</button></p></td>
+
+                                <td><p><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Write", "StudentHome", new {Id = Model.Id})' ;return false; ">Write</button></p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>

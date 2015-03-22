@@ -40,12 +40,13 @@ namespace Proto2.Areas.Student.Models
 
     public class SubmissionView
     {
-        public string StoryId { get; set; }
+        public string Id { get; set; }
+        public Guid AssignmentId { get; set; }
+        public string StudentId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
+        // Date is not set until submit is completed, will be empty on all just saves.
         public DateTime SubmissionDate { get; set; }
-        //public string StudentId { get; set; }
-        //public string Title { get; set; }
         public string Story { get; set; }
     }
 
@@ -73,8 +74,10 @@ namespace Proto2.Areas.Student.Models
     public class StoryInput
     {
         public string Id { get; set; }
+        public Guid AssignmentId { get; set; }
         public string Story { get; set; }
         public string StudentId { get; set; }
-        //public string Title { get; set; }
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
     }
 }
