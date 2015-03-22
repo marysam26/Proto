@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.AspNet.Identity;
+using Proto2.Areas.Student.Models;
 using Proto2.Areas.SystemAdmin.Models;
 using Proto2.Areas.Teacher.Models;
 using Proto2.Areas.Teacher.Indexes;
@@ -80,14 +82,17 @@ namespace Proto2.Areas.Teacher.Controllers
          }*/
 
         //TODO:  Pulling data from the database using fake data until the class view for teacher is implemented
-        public ActionResult ViewStudents(String classID)
+        public ActionResult ViewStudents(Guid classID)
         {
-            var students = DocumentSession.Query<StudentViewModel>()
+            var studentList = DocumentSession.Query<StudentModel>()
                 // How to make it pull based on teacherID?
-                                .Where(r => r.teacherID == User.Identity.GetUserId() &&
-                                 r.classID == classID)// classID associated with the link from the class button
+                                .Where(x => x.ClassIDs.Contains<Guid>(classID))// classID associated with the link from the class button
                                 .ToList();
-
+            var students = new StudentViewList()
+            {
+                StudentList = studentList,
+                CourseId = classID
+            };
             return View(students);
 
         }
@@ -217,6 +222,26 @@ namespace Proto2.Areas.Teacher.Controllers
             DocumentSession.SaveChanges();
 
             return RedirectToAction("ViewAssignments", new {classid = asgn.CourseId});
+        }
+
+       
+        public ActionResult DeleteStudent(string student, Guid courseId, string dataId)
+        {
+            var courses = DocumentSession.Query<ClassModel>().FirstOrDefault(x => x.id == courseId);
+            if (courses != null)
+            {
+                courses.Students = courses.Students.Where(val => val != student).ToArray();
+            }
+
+            var studentName = DocumentSession.Load<StudentModel>(dataId);
+            if (studentName != null)
+            {
+                studentName.ClassIDs = studentName.ClassIDs.Where(val => val != courseId).ToArray();
+            }
+            //DocumentSession.Store(courses);
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("ViewStudents", new {classid = courseId});
         }
     }
 

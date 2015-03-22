@@ -739,7 +739,7 @@
     <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviewer.cshtml" />
     <Content Include="Areas\Account\Views\Account\_LoginPartial.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\_LoginPartial.cshtml" />
-    <Content Include="Areas\Student\Views\StudentHome\_LoginPartial.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\_LoginPartial.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\_LoginPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

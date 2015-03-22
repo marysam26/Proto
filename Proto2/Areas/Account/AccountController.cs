@@ -149,7 +149,7 @@ namespace Proto2.Areas.Account
                         var s = new StudentModel()
                         {
                             StudentID = "ProtoUsers/" + user.UserName,
-                            Name = user.FirstName,
+                            Name = user.FirstName + user.LastName,
                             ClassIDs = new List<Guid>().ToArray(),
                             Submissions = new List<SubmissionView>().ToArray()
                         };
