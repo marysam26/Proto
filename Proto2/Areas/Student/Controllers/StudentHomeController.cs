@@ -33,10 +33,17 @@ namespace Proto2.Areas.Student.Controllers
             // then find infor on the classes that pull...need the log in model to be fixed for that
             // If there are a lot of courses this could take a long time to run
             // Calling the .Contains in the query did not work though
-            for (int i = 0; i < courses.Count; i++)
+            if (courses.FirstOrDefault() != null)
             {
-                if(courses[i].Students.Contains(User.Identity.GetUserId())){
-                    models.Add(courses[i]);
+                for (int i = 0; i < courses.Count; i++)
+                {
+                    if (courses[i].Students != null)
+                    {
+                        if (courses[i].Students.Contains(User.Identity.GetUserId()))
+                        {
+                            models.Add(courses[i]);
+                        }
+                    }
                 }
             }
             return View(models);
