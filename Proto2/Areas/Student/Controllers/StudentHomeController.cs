@@ -128,10 +128,16 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult PastSubmission(string submitId)
         {
-            //var submission = new List<SubmissionView>();
-            //submission.Add(input);
+            SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
 
-            return View();
+            SubmitDetails sd = new SubmitDetails()
+            {
+                Story = new HtmlString(submission.Story),
+                SubmissionId = submission.Id,
+                AssignmentName = submission.AssignmentName,
+                Description = submission.Description
+            };
+            return View(sd);
         }
 
         public ActionResult Write(Guid Id)
@@ -147,6 +153,7 @@ namespace Proto2.Areas.Student.Controllers
                 var assign = DocumentSession.Load<AssignmentInputView>(Id);
                 var writeData = new SubmissionView()
                 {
+                    
                     classId = assign.CourseId,
                     AssignmentId = assign.Id,
                     StudentId = User.Identity.GetUserId(),

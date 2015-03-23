@@ -38,6 +38,14 @@ namespace Proto2.Areas.Student.Models
         public StoryReviewView ReviewTwo { get; set; }
     }
 
+    public class SubmitDetails
+    {
+        public HtmlString Story { get; set; }
+        public string SubmissionId { get; set; }
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+    }
+
     public class SubmissionView
     {
         public string Id { get; set; }
