@@ -38,7 +38,7 @@
                     {
                         <tr>
                             <td>@a.AssignmentName</td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAddAssignmentDetailed", "TeacherHome", new {asgnid = a.Id, courseid = @Model.CourseId.ToString()})' ;return false; ">Add Assignment</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAddAssignmentDetailed", "TeacherHome", new {asgnid = a.Id, courseid = @Model.CourseId.ToString()})' ;return false; ">View Details to Add</button></p></td>
 
                         </tr>
                     }
