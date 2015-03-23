@@ -27,7 +27,7 @@
     <div class="form-group">
         <form method="post">
             <input type="submit" value="Submit" class="btn btn-primary" />
-            @Html.TextAreaFor(s => s.Story, new { @id = "editor1", @value = Model.Story })
+            @Html.TextAreaFor(s => s.Story, new { @id = "editor1", @value = Model.Story})
             @Html.TextBoxFor(s => s.Id, new { @Value = Model.Id, @type = "hidden" })
             <!--<textarea style="text-align:center" cols="80" id="editor1" name="editor1" rows="10"></textarea>-->
             
@@ -50,7 +50,6 @@
                         { name: 'others', items: ['-'] },
                     ]
                 });
-
                 var editor = CKEDITOR.replace('editor1');
                 // The "save" event is fired whenever a change is made in the editor.
                 editor.on('save', function (evt) {
