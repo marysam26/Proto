@@ -181,15 +181,10 @@ namespace Proto2.Areas.Student.Controllers
             // Story and submission date will continue to apdate as long as the 
             // student is making changes before the due date because current assignment will expire at a due date
             sv.SubmissionDate = DateTime.Now;
-            //StoryInput story = new StoryInput()
-            //{
-            // StudentId = User.Identity.GetUserId(),
-            // Story = input.Story
-            //};
 
             DocumentSession.Store(sv);
             DocumentSession.SaveChanges();
-            //return View();
+
             return RedirectToAction("Write", new { Id = sv.AssignmentId });
         }
 
