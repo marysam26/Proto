@@ -231,6 +231,9 @@ namespace Proto2.Areas.Teacher.Controllers
             if (courses != null)
             {
                 courses.Students = courses.Students.Where(val => val != student).ToArray();
+                var random = new Random();
+                var code = random.Next(1000, 9999);
+                courses.ConfirmCode = code.ToString();
             }
 
             var studentName = DocumentSession.Load<StudentModel>(dataId);
@@ -238,7 +241,7 @@ namespace Proto2.Areas.Teacher.Controllers
             {
                 studentName.ClassIDs = studentName.ClassIDs.Where(val => val != courseId).ToArray();
             }
-            //DocumentSession.Store(courses);
+       
             DocumentSession.SaveChanges();
 
             return RedirectToAction("ViewStudents", new {classid = courseId});
