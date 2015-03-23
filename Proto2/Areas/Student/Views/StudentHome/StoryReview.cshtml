@@ -1,9 +1,8 @@
 ﻿@model List<Proto2.Areas.Student.Models.StoryReviewView>
 
-@*See the bottom left/middle mockup for how this view should look*@
 
 @{
-    ViewBag.Title = "Scores out of 7";
+    ViewBag.Title = "Reviews";
 
 }
 
@@ -22,19 +21,19 @@
     @if (Model.Any())
     {
         <h2>@ViewBag.Title</h2><br>
-        <div class="content-wrapper">
-            <div class="jumbotron" style="opacity: .90">
-                @foreach (var student in Model)
+    <div class="content-wrapper">
+        @foreach (var review in Model)
                 {
-
-                    <text><b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;@student.ScorePlot</text><br><br>
-                    <text><b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@student.ScoreCharacter</text><br><br>
-                    <text><b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@student.ScoreSetting</text><br><br>
-                    <text><b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@student.Comments</text><br><br>
-
+                    <div class="jumbotron" style="opacity: .90">
+                            <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;@review.ScorePlot
+                        <br><br>
+                        <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>
+                        <b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreSetting<br><br>
+                        <b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.Comments<br><br>
+                    </div>
+                    <p></p>
                 }
-            </div>
         </div>
     }
 

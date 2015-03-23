@@ -79,14 +79,4 @@ namespace Proto2.Areas.Student.Models
         //to associate it with the model if possible
         
     }
-
-    public class StoryInput
-    {
-        public string Id { get; set; }
-        public Guid AssignmentId { get; set; }
-        public string Story { get; set; }
-        public string StudentId { get; set; }
-        public string AssignmentName { get; set; }
-        public string Description { get; set; }
-    }
 }

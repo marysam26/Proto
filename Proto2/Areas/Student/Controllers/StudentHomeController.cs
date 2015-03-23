@@ -193,24 +193,6 @@ namespace Proto2.Areas.Student.Controllers
             return RedirectToAction("Write", new { Id = sv.AssignmentId });
         }
 
-        /*[HttpPost]
-        public ActionResult onSubmit(SubmissionView input)
-        {
-            // Load the submissionView with the Id of the one from input
-            var sv = DocumentSession.Load<SubmissionView>(input.Id);
-
-            // Update the story data
-            sv.Story = input.Story;
-
-            // Set submission date
-            sv.SubmissionDate = new DateTime();
-
-            DocumentSession.Store(sv);
-            DocumentSession.SaveChanges();
-
-            return RedirectToAction("ViewAssignments", new { classId = sv.classId });
-        }*/
-
         public ActionResult Train(Guid Id)
         {
             var assign = DocumentSession.Load<AssignmentInputView>(Id);
@@ -247,16 +229,31 @@ namespace Proto2.Areas.Student.Controllers
             return View(ReviewsList);
         }
 
-        public ActionResult StoryReview()
+        public ActionResult StoryReview(string submissionId)
         {
-            //TODO: this should return a list of StoryReviewViews
-            //Default review, will pull reviews from database but will use this as default for now.
+            // StoryId will actually be pulled as a SubmissionId from a submitted assignment
+            // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
+            // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
+            
+            // Reviewer needs a model that saves to the database other than review input,
+            // like it takes inthe review input then adds the data to a review and saves that review.
+            // The data types of the current reviewinput do not like to be queried
+            //var stReviews = DocumentSession.Query<ReviewInputSave>()
+            //                   .Where(r => r.StoryId == submissionId)
+            //                   .ToList; // This should only be two, reviews should not show up for reviewer after 2 have been completed
+                            
             var StoryReviewsList = new List<StoryReviewView>(){
                 new StoryReviewView(){
                        ScorePlot = 5,
                        ScoreCharacter = 4,
                        ScoreSetting = 5,
                        Comments = "Develop a stronger plot and invest more thought to character development."
+                },
+                new StoryReviewView(){
+                       ScorePlot = 7,
+                       ScoreCharacter = 6,
+                       ScoreSetting = 6,
+                       Comments = "A more well developed story setting will help the reader have a better visual."
                 }
             };
             return View(StoryReviewsList);
