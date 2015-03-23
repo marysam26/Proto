@@ -151,7 +151,7 @@ namespace Proto2.Areas.Account
                             StudentID = "ProtoUsers/" + user.UserName,
                             Name = user.FirstName + user.LastName,
                             ClassIDs = new List<Guid>().ToArray(),
-                            Submissions = new List<SubmissionView>().ToArray()
+                            //Submissions = new List<SubmissionView>().ToArray()
                         };
                         DocumentSession.Store(s);
                         DocumentSession.SaveChanges();
