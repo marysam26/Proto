@@ -241,19 +241,22 @@ namespace Proto2.Areas.Student.Controllers
             //var stReviews = DocumentSession.Query<ReviewInputSave>()
             //                   .Where(r => r.StoryId == submissionId)
             //                   .ToList; // This should only be two, reviews should not show up for reviewer after 2 have been completed
-                            
+
+            int num = 1;
             var StoryReviewsList = new List<StoryReviewView>(){
                 new StoryReviewView(){
                        ScorePlot = 5,
                        ScoreCharacter = 4,
                        ScoreSetting = 5,
-                       Comments = "Develop a stronger plot and invest more thought to character development."
+                       Comments = "Develop a stronger plot and invest more thought to character development.",
+                       reviewNum = num
                 },
                 new StoryReviewView(){
                        ScorePlot = 7,
                        ScoreCharacter = 6,
                        ScoreSetting = 6,
-                       Comments = "A more well developed story setting will help the reader have a better visual."
+                       Comments = "A more well developed story setting will help the reader have a better visual.",
+                       reviewNum = num+1
                 }
             };
             return View(StoryReviewsList);

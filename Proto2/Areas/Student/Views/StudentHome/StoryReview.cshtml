@@ -20,12 +20,13 @@
     }
     @if (Model.Any())
     {
-        <h2>@ViewBag.Title</h2><br>
+        <center><h2>@ViewBag.Title</h2></center><br>
     <div class="content-wrapper">
         @foreach (var review in Model)
                 {
+                    <h2>Review @review.reviewNum</h2>
                     <div class="jumbotron" style="opacity: .90">
-                            <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;@review.ScorePlot
                         <br><br>
                         <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>

@@ -65,6 +65,7 @@ namespace Proto2.Areas.Student.Models
         public int ScoreCharacter { get; set; }
         public int ScoreSetting { get; set; }
         public string Comments { get; set; }
+        public int reviewNum { get; set; }
     }
 
     public class AssignmentsView
