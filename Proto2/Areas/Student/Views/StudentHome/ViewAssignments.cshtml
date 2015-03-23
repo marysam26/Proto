@@ -14,17 +14,22 @@
         <div>
             <h2>Current Assignments</h2>
             <div class="row">
-                <div class="col-xs-10">
-                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                <div class="col-xs-8">
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
                         <!--<h3>Current Assignments</h3>-->
                         <table class="table">
                             <thead>
+                                <tr>
+                                    <th>Assignment Name</th>
+                                    <th>Due Date</th>
+                                </tr>
                             </thead>
                             <tbody>
                                     @if(Model.Current != null){
                                         foreach(var a in Model.Current){
                                         <tr>
-                                            <td><p><a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</a></p></td>
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("CurrentAssignment", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</button></td>
+                                            <td>@a.DueDate.ToShortDateString()</td>
                                         </tr>
                                         }
                                     }
@@ -37,18 +42,25 @@
             <div class="content-wrapper">
                 <h2>Submitted Assignments</h2>
             </div><div class="row">
-                <div class="col-xs-10">
-                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                <div class="col-xs-8">
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
                         <!--<h3>Submitted Assignments</h3>-->
                         <table class="table">
                             <thead>
+                               <tr>
+                                    <th>Assignment Name</th>
+                                    <th>Submission Date</th>
+                               </tr>
                             </thead>
                             <tbody>
-                                    @foreach (var s in Model.Submitted) {
+                                @if (Model.Submitted != null) {
+                                    foreach (var s in Model.Submitted) {
                                         <tr>
-                                            <td><p><a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {input = s})' ;return false; ">@s.AssignmentName</a></p></td>
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {submitId = s.Id})' ;return false; ">@s.AssignmentName</button></td>
+                                            <td>@s.SubmissionDate.ToShortDateString()</td>
                                         </tr>
                                     }
+                                }
                             </tbody>
                         </table>
                     </div>

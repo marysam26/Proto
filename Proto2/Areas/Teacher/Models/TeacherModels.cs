@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Proto2.Areas.Student.Models;
 using Proto2.Areas.SystemAdmin.Models;
 
 namespace Proto2.Areas.Teacher.Models
@@ -31,6 +32,11 @@ namespace Proto2.Areas.Teacher.Models
         public string[] classIDs { get; set; }
     }
 
+    public class StudentViewList
+    {
+        public List<StudentModel> StudentList { get; set; }
+        public Guid CourseId { get; set; }
+    }
 
     public class StudentViewModel
     {
@@ -43,6 +49,14 @@ namespace Proto2.Areas.Teacher.Models
         public string Confirmed { get; set; }
         public string teacherID { get; set; }
 
+    }
+
+    public class ReviewerViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string classID { get; set; }
     }
 
     public class AddStudentInput

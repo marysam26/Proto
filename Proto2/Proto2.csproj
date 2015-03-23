@@ -736,6 +736,12 @@
     <Content Include="Areas\Reviewer\Views\Web.config" />
     <Content Include="Areas\Reviewer\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewerAddClass.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\ViewReviewer.cshtml" />
+    <Content Include="Areas\Account\Views\Account\_LoginPartial.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\_LoginPartial.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherHome\_LoginPartial.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\_LoginPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -777,10 +783,10 @@
     <Content Include="Areas\Account\Views\Account\Login.cshtml" />
     <Content Include="Areas\Account\Views\Account\Manage.cshtml" />
     <Content Include="Areas\Account\Views\Account\Register.cshtml" />
-    <Content Include="Views\Home\_LoginPartial.cshtml" />
     <Content Include="Areas\Account\Views\Account\RegisterReviewer.cshtml" />
     <Content Include="Areas\Account\Views\Account\RegisterStudent.cshtml" />
     <Content Include="Areas\Account\Views\Account\RegisterTeacher.cshtml" />
+    <Content Include="Views\Home\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

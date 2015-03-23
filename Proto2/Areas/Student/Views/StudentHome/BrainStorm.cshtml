@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@model Proto2.Areas.Teacher.Models.AssignmentInputView
+<!DOCTYPE html>
 
 @{
     ViewBag.Title = "Brainstorm";
-    Layout = "~/Areas/Student/Views/Shared/_AssignmentLayout.cshtml";
 }
 
 <html>
@@ -13,7 +13,12 @@
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
         background-repeat: no-repeat;
         background-size: cover">
-    <center><h2>@ViewBag.Title</h2></center>
+    <center><h2>@Model.AssignmentName</h2></center>
+    <p></p>
+    <center><h3>@Model.Description</h3></center>
+    <div class="pull-right">
+        <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("CurrentAssignment", "StudentHome", new { Id = Model.Id })';return false;">&nbsp;Return</button>&nbsp;&nbsp;
+    </div>
     <div style="text-align:center">
         <br>
         <asp:label runat="server">

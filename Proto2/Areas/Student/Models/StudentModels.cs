@@ -17,7 +17,7 @@ namespace Proto2.Areas.Student.Models
         public string Name { get; set; }
         // list of classIDs
         public Guid[] ClassIDs { get; set; }
-        public SubmissionView[] Submissions { get; set; }
+        //public SubmissionView[] Submissions { get; set; }
     }
 
     public class VideoView
@@ -38,14 +38,24 @@ namespace Proto2.Areas.Student.Models
         public StoryReviewView ReviewTwo { get; set; }
     }
 
-    public class SubmissionView
+    public class SubmitDetails
     {
-        public string StoryId { get; set; }
+        public HtmlString Story { get; set; }
+        public string SubmissionId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
+    }
+
+    public class SubmissionView
+    {
+        public string Id { get; set; }
+        public Guid classId { get; set; }
+        public Guid AssignmentId { get; set; }
+        public string StudentId { get; set; }
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+        // Date is not set until submit is completed, will be empty on all just saves.
         public DateTime SubmissionDate { get; set; }
-        //public string StudentId { get; set; }
-        //public string Title { get; set; }
         public string Story { get; set; }
     }
 
@@ -55,6 +65,7 @@ namespace Proto2.Areas.Student.Models
         public int ScoreCharacter { get; set; }
         public int ScoreSetting { get; set; }
         public string Comments { get; set; }
+        public int reviewNum { get; set; }
     }
 
     public class AssignmentsView
@@ -68,13 +79,5 @@ namespace Proto2.Areas.Student.Models
         //TODO: if we're going to save their picture, we should try
         //to associate it with the model if possible
         
-    }
-
-    public class StoryInput
-    {
-        public string Id { get; set; }
-        public string Story { get; set; }
-        public string StudentId { get; set; }
-        //public string Title { get; set; }
     }
 }

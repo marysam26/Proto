@@ -138,6 +138,7 @@ namespace Proto2.Areas.Reviewer.Controllers
 
             DocumentSession.SaveChanges();
 
+            // Return to the page to choose another review, or return to class
             return Content("It saved!");
             //This will respond to a fom being completed and will eventually be saved to a database
             //This could return a view of all past reviews which would then include the submitted review

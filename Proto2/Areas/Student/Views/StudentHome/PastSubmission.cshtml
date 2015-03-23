@@ -1,22 +1,40 @@
-﻿@{
+﻿@model Proto2.Areas.Student.Models.SubmitDetails
+<!DOCTYPE html>
+@{
     ViewBag.Title = "Submitted Assignment";
 }
 
+<html>
 <body style="
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
         background-repeat: no-repeat;
         background-size: cover">
 
-</body>
+    <div class="content-wrapper">
+        <div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
+                        <center><h2>@Model.AssignmentName</h2></center>
+                        <p></p>
+                        <h3>@Model.Description</h3>
+                        <table class="table">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><p><button type="button" class="btn btn-primary btn-default" onclick="location.href='@Url.Action("StoryReview", "StudentHome", new {submissionId = Model.SubmissionId})' ;return false; ">Read Reviews</button></p></td>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                                @Model.Story
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
