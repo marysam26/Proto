@@ -7,6 +7,7 @@ using Proto2.Areas.Reviewer.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
+using Proto2.Areas.Teacher.Models;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
@@ -19,26 +20,60 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult Index()
         {
-            // Hardcoded for tesing because login is broken
-            string userID = "1234";
-            var models = new List<ViewModel>();
-            var classes = DocumentSession.Query<ViewModel>()
-                         .ToList();
-
-            for (int i = 0; i < classes.Count; i++)
+          
+            var reviewerModel = DocumentSession.Load<ReviewerModel>(User.Identity.Name);
+            //var courses = DocumentSession.Query<ClassModel>().
+              //Where(x => reviewerModel.ClassIDs.Contains<string>(x.Id)).ToList();//broken here!!!!!!!!!!!!!!!!!!!!!!!
+            
+            var courses = new List<ViewModel>();
+            foreach (string r in reviewerModel.ClassIDs)
             {
-                if (classes[i].ClassIDs.Contains(userID))
-                {
-                    models.Add(classes[i]);
-                }
+                var course = DocumentSession.Load<ClassModel>(r);  //look through database for every class this reviewer is associated with
+                var ReviewerClass = new ViewModel();
+                ReviewerClass.ClassIDs = course.Id;
+                ReviewerClass.ClassName = course.ClassName;
+                ReviewerClass.NumReviews = course.Reviewers.Count;
+                courses.Add(ReviewerClass);
             }
-            return View(models);
+            
+
+
+            return View(courses);
         }
 
+
+        [HttpPost]
+        public ActionResult ReviewerAddClass(ReviewerAddClass input)
+        {
+            var courses = DocumentSession.Query<ClassModel>()
+                   .Where(r => r.ConfirmCode == input.classCode)
+                   .ToList();
+            if (!courses.Any())  //check to be sure the code correspondes to a class in the DB
+            {
+                ModelState.AddModelError("", "The provided class code is incorrect.");
+                return View(input);
+            }
+
+            var reviewer = DocumentSession.Load<ReviewerModel>(User.Identity.Name);  //get this reviewers model from the db
+
+            //add the class to the reviewers model on db
+            reviewer.ClassIDs.Add(courses.First().Id);
+            
+            //add reviewer id to the class model on the database
+            courses.First().Reviewers.Add(User.Identity.GetUserId());
+
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
+
+        
         public ActionResult ReviewerAddClass()
         {
             return View();
         }
+
 
         public ActionResult Train()
         {
@@ -71,7 +106,7 @@ namespace Proto2.Areas.Reviewer.Controllers
 
 
             var pastReviews = DocumentSession.Query<PastReviewView, PastReviewIndex>()
-                .Where(r => r.OwnerUserId == User.Identity.GetUserId() && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
+                .Where(r => r.StudentId == User.Identity.GetUserId() && r.PublishDate >= DateTime.UtcNow.AddDays(-7))
                 .ToList();
 
             return View(pastReviews);
@@ -103,6 +138,7 @@ namespace Proto2.Areas.Reviewer.Controllers
 
             DocumentSession.SaveChanges();
 
+            // Return to the page to choose another review, or return to class
             return Content("It saved!");
             //This will respond to a fom being completed and will eventually be saved to a database
             //This could return a view of all past reviews which would then include the submitted review
@@ -135,8 +171,8 @@ namespace Proto2.Areas.Reviewer.Controllers
                 //TODO: Parse title,story,and reviewer names from avabile information
                 Title = "Reviewed Story",
                 Story = "A long long long long but not so long time ago....",
-                ReviewerName = "Uidentfied reviewer",
-                ReviewerNames = new string[] { "Dr. Pompus" },
+                //ReviewerName = "Uidentfied reviewer",
+                //ReviewerNames = new string[] { "Dr. Pompus" },
                 Comment = input.Comments,
                 ScoreCharacter = input.ScoreCharacter,
                 ScorePlot = input.ScorePlot,

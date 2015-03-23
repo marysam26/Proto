@@ -65,6 +65,7 @@ namespace Proto2.Areas.Student.Models
         public int ScoreCharacter { get; set; }
         public int ScoreSetting { get; set; }
         public string Comments { get; set; }
+        public int reviewNum { get; set; }
     }
 
     public class AssignmentsView
@@ -78,15 +79,5 @@ namespace Proto2.Areas.Student.Models
         //TODO: if we're going to save their picture, we should try
         //to associate it with the model if possible
         
-    }
-
-    public class StoryInput
-    {
-        public string Id { get; set; }
-        public Guid AssignmentId { get; set; }
-        public string Story { get; set; }
-        public string StudentId { get; set; }
-        public string AssignmentName { get; set; }
-        public string Description { get; set; }
     }
 }

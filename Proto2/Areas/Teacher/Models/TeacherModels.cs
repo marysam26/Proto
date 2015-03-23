@@ -16,10 +16,10 @@ namespace Proto2.Areas.Teacher.Models
         public string ConfirmCode { get; set; }
         public DateTime EndDate { get; set; }
         //List of students
-        public string[] Students { get; set; }
+        public List<string> Students { get; set; }
         // List of reviewers
         // When a reviewer agrees to review for this class it adds them to this list
-        public string[] Reviewers { get; set; }
+        public List<string> Reviewers { get; set; }
         public string ClassName { get; set; }
     }
 

@@ -48,8 +48,8 @@ namespace Proto2.Areas.Teacher.Controllers
                 teacherId = User.Identity.GetUserId(),
                 EndDate = input.EndDate,
                 ConfirmCode = code.ToString(),
-                Students =  new List<string>().ToArray(),
-                Reviewers = new List<string>().ToArray(),
+                Students =  new List<string>(),
+                Reviewers = new List<string>(),
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
@@ -230,7 +230,7 @@ namespace Proto2.Areas.Teacher.Controllers
             var courses = DocumentSession.Query<ClassModel>().FirstOrDefault(x => x.id == courseId);
             if (courses != null)
             {
-                courses.Students = courses.Students.Where(val => val != student).ToArray();
+                courses.Students.Remove(student);// = courses.Students.Where(val => val != student);  //change from array to list of students, may need to be revised
                 var random = new Random();
                 var code = random.Next(1000, 9999);
                 courses.ConfirmCode = code.ToString();

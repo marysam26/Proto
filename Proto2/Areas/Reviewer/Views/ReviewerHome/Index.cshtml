@@ -7,7 +7,7 @@
     ViewBag.Title = "Reviewer";
 }
 
-<h2>Welcome Reviewer</h2>
+
 <body style="
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
         background-repeat: no-repeat;
@@ -19,6 +19,7 @@
     @if (!Model.Any())
     {
         <div class="jumbotron">
+            <h2>Welcome Reviewer</h2>
             <h2><strong>You currently have no reviews.</strong> </h2>
             <p>Once you have been registered with a class, your reviews will be available.</p>
             <p>
@@ -37,16 +38,22 @@
             </div>
             <h2>@ViewBag.Title</h2>
             <div class="row">
-                <div class="col-xs-5">
-                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+                <div>
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
                         <table class="table">
                             <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Number of Reviewers for this Course</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach (var course in Model)
                                 {
+                                    
                                     <tr>
-                                        <td><p><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("ViewReviews", "ReviewHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
+                                        <td><p><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ViewReviews", "ReviewHome", new {classID = course.ClassIDs})' ;return false; ">@course.ClassName</button></p></td>
+                                        <td>@course.NumReviews</td>
                                     </tr>
 
                                 }

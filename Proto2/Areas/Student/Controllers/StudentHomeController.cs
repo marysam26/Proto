@@ -71,7 +71,7 @@ namespace Proto2.Areas.Student.Controllers
                 ClassModel course = DocumentSession.Load<ClassModel>(id);
                 List<string> list = course.Students.ToList();
                 list.Add(User.Identity.GetUserId());
-                course.Students = list.ToArray();
+                course.Students = list;
                 //DocumentSession.SaveChanges();
 
                 string ids = student[0].Id;
@@ -181,35 +181,12 @@ namespace Proto2.Areas.Student.Controllers
             // Story and submission date will continue to apdate as long as the 
             // student is making changes before the due date because current assignment will expire at a due date
             sv.SubmissionDate = DateTime.Now;
-            //StoryInput story = new StoryInput()
-            //{
-            // StudentId = User.Identity.GetUserId(),
-            // Story = input.Story
-            //};
 
             DocumentSession.Store(sv);
             DocumentSession.SaveChanges();
-            //return View();
+
             return RedirectToAction("Write", new { Id = sv.AssignmentId });
         }
-
-        /*[HttpPost]
-        public ActionResult onSubmit(SubmissionView input)
-        {
-            // Load the submissionView with the Id of the one from input
-            var sv = DocumentSession.Load<SubmissionView>(input.Id);
-
-            // Update the story data
-            sv.Story = input.Story;
-
-            // Set submission date
-            sv.SubmissionDate = new DateTime();
-
-            DocumentSession.Store(sv);
-            DocumentSession.SaveChanges();
-
-            return RedirectToAction("ViewAssignments", new { classId = sv.classId });
-        }*/
 
         public ActionResult Train(Guid Id)
         {
@@ -247,16 +224,34 @@ namespace Proto2.Areas.Student.Controllers
             return View(ReviewsList);
         }
 
-        public ActionResult StoryReview()
+        public ActionResult StoryReview(string submissionId)
         {
-            //TODO: this should return a list of StoryReviewViews
-            //Default review, will pull reviews from database but will use this as default for now.
+            // StoryId will actually be pulled as a SubmissionId from a submitted assignment
+            // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
+            // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
+            
+            // Reviewer needs a model that saves to the database other than review input,
+            // like it takes inthe review input then adds the data to a review and saves that review.
+            // The data types of the current reviewinput do not like to be queried
+            //var stReviews = DocumentSession.Query<ReviewInputSave>()
+            //                   .Where(r => r.StoryId == submissionId)
+            //                   .ToList; // This should only be two, reviews should not show up for reviewer after 2 have been completed
+
+            int num = 1;
             var StoryReviewsList = new List<StoryReviewView>(){
                 new StoryReviewView(){
                        ScorePlot = 5,
                        ScoreCharacter = 4,
                        ScoreSetting = 5,
-                       Comments = "Develop a stronger plot and invest more thought to character development."
+                       Comments = "Develop a stronger plot and invest more thought to character development.",
+                       reviewNum = num
+                },
+                new StoryReviewView(){
+                       ScorePlot = 7,
+                       ScoreCharacter = 6,
+                       ScoreSetting = 6,
+                       Comments = "A more well developed story setting will help the reader have a better visual.",
+                       reviewNum = num+1
                 }
             };
             return View(StoryReviewsList);

@@ -42,7 +42,7 @@ teachers for an example*@
                     @foreach (var reviewer in Model)
                     {
                         <tr>
-                            <td>@reviewer.ReviewerName</td>
+                            <td>@User.Identity.Name</td>
                             <td>@reviewer.Story</td>
                             <td>@reviewer.Title</td>
                             <td>@reviewer.ScoreCharacter</td>
