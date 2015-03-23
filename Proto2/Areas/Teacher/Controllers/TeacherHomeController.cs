@@ -46,8 +46,8 @@ namespace Proto2.Areas.Teacher.Controllers
                 teacherId = User.Identity.GetUserId(),
                 EndDate = input.EndDate,
                 ConfirmCode = code.ToString(),
-                Students =  new List<string>().ToArray(),
-                Reviewers = new List<string>().ToArray(),
+                Students =  new List<string>(),
+                Reviewers = new List<string>(),
             };
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();

@@ -1,15 +1,21 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Proto2.Areas.Reviewer.Models
 {
+    public class ReviewerModel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        // list of classIDs
+        public List<string> ClassIDs { get; set; }
+        public List<PastReviewView> Reviews { get; set; }
+    }
     public class ViewModel
     {
-        public string Name { get; set; }
-        public Guid id { get; set; }
-        public string[] ClassIDs { get; set; }
+        public string ClassIDs { get; set; }
         public string ClassName { get; set; }
-        public DateTime DatePublished { get; set; }
         public int NumReviews { get; set; }
     }
 
@@ -25,6 +31,9 @@ namespace Proto2.Areas.Reviewer.Models
 
     public class ReviewerAddClass
     {
+        [Required]
+        [Range(1000, 9999)]
+        [Display(Name = "Class Code")]
         public string classCode { get; set; }
     }
 
@@ -79,9 +88,9 @@ namespace Proto2.Areas.Reviewer.Models
         public int ScoreSetting { get; set; }
         public int ScoreCharacter { get; set; }
         public string Comment { get; set; }
-        public string ReviewerName { get; set; }
-        public string[] ReviewerNames { get; set; }
-        public string OwnerUserId { get; set; }
+       // public string ReviewerName { get; set; }
+       //public string[] ReviewerNames { get; set; }
+        public string StudentId { get; set; }
         public DateTime PublishDate { get; set; }
     }
 

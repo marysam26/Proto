@@ -11,6 +11,7 @@ using Raven.Client.Document;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
 using StructureMap.Pipeline;
+using Proto2.Areas.Reviewer.Models;
 
 namespace Proto2.Areas.Account
 {
@@ -160,8 +161,33 @@ namespace Proto2.Areas.Account
                     {   
                         AddErrors(result);
                     }
+                }
+                if (model.AccountType == "Reviewer")
+                {
+                    user.Roles.Add(ProtoRoles.Reviewer);
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        // Make a reviewer model
+                        var r = new ReviewerModel()
+                        {
+                            Id = user.UserName,
+                            Name = user.FirstName,
+                            ClassIDs = new List<string>(),
+                            Reviews = new List<PastReviewView>()
+                        };
+                        DocumentSession.Store(r);
+                        DocumentSession.SaveChanges();
+
+                        return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }                  
-                else
+               /* else
                 {
                     user.Roles.Add(ProtoRoles.Reviewer);
                     var result = await UserManager.CreateAsync(user, model.Password);
@@ -174,7 +200,7 @@ namespace Proto2.Areas.Account
                     {
                         AddErrors(result);
                     }
-                }
+                }*/
             }
 
             model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");

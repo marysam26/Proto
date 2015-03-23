@@ -75,7 +75,7 @@ namespace Proto2.Areas.Student.Controllers
                 ClassModel course = DocumentSession.Load<ClassModel>(id);
                 List<string> list = course.Students.ToList();
                 list.Add(User.Identity.GetUserId());
-                course.Students = list.ToArray();
+                course.Students = list;
                 //DocumentSession.SaveChanges();
 
                 string ids = student[0].Id;

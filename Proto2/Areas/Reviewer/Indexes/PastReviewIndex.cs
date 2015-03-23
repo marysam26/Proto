@@ -9,7 +9,7 @@ namespace Proto2.Areas.Reviewer.Indexes
         public PastReviewIndex()
         {
             Map = docs => from review in docs
-                select new { PublishDate = review.PublishDate, OwnerUserId = review.OwnerUserId, NickName = "Sally" };
+                select new { PublishDate = review.PublishDate, StudentId = review.StudentId, NickName = "Sally" };
         }
     }
 }
