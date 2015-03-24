@@ -59,14 +59,10 @@ Centralized
 * Everyone is able to check out and push to the development branch. Marysa manages any merge conflicts.
 
 ## Known Bugs / Caveats
-
-* Bug in login, where calling User.Identity.GetUserId() is returning an id for a different user other than the one you logged in with. A log out link would solve this probably for testing if that can be implemented. Maybe even a logout command that is called before the login starts to parse data...
-* * Fixed the log in issue by adding "await SignInAsync(user, isPersistent: false);" that appears to actually be logging them in. Previously it was only recognizing users as being logged in if they had gone through registration.
+* Internet Explorer throws an error upon choosing the dropdown menu.
 
 * Discovered a bug in Teacher where after adding a course, the page relaods as if they had no course. If they go to the TeacherHome tab, it then appears but it should show up immediately on redirect.
 
-* We had a bug where if we were logged in it would not let you get back to the home page to log in for another user.  Currently we have the commented out so that now you always have to log in. 
-* * Since this may be used on shared computers, required login is probably needed anyway to avoid accidental privacy loss
 
 ## TODO
 
