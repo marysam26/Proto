@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using Proto2.Areas
+@using Proto2.Areas.Account
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,6 +30,11 @@
                         <li>@Html.ActionLink("Training", "Train", "ReviewerHome")</li>
                         <li>@Html.ActionLink("Review Story", "ReviewStory", "ReviewerHome")</li>
                         <li>@Html.ActionLink("Past Reviews", "PastReviews", "ReviewerHome")</li>
+                        @if (User.IsInRole(ProtoRoles.Teacher))
+                        {
+                            <li>@Html.ActionLink("Teacher", "Index", "TeacherHome")</li>
+
+                        }
 
                     </ul>
                 }

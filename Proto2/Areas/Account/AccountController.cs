@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -150,7 +151,7 @@ namespace Proto2.Areas.Account
                         var s = new StudentModel()
                         {
                             StudentID = "ProtoUsers/" + user.UserName,
-                            Name = user.FirstName + user.LastName,
+                            Name = user.FirstName +" "+ user.LastName,
                             ClassIDs = new List<Guid>().ToArray(),
                             //Submissions = new List<SubmissionView>().ToArray()
                         };
@@ -175,7 +176,7 @@ namespace Proto2.Areas.Account
                         var r = new ReviewerModel()
                         {
                             Id = user.UserName,
-                            Name = user.FirstName,
+                            Name = user.FirstName+ " " + user.LastName,
                             ClassIDs = new List<string>(),
                             Reviews = new List<PastReviewView>()
                         };

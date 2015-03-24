@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Indexes;
 using Proto2.Areas.Reviewer.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
 using Proto2.Areas.Teacher.Models;
+using RavenDB.AspNet.Identity;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
@@ -18,6 +20,19 @@ namespace Proto2.Areas.Reviewer.Controllers
         //
         // GET: /Reviewer/
 
+           public ReviewerHomeController()
+        {
+            this.UserManager = new UserManager<ProtoUser>(
+                new UserStore<ProtoUser>(() => this.DocumentSession));
+               
+        }
+
+        //public AccountController(UserManager<ProtoUser> userManager)
+        //{
+        //    UserManager = userManager;
+        //}
+
+        public UserManager<ProtoUser> UserManager { get; private set; }
         public ActionResult Index()
         {
           

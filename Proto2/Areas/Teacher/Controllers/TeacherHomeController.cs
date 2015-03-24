@@ -4,22 +4,37 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.AspNet.Identity;
+using Proto2.Areas.Account;
+using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Student.Models;
 using Proto2.Areas.SystemAdmin.Models;
 using Proto2.Areas.Teacher.Models;
 using Proto2.Areas.Teacher.Indexes;
 using System.Linq;
 using Raven.Client;
+using RavenDB.AspNet.Identity;
 using StoryView = Proto2.Areas.Teacher.Models.StoryView;
 
 
 namespace Proto2.Areas.Teacher.Controllers
 {
+ 
     public class TeacherHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
         public IDocumentSession DocumentSession { get; set; }
+        public TeacherHomeController()
+        {
+            this.UserManager = new UserManager<ProtoUser>(
+                new UserStore<ProtoUser>(() => this.DocumentSession));
+        }
 
+        //public AccountController(UserManager<ProtoUser> userManager)
+        //{
+        //    UserManager = userManager;
+        //}
+
+        public UserManager<ProtoUser> UserManager { get; private set; }
         // This is also the classView, the teacher home defaults to viewing their classes
         public ActionResult Index()
         {
@@ -245,6 +260,37 @@ namespace Proto2.Areas.Teacher.Controllers
             DocumentSession.SaveChanges();
 
             return RedirectToAction("ViewStudents", new {classid = courseId});
+        }
+
+        public ActionResult RegisterAsReviewer()
+        {
+            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Reviewer))
+            {
+                return RedirectToAction("Index", "ReviewerHome", new {area = "Reviewer"});
+
+            }
+         
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult RegisterTeacherAsReviewer()
+        {
+            UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Reviewer);
+
+            var r = new ReviewerModel()
+            {
+                Id = User.Identity.GetUserName(),
+                Name = User.Identity.Name,
+                ClassIDs = new List<string>(),
+                Reviews = new List<PastReviewView>()
+            };
+            DocumentSession.Store(r);
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
         }
     }
 
