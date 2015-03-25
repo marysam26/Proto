@@ -228,34 +228,27 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult StoryReview(string submissionId)
         {
-            // StoryId will actually be pulled as a SubmissionId from a submitted assignment
+            // StoryId will be passed as a SubmissionId from a submitted assignment
             // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
             // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
             
-            // Reviewer needs a model that saves to the database other than review input,
-            // like it takes inthe review input then adds the data to a review and saves that review.
-            // The data types of the current reviewinput do not like to be queried
-            //var stReviews = DocumentSession.Query<ReviewInputSave>()
-            //                   .Where(r => r.StoryId == submissionId)
-            //                   .ToList; // This should only be two, reviews should not show up for reviewer after 2 have been completed
+            var StoryReviewsList = new List<StoryReviewView>();
 
-            int num = 1;
-            var StoryReviewsList = new List<StoryReviewView>(){
-                new StoryReviewView(){
-                       ScorePlot = 5,
-                       ScoreCharacter = 4,
-                       ScoreSetting = 5,
-                       Comments = "Develop a stronger plot and invest more thought to character development.",
-                       reviewNum = num
-                },
-                new StoryReviewView(){
-                       ScorePlot = 7,
-                       ScoreCharacter = 6,
-                       ScoreSetting = 6,
-                       Comments = "A more well developed story setting will help the reader have a better visual.",
-                       reviewNum = num+1
-                }
-            };
+            var reviews = DocumentSession.Query<ReviewInput>()
+                            .Where(r => r.SubmitId == submissionId)
+                            .ToList(); // This should only be two, reviews should not show up for reviewer after 2 have been completed
+            int num = 0;
+            foreach (ReviewInput r in reviews)
+            {
+                StoryReviewsList.Add(new StoryReviewView()
+                {
+                    ScorePlot = r.ScorePlot,
+                    ScoreCharacter = r.ScoreCharacter,
+                    ScoreSetting = r.ScoreSetting,
+                    Comments = r.Comments,
+                    reviewNum = num + 1
+                });
+            }
             return View(StoryReviewsList);
         }
 
