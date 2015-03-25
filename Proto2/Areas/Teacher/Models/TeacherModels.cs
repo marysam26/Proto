@@ -7,7 +7,12 @@ using Proto2.Areas.SystemAdmin.Models;
 
 namespace Proto2.Areas.Teacher.Models
 {
-
+    public class TeacherModel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public List<Guid> Classes { get; set; } 
+    }
     public class ClassModel
     {
         public string Id { get; set; }
@@ -23,14 +28,7 @@ namespace Proto2.Areas.Teacher.Models
         public string ClassName { get; set; }
     }
 
-    public class TeacherModel
-    {
-        public string teacherID { get; set; }
-        public string Name { get; set; }
-        public string confirmCode { get; set; }
-        // list of classIDs
-        public string[] classIDs { get; set; }
-    }
+
 
     public class StudentViewList
     {

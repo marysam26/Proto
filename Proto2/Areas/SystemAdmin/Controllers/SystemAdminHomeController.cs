@@ -6,9 +6,14 @@ using System.Security.Cryptography;
 using System.Web.Mvc;
 using System.Web.Security;
 using Proto2.Areas.Account;
+using Proto2.Areas.Reviewer.Models;
+using Proto2.Areas.Student.Models;
 using Proto2.Areas.SystemAdmin.Models;
+using Proto2.Areas.Teacher.Models;
 using Raven.Client;
 using Raven.Client.Document;
+using StoryView = Proto2.Areas.SystemAdmin.Models.StoryView;
+using VideoView = Proto2.Areas.SystemAdmin.Models.VideoView;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
 {
@@ -27,44 +32,22 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult Students()
         {
-            var students = new List<StudentView>()
-            {
-                new StudentView()
-                {
-                    Name = "Alan Turing",
-                    Email = "turing@email.com",
-                    Confirmed = true,
-                    Teacher = "Dr. Mocas"
-                }
-            };
-            return View(students);
+            var students = DocumentSession.Query<StudentModel>().ToList();
+          return View(students);
         }
 
         public ActionResult Teachers()
         {
-            var teachers = new List<TeacherView>()
-            {
-                new TeacherView()
-                {
-                    Name = "Dr. Mocas",
-                    Email = "mocas@email.com",
-                    Confirmed = true,
-                }
-            };
+            //need to make teacher model to save data
+            var teachers = DocumentSession.Query<TeacherModel>().ToList();
+         
             return View(teachers);
         }
 
         public ActionResult Reviewers()
         {
-            var reviewers = new List<ReviewerView>()
-            {
-                new ReviewerView()
-                {
-                    Name = "The Best Reviewer",
-                    Email = "reviewer@email.com",
-                    Confirmed = true
-                }
-            };
+            var reviewers = DocumentSession.Query<ReviewerModel>().ToList();
+           
             return View(reviewers);
         }
 

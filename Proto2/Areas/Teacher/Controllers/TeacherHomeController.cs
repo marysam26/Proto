@@ -66,6 +66,10 @@ namespace Proto2.Areas.Teacher.Controllers
                 Students =  new List<string>(),
                 Reviewers = new List<string>(),
             };
+
+            var teacher = DocumentSession.Load<TeacherModel>("Teacher/" +User.Identity.Name);
+            teacher.Classes.Add(course.id);
+           
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
 

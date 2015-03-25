@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.SystemAdmin.Models.StudentView>
+﻿@model List<Proto2.Areas.Student.Models.StudentModel>
 
 @{
     ViewBag.Title = "Students";
@@ -30,10 +30,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Teacher</th>
                         <th>Stories</th>
-                        <th>Confirmed</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -42,10 +39,7 @@
                     {
                         <tr>
                             <td><strong>@student.Name</strong></td>
-                            <td>@student.Email</td>
-                            <td>@student.Teacher</td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{id = new Guid()} )' ;return false; ">Stories</button></p></td>
-                            <td>@student.Confirmed</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{id = student.Id} )' ;return false; ">Stories</button></p></td>
                             <td><a style="color:red">Delete</a></td>
                         </tr>
 

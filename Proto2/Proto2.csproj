@@ -744,7 +744,7 @@
     <Content Include="Areas\Reviewer\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\_LoginPartial.cshtml" />
-    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\_LoginPartial.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Student\Views\StudentHome\BrainstormLiterallyCanvas.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\RegisterAsReviewer.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\RegisterAsTeacher.cshtml" />
