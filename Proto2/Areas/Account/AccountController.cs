@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Proto2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Linq;
@@ -110,7 +111,11 @@ namespace Proto2.Areas.Account
         {
             return View(new RegisterModel
             {
-                KeyList = new SelectList(new[] { "Student", "Teacher", "Reviewer" }, "AccountType"),
+                KeyList = new List<SelectListItem>(){
+                    new SelectListItem(){ Text="Student", Value="Student" } ,
+                    new SelectListItem(){ Text="Teacher", Value="Teacher" } ,
+                    new SelectListItem(){ Text="Reviewer", Value="Reviewer" } ,
+                   }
             });
         }
 
@@ -126,6 +131,32 @@ namespace Proto2.Areas.Account
 
             if (ModelState.IsValid)
             {
+                if (model.AccountType == "Teacher")
+                {
+                    if (model.ConfirmCode == 0)
+                    {
+                        ModelState.AddModelError("", "Please enter the code provided by yours System Administrator.");
+                        model.KeyList = new List<SelectListItem>()
+                        {
+                            new SelectListItem() {Text = "Student", Value = "Student"},
+                            new SelectListItem() {Text = "Teacher", Value = "Teacher"},
+                            new SelectListItem() {Text = "Reviewer", Value = "Reviewer"},
+                        };
+                        return View(model);
+                    }
+                    var code = DocumentSession.Load<AddPassView>(model.ConfirmCode);
+                    if (code == null)
+                    {
+                        ModelState.AddModelError("", "The code entered is either incorrect or no longer valid.");
+                        model.KeyList = new List<SelectListItem>()
+                        {
+                            new SelectListItem() {Text = "Student", Value = "Student"},
+                            new SelectListItem() {Text = "Teacher", Value = "Teacher"},
+                            new SelectListItem() {Text = "Reviewer", Value = "Reviewer"},
+                        };
+                        return View(model);
+                    }
+                }
                 var user = new ProtoUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName};
                 if (model.AccountType == "Teacher")
                 {
@@ -133,6 +164,7 @@ namespace Proto2.Areas.Account
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        DocumentSession.Delete<AddPassView>(model.ConfirmCode);
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
                     }
@@ -206,7 +238,7 @@ namespace Proto2.Areas.Account
                 }*/
             }
 
-            model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");
+         //   model.KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType");
 
             // If we got this far, something failed, redisplay form
             var errorModel = new RegisterModel()
@@ -216,8 +248,14 @@ namespace Proto2.Areas.Account
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                KeyList = new SelectList(new[] {"Student", "Teacher", "Reviewer"}, "AccountType"),
+                KeyList = new List<SelectListItem>(){
+                    new SelectListItem(){ Text="Student", Value="Student" } ,
+                    new SelectListItem(){ Text="Teacher", Value="Teacher" } ,
+                    new SelectListItem(){ Text="Reviewer", Value="Reviewer" } ,
+                   }
             };
+
+  
             return View(errorModel);
         }
 

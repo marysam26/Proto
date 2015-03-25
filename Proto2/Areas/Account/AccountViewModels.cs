@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Proto2.Areas.Account
@@ -67,11 +68,11 @@ namespace Proto2.Areas.Account
         [Required]
         public string AccountType { get; set; }
 
-        public SelectList KeyList { get; set; }
+        public List<SelectListItem> KeyList { get; set; }
 
         [Display(Name = "Confirmation Code")]
        // [Required]
-        public string ConfirmCode { get; set; }
+        public int ConfirmCode { get; set; }
 
     }
 
