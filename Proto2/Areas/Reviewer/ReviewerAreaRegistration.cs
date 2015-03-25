@@ -15,7 +15,7 @@ namespace Proto2.Areas.Reviewer
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Reviewer_default",
+                "Reviewer_Defaults",
                 "Reviewer/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );

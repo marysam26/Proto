@@ -78,7 +78,9 @@ namespace Proto2.Areas.SystemAdmin.Models
 
     public class AddPassView
     {
-        public int PassCode { get; set; }
+        public int Id { get; set; }
+        public DateTime DateAdded { get; set; }
+        public bool InUse { get; set; }
     }
 
     public class AssignmentInput

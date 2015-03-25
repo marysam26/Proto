@@ -6,24 +6,24 @@
     ViewBag.Title = "Detailed Assignment View";
 
 }
-
 <body style="
-        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
-        background-repeat: no-repeat;
-        background-size: cover">
-        <h2>@ViewBag.Title</h2><br>
-        <div class="content-wrapper">
-            <div class="jumbotron" style="opacity: .90">
-                    <text><b>Title:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;@Model.AssignmentName</text><br><br>
-                    <text><b>Description:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Description</text><br><br>
-                    <text><b>Video:</b><br></text>
-                     <asp:label runat="server">
-                         <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
+                                      background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
+                                      background-repeat: no-repeat;
+                                      background-size: cover">
+
+    <br />
+    <div class="content-wrapper" style="background-color: white; padding-left: 50px; padding-bottom: 275px; padding-right: 50px; padding-top: 1px; opacity: 0.90; border-radius: 25px;">
+        <div>
+            <div class="pull-right">
+                <asp:label runat="server">
+                    <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
                     <br>
                 </asp:label>
                 Click to Pause/Resume Video
-
             </div>
+            <h2><b>@Model.AssignmentName</b></h2>
+            <text><b>Description:</b><br />@Model.Description</text><br>
+
         </div>
+    </div>
 </body>

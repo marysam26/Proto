@@ -10,6 +10,7 @@ using Proto2.Areas.Teacher.Models;
 using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Student.Indexes;
 using Proto2.Areas.Student.Models;
+using RavenDB.AspNet.Identity;
 
 namespace Proto2.Areas.Student.Controllers
 {
@@ -18,6 +19,18 @@ namespace Proto2.Areas.Student.Controllers
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
         public IDocumentSession DocumentSession { get; set; }    
 
+           public StudentHomeController()
+        {
+            this.UserManager = new UserManager<ProtoUser>(
+                new UserStore<ProtoUser>(() => this.DocumentSession));
+        }
+
+        //public AccountController(UserManager<ProtoUser> userManager)
+        //{
+        //    UserManager = userManager;
+        //}
+
+        public UserManager<ProtoUser> UserManager { get; private set; }
         //
         // GET: /Student/
         public ActionResult Index()
