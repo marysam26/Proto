@@ -169,10 +169,12 @@ namespace Proto2.Areas.Student.Controllers
                     
                     classId = assign.CourseId,
                     AssignmentId = assign.Id,
+                    DueDate = assign.DueDate,
                     StudentId = User.Identity.GetUserId(),
                     AssignmentName = assign.AssignmentName,
                     Description = assign.Description,
-                    Story = ""
+                    Story = "",
+                    NumReviews = 0
                 };
                 DocumentSession.Store(writeData);
                 DocumentSession.SaveChanges();

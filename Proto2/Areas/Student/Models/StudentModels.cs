@@ -51,12 +51,14 @@ namespace Proto2.Areas.Student.Models
         public string Id { get; set; }
         public Guid classId { get; set; }
         public Guid AssignmentId { get; set; }
+        public DateTime DueDate { get; set; }
         public string StudentId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
         // Date is not set until submit is completed, will be empty on all just saves.
         public DateTime SubmissionDate { get; set; }
         public string Story { get; set; }
+        public int NumReviews { get; set; }
     }
 
     public class StoryReviewView

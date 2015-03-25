@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web;
 using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Indexes;
 using Proto2.Areas.Reviewer.Models;
@@ -11,6 +12,7 @@ using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
 using Proto2.Areas.Teacher.Models;
 using RavenDB.AspNet.Identity;
+using Proto2.Areas.Student.Models;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
@@ -128,10 +130,18 @@ namespace Proto2.Areas.Reviewer.Controllers
             return View(pastReviews);
         }
 
-        public ActionResult ReviewStoryView()
+        public ActionResult ReviewStoryView(string SubmitId)
         {
             //Return a view to review a story
-            return View();
+            var Submission = DocumentSession.Load<SubmissionView>(SubmitId);
+            ReviewInput input = new ReviewInput()
+            {
+                AssignmentName = Submission.AssignmentName,
+                AssignmentDescription = Submission.Description,
+                SubmitId = Submission.Id,
+                Story = new HtmlString(Submission.Story)
+            };
+            return View(input);
         }
 
         [HttpPost]
@@ -142,7 +152,9 @@ namespace Proto2.Areas.Reviewer.Controllers
             {
                 //Information for the new review will be parsed and added to the database here
                 //TODO: Parse title,story,and reviewer names from avabile information
-                StoryId = input.StoryId,
+                //AssignmentName = input.AssignmentName,
+                //AssignmentDescription = input.AssignmentDescription,
+                SubmitId = input.SubmitId,
                 ScorePlot = input.ScorePlot,
                 Comments = input.Comments,
                 ScoreCharacter = input.ScoreCharacter,
@@ -155,26 +167,38 @@ namespace Proto2.Areas.Reviewer.Controllers
             DocumentSession.SaveChanges();
 
             // Return to the page to choose another review, or return to class
-            return Content("It saved!");
+            return RedirectToAction("Index");
             //This will respond to a fom being completed and will eventually be saved to a database
             //This could return a view of all past reviews which would then include the submitted review
             //Or take them to a reviewer conformation page, I will assume the former for now.
 
         }
 
-        public ActionResult ReviewStory()
+        public ActionResult ReviewStories(string classId)
         {
+            ClassModel course = DocumentSession.Load<ClassModel>(classId);
+
             //Return view of a story for review
-            var reviewStory = new ReviewViewModel()
+
+            var storyList = new List<Reviews>();
+            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.id && s.DueDate < DateTime.Now && s.NumReviews < 2).ToList();
+
+            if (submittedStories.Count() != 0)
             {
-                Title = "A Really Great Story",
-                Story = "A really great story has really great stories inside.",
-                DatePublished = System.DateTime.Now,
-                Name = "Samantha B. Rutherferdmanskin",
-                NumReviews = 0
-            };
-            return View(reviewStory);
+                foreach (SubmissionView s in submittedStories)
+                {
+                    storyList.Add(new Reviews()
+                    {
+                        SubmissionId = s.Id,
+                        AssignmentName = s.AssignmentName,
+                        NumReviews = s.NumReviews,
+                        DatePublished = s.SubmissionDate
+                    });
+                }
+            }
+            return View(storyList);
         }
+
 
        [HttpPost]
         public ActionResult ReviewStory(ReviewInput input)
