@@ -378,3 +378,4 @@ D:\dev\CapstoneProject\Proto\Proto2\bin\Mono.Math.xml
 D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.dll
 D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.pdb
 D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
+D:\dev\CapstoneProject\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll

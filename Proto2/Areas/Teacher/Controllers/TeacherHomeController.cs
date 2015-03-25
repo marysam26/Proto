@@ -18,7 +18,7 @@ using StoryView = Proto2.Areas.Teacher.Models.StoryView;
 
 namespace Proto2.Areas.Teacher.Controllers
 {
- 
+
     public class TeacherHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry

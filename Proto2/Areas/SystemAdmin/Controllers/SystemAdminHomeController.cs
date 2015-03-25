@@ -237,7 +237,8 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult AddPass()
         {
-            return View();
+            var codes = DocumentSession.Query<AddPassView>().Customize(x =>x.WaitForNonStaleResultsAsOf(DateTime.Now.AddSeconds(1))).OrderByDescending(RetrieveDate).ToList();
+            return View(codes);
         }
 
 
@@ -247,11 +248,31 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             var code = random.Next(1000, 9999);
             var codeView = new AddPassView
             {
-                PassCode = code
+                Id = code,
+                DateAdded = DateTime.Now,
+                InUse = false,
             };
+
             DocumentSession.Store(codeView);
             DocumentSession.SaveChanges();
-            return View(codeView);
+            return RedirectToAction("AddPass");
+        }
+
+        public ActionResult MarkCodeAsUsed(int code)
+        {
+            var codeModel = DocumentSession.Load<AddPassView>(code);
+            codeModel.InUse = !codeModel.InUse;
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("AddPass");
+        }
+
+        public ActionResult DeleteCode(int code)
+        {
+            DocumentSession.Delete<AddPassView>(code);
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("AddPass");
         }
 
         public ActionResult AddAssignment()
@@ -289,6 +310,11 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult ViewAssignmentDetailed(AssignmentView asgn)
         {
             return View(asgn);
+        }
+
+        public DateTime RetrieveDate(AddPassView input)
+        {
+            return input.DateAdded;
         }
     }
 }

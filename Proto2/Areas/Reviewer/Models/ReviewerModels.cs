@@ -37,10 +37,21 @@ namespace Proto2.Areas.Reviewer.Models
         public string classCode { get; set; }
     }
 
+    public class RegisterTeacher
+    {
+        [Required]
+        [Range(1000, 9999)]
+        [Display(Name = "Teacher Code")]
+        public int TeacherCode { get; set; }
+    }
+
     public class ReviewInput
     {
         [Required]
         public string StoryId { get; set; }
+        
+        //Story text
+        
 
         [Required]
         [Range(0, 7)]

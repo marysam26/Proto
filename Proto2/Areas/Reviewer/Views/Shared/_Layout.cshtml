@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@using Proto2.Areas
-@using Proto2.Areas.Account
+﻿@using Proto2.Areas.Account
 
 <!DOCTYPE html>
 <html>
@@ -30,16 +28,12 @@
                         <li>@Html.ActionLink("Training", "Train", "ReviewerHome")</li>
                         <li>@Html.ActionLink("Review Story", "ReviewStory", "ReviewerHome")</li>
                         <li>@Html.ActionLink("Past Reviews", "PastReviews", "ReviewerHome")</li>
-                        @if (User.IsInRole(ProtoRoles.Teacher))
-                        {
-                            <li>@Html.ActionLink("Teacher", "Index", "TeacherHome")</li>
-
-                        }
+                        <li>@Html.ActionLink("Teacher", "RegisterAsTeacher", "ReviewerHome")</li>
 
                     </ul>
                 }
                 @Html.Partial("_LoginPartial")
-            </div>
+           </div> 
         </div>
     </div>
     <div class="container body-content">

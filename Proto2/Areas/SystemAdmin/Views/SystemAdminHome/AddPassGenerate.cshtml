@@ -1,4 +1,4 @@
-﻿@model Proto2.Areas.SystemAdmin.Models.AddPassView
+﻿@model List<Proto2.Areas.SystemAdmin.Models.AddPassView>
 
 @{
     ViewBag.Title = "Generate Passcode";
@@ -10,8 +10,59 @@
         background-size: cover">
 </body>
 <div class="content-wrapper">
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
 
-        <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddPassGenerate", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
-        <p>@Model.PassCode</p>
-    
-</div>
+            <p>To generate an access code for Teachers to register, click the button below.</p>
+            <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddPassGenerate", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
+            </div>
+            }
+
+            @if (Model.Any())
+    {
+
+                <div class="jumbotron" style="opacity: .90">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddPassGenerate", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
+                    </div>
+                    <h2>@ViewBag.Title</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Teacher Access Code</th>
+                                <th>Date Added</th>
+                                <th>In Use</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var code in Model)
+                            {
+                                <tr>
+                                    <td><strong>@code.Id</strong></td>
+                                    <td>@code.DateAdded</td>
+                                    @if(@code.InUse){
+                                    <td>
+                                        <button type="button" class="btn btn-danger" onclick=" location.href='@Url.Action("MarkCodeAsUsed", "SystemAdminHome", new {code = code.Id})  ' "><i class=" glyphicon "></i>&nbsp;Unavailable</button></td>
+                                        }
+                                        else{
+                                    <td>
+                                        <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("MarkCodeAsUsed", "SystemAdminHome", new {code = code.Id})  ' "><i class=" glyphicon "></i>&nbsp;Available</button></td>
+                                    }
+                                    <td>
+                                        <button type="button" class="btn btn-danger" onclick=" location.href='@Url.Action("DeleteCode", "SystemAdminHome", new {code = code.Id})  ' "><i class=" glyphicon "></i>&nbsp;Delete</button>
+                                    </td>
+
+</tr>
+                            
+
+                    }
+                        </tbody>
+                    </table>
+                </div>
+
+
+    }
+
+        </div>

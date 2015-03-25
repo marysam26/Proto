@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Indexes;
 using Proto2.Areas.Reviewer.Models;
+using Proto2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
@@ -243,6 +244,37 @@ namespace Proto2.Areas.Reviewer.Controllers
             //TODO: eventually this will respond to a post of a comment and the comment will be saved to database
             //similar to above, assuming this takes reviewer to list of full discussion
             return RedirectToAction("Discuss");
+        }
+
+        public ActionResult RegisterasTeacher()
+        {
+            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Teacher))
+            {
+                return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+
+            }
+
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult RegisterAsTeacher(RegisterTeacher input)
+        {
+            var code = DocumentSession.Load<AddPassView>(input.TeacherCode);
+            if (code == null)
+            {
+                ModelState.AddModelError("", "The provided teacher code is incorrect.");
+                return View(input);
+            }
+
+            UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Teacher);
+            DocumentSession.Delete<AddPassView>(input.TeacherCode);
+            DocumentSession.SaveChanges();
+            
+            return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
         }
     }
 }
