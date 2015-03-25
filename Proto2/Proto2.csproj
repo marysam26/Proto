@@ -728,7 +728,7 @@
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Discuss.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Index.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\PastReviews.cshtml" />
-    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStory.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStories.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ReviewStoryView.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\Train.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\ViewPastReviews.cshtml" />

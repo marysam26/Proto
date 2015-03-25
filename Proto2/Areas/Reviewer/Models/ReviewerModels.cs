@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Web;
 
 namespace Proto2.Areas.Reviewer.Models
 {
@@ -14,6 +15,7 @@ namespace Proto2.Areas.Reviewer.Models
     }
     public class ViewModel
     {
+        
         public string ClassIDs { get; set; }
         public string ClassName { get; set; }
         public int NumReviews { get; set; }
@@ -24,9 +26,15 @@ namespace Proto2.Areas.Reviewer.Models
         public string Title { get; set; }
         public string Story { get; set; }
         public DateTime DatePublished { get; set; }
-        public string Name { get; set; }
         public int NumReviews { get; set; }
 
+    }
+    public class Reviews
+    {
+        public string SubmissionId { get; set; }
+        public string AssignmentName { get; set; }
+        public DateTime DatePublished { get; set; }
+        public int NumReviews { get; set; }
     }
 
     public class ReviewerAddClass
@@ -39,9 +47,11 @@ namespace Proto2.Areas.Reviewer.Models
 
     public class ReviewInput
     {
-        [Required]
-        public string StoryId { get; set; }
-
+        public string SubmitId { get; set; }
+        public HtmlString Story { get; set; }
+        public string AssignmentName { get; set; }
+        public string AssignmentDescription { get; set; }
+        
         [Required]
         [Range(0, 7)]
         [Display(Name = "Score for plot")]
