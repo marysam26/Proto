@@ -58,7 +58,7 @@ namespace Proto2.Areas.Teacher.Controllers
             var code = random.Next(1000, 9999);
             var course = new ClassModel()
             {
-                id = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 ClassName = input.ClassName,
                 teacherId = User.Identity.GetUserId(),
                 EndDate = input.EndDate,
@@ -68,7 +68,7 @@ namespace Proto2.Areas.Teacher.Controllers
             };
 
             var teacher = DocumentSession.Load<TeacherModel>("Teacher/" +User.Identity.Name);
-            teacher.Classes.Add(course.id);
+            teacher.Classes.Add(course.Id);
            
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
@@ -246,7 +246,7 @@ namespace Proto2.Areas.Teacher.Controllers
        
         public ActionResult DeleteStudent(string student, Guid courseId, string dataId)
         {
-            var courses = DocumentSession.Query<ClassModel>().FirstOrDefault(x => x.id == courseId);
+            var courses = DocumentSession.Query<ClassModel>().FirstOrDefault(x => x.Id == courseId);
             if (courses != null)
             {
                 courses.Students.Remove(student);// = courses.Students.Where(val => val != student);  //change from array to list of students, may need to be revised
@@ -288,7 +288,7 @@ namespace Proto2.Areas.Teacher.Controllers
             {
                 Id = User.Identity.GetUserName(),
                 Name = User.Identity.Name,
-                ClassIDs = new List<string>(),
+                ClassIDs = new List<Guid>(),
                 Reviews = new List<PastReviewView>()
             };
             DocumentSession.Store(r);

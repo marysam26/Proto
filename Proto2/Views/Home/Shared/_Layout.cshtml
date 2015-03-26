@@ -22,7 +22,14 @@
               <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                  <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                  @if (Request.IsAuthenticated)
+                  {
+                      <li>@Html.ActionLink("Teacher", "Teacher", "Home")</li>
+                      <li>@Html.ActionLink("Reviewer", "Reviewer", "Home")</li>
+                      <li>@Html.ActionLink("Student", "Student", "Home")</li>
+                      <li>@Html.ActionLink("System Admin", "SystemAdmin", "Home")</li>
+                  }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -10,13 +10,13 @@ namespace Proto2.Areas.Reviewer.Models
         public string Id { get; set; }
         public string Name { get; set; }
         // list of classIDs
-        public List<string> ClassIDs { get; set; }
+        public List<Guid> ClassIDs { get; set; }
         public List<PastReviewView> Reviews { get; set; }
     }
     public class ViewModel
     {
         
-        public string ClassIDs { get; set; }
+        public Guid ClassIDs { get; set; }
         public string ClassName { get; set; }
         public int NumReviews { get; set; }
     }
