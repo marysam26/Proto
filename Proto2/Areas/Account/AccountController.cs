@@ -182,7 +182,6 @@ namespace Proto2.Areas.Account
                         // Make the studen't first model
                         var s = new StudentModel()
                         {
-                            StudentID = "ProtoUsers/" + user.UserName,
                             Name = user.FirstName +" "+ user.LastName,
                             ClassIDs = new List<Guid>().ToArray(),
                             //Submissions = new List<SubmissionView>().ToArray()

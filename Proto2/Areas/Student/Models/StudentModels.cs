@@ -13,11 +13,9 @@ namespace Proto2.Areas.Student.Models
     public class StudentModel
     {
         public string Id { get; set; }
-        public string StudentID { get; set; }
         public string Name { get; set; }
         // list of classIDs
         public Guid[] ClassIDs { get; set; }
-        //public SubmissionView[] Submissions { get; set; }
     }
 
     public class VideoView
@@ -59,6 +57,8 @@ namespace Proto2.Areas.Student.Models
         public DateTime SubmissionDate { get; set; }
         public string Story { get; set; }
         public int NumReviews { get; set; }
+        public string reviewer1 { get; set; }
+        public string reviewer2 { get; set; }
     }
 
     public class StoryReviewView
