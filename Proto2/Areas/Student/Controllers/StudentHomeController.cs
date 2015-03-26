@@ -70,6 +70,12 @@ namespace Proto2.Areas.Student.Controllers
                          .Where(c => c.ConfirmCode == input.classCode)
                          .ToList();
 
+            if (!courses.Any())  //check to be sure the code correspondes to a class in the DB
+            {
+                ModelState.AddModelError("", "The provided class code is incorrect.");
+                return View(input);
+            }
+
             var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
                           .Where(s => s.StudentID == User.Identity.GetUserId())
                           .ToList();
