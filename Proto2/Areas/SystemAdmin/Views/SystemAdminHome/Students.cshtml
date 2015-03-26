@@ -40,7 +40,7 @@
                         <tr>
                             <td><strong>@student.Name</strong></td>
                             <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{id = student.Id} )' ;return false; ">Stories</button></p></td>
-                            <td><a style="color:red">Delete</a></td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-student="@student.StudentID" data-dataid="@student.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
                         </tr>
 
                     }
@@ -51,3 +51,48 @@
 
     }
 </div>
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="student"></div>
+                <div class="hide" id="dataid"></div>
+                <div class="hide" id="terminateLink">@Url.Action("RemoveStudent", "SystemAdminHome")</div>
+                <p>
+                    This student will be removed from this course only and will no longer be able to view
+                    or submit assignments for this course.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove student from course.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+            var student = $(this).data('student');
+            var dataid = $(this).data('dataid');
+            $(".modal-body #student").text(student);
+            $(".modal-body #dataid").text(dataid);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var student = $(".modal-body #student").text();
+            var dataid = $(".modal-body #dataid").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?&dataID=' + dataid + '&studentID=' + student
+            return false;
+        });
+    </script>
+}
