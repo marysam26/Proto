@@ -66,46 +66,52 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (input != null)
             {
-                //Query classes for this confCode and then add student to the list
-                //If there is one, then add load that specific object and add the student to the array
-                var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
-                             .Where(c => c.ConfirmCode == input.classCode)
-                             .ToList();
+             //Query classes for this confCode and then add student to the list
+             //If there is one, then add load that specific object and add the student to the array
+            var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
+                         .Where(c => c.ConfirmCode == input.classCode)
+                         .ToList();
 
-                var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
+            if (!courses.Any())  //check to be sure the code correspondes to a class in the DB
+            {
+                ModelState.AddModelError("", "The provided class code is incorrect.");
+                return View(input);
+            }
+
+            var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
                               .Where(s => s.Id == User.Identity.GetUserId())
-                              .ToList();
+                          .ToList();
 
-                if (courses.Count != 0 && student.Count != 0)
-                {
+            if (courses.Count != 0 && student.Count != 0)
+            {
 
-                    string id = courses[0].Id;
-                    // Having this Id attribute that gets set by RavenDb 
-                    // allows for retrieval of the exact object that can be updated or deleted
-                    // by using the Load command that uses a document Id
-                    ClassModel course = DocumentSession.Load<ClassModel>(id);
-                    List<string> list = course.Students.ToList();
-                    list.Add(User.Identity.GetUserId());
-                    course.Students = list;
-                    //DocumentSession.SaveChanges();
+                string id = courses[0].Id;
+                // Having this Id attribute that gets set by RavenDb 
+                // allows for retrieval of the exact object that can be updated or deleted
+                // by using the Load command that uses a document Id
+                ClassModel course = DocumentSession.Load<ClassModel>(id);
+                List<string> list = course.Students.ToList();
+                list.Add(User.Identity.GetUserId());
+                course.Students = list;
+                //DocumentSession.SaveChanges();
 
-                    string ids = student[0].Id;
-                    // Having this Id attribute that gets set by RavenDb 
-                    // allows for retrieval of the exact object that can be updated or deleted
-                    // by using the Load command that uses a document Id
-                    StudentModel st = DocumentSession.Load<StudentModel>(ids);
-                    List<Guid> listS = st.ClassIDs.ToList();
-                    listS.Add(course.id);
-                    st.ClassIDs = listS.ToArray();
+                string ids = student[0].Id;
+                // Having this Id attribute that gets set by RavenDb 
+                // allows for retrieval of the exact object that can be updated or deleted
+                // by using the Load command that uses a document Id
+                StudentModel st = DocumentSession.Load<StudentModel>(ids);
+                List<Guid> listS = st.ClassIDs.ToList();
+                listS.Add(course.id);
+                st.ClassIDs = listS.ToArray();
+                
+                DocumentSession.SaveChanges();
 
-                    DocumentSession.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View();
-                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
             }
             else
             {
@@ -118,28 +124,28 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (classID != null)
             {
-                var assigns = new AssignmentsView();
+            var assigns = new AssignmentsView();
 
-                var assign = DocumentSession.Query<AssignmentInputView>()
-                              .Where(a => a.CourseId == classID && a.DueDate > DateTime.Now)
-                              .ToList();
+            var assign = DocumentSession.Query<AssignmentInputView>()
+                          .Where(a => a.CourseId == classID && a.DueDate > DateTime.Now)
+                          .ToList();
 
-                var submissions = DocumentSession.Query<SubmissionView>()
-                                   .Where(s => s.StudentId == User.Identity.GetUserId() && s.classId == classID)
-                                   .ToList();
+            var submissions = DocumentSession.Query<SubmissionView>()
+                               .Where(s => s.StudentId == User.Identity.GetUserId() && s.classId == classID)
+                               .ToList();
 
-                if (assign.Count() != 0)
-                {
-                    assigns.Current = assign.ToArray();
-                }
-
-                if (submissions.Count != 0)
-                {
-                    assigns.Submitted = submissions.ToArray();
-                }
-
-                return View(assigns);
+            if (assign.Count() != 0)
+            {
+                assigns.Current = assign.ToArray();
             }
+
+            if (submissions.Count != 0)
+            {
+                assigns.Submitted = submissions.ToArray();
+            }
+
+            return View(assigns);
+        }
             else
             {
                 return RedirectToAction("Index");
@@ -149,10 +155,10 @@ namespace Proto2.Areas.Student.Controllers
         public ActionResult CurrentAssignment(Guid Id)
         {
             if (Id != null) { 
-                var assignment = DocumentSession.Load<AssignmentInputView>(Id);
+            var assignment = DocumentSession.Load<AssignmentInputView>(Id);
 
-                return View(assignment);
-            }
+            return View(assignment);
+        }
             else
             {
                 return RedirectToAction("Index");
@@ -163,17 +169,17 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (submitId != null)
             {
-                SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
+            SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
 
-                SubmitDetails sd = new SubmitDetails()
-                {
-                    Story = new HtmlString(submission.Story),
-                    SubmissionId = submission.Id,
-                    AssignmentName = submission.AssignmentName,
-                    Description = submission.Description
-                };
-                return View(sd);
-            }
+            SubmitDetails sd = new SubmitDetails()
+            {
+                Story = new HtmlString(submission.Story),
+                SubmissionId = submission.Id,
+                AssignmentName = submission.AssignmentName,
+                Description = submission.Description
+            };
+            return View(sd);
+        }
             else
             {
                 return RedirectToAction("Index");
@@ -184,35 +190,35 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (Id != null)
             {
-                // Get SubmissionView that matches this assignment id and user
-                var prev = DocumentSession.Query<SubmissionView>()
-                            .Where(a => a.StudentId == User.Identity.GetUserId() && a.AssignmentId == Id)
-                            .ToList();
+            // Get SubmissionView that matches this assignment id and user
+            var prev = DocumentSession.Query<SubmissionView>()
+                        .Where(a => a.StudentId == User.Identity.GetUserId() && a.AssignmentId == Id)
+                        .ToList();
 
-                // If first time loading write page, make a StoryInput Model and return it
+            // If first time loading write page, make a StoryInput Model and return it
                 if (prev.Count == 0)
                 {
-                    // Load assignmentInputView with this Id
-                    var assign = DocumentSession.Load<AssignmentInputView>(Id);
-                    var writeData = new SubmissionView()
-                    {
-
-                        classId = assign.CourseId,
-                        AssignmentId = assign.Id,
-                        DueDate = assign.DueDate,
-                        StudentId = User.Identity.GetUserId(),
-                        AssignmentName = assign.AssignmentName,
-                        Description = assign.Description,
-                        Story = "",
-                        NumReviews = 0
-                    };
-                    DocumentSession.Store(writeData);
-                    DocumentSession.SaveChanges();
-                    return View(writeData);
-                }
-                // Else return the SubmissionView from query
-                return View(prev[0]);
+                // Load assignmentInputView with this Id
+                var assign = DocumentSession.Load<AssignmentInputView>(Id);
+                var writeData = new SubmissionView()
+                {
+                    
+                    classId = assign.CourseId,
+                    AssignmentId = assign.Id,
+                    DueDate = assign.DueDate,
+                    StudentId = User.Identity.GetUserId(),
+                    AssignmentName = assign.AssignmentName,
+                    Description = assign.Description,
+                    Story = "",
+                    NumReviews = 0
+                };
+                DocumentSession.Store(writeData);
+                DocumentSession.SaveChanges();
+                return View(writeData);
             }
+            // Else return the SubmissionView from query
+            return View(prev[0]);
+        }
             else
             {
                 return RedirectToAction("index");
@@ -242,9 +248,9 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (Id != null)
             {
-                var assign = DocumentSession.Load<AssignmentInputView>(Id);
-                return View(assign);
-            }
+            var assign = DocumentSession.Load<AssignmentInputView>(Id);
+            return View(assign);
+        }
             else
             {
                 return RedirectToAction("Index");
@@ -255,9 +261,9 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (Id != null)
             {
-                var assign = DocumentSession.Load<AssignmentInputView>(Id);
-                return View(assign);
-            }
+            var assign = DocumentSession.Load<AssignmentInputView>(Id);
+            return View(assign);
+        }
             else
             {
                 return RedirectToAction("Index");
@@ -292,29 +298,29 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (submissionId != null)
             {
-                // StoryId will be passed as a SubmissionId from a submitted assignment
-                // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
-                // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
+            // StoryId will be passed as a SubmissionId from a submitted assignment
+            // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
+            // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
+            
+            var StoryReviewsList = new List<StoryReviewView>();
 
-                var StoryReviewsList = new List<StoryReviewView>();
-
-                var reviews = DocumentSession.Query<ReviewInput>()
-                                .Where(r => r.SubmitId == submissionId)
-                                .ToList(); // This should only be two, reviews should not show up for reviewer after 2 have been completed
-                int num = 0;
-                foreach (ReviewInput r in reviews)
+            var reviews = DocumentSession.Query<ReviewInput>()
+                            .Where(r => r.SubmitId == submissionId)
+                            .ToList(); // This should only be two, reviews should not show up for reviewer after 2 have been completed
+            int num = 0;
+            foreach (ReviewInput r in reviews)
+            {
+                StoryReviewsList.Add(new StoryReviewView()
                 {
-                    StoryReviewsList.Add(new StoryReviewView()
-                    {
-                        ScorePlot = r.ScorePlot,
-                        ScoreCharacter = r.ScoreCharacter,
-                        ScoreSetting = r.ScoreSetting,
-                        Comments = r.Comments,
-                        reviewNum = num + 1
-                    });
-                }
-                return View(StoryReviewsList);
+                    ScorePlot = r.ScorePlot,
+                    ScoreCharacter = r.ScoreCharacter,
+                    ScoreSetting = r.ScoreSetting,
+                    Comments = r.Comments,
+                    reviewNum = num + 1
+                });
             }
+            return View(StoryReviewsList);
+        }
             else
             {
                 return RedirectToAction("Index");

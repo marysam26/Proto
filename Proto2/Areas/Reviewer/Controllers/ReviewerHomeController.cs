@@ -294,6 +294,13 @@ namespace Proto2.Areas.Reviewer.Controllers
                 return View(input);
             }
 
+            var teacher = new TeacherModel()
+            {
+                Name = User.Identity.Name,
+                Id = "Teacher/" + User.Identity.GetUserId(),
+                Classes = new List<Guid>()
+            };
+            DocumentSession.Store(teacher);
             UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Teacher);
             DocumentSession.Delete<AddPassView>(input.TeacherCode);
             DocumentSession.SaveChanges();

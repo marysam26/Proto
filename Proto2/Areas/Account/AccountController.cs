@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Proto2.Areas.SystemAdmin.Models;
+using Proto2.Areas.Teacher.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Linq;
@@ -164,6 +165,13 @@ namespace Proto2.Areas.Account
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        var teacher = new TeacherModel()
+                        {
+                            Id = "Teacher/" + model.Email,
+                            Name = model.FirstName + " " + model.LastName,
+                            Classes = new List<Guid>()
+                        };
+                        DocumentSession.Store(teacher);
                         DocumentSession.Delete<AddPassView>(model.ConfirmCode);
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
@@ -182,6 +190,7 @@ namespace Proto2.Areas.Account
                         // Make the studen't first model
                         var s = new StudentModel()
                         {
+                            StudentID = "ProtoUsers/" + user.UserName,
                             Name = user.FirstName +" "+ user.LastName,
                             ClassIDs = new List<Guid>().ToArray(),
                             //Submissions = new List<SubmissionView>().ToArray()
