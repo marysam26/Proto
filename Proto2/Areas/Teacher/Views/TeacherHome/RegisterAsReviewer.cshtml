@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Welcome Teacher";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+<div class="content-wrapper">
+
+        <div class="jumbotron">
+            <h2><strong>Please Register as a Reviewer to access the reviewer page</strong> </h2>
+            <p>Once you've registered, this tab will automatically take you to your Reviewer page.</p>
+            <p>
+                <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("RegisterTeacherAsReviewer", "TeacherHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Register As Reviewer</button>
+            </p>
+        </div>
+        
+</div>

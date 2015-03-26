@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Proto2.Areas.SystemAdmin.Models.AddPassView>
 
 @{
     ViewBag.Title = "Generate Passcode";
@@ -10,5 +10,104 @@
         background-size: cover">
 </body>
 <div class="content-wrapper">
-        <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("AddPassGenerate", "SystemAdminHome")';return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+
+            <p>To generate an access code for Teachers to register, click the button below.</p>
+            <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddPassGenerate", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+
+        <div class="jumbotron" style="opacity: .90">
+            <div class="pull-right">
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddPassGenerate", "SystemAdminHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Generate Passcode</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Teacher Access Code</th>
+                        <th>Date Added</th>
+                        <th>In Use</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var code in Model)
+                    {
+                        <tr>
+                            <td><strong>@code.Id</strong></td>
+                            <td>@code.DateAdded</td>
+                            @if (@code.InUse)
+                            {
+                                <td>
+                                    <button type="button" style="width: 100px;"class="btn btn-danger" onclick=" location.href='@Url.Action("MarkCodeAsUsed", "SystemAdminHome", new {code = code.Id})  ' "><i class=" glyphicon "></i>Unavailable</button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button type="button" style="width: 100px;"class="btn btn-success" onclick=" location.href='@Url.Action("MarkCodeAsUsed", "SystemAdminHome", new {code = code.Id})  ' "><i class=" glyphicon "></i>Available</button>
+                                </td>
+                            }
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-code="@code.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+
+                            @*<td>
+                                <button type="button" class="btn btn-danger" onclick=" location.href='@Url.Action("DeleteCode", "SystemAdminHome", new {code = code.Id})  ' "><i class=" glyphicon "></i>&nbsp;Delete</button>
+                            </td>*@
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+
 </div>
+
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="code"></div>
+                <div class="hide" id="terminateLink">@Url.Action("DeleteCode", "SystemAdminHome")</div>
+                <p>
+                    Remove this code. Any teacher attempting to register with this code will no longer be able to.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove code.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+           var code = $(this).data('code');
+            $(".modal-body #code").text(code);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var code = $(".modal-body #code").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?code=' + code;
+            return false;
+        });
+    </script>
+}

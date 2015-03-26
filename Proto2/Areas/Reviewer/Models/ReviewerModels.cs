@@ -26,6 +26,7 @@ namespace Proto2.Areas.Reviewer.Models
         public string Title { get; set; }
         public string Story { get; set; }
         public DateTime DatePublished { get; set; }
+        public string Name { get; set; }
         public int NumReviews { get; set; }
 
     }
@@ -45,6 +46,14 @@ namespace Proto2.Areas.Reviewer.Models
         public string classCode { get; set; }
     }
 
+    public class RegisterTeacher
+    {
+        [Required]
+        [Range(1000, 9999)]
+        [Display(Name = "Teacher Code")]
+        public int TeacherCode { get; set; }
+    }
+
     public class ReviewInput
     {
         public string SubmitId { get; set; }
@@ -52,6 +61,8 @@ namespace Proto2.Areas.Reviewer.Models
         public string AssignmentName { get; set; }
         public string AssignmentDescription { get; set; }
         
+           
+
         [Required]
         [Range(0, 7)]
         [Display(Name = "Score for plot")]

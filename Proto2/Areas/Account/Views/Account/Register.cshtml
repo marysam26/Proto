@@ -59,12 +59,19 @@
     
     <div class="form-group">
         @Html.LabelFor(model => model.AccountType, "Account Type", new { @class = "control-label col-md-2" })
-        <div class="col-md-4" id="account" onclick="javascript:yesnoCheck();">
+        <div class="col-md-4"  >
+            @*<select class="form-control" style="width: 100%;">
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Reviewer">Reviewer</option>
+
+            </select>*@
             @Html.DropDownListFor(model => model.AccountType, Model.KeyList, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.AccountType)
         </div>
     </div>
-         <div class="form-group hidden" id="ConfirmCode">
+
+         <div class="form-group" id="ConfirmCode">
              @Html.LabelFor(model => model.ConfirmCode, "Confirm Code", new {@class = "control-label col-md-2"})
              <div class="col-md-4">
                  @Html.TextBoxFor(m => m.ConfirmCode, new { @class = "form-control" })
@@ -85,17 +92,26 @@
         </div>
     </div>
 }
-<script type="text/javascript">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
-    function yesnoCheck() {
-        var e = document.getElementById("account");
-        var account = e.options[e.selectedIndex].text;
-        if (account == "Teacher") {
-            document.getElementById('ConfirmCode').style.display = 'visible';
-        } else {
-            document.getElementById('ConfirmCode').style.display = 'hidden';
-        }
-    }
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("select").change(function(){
+            $("select option:selected").each(function () {
+                if($(this).attr("value")=="Student"){
+                    $("#ConfirmCode").hide();
+             
+                }
+                if($(this).attr("value")=="Teacher"){
+                    $("#ConfirmCode").show();
+                }
+                if($(this).attr("value")=="Reviewer") {
+                    $("#ConfirmCode").hide();
+                }
+            });
+        }).change();
+    });
+ 
 
 </script>
 @section Scripts {

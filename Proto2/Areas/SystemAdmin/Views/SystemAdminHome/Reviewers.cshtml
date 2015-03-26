@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.SystemAdmin.Models.ReviewerView>
+﻿@model List<Proto2.Areas.Reviewer.Models.ReviewerModel>
 @{
     ViewBag.Title = "Reviewers";
 }
@@ -29,9 +29,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Reviews</th>
-                        <th>Confirmed</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -40,9 +38,7 @@
                     {
                         <tr>
                             <td><strong>@reviewer.Name</strong></td>
-                            <td>@reviewer.Email</td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewsByReviewers", "SystemAdminHome", new{id = new Guid()} )' ;return false; ">Reviews</button></p></td>
-                            <td>@reviewer.Confirmed</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewsByReviewers", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Reviews</button></p></td>
                             <td><a style="color:red">Delete</a></td>
                         </tr>
 

@@ -1,4 +1,5 @@
-﻿using RavenDB.AspNet.Identity;
+﻿using System.Collections.Generic;
+using RavenDB.AspNet.Identity;
 
 namespace Proto2.Areas
 {

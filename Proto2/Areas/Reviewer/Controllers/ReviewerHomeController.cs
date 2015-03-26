@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web;
+using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Indexes;
 using Proto2.Areas.Reviewer.Models;
+using Proto2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
 using Proto2.Areas.Teacher.Models;
+using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
 
 namespace Proto2.Areas.Reviewer.Controllers
@@ -20,6 +23,19 @@ namespace Proto2.Areas.Reviewer.Controllers
         //
         // GET: /Reviewer/
 
+           public ReviewerHomeController()
+        {
+            this.UserManager = new UserManager<ProtoUser>(
+                new UserStore<ProtoUser>(() => this.DocumentSession));
+               
+        }
+
+        //public AccountController(UserManager<ProtoUser> userManager)
+        //{
+        //    UserManager = userManager;
+        //}
+
+        public UserManager<ProtoUser> UserManager { get; private set; }
         public ActionResult Index()
         {
           
@@ -252,6 +268,44 @@ namespace Proto2.Areas.Reviewer.Controllers
             //TODO: eventually this will respond to a post of a comment and the comment will be saved to database
             //similar to above, assuming this takes reviewer to list of full discussion
             return RedirectToAction("Discuss");
+        }
+
+        public ActionResult RegisterasTeacher()
+        {
+            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Teacher))
+            {
+                return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+
+            }
+
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult RegisterAsTeacher(RegisterTeacher input)
+        {
+            var code = DocumentSession.Load<AddPassView>(input.TeacherCode);
+            if (code == null)
+            {
+                ModelState.AddModelError("", "The provided teacher code is incorrect.");
+                return View(input);
+            }
+
+            var teacher = new TeacherModel()
+            {
+                Name = User.Identity.Name,
+                Id = "Teacher/" + User.Identity.GetUserId(),
+                Classes = new List<Guid>()
+            };
+            DocumentSession.Store(teacher);
+            UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Teacher);
+            DocumentSession.Delete<AddPassView>(input.TeacherCode);
+            DocumentSession.SaveChanges();
+            
+            return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
         }
     }
 }
