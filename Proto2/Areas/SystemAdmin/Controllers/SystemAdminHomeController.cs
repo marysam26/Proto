@@ -292,6 +292,21 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return RedirectToAction("AddPass");
         }
 
+        public ActionResult RemoveStudent(string studentID, string dataID)
+        {
+            var random = new Random();
+            var courses = DocumentSession.Query<ClassModel>()
+                                        .Where(r => r.Students.Contains(studentID))
+                                        .ToList();
+            foreach (ClassModel course in courses)
+            {
+                course.ConfirmCode = random.Next(1000, 9999).ToString();
+            }
+            DocumentSession.Delete(dataID);
+            DocumentSession.SaveChanges();
+            return RedirectToAction("Students");
+        }
+
         public ActionResult AddAssignment()
         {
             return View();

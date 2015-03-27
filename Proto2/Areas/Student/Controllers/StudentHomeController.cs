@@ -64,6 +64,8 @@ namespace Proto2.Areas.Student.Controllers
         [HttpPost]
         public ActionResult StudentAddClass(StudentAddClass input)
         {
+            if (input != null)
+            {
              //Query classes for this confCode and then add student to the list
              //If there is one, then add load that specific object and add the student to the array
             var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
@@ -108,11 +110,18 @@ namespace Proto2.Areas.Student.Controllers
             {
                 return View();
             }
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
 
         }
 
         public ActionResult ViewAssignments(Guid classID)
         {
+            if (classID != null)
+            {
             var assigns = new AssignmentsView();
 
             var assign = DocumentSession.Query<AssignmentInputView>()
@@ -135,16 +144,29 @@ namespace Proto2.Areas.Student.Controllers
 
             return View(assigns);
         }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         public ActionResult CurrentAssignment(Guid Id)
         {
+            if (Id != null) { 
             var assignment = DocumentSession.Load<AssignmentInputView>(Id);
 
             return View(assignment);
         }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         public ActionResult PastSubmission(string submitId)
         {
+            if (submitId != null)
+            {
             SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
 
             SubmitDetails sd = new SubmitDetails()
@@ -156,16 +178,24 @@ namespace Proto2.Areas.Student.Controllers
             };
             return View(sd);
         }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         public ActionResult Write(Guid Id)
         {
+            if (Id != null)
+            {
             // Get SubmissionView that matches this assignment id and user
             var prev = DocumentSession.Query<SubmissionView>()
                         .Where(a => a.StudentId == User.Identity.GetUserId() && a.AssignmentId == Id)
                         .ToList();
 
             // If first time loading write page, make a StoryInput Model and return it
-            if(prev.Count == 0){
+                if (prev.Count == 0)
+                {
                 // Load assignmentInputView with this Id
                 var assign = DocumentSession.Load<AssignmentInputView>(Id);
                 var writeData = new SubmissionView()
@@ -186,6 +216,11 @@ namespace Proto2.Areas.Student.Controllers
             }
             // Else return the SubmissionView from query
             return View(prev[0]);
+        }
+            else
+            {
+                return RedirectToAction("index");
+            }
         }
 
         [HttpPost]
@@ -209,14 +244,28 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult Train(Guid Id)
         {
+            if (Id != null)
+            {
             var assign = DocumentSession.Load<AssignmentInputView>(Id);
             return View(assign);
+        }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult BrainStorm(Guid Id)
         {
+            if (Id != null)
+            {
             var assign = DocumentSession.Load<AssignmentInputView>(Id);
             return View(assign);
+        }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Reviews()
@@ -245,6 +294,8 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult StoryReview(string submissionId)
         {
+            if (submissionId != null)
+            {
             // StoryId will be passed as a SubmissionId from a submitted assignment
             // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
             // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
@@ -267,6 +318,11 @@ namespace Proto2.Areas.Student.Controllers
                 });
             }
             return View(StoryReviewsList);
+        }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
     }
