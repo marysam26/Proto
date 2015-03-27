@@ -22,13 +22,13 @@ namespace Proto2.Areas.Student.Indexes
                           select new { ConfirmCode = course.ConfirmCode };
         }
     }
-
-    public class AddClassToStudentIndex : AbstractIndexCreationTask<StudentModel>
-    {
-        public AddClassToStudentIndex()
-        {
-            Map = docs => from student in docs
-                          select new { StudentID = student.StudentID };
-        }
-    }
+    //I don't think we need this any more
+    //public class AddClassToStudentIndex : AbstractIndexCreationTask<StudentModel>
+    //{
+    //    public AddClassToStudentIndex()
+    //    {
+    //        Map = docs => from student in docs
+    //                      select new { StudentID = student.StudentID };
+    //    }
+    //}
 }

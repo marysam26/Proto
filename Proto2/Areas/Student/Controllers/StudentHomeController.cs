@@ -76,11 +76,9 @@ namespace Proto2.Areas.Student.Controllers
                 return View(input);
             }
 
-            var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
-                          .Where(s => s.StudentID == User.Identity.GetUserId())
-                          .ToList();
+            var student = DocumentSession.Load<StudentModel>("Student/" + User.Identity.GetUserId());
 
-            if (courses.Count != 0 && student.Count != 0)
+            if (courses.Count != 0 && student != null)
             {
 
                 var id = courses[0].Id;
@@ -93,7 +91,7 @@ namespace Proto2.Areas.Student.Controllers
                 course.Students = list;
                 //DocumentSession.SaveChanges();
 
-                string ids = student[0].Id;
+                string ids = student.Id;
                 // Having this Id attribute that gets set by RavenDb 
                 // allows for retrieval of the exact object that can be updated or deleted
                 // by using the Load command that uses a document Id
