@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.Teacher.Models.ClassModel>
+﻿@model List<Proto2.Areas.Student.Models.StudentClassModel>
 @{
     ViewBag.Title = "Select a Course To Work In";
 }
@@ -31,28 +31,29 @@
             <div class="pull-right">
                 <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("StudentAddClass", "StudentHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
             </div>
-            <h2>@ViewBag.Title</h2>
-            <div class="row">
-                <div class="col-xs-5">
-                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
+            <center><h2>@ViewBag.Title</h2></center>
+                    <div class="jumbotron" style="opacity: .90;  margin:auto">
                         <table class="table">
                             <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Instructor</th>
+                                    <th>End Date</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach (var course in Model)
                                 {
                                     <tr>
-                                        <td><p><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.Id})' ;return false; ">@course.ClassName</button></p></td>
+                                        <td><p><button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.courseId})' ;return false; ">@course.ClassName</button></p></td>
+                                        <td>@course.TeacherName</td>
+                                        <td>@course.EndDate.ToShortDateString()</td>
                                     </tr>
 
                                 }
                             </tbody>
                         </table>
                     </div>
-                </div> 
-            </div>
-        </div>
-
-
+                </div>
     }
 </div>

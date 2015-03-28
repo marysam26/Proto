@@ -37,7 +37,7 @@ namespace Proto2.Areas.Student.Controllers
         public ActionResult Index()
         {
             var userName = "StudentModels/" + User.Identity.Name;
-            var models = new List<ClassModel>();
+            var models = new List<StudentClassModel>();
             var courses = DocumentSession.Query<ClassModel>()
                          .ToList();
 
@@ -50,7 +50,15 @@ namespace Proto2.Areas.Student.Controllers
                     {
                         if (courses[i].Students.Contains(userName))
                         {
-                            models.Add(courses[i]);
+                            var teacher = DocumentSession.Load<ProtoUser>(courses[i].teacherId);
+                            StudentClassModel sClass = new StudentClassModel()
+                            {
+                                TeacherName = teacher.FirstName + " " + teacher.LastName,
+                                EndDate = courses[i].EndDate,
+                                ClassName = courses[i].ClassName,
+                                courseId = courses[i].Id
+                            };
+                            models.Add(sClass);
                         }
                     }
                 }
