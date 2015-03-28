@@ -280,7 +280,6 @@ C:\Users\troper\Source\Repos\Proto\Proto2\bin\WebMatrix.WebData.xml
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\Org.Mentalis.Security.Cryptography.xml
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\Mono.Math.xml
 C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csproj.App.config
-C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
 C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.dll
 C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.pdb
 C:\Users\Tulio\Documents\Capstone\Proto\Proto2\bin\Proto2.dll.config
@@ -474,3 +473,4 @@ C:\Users\Smartie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csproj.App.config
 C:\Users\Smartie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
 C:\Users\Smartie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.dll
 C:\Users\Smartie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.pdb
+C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
