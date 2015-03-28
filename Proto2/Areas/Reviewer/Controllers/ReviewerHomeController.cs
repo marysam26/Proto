@@ -98,9 +98,16 @@ namespace Proto2.Areas.Reviewer.Controllers
                 
                 //The SystemAdmin view is not currently set up to distinguish between the videos.  
                 //It is currently just holding all videos to test my training page.
-                //SystemAdmin needs to be updated to distinguish between other videos
+            //SystemAdmin needs to be updated to distinguish between other videos
                 var training = DocumentSession.Query<VideoView>().ToList();
-                return View(training[0]);
+                if (training.Count() != 0)
+                {
+                    return View(training[0]);
+                }
+                else
+                {
+                    return View();
+                }
         }
             //var trainingVideos = new List<TrainVideoView>()
             //{
