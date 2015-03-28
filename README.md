@@ -59,7 +59,6 @@ Centralized
 * Everyone is able to check out and push to the development branch. Marysa manages any merge conflicts.
 
 ## Known Bugs / Caveats
-* Internet Explorer throws an error upon choosing the dropdown menu.
 
 * Discovered a bug in Teacher where after adding a course, the page relaods as if they had no course. If they go to the TeacherHome tab, it then appears but it should show up immediately on redirect.
 
