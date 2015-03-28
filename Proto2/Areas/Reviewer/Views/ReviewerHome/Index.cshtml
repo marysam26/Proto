@@ -51,7 +51,7 @@
                                 @foreach (var course in Model)
                                 {
                                     <tr>
-                                        <td><p><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReviewStories", "ReviewerHome", new {classId = course.ClassIDs.ToString()})' ;return false; ">@course.ClassName</button></p></td>
+                                        <td><p><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReviewStories", "ReviewerHome", new {classId = course.ClassIDs})' ;return false; ">@course.ClassName</button></p></td>
                                         <td>@course.NumReviews</td>
                                     </tr>
 
