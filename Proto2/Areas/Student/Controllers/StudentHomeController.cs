@@ -17,10 +17,11 @@ namespace Proto2.Areas.Student.Controllers
     public class StudentHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
-        public IDocumentSession DocumentSession { get; set; }    
+        public IDocumentSession DocumentSession { get; set; }
+  
 
            public StudentHomeController()
-        {
+           {
             this.UserManager = new UserManager<ProtoUser>(
                 new UserStore<ProtoUser>(() => this.DocumentSession));
         }
@@ -35,6 +36,7 @@ namespace Proto2.Areas.Student.Controllers
         // GET: /Student/
         public ActionResult Index()
         {
+            var userName = "StudentModels/" + User.Identity.Name;
             var models = new List<ClassModel>();
             var courses = DocumentSession.Query<ClassModel>()
                          .ToList();
@@ -46,7 +48,7 @@ namespace Proto2.Areas.Student.Controllers
                 {
                     if (courses[i].Students != null)
                     {
-                        if (courses[i].Students.Contains(User.Identity.GetUserId()))
+                        if (courses[i].Students.Contains(userName))
                         {
                             models.Add(courses[i]);
                         }
@@ -77,31 +79,29 @@ namespace Proto2.Areas.Student.Controllers
                 ModelState.AddModelError("", "The provided class code is incorrect.");
                 return View(input);
             }
+            var userName = "StudentModels/" + User.Identity.Name;
+            var student = DocumentSession.Load<StudentModel>(userName);
 
-            var student = DocumentSession.Query<StudentModel, AddClassToStudentIndex>()
-                              .Where(s => s.Id == User.Identity.GetUserId())
-                          .ToList();
-
-            if (courses.Count != 0 && student.Count != 0)
+            if (courses.Count != 0 && student != null)
             {
 
-                string id = courses[0].Id;
+                var id = courses[0].Id;
                 // Having this Id attribute that gets set by RavenDb 
                 // allows for retrieval of the exact object that can be updated or deleted
                 // by using the Load command that uses a document Id
                 ClassModel course = DocumentSession.Load<ClassModel>(id);
                 List<string> list = course.Students.ToList();
-                list.Add(User.Identity.GetUserId());
+                list.Add(userName);
                 course.Students = list;
                 //DocumentSession.SaveChanges();
 
-                string ids = student[0].Id;
+                string ids = student.Id;
                 // Having this Id attribute that gets set by RavenDb 
                 // allows for retrieval of the exact object that can be updated or deleted
                 // by using the Load command that uses a document Id
                 StudentModel st = DocumentSession.Load<StudentModel>(ids);
                 List<Guid> listS = st.ClassIDs.ToList();
-                listS.Add(course.id);
+                listS.Add(course.Id);
                 st.ClassIDs = listS.ToArray();
                 
                 DocumentSession.SaveChanges();
@@ -122,6 +122,7 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult ViewAssignments(Guid classID)
         {
+            var userName = "StudentModels/" + User.Identity.Name;
             if (classID != null)
             {
             var assigns = new AssignmentsView();
@@ -131,7 +132,7 @@ namespace Proto2.Areas.Student.Controllers
                           .ToList();
 
             var submissions = DocumentSession.Query<SubmissionView>()
-                               .Where(s => s.StudentId == User.Identity.GetUserId() && s.classId == classID)
+                               .Where(s => s.StudentId == userName && s.classId == classID)
                                .ToList();
 
             if (assign.Count() != 0)
@@ -188,11 +189,12 @@ namespace Proto2.Areas.Student.Controllers
 
         public ActionResult Write(Guid Id)
         {
+            var userName = "StudentModels/" + User.Identity.Name;
             if (Id != null)
             {
             // Get SubmissionView that matches this assignment id and user
             var prev = DocumentSession.Query<SubmissionView>()
-                        .Where(a => a.StudentId == User.Identity.GetUserId() && a.AssignmentId == Id)
+                        .Where(a => a.StudentId ==userName && a.AssignmentId == Id)
                         .ToList();
 
             // If first time loading write page, make a StoryInput Model and return it
@@ -206,7 +208,7 @@ namespace Proto2.Areas.Student.Controllers
                     classId = assign.CourseId,
                     AssignmentId = assign.Id,
                     DueDate = assign.DueDate,
-                    StudentId = User.Identity.GetUserId(),
+                    StudentId = userName,
                     AssignmentName = assign.AssignmentName,
                     Description = assign.Description,
                     Story = "",

@@ -44,7 +44,7 @@ namespace Proto2.Areas.Reviewer.Controllers
               //Where(x => reviewerModel.ClassIDs.Contains<string>(x.Id)).ToList();//broken here!!!!!!!!!!!!!!!!!!!!!!!
             
             var courses = new List<ViewModel>();
-            foreach (string r in reviewerModel.ClassIDs)
+            foreach (var r in reviewerModel.ClassIDs)
             {
                 var course = DocumentSession.Load<ClassModel>(r);  //look through database for every class this reviewer is associated with
                 var ReviewerClass = new ViewModel();
@@ -78,7 +78,7 @@ namespace Proto2.Areas.Reviewer.Controllers
             reviewer.ClassIDs.Add(courses.First().Id);
             
             //add reviewer id to the class model on the database
-            courses.First().Reviewers.Add(User.Identity.GetUserId());
+            courses.First().Reviewers.Add(User.Identity.Name);
 
             DocumentSession.SaveChanges();
 
@@ -181,7 +181,7 @@ namespace Proto2.Areas.Reviewer.Controllers
             //Return view of a story for review
 
             var storyList = new List<Reviews>();
-            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.id && s.DueDate < DateTime.Now && s.NumReviews < 2).ToList();
+            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.Id && s.DueDate < DateTime.Now && s.NumReviews < 2).ToList();
 
             if (submittedStories.Count() != 0)
             {
@@ -297,7 +297,7 @@ namespace Proto2.Areas.Reviewer.Controllers
             var teacher = new TeacherModel()
             {
                 Name = User.Identity.Name,
-                Id = "Teacher/" + User.Identity.GetUserId(),
+                Id = "Teacher/" + User.Identity.Name,
                 Classes = new List<Guid>()
             };
             DocumentSession.Store(teacher);

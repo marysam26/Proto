@@ -54,6 +54,12 @@ namespace Proto2.Areas.Account
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Confirm Email")]
+        [DataType(DataType.EmailAddress)]
+        [System.ComponentModel.DataAnnotations.Compare("Email", ErrorMessage = "Your email and confirmation email do not match.")]
+        public string ConfirmEmail { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

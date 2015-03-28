@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.Ajax.Utilities;
 using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Student.Models;
@@ -62,8 +63,49 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return RedirectToAction("Teachers");
         }
 
-        public ActionResult DeleteTeacher(Guid id)
+        public ActionResult DeleteTeacher(string id)
         {
+            //delete proto user, teacher model, courses associated with teacher,
+            //for each course, remove it from associated students and reviewers
+
+            var teacher = DocumentSession.Load<TeacherModel>(id);
+
+            var courses = teacher.Classes;
+            foreach (var c in courses)
+            {
+                var classModel = DocumentSession.Load<ClassModel>(c);
+                foreach (var s in classModel.Students)
+                {
+                    var studentName = DocumentSession.Load<StudentModel>(s);
+                    if (studentName != null)
+                    {
+                        studentName.ClassIDs = studentName.ClassIDs.Where(val => val != c).ToArray();
+                    }
+                   
+                }
+
+                foreach (var r in classModel.Reviewers)
+                {
+                    var reviewer = DocumentSession.Load<ReviewerModel>(r);
+                    if (reviewer != null)
+                    {
+                        reviewer.ClassIDs.Remove(c);
+                    }
+                }
+                DocumentSession.Delete<ClassModel>(c);
+             
+               
+            }
+            var teacherId = teacher.Id.Split('/');
+            var protoUser = DocumentSession.Load<ProtoUser>("ProtoUsers/" + teacherId[1]);
+            protoUser.Roles.Remove(ProtoRoles.Teacher);
+            if (!protoUser.Roles.Any())
+            {
+                DocumentSession.Delete(protoUser.Id);
+            }
+            DocumentSession.Delete(id);
+         
+            DocumentSession.SaveChanges();
             return RedirectToAction("Teachers");
         }
 
