@@ -92,11 +92,19 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                         reviewer.ClassIDs.Remove(c);
                     }
                 }
-                DocumentSession.Delete(c);
-                DocumentSession.Delete(id);
+                DocumentSession.Delete<ClassModel>(c);
+             
                
             }
-
+            var teacherId = teacher.Id.Split('/');
+            var protoUser = DocumentSession.Load<ProtoUser>("ProtoUsers/" + teacherId[1]);
+            protoUser.Roles.Remove(ProtoRoles.Teacher);
+            if (!protoUser.Roles.Any())
+            {
+                DocumentSession.Delete(protoUser.Id);
+            }
+            DocumentSession.Delete(id);
+         
             DocumentSession.SaveChanges();
             return RedirectToAction("Teachers");
         }

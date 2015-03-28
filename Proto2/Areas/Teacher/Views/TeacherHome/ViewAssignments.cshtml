@@ -39,6 +39,8 @@
                         <th>Name</th>
                         <th>Due Date</th>
                         <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,7 @@
                             <td>@a.AssignmentName</td>
                             <td>@a.DueDate</td>
                             <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentDetailed", "TeacherHome", a)' ;return false; ">Assignment Details</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ExtendDueDate", "TeacherHome", new {date = @a.DueDate, id = a.Id})' ;return false; ">Extend Due Date</button></p></td>
 
                         </tr>
                     }

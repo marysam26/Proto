@@ -1,27 +1,27 @@
-﻿@model List<Proto2.Areas.Teacher.Models.ReviewerViewModel>
+﻿@model Proto2.Areas.Teacher.Models.ReviewerViewList
 
 @*This view should look like the bottom screen on the left
     for the reviewer mockups. Look at the Index view for
     teachers for an example*@
 
 @{
-    ViewBag.Title = "Students";
+    ViewBag.Title = "Reviewers";
 }
 
 
 <body style="
-        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
-        background-repeat: no-repeat;
-        background-size: cover">
+                                      background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+                                      background-repeat: no-repeat;
+                                      background-size: cover">
 
-    @if (!Model.Any())
+    @if (!Model.ReviewerList.Any())
     {
         <div class="jumbotron" style="opacity: .90">
             <h2>No Reviewers enrolled</h2>
         </div>
 
     }
-    @if (Model.Any())
+    @if (Model.ReviewerList.Any())
     {
         <h2>@ViewBag.Title</h2>
         <div class="jumbotron" style="opacity: .90">
@@ -29,15 +29,16 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var s in Model)
+                    @foreach (var s in Model.ReviewerList)
                     {
                         <tr>
                             <td>@s.Name</td>
-                            <td>@s.Email</td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-courseid="@Model.CourseId" data-dataid="@s.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+
                         </tr>
                     }
                 </tbody>
@@ -47,3 +48,49 @@
 
     }
 </body>
+
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="courseid"></div>
+                <div class="hide" id="dataid"></div>
+                <div class="hide" id="terminateLink">@Url.Action("DeleteReviewer", "TeacherHome")</div>
+                <p>
+                    This reviewer will be removed from this course only and will no longer be able to view
+                    or submit reviews for this course.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove reviewer from course.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+            var courseid = $(this).data('courseid');
+            var dataid = $(this).data('dataid');
+            $(".modal-body #courseid").text(courseid);
+            $(".modal-body #dataid").text(dataid);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var courseid = $(".modal-body #courseid").text();
+            var dataid = $(".modal-body #dataid").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?courseId=' + courseid + '&dataId=' + dataid;
+            return false;
+        });
+    </script>
+}
