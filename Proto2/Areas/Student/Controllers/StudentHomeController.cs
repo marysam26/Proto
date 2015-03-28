@@ -192,12 +192,12 @@ namespace Proto2.Areas.Student.Controllers
             var userName = "StudentModels/" + User.Identity.Name;
             if (Id != null)
             {
-            // Get SubmissionView that matches this assignment id and user
-            var prev = DocumentSession.Query<SubmissionView>()
-                        .Where(a => a.StudentId ==userName && a.AssignmentId == Id)
+                // Get SubmissionView that matches this assignment id and user
+                var prev = DocumentSession.Query<SubmissionView>()
+                        .Where(a => a.StudentId == userName && a.AssignmentId == Id)
                         .ToList();
 
-            // If first time loading write page, make a StoryInput Model and return it
+                // If first time loading write page, make a StoryInput Model and return it
                 if (prev.Count == 0)
                 {
                 // Load assignmentInputView with this Id
@@ -212,6 +212,7 @@ namespace Proto2.Areas.Student.Controllers
                     AssignmentName = assign.AssignmentName,
                     Description = assign.Description,
                     Story = "",
+                    StoryTitle = "",
                     NumReviews = 0
                 };
                 DocumentSession.Store(writeData);
@@ -236,6 +237,8 @@ namespace Proto2.Areas.Student.Controllers
 
             // Update the story data
             sv.Story = input.Story;
+            // Add the story title
+            sv.StoryTitle = input.StoryTitle;
             // Story and submission date will continue to apdate as long as the 
             // student is making changes before the due date because current assignment will expire at a due date
             sv.SubmissionDate = DateTime.Now;

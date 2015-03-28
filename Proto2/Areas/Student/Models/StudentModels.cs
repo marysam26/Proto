@@ -53,8 +53,13 @@ namespace Proto2.Areas.Student.Models
         public string StudentId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
-        // Date is not set until submit is completed, will be empty on all just saves.
         public DateTime SubmissionDate { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The story title is required, but may be changed at any time")]
+        [Display(Name = "Story Title (Required)")]
+        public string StoryTitle { get; set; }
+
         public string Story { get; set; }
         public int NumReviews { get; set; }
         public string reviewer1 { get; set; }
