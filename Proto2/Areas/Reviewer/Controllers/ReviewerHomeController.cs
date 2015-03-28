@@ -174,7 +174,7 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         }
 
-        public ActionResult ReviewStories(string classId)
+        public ActionResult ReviewStories(Guid classId)
         {
             ClassModel course = DocumentSession.Load<ClassModel>(classId);
 
