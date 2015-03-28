@@ -193,6 +193,9 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 Link = input.Link,
                 Title = input.Title
             };
+
+            DocumentSession.Store(video);
+            DocumentSession.SaveChanges();
             var videos = new List<VideoView> {video};
             return View("EditReviewerVideos", videos);
         }

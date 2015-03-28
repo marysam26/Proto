@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.Reviewer.Models.TrainVideoView>
+﻿@model Proto2.Areas.SystemAdmin.Models.VideoView
 
 @*This is the first view on the right in the mockups and can
     display just the links or embedded videos. Whichever is
@@ -19,13 +19,16 @@
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
         background-repeat: no-repeat;
         background-size: cover">
-
-    <div style ="text-align:center">
-        <br>
-        <asp:label runat="server">
-            <iframe width="500" height="300" src="//www.youtube.com/embed/AnVv0RkiG4U" frameborder="0"></iframe>
-        </asp:label>
-        <br><br>
-    </div>
+   
+    <center><h2>@Model.Title</h2></center>
+        <div style="text-align:center">
+            <br>
+            <asp:label runat="server">
+                <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
+            <br>
+            </asp:label>
+        </div>
+        
+    
 </body>
 </html>

@@ -95,16 +95,23 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult Train()
         {
-            var trainingVideos = new List<TrainVideoView>()
-            {
-                //default training videos, to be replaced
-                new TrainVideoView(){
-                       Title = "Default Training Video",
-                       Link = "https://www.youtube.com/watch?v=D85NqSrpzew"
-                }
-            };
-            return View(trainingVideos);
+                
+                //The SystemAdmin view is not currently set up to distinguish between the videos.  
+                //It is currently just holding all videos to test my training page.
+                //SystemAdmin needs to be updated to distinguish between other videos
+                var training = DocumentSession.Query<VideoView>().ToList();
+                return View(training[0]);
         }
+            //var trainingVideos = new List<TrainVideoView>()
+            //{
+                //default training videos, to be replaced
+              //  new TrainVideoView(){
+                //       Title = "Default Training Video",
+                  //     Link = "https://www.youtube.com/watch?v=D85NqSrpzew"
+                //}
+            //};
+            //return View(trainingVideos);
+        
 
         public ActionResult PastReviewsHome()
         {

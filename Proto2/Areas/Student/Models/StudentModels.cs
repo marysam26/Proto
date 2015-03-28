@@ -18,11 +18,11 @@ namespace Proto2.Areas.Student.Models
         public Guid[] ClassIDs { get; set; }
     }
 
-    public class VideoView
+   /* public class VideoView
     {
         public string Title { get; set; }
         public string Link { get; set; }
-    }
+    }*/
 
     public class StudentAddClass
     {
