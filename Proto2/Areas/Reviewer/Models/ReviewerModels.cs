@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Proto2.Areas.Reviewer.Models
 {
@@ -60,8 +61,8 @@ namespace Proto2.Areas.Reviewer.Models
         public HtmlString Story { get; set; }
         public string AssignmentName { get; set; }
         public string AssignmentDescription { get; set; }
-        
-           
+
+        public List<SelectListItem> KeyList { get; set; }
 
         [Required]
         [Range(0, 7)]
