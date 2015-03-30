@@ -106,20 +106,10 @@ namespace Proto2.Areas.Reviewer.Controllers
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index");
                 }
         }
-            //var trainingVideos = new List<TrainVideoView>()
-            //{
-                //default training videos, to be replaced
-              //  new TrainVideoView(){
-                //       Title = "Default Training Video",
-                  //     Link = "https://www.youtube.com/watch?v=D85NqSrpzew"
-                //}
-            //};
-            //return View(trainingVideos);
-        
-
+          
         public ActionResult PastReviewsHome()
         {
             //Default review, will pull reviews from database but will use this as default for now.
@@ -153,6 +143,7 @@ namespace Proto2.Areas.Reviewer.Controllers
                 AssignmentName = Submission.AssignmentName,
                 AssignmentDescription = Submission.Description,
                 SubmitId = Submission.Id,
+                StoryTitle = Submission.StoryTitle,
                 Story = new HtmlString(Submission.Story),
                 KeyList = new List<SelectListItem>()
                 {
@@ -220,7 +211,8 @@ namespace Proto2.Areas.Reviewer.Controllers
                         SubmissionId = s.Id,
                         AssignmentName = s.AssignmentName,
                         NumReviews = s.NumReviews,
-                        DatePublished = s.SubmissionDate
+                        DatePublished = s.SubmissionDate,
+                        StoryTitle = s.StoryTitle
                     });
                 }
             }

@@ -24,7 +24,8 @@ see AddStudent in the Teacher view for an example*@
             @Html.ValidationSummary(true)
             <center> <h2>@Model.AssignmentName</h2></center>
             <center><h2>@Model.AssignmentDescription</h2></center>
-            <center><h3>@Model.Story</h3></center>
+            <center><h3>@Model.StoryTitle</h3></center>
+            <center><h4>@Model.Story</h4></center>
             <p></p>
             <div class="form-group">
                 @Html.LabelFor(model => model.ScorePlot, "Score for plot", new { @class = "control-label col-md-2" })

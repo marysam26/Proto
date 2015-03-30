@@ -37,6 +37,7 @@ namespace Proto2.Areas.Reviewer.Models
         public string AssignmentName { get; set; }
         public DateTime DatePublished { get; set; }
         public int NumReviews { get; set; }
+        public string StoryTitle { get; set; }
     }
 
     public class ReviewerAddClass
@@ -61,6 +62,7 @@ namespace Proto2.Areas.Reviewer.Models
         public HtmlString Story { get; set; }
         public string AssignmentName { get; set; }
         public string AssignmentDescription { get; set; }
+        public string StoryTitle { get; set; }
 
         public List<SelectListItem> KeyList { get; set; }
 
