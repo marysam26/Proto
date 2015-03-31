@@ -749,6 +749,8 @@
     <Content Include="Areas\Teacher\Views\TeacherHome\RegisterAsReviewer.cshtml" />
     <Content Include="Areas\Reviewer\Views\ReviewerHome\RegisterAsTeacher.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherHome\ExtendDueDate.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\NoReviews.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\NoTrainingVideos.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

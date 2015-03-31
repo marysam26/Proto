@@ -55,6 +55,16 @@ namespace Proto2.Areas.Reviewer.Models
         [Display(Name = "Teacher Code")]
         public int TeacherCode { get; set; }
     }
+    public class ReviewInputDatabase
+    {
+        public string SubmitId { get; set; }
+        public int ScorePlot { get; set; }
+        public int ScoreCharacter { get; set; }
+        public int ScoreSetting { get; set; }
+        public string Comments { get; set; }
+        public string Username { get; set; }
+
+    }
 
     public class ReviewInput
     {
