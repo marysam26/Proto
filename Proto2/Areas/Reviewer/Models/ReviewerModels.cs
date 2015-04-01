@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Proto2.Areas.Reviewer.Models
 {
@@ -36,6 +37,7 @@ namespace Proto2.Areas.Reviewer.Models
         public string AssignmentName { get; set; }
         public DateTime DatePublished { get; set; }
         public int NumReviews { get; set; }
+        public string StoryTitle { get; set; }
     }
 
     public class ReviewerAddClass
@@ -53,6 +55,16 @@ namespace Proto2.Areas.Reviewer.Models
         [Display(Name = "Teacher Code")]
         public int TeacherCode { get; set; }
     }
+    public class ReviewInputDatabase
+    {
+        public string SubmitId { get; set; }
+        public int ScorePlot { get; set; }
+        public int ScoreCharacter { get; set; }
+        public int ScoreSetting { get; set; }
+        public string Comments { get; set; }
+        public string Username { get; set; }
+
+    }
 
     public class ReviewInput
     {
@@ -60,8 +72,9 @@ namespace Proto2.Areas.Reviewer.Models
         public HtmlString Story { get; set; }
         public string AssignmentName { get; set; }
         public string AssignmentDescription { get; set; }
-        
-           
+        public string StoryTitle { get; set; }
+
+        public List<SelectListItem> KeyList { get; set; }
 
         [Required]
         [Range(0, 7)]

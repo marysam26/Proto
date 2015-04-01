@@ -24,12 +24,13 @@ see AddStudent in the Teacher view for an example*@
             @Html.ValidationSummary(true)
             <center> <h2>@Model.AssignmentName</h2></center>
             <center><h2>@Model.AssignmentDescription</h2></center>
-            <center><h3>@Model.Story</h3></center>
+            <center><h3>@Model.StoryTitle</h3></center>
+            <center><h4>@Model.Story</h4></center>
             <p></p>
             <div class="form-group">
                 @Html.LabelFor(model => model.ScorePlot, "Score for plot", new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.ScorePlot, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.ScorePlot, Model.KeyList, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ScorePlot)
                 </div>
             </div>
@@ -38,7 +39,7 @@ see AddStudent in the Teacher view for an example*@
             <div class="form-group">
                 @Html.LabelFor(model => model.ScoreCharacter, "Score for character", new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.ScoreCharacter, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.ScoreCharacter, Model.KeyList, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ScoreCharacter)
                 </div>
             </div>
@@ -46,7 +47,7 @@ see AddStudent in the Teacher view for an example*@
             <div class="form-group">
                 @Html.LabelFor(model => model.ScoreSetting, "Score for setting", new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.ScoreSetting, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.ScoreSetting, Model.KeyList, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ScoreSetting)
                 </div>
             </div>
@@ -55,7 +56,7 @@ see AddStudent in the Teacher view for an example*@
             <div class="form-group">
                 @Html.LabelFor(model => model.Comments, "Comments", new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.Comments, new { @class = "form-control" })
+                    @Html.TextAreaFor(model => model.Comments, new { style = "width: 360px; height: 100px;" })
                     @Html.ValidationMessageFor(model => model.Comments)
                 </div>
             </div>

@@ -106,20 +106,10 @@ namespace Proto2.Areas.Reviewer.Controllers
                 }
                 else
                 {
-                    return View();
+                    return View("NoTrainingVideos");
                 }
         }
-            //var trainingVideos = new List<TrainVideoView>()
-            //{
-                //default training videos, to be replaced
-              //  new TrainVideoView(){
-                //       Title = "Default Training Video",
-                  //     Link = "https://www.youtube.com/watch?v=D85NqSrpzew"
-                //}
-            //};
-            //return View(trainingVideos);
-        
-
+          
         public ActionResult PastReviewsHome()
         {
             //Default review, will pull reviews from database but will use this as default for now.
@@ -148,12 +138,37 @@ namespace Proto2.Areas.Reviewer.Controllers
         {
             //Return a view to review a story
             var Submission = DocumentSession.Load<SubmissionView>(SubmitId);
+
+           if (Submission.reviewer1 == null)
+            {
+                Submission.reviewer1 = User.Identity.GetUserId();
+            }
+            else
+            {
+                Submission.reviewer2 = User.Identity.GetUserId();
+            }
+
+            DocumentSession.Store(Submission);
+
+            DocumentSession.SaveChanges();
             ReviewInput input = new ReviewInput()
             {
                 AssignmentName = Submission.AssignmentName,
                 AssignmentDescription = Submission.Description,
                 SubmitId = Submission.Id,
-                Story = new HtmlString(Submission.Story)
+                StoryTitle = Submission.StoryTitle,
+                Story = new HtmlString(Submission.Story),
+                KeyList = new List<SelectListItem>()
+                {
+                            new SelectListItem() {Text = "0", Value = "0"},
+                            new SelectListItem() {Text = "1", Value = "1"},
+                            new SelectListItem() {Text = "2", Value = "2"},
+                            new SelectListItem() {Text = "3", Value = "3"},
+                            new SelectListItem() {Text = "4", Value = "4"},
+                            new SelectListItem() {Text = "5", Value = "5"},
+                            new SelectListItem() {Text = "6", Value = "6"},
+                            new SelectListItem() {Text = "7", Value = "7"},
+                 }
             };
             return View(input);
         }
@@ -161,7 +176,7 @@ namespace Proto2.Areas.Reviewer.Controllers
         [HttpPost]
         public ActionResult ReviewStoryView(ReviewInput input)
         {
-            var newReview = new ReviewInput
+            var newReview = new ReviewInputDatabase
 
             {
                 //Information for the new review will be parsed and added to the database here
@@ -191,24 +206,31 @@ namespace Proto2.Areas.Reviewer.Controllers
         public ActionResult ReviewStories(Guid classId)
         {
             ClassModel course = DocumentSession.Load<ClassModel>(classId);
-
             //Return view of a story for review
 
             var storyList = new List<Reviews>();
-            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.Id && s.DueDate < DateTime.Now && s.NumReviews < 2).ToList();
+            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.Id && s.DueDate < DateTime.Now && s.NumReviews < 2 ).ToList();
 
-            if (submittedStories.Count() != 0)
+            var userName = User.Identity.GetUserId();
+
+            foreach (SubmissionView s in submittedStories)
             {
-                foreach (SubmissionView s in submittedStories)
+                if (s.reviewer1 != userName && s.reviewer2 != userName)
                 {
                     storyList.Add(new Reviews()
                     {
                         SubmissionId = s.Id,
                         AssignmentName = s.AssignmentName,
                         NumReviews = s.NumReviews,
-                        DatePublished = s.SubmissionDate
-                    });
+                        DatePublished = s.SubmissionDate,
+                        StoryTitle = s.StoryTitle
+                    }); 
                 }
+                else
+                {
+                    return View("NoReviews");
+                }
+                      
             }
             return View(storyList);
         }
