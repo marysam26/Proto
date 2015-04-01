@@ -283,30 +283,6 @@ namespace Proto2.Areas.Student.Controllers
             }
         }
 
-        public ActionResult Reviews()
-        {
-            //TODO: this should return a list of ReviewView modles
-            //Default review, will pull reviews from database but will use this as default for now.
-            var ReviewsList = new List<StudentReviewView>(){
-                new StudentReviewView(){
-                    Title = "The Best Story Ever",
-                    ReviewOne = new StoryReviewView(){
-                        ScorePlot = 5,
-                        ScoreCharacter = 4,
-                        ScoreSetting = 5,
-                        Comments = "Develop a stronger plot and invest more thought to character development."
-                    },
-                    //ReviewTwo = new StoryReviewView(){
-                    //    ScorePlot = 6,
-                    //    ScoreCharacter = 4,
-                    //    ScoreSetting = 6,
-                    //    Comments = "Further develop the characters of your story."
-                    //}
-                }
-            };
-            return View(ReviewsList);
-        }
-
         public ActionResult StoryReview(string submissionId)
         {
             if (submissionId != null)
@@ -317,11 +293,11 @@ namespace Proto2.Areas.Student.Controllers
             
             var StoryReviewsList = new List<StoryReviewView>();
 
-            var reviews = DocumentSession.Query<ReviewInput>()
+            var reviews = DocumentSession.Query<ReviewInputDatabase>()
                             .Where(r => r.SubmitId == submissionId)
                             .ToList(); // This should only be two, reviews should not show up for reviewer after 2 have been completed
             int num = 0;
-            foreach (ReviewInput r in reviews)
+            foreach (ReviewInputDatabase r in reviews)
             {
                 StoryReviewsList.Add(new StoryReviewView()
                 {

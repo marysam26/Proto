@@ -83,10 +83,4 @@ namespace Proto2.Areas.Student.Models
         public SubmissionView[] Submitted { get; set; }
     }
 
-    public class BrainStormInput
-    {
-        //TODO: if we're going to save their picture, we should try
-        //to associate it with the model if possible
-        
-    }
 }
