@@ -235,6 +235,10 @@ namespace Proto2.Areas.Reviewer.Controllers
             return View(storyList);
         }
 
+        public ActionResult NoReviews()
+        {
+            return View();
+        }
 
        [HttpPost]
         public ActionResult ReviewStory(ReviewInput input)

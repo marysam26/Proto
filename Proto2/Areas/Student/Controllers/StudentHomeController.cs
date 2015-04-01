@@ -76,50 +76,50 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (input != null)
             {
-             //Query classes for this confCode and then add student to the list
-             //If there is one, then add load that specific object and add the student to the array
-            var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
-                         .Where(c => c.ConfirmCode == input.classCode)
-                         .ToList();
+                //Query classes for this confCode and then add student to the list
+                //If there is one, then add load that specific object and add the student to the array
+                var courses = DocumentSession.Query<ClassModel, StudentAddClassIndex>()
+                            .Where(c => c.ConfirmCode == input.classCode)
+                            .ToList();
 
-            if (!courses.Any())  //check to be sure the code correspondes to a class in the DB
-            {
-                ModelState.AddModelError("", "The provided class code is incorrect.");
-                return View(input);
-            }
-            var userName = "StudentModels/" + User.Identity.Name;
-            var student = DocumentSession.Load<StudentModel>(userName);
+                if (!courses.Any())  //check to be sure the code correspondes to a class in the DB
+                {
+                    ModelState.AddModelError("", "The provided class code is incorrect.");
+                    return View(input);
+                }
+                var userName = "StudentModels/" + User.Identity.Name;
+                var student = DocumentSession.Load<StudentModel>(userName);
 
-            if (courses.Count != 0 && student != null)
-            {
+                if (courses.Count != 0 && student != null)
+                {
 
-                var id = courses[0].Id;
-                // Having this Id attribute that gets set by RavenDb 
-                // allows for retrieval of the exact object that can be updated or deleted
-                // by using the Load command that uses a document Id
-                ClassModel course = DocumentSession.Load<ClassModel>(id);
-                List<string> list = course.Students.ToList();
-                list.Add(userName);
-                course.Students = list;
-                //DocumentSession.SaveChanges();
+                    var id = courses[0].Id;
+                    // Having this Id attribute that gets set by RavenDb 
+                    // allows for retrieval of the exact object that can be updated or deleted
+                    // by using the Load command that uses a document Id
+                    ClassModel course = DocumentSession.Load<ClassModel>(id);
+                    List<string> list = course.Students.ToList();
+                    list.Add(userName);
+                    course.Students = list;
+                    //DocumentSession.SaveChanges();
 
-                string ids = student.Id;
-                // Having this Id attribute that gets set by RavenDb 
-                // allows for retrieval of the exact object that can be updated or deleted
-                // by using the Load command that uses a document Id
-                StudentModel st = DocumentSession.Load<StudentModel>(ids);
-                List<Guid> listS = st.ClassIDs.ToList();
-                listS.Add(course.Id);
-                st.ClassIDs = listS.ToArray();
+                    string ids = student.Id;
+                    // Having this Id attribute that gets set by RavenDb 
+                    // allows for retrieval of the exact object that can be updated or deleted
+                    // by using the Load command that uses a document Id
+                    StudentModel st = DocumentSession.Load<StudentModel>(ids);
+                    List<Guid> listS = st.ClassIDs.ToList();
+                    listS.Add(course.Id);
+                    st.ClassIDs = listS.ToArray();
                 
-                DocumentSession.SaveChanges();
+                    DocumentSession.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
-            }
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
@@ -178,17 +178,17 @@ namespace Proto2.Areas.Student.Controllers
         {
             if (submitId != null)
             {
-            SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
+                SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
 
-            SubmitDetails sd = new SubmitDetails()
-            {
-                Story = new HtmlString(submission.Story),
-                SubmissionId = submission.Id,
-                AssignmentName = submission.AssignmentName,
-                Description = submission.Description
-            };
-            return View(sd);
-        }
+                SubmitDetails sd = new SubmitDetails()
+                {
+                    Story = new HtmlString(submission.Story),
+                    SubmissionId = submission.Id,
+                    AssignmentName = submission.AssignmentName,
+                    Description = submission.Description
+                };
+                return View(sd);
+            }
             else
             {
                 return RedirectToAction("Index");
