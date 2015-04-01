@@ -182,6 +182,7 @@ namespace Proto2.Areas.Student.Controllers
 
                 SubmitDetails sd = new SubmitDetails()
                 {
+                    StoryTitle = submission.StoryTitle,
                     Story = new HtmlString(submission.Story),
                     SubmissionId = submission.Id,
                     AssignmentName = submission.AssignmentName,

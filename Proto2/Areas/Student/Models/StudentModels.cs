@@ -40,6 +40,7 @@ namespace Proto2.Areas.Student.Models
 
     public class SubmitDetails
     {
+        public string StoryTitle { get; set; }
         public HtmlString Story { get; set; }
         public string SubmissionId { get; set; }
         public string AssignmentName { get; set; }

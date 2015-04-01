@@ -13,23 +13,23 @@
     <div class="content-wrapper">
         <div>
             <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-8"><p></p>
                     <div class="jumbotron" style="opacity: .90; margin:auto">
-                        <center><h2>@Model.AssignmentName</h2></center>
-                        <p></p>
-                        <h3>@Model.Description</h3>
+                        <center><h3>@Model.AssignmentName</h3></center>
+                        <center><h4>@Model.Description</h4></center>
                         <table class="table">
                             <thead>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><p><center><button type="button" class="btn btn-lg btn-default" onclick="location.href='@Url.Action("StoryReview", "StudentHome", new {submissionId = Model.SubmissionId})' ;return false; ">Read Reviews</button></center></p></td>
+                                    <td><center><button type="button" class="btn btn-lg btn-default" onclick="location.href='@Url.Action("StoryReview", "StudentHome", new {submissionId = Model.SubmissionId})' ;return false; ">Read Reviews</button></center></td>
 
                                 </tr>
                             </tbody>
                         </table>
+                        <center><h4>@Model.StoryTitle</h4></center><p></p>
                         <div>
-                             @Model.Story
+                             <center><div style="width:650px; height:225px; overflow: scroll">@Model.Story</div></center>
                         </div>
                     </div>
                 </div>
