@@ -13,18 +13,23 @@
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
         background-repeat: no-repeat;
         background-size: cover">
-    <center><h2>@Model.AssignmentName</h2></center>
-    <p></p>
-    <center><h3>@Model.Description</h3></center>
+    <br />
     <div class="pull-right">
         <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("CurrentAssignment", "StudentHome", new { Id = Model.Id })';return false;">&nbsp;Return</button>&nbsp;&nbsp;
     </div>
-    <div style="text-align:center">
-        <br>
-        <asp:label runat="server">
-            <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
-            <br>
-        </asp:label>
+    <br /><br />
+    <div class="content-wrapper" style="background-color: white; padding-left: 50px; padding-bottom: 275px; padding-right: 50px; padding-top: 1px; opacity: 0.90; border-radius: 25px;">
+        <div>
+            <div class="pull-right">
+                <asp:label runat="server">
+                    <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;showinfo=0" frameborder="0"></iframe>
+                    <br>
+                </asp:label>
+            </div>
+            <h2><b>@Model.AssignmentName</b></h2>
+            <text><b>Description:</b><br />@Model.Description</text><br>
+
+        </div>
     </div>
 </body>
 </html>

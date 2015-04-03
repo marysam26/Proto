@@ -189,11 +189,16 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         [HttpPost]
         public ActionResult AddReviewerVideo(AddVideoInput input)
         {
+            var splitLink = input.Link.Split('=');
+            var videoID = splitLink[1];
             var video = new VideoView()
             {
-                Link = input.Link,
+                Link = videoID,
                 Title = input.Title
             };
+
+            DocumentSession.Store(video);
+            DocumentSession.SaveChanges();
             var videos = new List<VideoView> {video};
             return View("EditReviewerVideos", videos);
         }

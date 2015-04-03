@@ -18,15 +18,17 @@ namespace Proto2.Areas.Student.Models
         public Guid[] ClassIDs { get; set; }
     }
 
-    public class VideoView
-    {
-        public string Title { get; set; }
-        public string Link { get; set; }
-    }
-
     public class StudentAddClass
     {
         public string classCode { get; set; }
+    }
+
+    public class StudentClassModel
+    {
+        public string TeacherName { get; set; }
+        public string ClassName { get; set; }
+        public Guid courseId { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
     public class StudentReviewView
@@ -38,6 +40,7 @@ namespace Proto2.Areas.Student.Models
 
     public class SubmitDetails
     {
+        public string StoryTitle { get; set; }
         public HtmlString Story { get; set; }
         public string SubmissionId { get; set; }
         public string AssignmentName { get; set; }
@@ -53,8 +56,13 @@ namespace Proto2.Areas.Student.Models
         public string StudentId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
-        // Date is not set until submit is completed, will be empty on all just saves.
         public DateTime SubmissionDate { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The story title is required, but may be changed at any time")]
+        [Display(Name = "Story Title (Required)")]
+        public string StoryTitle { get; set; }
+
         public string Story { get; set; }
         public int NumReviews { get; set; }
         public string reviewer1 { get; set; }
@@ -76,10 +84,4 @@ namespace Proto2.Areas.Student.Models
         public SubmissionView[] Submitted { get; set; }
     }
 
-    public class BrainStormInput
-    {
-        //TODO: if we're going to save their picture, we should try
-        //to associate it with the model if possible
-        
-    }
 }
