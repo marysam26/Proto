@@ -29,8 +29,6 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-
-                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,10 +36,7 @@
                     {
                         <tr>
                             <td>@s.Name</td>
-                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-courseid="@Model.CourseId" data-dataid="@s.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
-                            @*<td><button type="button" class="btn btn-danger" onclick=" location.href='@Url.Action("DeleteStudent", "TeacherHome", new {courseId = Model.CourseId, student = s.StudentID, dataId = s.Id})  '"><i class=" glyphicon "></i>&nbsp;Delete</button>
-                            </td>*@
-                        </tr>
+                       </tr>
                     }
                 </tbody>
             </table>

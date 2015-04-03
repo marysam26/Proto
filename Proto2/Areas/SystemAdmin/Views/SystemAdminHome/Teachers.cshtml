@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Classes</th>
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -36,7 +36,7 @@
                     {
                         <tr>
                             <td><strong>@teacher.Name</strong></td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudentsByTeacher", "SystemAdminHome", new{id = new Guid()} )' ;return false; ">Students</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewClasess", "SystemAdminHome" ,new {teacherid = teacher.Id} )' ;return false; ">Classes</button></p></td>
                             <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-code="@teacher.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
                         </tr>
 
