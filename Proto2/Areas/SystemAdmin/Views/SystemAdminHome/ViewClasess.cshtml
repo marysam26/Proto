@@ -1,0 +1,60 @@
+﻿@model List<Proto2.Areas.Teacher.Models.ClassModel>
+@{
+    ViewBag.Title = "Welcome Teacher";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2><strong>No Courses have been added by this Teacher.</strong> </h2>
+           </div>
+
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <h2>@ViewBag.Title</h2>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>End Date</th>
+                            <th>Confirmation Code</th>
+                            <th>Students</th>
+                            <th>Reviewers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var course in Model)
+                        {
+                            <tr>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "SystemAdminHome", new {classid = course.Id})' ;return false; ">@course.ClassName</button></p></td>
+                                <td>@course.EndDate.ToShortDateString()</td>
+                                <td>@course.ConfirmCode</td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudents", "SystemAdminHome", new {classID = course.Id})' ;return false; ">Students</button></p></td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewer", "SystemAdminHome", new {classID = course.Id})' ;return false; ">Reviewers</button></p></td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }
+</div>
+

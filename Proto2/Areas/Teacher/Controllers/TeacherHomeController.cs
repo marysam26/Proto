@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.AspNet.Identity;
@@ -365,6 +367,34 @@ namespace Proto2.Areas.Teacher.Controllers
             DocumentSession.Delete<ClassModel>(courseId);
             DocumentSession.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ViewStudentAssignments(string studentid)
+        {
+            var userName = "StudentModels/" + User.Identity.Name;
+      
+                // Get SubmissionView that matches this assignment id and user
+                var prev = DocumentSession.Query<SubmissionView>()
+                        .Where(a => a.StudentId == studentid)
+                        .ToList();
+            return View(prev);
+                                // If first time loading write page, make a StoryInput Model and return it
+               }
+
+        public ActionResult CurrentAssignment(string story)
+        {
+            var assign = DocumentSession.Load<SubmissionView>(story);
+            assign.Story = Regex.Replace(assign.Story, @"<[^>]+>|&nbsp;", "").Trim();
+            return View(assign);
+        }
+
+        public ActionResult CurrentReview(string revId, string assId)
+        {
+            var review = DocumentSession.Query<ReviewInputDatabase>().
+                Where(x => x.SubmitId == assId && x.Username == revId).ToList().FirstOrDefault();
+
+            return View(review);
+
         }
     }
 

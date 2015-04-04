@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Student.Models;
@@ -34,21 +35,21 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult Students()
         {
             var students = DocumentSession.Query<StudentModel>().ToList();
-          return View(students);
+            return View(students);
         }
 
         public ActionResult Teachers()
         {
             //need to make teacher model to save data
             var teachers = DocumentSession.Query<TeacherModel>().ToList();
-         
+
             return View(teachers);
         }
 
         public ActionResult Reviewers()
         {
             var reviewers = DocumentSession.Query<ReviewerModel>().ToList();
-           
+
             return View(reviewers);
         }
 
@@ -81,7 +82,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                     {
                         studentName.ClassIDs = studentName.ClassIDs.Where(val => val != c).ToArray();
                     }
-                   
+
                 }
 
                 foreach (var r in classModel.Reviewers)
@@ -93,8 +94,8 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                     }
                 }
                 DocumentSession.Delete<ClassModel>(c);
-             
-               
+
+
             }
             var teacherId = teacher.Id.Split('/');
             var protoUser = DocumentSession.Load<ProtoUser>("ProtoUsers/" + teacherId[1]);
@@ -104,7 +105,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 DocumentSession.Delete(protoUser.Id);
             }
             DocumentSession.Delete(id);
-         
+
             DocumentSession.SaveChanges();
             return RedirectToAction("Teachers");
         }
@@ -267,7 +268,11 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult AddPass()
         {
-            var codes = DocumentSession.Query<AddPassView>().Customize(x =>x.WaitForNonStaleResultsAsOf(DateTime.Now.AddSeconds(1))).OrderByDescending(RetrieveDate).ToList();
+            var codes =
+                DocumentSession.Query<AddPassView>()
+                    .Customize(x => x.WaitForNonStaleResultsAsOf(DateTime.Now.AddSeconds(1)))
+                    .OrderByDescending(RetrieveDate)
+                    .ToList();
             return View(codes);
         }
 
@@ -309,8 +314,8 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         {
             var random = new Random();
             var courses = DocumentSession.Query<ClassModel>()
-                                        .Where(r => r.Students.Contains(studentID))
-                                        .ToList();
+                .Where(r => r.Students.Contains(studentID))
+                .ToList();
             foreach (ClassModel course in courses)
             {
                 course.ConfirmCode = random.Next(1000, 9999).ToString();
@@ -346,8 +351,8 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult ViewAssignment()
         {
             var assignment = DocumentSession.Query<AssignmentView>()
-                                   .Where(r => r.Id != null)
-                                   .ToList();
+                .Where(r => r.Id != null)
+                .ToList();
 
             return View(assignment);
         }
@@ -360,6 +365,62 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public DateTime RetrieveDate(AddPassView input)
         {
             return input.DateAdded;
+        }
+
+        public ActionResult ViewClasess(string teacherid)
+        {
+            var teacher = teacherid.Split('/');
+           teacherid = "ProtoUsers/" + teacher[1];
+            var courses = DocumentSession.Query<ClassModel>()
+                // How to make it pull based on teacherID
+                .Where(r => r.teacherId == teacherid)
+                .ToList();
+
+            return View(courses);
+        }
+
+        public ActionResult ViewAssignments(Guid classid)
+        {
+            var assignments = DocumentSession.Query<AssignmentInputView>()
+                .Where(x => x.CourseId == classid).ToList();
+            var assignmentList = new AssignmentViewList()
+            {
+                Assignments = assignments,
+                CourseId = classid
+            };
+
+            return View(assignmentList);
+        }
+
+        public ActionResult ViewReviewer(Guid classID)
+        {
+            var reviewerList = DocumentSession.Query<ReviewerModel>()
+                // How to make it pull based on teacherID?
+                .Where(x => x.ClassIDs.Contains<Guid>(classID))
+                // classID associated with the link from the class button
+                .ToList();
+            var reviewers = new ReviewerViewList()
+            {
+                ReviewerList = reviewerList,
+                CourseId = classID
+            };
+            return View(reviewers);
+        }
+
+        public ActionResult ViewStudents(Guid classID)
+        {
+            var studentList = DocumentSession.Query<StudentModel>()
+                // How to make it pull based on teacherID?
+                .Where(x => x.ClassIDs.Contains<Guid>(classID))
+                // classID associated with the link from the class button
+                .ToList();
+            var students = new StudentViewList()
+            {
+                StudentList = studentList,
+                CourseId = classID
+            };
+            return View(students);
+
         }
     }
 }
