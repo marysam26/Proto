@@ -40,11 +40,16 @@ namespace Proto2.Areas.Student.Models
 
     public class SubmitDetails
     {
+        // Class ID added for return to assignemtns page without having to go the way back home
+        public Guid classId { get; set; }
         public string StoryTitle { get; set; }
+        // Im using an html string instead of RegEx removal of formatting in order to keep the student's formatting
+        // So that it retains their fonts, colors etc.
         public HtmlString Story { get; set; }
         public string SubmissionId { get; set; }
         public string AssignmentName { get; set; }
         public string Description { get; set; }
+        public int NumReviews { get; set; }
     }
 
     public class SubmissionView

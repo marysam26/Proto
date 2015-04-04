@@ -1,0 +1,40 @@
+﻿@model List<Proto2.Areas.Student.Models.StoryReviewView>
+
+
+    @{
+        ViewBag.Title = "Review";
+
+    }
+
+    <body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+        @if (!Model.Any())
+        {
+            <div class="jumbotron">
+                <h2>No Reviews</h2>
+            </div>
+
+        }
+        @if (Model.Any())
+        {
+            <center><h2>@ViewBag.Title</h2></center><br>
+            <div class="content-wrapper">
+                @foreach (var review in Model)
+                {
+                    <div class="jumbotron" style="opacity: .90">
+                        <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;@review.ScorePlot
+                        <br><br>
+                        <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>
+                        <b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreSetting<br><br>
+                        <b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.Comments<br><br>
+                    </div>
+                    <p></p>
+                }
+            </div>
+        }
+
+    </body>

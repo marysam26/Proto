@@ -174,19 +174,21 @@ namespace Proto2.Areas.Student.Controllers
             }
         }
 
-        public ActionResult PastSubmission(string submitId)
+        public ActionResult PastSubmission(string submitId, Guid classID)
         {
-            if (submitId != null)
+            if (submitId != null && classID != null)
             {
                 SubmissionView submission = DocumentSession.Load<SubmissionView>(submitId);
 
                 SubmitDetails sd = new SubmitDetails()
                 {
+                    classId = classID,
                     StoryTitle = submission.StoryTitle,
                     Story = new HtmlString(submission.Story),
                     SubmissionId = submission.Id,
                     AssignmentName = submission.AssignmentName,
-                    Description = submission.Description
+                    Description = submission.Description,
+                    NumReviews = submission.NumReviews
                 };
                 return View(sd);
             }
@@ -311,6 +313,38 @@ namespace Proto2.Areas.Student.Controllers
             }
             return View(StoryReviewsList);
         }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult StoryReviewOne(string submissionId)
+        {
+            if (submissionId != null)
+            {
+                // StoryId will be passed as a SubmissionId from a submitted assignment
+                // that is past it's due date. for example, the reviewer gets all assignments where due date is < DateTime.Now
+                // Then looks for submissions with those assignmentIds, then those submissions are listed as ones to review
+
+                var StoryReviewsList = new List<StoryReviewView>();
+
+                var reviews = DocumentSession.Query<ReviewInputDatabase>()
+                                .Where(r => r.SubmitId == submissionId)
+                                .ToList(); // This should only be one in this case
+                foreach (ReviewInputDatabase r in reviews)
+                {
+                    StoryReviewsList.Add(new StoryReviewView()
+                    {
+                        ScorePlot = r.ScorePlot,
+                        ScoreCharacter = r.ScoreCharacter,
+                        ScoreSetting = r.ScoreSetting,
+                        Comments = r.Comments,
+                        reviewNum = 1
+                    });
+                }
+                return View(StoryReviewsList);
+            }
             else
             {
                 return RedirectToAction("Index");

@@ -9,7 +9,6 @@
         background-size: cover">
 
 </body>
-
 <div class="content-wrapper">
         <div>
             <h2>Current Assignments</h2>
@@ -56,7 +55,7 @@
                                 @if (Model.Submitted != null) {
                                     foreach (var s in Model.Submitted) {
                                         <tr>
-                                            <td><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {submitId = s.Id})' ;return false; ">@s.AssignmentName</button></td>
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {submitId = @s.Id, classID = s.classId})' ;return false; ">@s.AssignmentName</button></td>
                                             <td>@s.SubmissionDate.ToShortDateString()</td>
                                         </tr>
                                     }
