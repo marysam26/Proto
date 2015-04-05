@@ -76,6 +76,10 @@ namespace Proto2.Areas.Student.Models
 
     public class StoryReviewView
     {
+        // Adding class ID and submission ID for link navigation
+        public Guid classId { get; set; }
+        public string submitId { get; set; }
+        public string AssignmentName { get; set; }
         public int ScorePlot { get; set; }
         public int ScoreCharacter { get; set; }
         public int ScoreSetting { get; set; }
@@ -85,6 +89,7 @@ namespace Proto2.Areas.Student.Models
 
     public class AssignmentsView
     {
+        public String className { get; set; }
         public AssignmentInputView[] Current { get; set; }
         public SubmissionView[] Submitted { get; set; }
     }

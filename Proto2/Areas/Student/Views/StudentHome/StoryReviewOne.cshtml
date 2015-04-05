@@ -11,30 +11,48 @@
         background-repeat: no-repeat;
         background-size: cover">
 
-        @if (!Model.Any())
+    @if (!Model.Any())
         {
-            <div class="jumbotron">
-                <h2>No Reviews</h2>
-            </div>
+        <div class="jumbotron">
+            <h2>No Reviews</h2>
+        </div>
 
         }
-        @if (Model.Any())
+    @if (Model.Any())
         {
-            <center><h2>@ViewBag.Title</h2></center><br>
-            <div class="content-wrapper">
-                @foreach (var review in Model)
-                {
-                    <div class="jumbotron" style="opacity: .90">
-                        <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;@review.ScorePlot
-                        <br><br>
-                        <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>
-                        <b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreSetting<br><br>
-                        <b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.Comments<br><br>
-                    </div>
-                    <p></p>
-                }
+    <p></p>
+    <div class="content-wrapper">
+        <div class="pull-right">
+            <p></p><p></p>
+            <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+
+                <a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new { submitId = @Model.First().submitId, classID = Model.First().classId })' ;return false; ">Submission</a><p></p>
+                <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.First().classId})' ;return false; ">Course home</a><p></p>
             </div>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div>
+            <div class="row">
+                <div class="col-xs-9">
+                    <p></p><p></p>
+                    <center><h2>Review for @Model.First().AssignmentName</h2></center>
+                    @foreach (var review in Model)
+                    {
+                        <div class="jumbotron" style="opacity: .90">
+                            <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;@review.ScorePlot
+                            <br><br>
+                            <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>
+                            <b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreSetting<br><br>
+                            <b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.Comments<br><br>
+                        </div>
+                        <p></p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
         }
 
     </body>

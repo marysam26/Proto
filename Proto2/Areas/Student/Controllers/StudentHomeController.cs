@@ -135,6 +135,10 @@ namespace Proto2.Areas.Student.Controllers
             {
             var assigns = new AssignmentsView();
 
+            ClassModel cm = DocumentSession.Load<ClassModel>("ClassModels/" + classID);
+
+            assigns.className = cm.ClassName;
+
             var assign = DocumentSession.Query<AssignmentInputView>()
                           .Where(a => a.CourseId == classID && a.DueDate > DateTime.Now)
                           .ToList();
@@ -299,11 +303,17 @@ namespace Proto2.Areas.Student.Controllers
             var reviews = DocumentSession.Query<ReviewInputDatabase>()
                             .Where(r => r.SubmitId == submissionId)
                             .ToList(); // This should only be two, reviews should not show up for reviewer after 2 have been completed
+
+            SubmissionView sv = DocumentSession.Load<SubmissionView>(submissionId);
+
             int num = 0;
             foreach (ReviewInputDatabase r in reviews)
             {
                 StoryReviewsList.Add(new StoryReviewView()
                 {
+                    classId = sv.classId,
+                    submitId = r.SubmitId,
+                    AssignmentName = sv.AssignmentName,
                     ScorePlot = r.ScorePlot,
                     ScoreCharacter = r.ScoreCharacter,
                     ScoreSetting = r.ScoreSetting,
@@ -332,10 +342,16 @@ namespace Proto2.Areas.Student.Controllers
                 var reviews = DocumentSession.Query<ReviewInputDatabase>()
                                 .Where(r => r.SubmitId == submissionId)
                                 .ToList(); // This should only be one in this case
+
+                SubmissionView sv = DocumentSession.Load<SubmissionView>(submissionId);
+
                 foreach (ReviewInputDatabase r in reviews)
                 {
                     StoryReviewsList.Add(new StoryReviewView()
                     {
+                        classId = sv.classId,
+                        submitId = r.SubmitId,
+                        AssignmentName = sv.AssignmentName,
                         ScorePlot = r.ScorePlot,
                         ScoreCharacter = r.ScoreCharacter,
                         ScoreSetting = r.ScoreSetting,
