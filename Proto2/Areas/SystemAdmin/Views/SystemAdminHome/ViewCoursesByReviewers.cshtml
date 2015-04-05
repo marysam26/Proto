@@ -1,0 +1,51 @@
+﻿@model List<Proto2.Areas.SystemAdmin.Models.ClassModel>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No courses for this Reviewer. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Teacher</th>
+                        <th>Assignments</th>
+                        @*<th>Remove</th>  To be used during phase two when entire courses can be removed by admin.*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model)
+                    {
+                        <tr>
+                            <td>@course.Title</td>
+                            <td>@course.teacherId</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentsByCourse", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Assignments</button></p></td>
+                            @*<td>Placeholder for removal button, can copy from any other page where removal is implimented. must copy button link and scripts.<td>*@
+                         </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>
