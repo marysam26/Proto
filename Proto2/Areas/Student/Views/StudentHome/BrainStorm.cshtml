@@ -15,9 +15,16 @@
         background-size: cover">
     <center><h2>@Model.AssignmentName</h2></center>
     <p></p>
-    <center><h3>@Model.Description</h3></center>
-    <div class="pull-right">
-        <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("CurrentAssignment", "StudentHome", new { Id = Model.Id })';return false;">&nbsp;Return</button>&nbsp;&nbsp;
+    <div class="content-wrapper">
+        <div class="pull-right">
+            <p></p>
+            <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:35px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+
+                <a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = Model.Id})' ;return false; ">Watch strategy video</a><p></p>
+                <a onclick="location.href='@Url.Action("Write", "StudentHome", new {Id = Model.Id})' ;return false; ">Writing</a><p></p>
+                <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.CourseId})' ;return false; ">Course home</a><p></p>
+            </div>
+        </div>
     </div>
     <div style="text-align:center">
         <br>

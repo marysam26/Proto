@@ -16,6 +16,7 @@ using Raven.Client;
 using Raven.Client.Document;
 using StoryView = Proto2.Areas.SystemAdmin.Models.StoryView;
 using VideoView = Proto2.Areas.SystemAdmin.Models.VideoView;
+using ClassModel = Proto2.Areas.SystemAdmin.Models.ClassModel;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
 {
@@ -35,21 +36,21 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult Students()
         {
             var students = DocumentSession.Query<StudentModel>().ToList();
-            return View(students);
+          return View(students);
         }
 
         public ActionResult Teachers()
         {
             //need to make teacher model to save data
             var teachers = DocumentSession.Query<TeacherModel>().ToList();
-
+         
             return View(teachers);
         }
 
         public ActionResult Reviewers()
         {
             var reviewers = DocumentSession.Query<ReviewerModel>().ToList();
-
+           
             return View(reviewers);
         }
 
@@ -140,7 +141,19 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return View(reviews);
         }
 
-        public ActionResult ViewReviewsByReviewers(Guid id)
+        public ActionResult ViewCoursesByReviewers(string id)
+        {
+            //Lists all of the reviewed by a given reviewer
+            var courses = DocumentSession.Query<ClassModel>()
+                .Where(r => r.Reviewers.Contains(id))
+                .ToList();
+
+
+            return View("ViewCoursesByReviewer",courses);
+
+        }
+
+        public ActionResult ViewReviewsByReviewers(string id)
         {
             var reviews = new List<ReviewsView>()
             {
@@ -208,7 +221,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return RedirectToAction("EditStudentVideos");
         }
 
-        public ActionResult ViewStoriesByStudent(Guid id)
+       /* public ActionResult ViewStoriesByStudent(Guid id)
         {
             var stories = new List<StoryView>()
             {
@@ -225,7 +238,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 }
             };
             return View(stories);
-        }
+        }*/
 
         public ActionResult ConfirmStudent(Guid id)
         {
@@ -312,17 +325,67 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult RemoveStudent(string studentID, string dataID)
         {
+            //TODO: Test to verify reviewer and related feilds are being removed.
             var random = new Random();
             var courses = DocumentSession.Query<ClassModel>()
-                .Where(r => r.Students.Contains(studentID))
-                .ToList();
+                                        .Where(r => r.Students.Contains(studentID))
+                                        .ToList();
             foreach (ClassModel course in courses)
             {
                 course.ConfirmCode = random.Next(1000, 9999).ToString();
             }
+            var idents2 = DocumentSession.Query<SubmissionView>()
+                        .Where(r => r.StudentId == studentID)
+                        .ToList();
+            foreach (SubmissionView sub in idents2)
+            {
+                DocumentSession.Delete(sub);
+            }
+
             DocumentSession.Delete(dataID);
             DocumentSession.SaveChanges();
             return RedirectToAction("Students");
+        }
+
+        public ActionResult RemoveReviewer(string reviewerID)
+        {
+            var random = new Random();
+            var courses = DocumentSession.Query<ClassModel>()
+                            .Where(r => r.Reviewers.Contains(reviewerID))
+                            .ToList();
+            foreach (ClassModel course in courses)
+            {
+                course.ConfirmCode = random.Next(1000, 9999).ToString();
+                course.Reviewers.Remove(reviewerID);
+            }
+            DocumentSession.SaveChanges();
+            var idents = DocumentSession.Query<ProtoUser>()
+                                        .Where(r => r.Id == reviewerID)
+                                        .ToList();
+            foreach (ProtoUser reviewer in idents)
+            {
+                //if the only role the user has is a reviwer than the entire account is removed
+                if (reviewer.Roles.Contains("Proto/Student") || reviewer.Roles.Contains("Proto/Teacher") || reviewer.Roles.Contains("Proto/Admin"))
+                {
+                    Roles.RemoveUserFromRole(reviewerID,"Reviewer");
+                }
+                else
+                {
+                    DocumentSession.Delete(reviewerID);
+                }
+
+            }
+            DocumentSession.SaveChanges();
+            var idents2 = DocumentSession.Query<ReviewerModel>()
+                                    .Where(r => r.Id == reviewerID)
+                                    .ToList();
+            foreach (ReviewerModel rev in idents2)
+            {
+                DocumentSession.Delete(rev);
+            }
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("Reviewers");
         }
 
         public ActionResult AddAssignment()
@@ -351,8 +414,8 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult ViewAssignment()
         {
             var assignment = DocumentSession.Query<AssignmentView>()
-                .Where(r => r.Id != null)
-                .ToList();
+                                   .Where(r => r.Id != null)
+                                   .ToList();
 
             return View(assignment);
         }

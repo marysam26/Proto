@@ -142,10 +142,12 @@ namespace Proto2.Areas.Reviewer.Controllers
            if (Submission.reviewer1 == null)
             {
                 Submission.reviewer1 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
             }
             else
             {
                 Submission.reviewer2 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
             }
 
             DocumentSession.Store(Submission);
@@ -188,7 +190,7 @@ namespace Proto2.Areas.Reviewer.Controllers
                 Comments = input.Comments,
                 ScoreCharacter = input.ScoreCharacter,
                 ScoreSetting = input.ScoreSetting,
-                Username = User.Identity.GetUserId(),
+                Username = User.Identity.GetUserId(),               
             };
 
             DocumentSession.Store(newReview);

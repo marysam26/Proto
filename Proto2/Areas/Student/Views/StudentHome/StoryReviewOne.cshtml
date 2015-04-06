@@ -1,44 +1,44 @@
 ﻿@model List<Proto2.Areas.Student.Models.StoryReviewView>
 
 
-@{
-    ViewBag.Title = "Reviews";
+    @{
+        ViewBag.Title = "Review";
 
-}
+    }
 
-<body style="
+    <body style="
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters3.50.jpg);
         background-repeat: no-repeat;
         background-size: cover">
 
     @if (!Model.Any())
-    {
+        {
         <div class="jumbotron">
             <h2>No Reviews</h2>
         </div>
 
-    }
+        }
     @if (Model.Any())
-    {
-        <p></p>
-        <div class="content-wrapper">
-            <div class="pull-right">
-                <p></p><p></p>
-                <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+        {
+    <p></p>
+    <div class="content-wrapper">
+        <div class="pull-right">
+            <p></p><p></p>
+            <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
 
-                    <a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new { submitId = @Model.First().submitId, classID = Model.First().classId })' ;return false; ">Submission</a><p></p>
-                    <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.First().classId})' ;return false; ">Course home</a><p></p>
-                </div>
+                <a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new { submitId = @Model.First().submitId, classID = Model.First().classId })' ;return false; ">Submission</a><p></p>
+                <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.First().classId})' ;return false; ">Course home</a><p></p>
             </div>
         </div>
+    </div>
     <div class="content-wrapper">
         <div>
             <div class="row">
                 <div class="col-xs-9">
-                    <center><h2>Reviews for @Model.First().AssignmentName</h2></center>
+                    <p></p><p></p>
+                    <center><h2>Review for @Model.First().AssignmentName</h2></center>
                     @foreach (var review in Model)
                     {
-                        <h2>Review @review.reviewNum</h2>
                         <div class="jumbotron" style="opacity: .90">
                             <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;@review.ScorePlot
@@ -53,6 +53,6 @@
             </div>
         </div>
     </div>
-    }
+        }
 
-</body>
+    </body>
