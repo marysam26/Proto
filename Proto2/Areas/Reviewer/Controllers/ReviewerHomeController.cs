@@ -44,7 +44,7 @@ namespace Proto2.Areas.Reviewer.Controllers
               //Where(x => reviewerModel.ClassIDs.Contains<string>(x.Id)).ToList();//broken here!!!!!!!!!!!!!!!!!!!!!!!
             
             var courses = new List<ViewModel>();
-            foreach (string r in reviewerModel.ClassIDs)
+            foreach (var r in reviewerModel.ClassIDs)
             {
                 var course = DocumentSession.Load<ClassModel>(r);  //look through database for every class this reviewer is associated with
                 var ReviewerClass = new ViewModel();
@@ -78,7 +78,7 @@ namespace Proto2.Areas.Reviewer.Controllers
             reviewer.ClassIDs.Add(courses.First().Id);
             
             //add reviewer id to the class model on the database
-            courses.First().Reviewers.Add(User.Identity.GetUserId());
+            courses.First().Reviewers.Add(User.Identity.Name);
 
             DocumentSession.SaveChanges();
 
@@ -95,17 +95,21 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult Train()
         {
-            var trainingVideos = new List<TrainVideoView>()
-            {
-                //default training videos, to be replaced
-                new TrainVideoView(){
-                       Title = "Default Training Video",
-                       Link = "https://www.youtube.com/watch?v=D85NqSrpzew"
+                
+                //The SystemAdmin view is not currently set up to distinguish between the videos.  
+                //It is currently just holding all videos to test my training page.
+            //SystemAdmin needs to be updated to distinguish between other videos
+                var training = DocumentSession.Query<VideoView>().ToList();
+                if (training.Count() != 0)
+                {
+                    return View(training[0]);
                 }
-            };
-            return View(trainingVideos);
+                else
+                {
+                    return View("NoTrainingVideos");
+                }
         }
-
+          
         public ActionResult PastReviewsHome()
         {
             //Default review, will pull reviews from database but will use this as default for now.
@@ -134,12 +138,39 @@ namespace Proto2.Areas.Reviewer.Controllers
         {
             //Return a view to review a story
             var Submission = DocumentSession.Load<SubmissionView>(SubmitId);
+
+           if (Submission.reviewer1 == null)
+            {
+                Submission.reviewer1 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
+            }
+            else
+            {
+                Submission.reviewer2 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
+            }
+
+            DocumentSession.Store(Submission);
+
+            DocumentSession.SaveChanges();
             ReviewInput input = new ReviewInput()
             {
                 AssignmentName = Submission.AssignmentName,
                 AssignmentDescription = Submission.Description,
                 SubmitId = Submission.Id,
-                Story = new HtmlString(Submission.Story)
+                StoryTitle = Submission.StoryTitle,
+                Story = new HtmlString(Submission.Story),
+                KeyList = new List<SelectListItem>()
+                {
+                            new SelectListItem() {Text = "0", Value = "0"},
+                            new SelectListItem() {Text = "1", Value = "1"},
+                            new SelectListItem() {Text = "2", Value = "2"},
+                            new SelectListItem() {Text = "3", Value = "3"},
+                            new SelectListItem() {Text = "4", Value = "4"},
+                            new SelectListItem() {Text = "5", Value = "5"},
+                            new SelectListItem() {Text = "6", Value = "6"},
+                            new SelectListItem() {Text = "7", Value = "7"},
+                 }
             };
             return View(input);
         }
@@ -147,7 +178,7 @@ namespace Proto2.Areas.Reviewer.Controllers
         [HttpPost]
         public ActionResult ReviewStoryView(ReviewInput input)
         {
-            var newReview = new ReviewInput
+            var newReview = new ReviewInputDatabase
 
             {
                 //Information for the new review will be parsed and added to the database here
@@ -159,7 +190,7 @@ namespace Proto2.Areas.Reviewer.Controllers
                 Comments = input.Comments,
                 ScoreCharacter = input.ScoreCharacter,
                 ScoreSetting = input.ScoreSetting,
-                Username = User.Identity.GetUserId(),
+                Username = User.Identity.GetUserId(),               
             };
 
             DocumentSession.Store(newReview);
@@ -174,31 +205,42 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         }
 
-        public ActionResult ReviewStories(string classId)
+        public ActionResult ReviewStories(Guid classId)
         {
             ClassModel course = DocumentSession.Load<ClassModel>(classId);
-
             //Return view of a story for review
 
             var storyList = new List<Reviews>();
-            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.id && s.DueDate < DateTime.Now && s.NumReviews < 2).ToList();
+            var submittedStories = DocumentSession.Query<SubmissionView>().Where(s => s.classId == course.Id && s.DueDate < DateTime.Now && s.NumReviews < 2 ).ToList();
 
-            if (submittedStories.Count() != 0)
+            var userName = User.Identity.GetUserId();
+
+            foreach (SubmissionView s in submittedStories)
             {
-                foreach (SubmissionView s in submittedStories)
+                if (s.reviewer1 != userName && s.reviewer2 != userName)
                 {
                     storyList.Add(new Reviews()
                     {
                         SubmissionId = s.Id,
                         AssignmentName = s.AssignmentName,
                         NumReviews = s.NumReviews,
-                        DatePublished = s.SubmissionDate
-                    });
+                        DatePublished = s.SubmissionDate,
+                        StoryTitle = s.StoryTitle
+                    }); 
                 }
+                else
+                {
+                    return View("NoReviews");
+                }
+                      
             }
             return View(storyList);
         }
 
+        public ActionResult NoReviews()
+        {
+            return View();
+        }
 
        [HttpPost]
         public ActionResult ReviewStory(ReviewInput input)
@@ -297,7 +339,7 @@ namespace Proto2.Areas.Reviewer.Controllers
             var teacher = new TeacherModel()
             {
                 Name = User.Identity.Name,
-                Id = "Teacher/" + User.Identity.GetUserId(),
+                Id = "Teacher/" + User.Identity.Name,
                 Classes = new List<Guid>()
             };
             DocumentSession.Store(teacher);

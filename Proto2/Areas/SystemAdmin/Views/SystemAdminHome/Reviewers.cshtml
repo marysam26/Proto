@@ -21,17 +21,13 @@
     {
 
         <div class="jumbotron" style="opacity: .90">
-            <div class="pull-right">
-                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("EditReviewerVideos", "SystemAdminHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Edit Training Videos</button>
-            </div>
             <h2>@ViewBag.Title</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Courses</th>
                         <th>Reviews</th>
-                        <th>Remove</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,9 +35,8 @@
                     {
                         <tr>
                             <td><strong>@reviewer.Name</strong></td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewCoursesByReviewers", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Courses</button></p></td>
                             <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewsByReviewers", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Reviews</button></p></td>
-                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-reviewerID="@reviewer.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+                            <td><a style="color:red">Delete</a></td>
                         </tr>
 
                     }
@@ -52,45 +47,3 @@
 
     }
 </div>
-
-<div class="modal fade" id="terminateUserModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header alert-danger">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
-            </div>
-            <div class="modal-body">
-                <div class="hide" id="student"></div>
-                <div class="hide" id="dataid"></div>
-                <div class="hide" id="terminateLink">@Url.Action("RemoveReviewer", "SystemAdminHome")</div>
-                <p>
-                    This reviewer permissions will be removed from the user and will no longer be able to review
-                    assignments. If the user only has a reviewer role they will be removed form the system.
-                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
-                </p>
-            </div>
-            <div class="modal-footer">
-                <p class="text-center">
-                    <button type="button" class="btn btn-danger terminate-user">Yes, remove reviewer.</button>
-                </p>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-@section scripts{
-    <script type="text/javascript">
-        $(document).on("click", ".confirm-terminate", function () {
-            var student = $(this).data('reviewerID');
-            $(".modal-body #student").text(student);
-            return false;
-        });
-
-        $(document).on("click", ".terminate-user", function () {
-            var student = $(".modal-body #student").text();
-            var url = $(".modal-body #terminateLink").text();
-            window.location.href = url + '?studentID=' + student
-            return false;
-        });
-    </script>
-}

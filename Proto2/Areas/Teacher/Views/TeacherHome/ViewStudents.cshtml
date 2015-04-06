@@ -29,7 +29,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -38,10 +38,9 @@
                     {
                         <tr>
                             <td>@s.Name</td>
-                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-courseid="@Model.CourseId" data-student="@s.StudentID" data-dataid="@s.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
-                            @*<td><button type="button" class="btn btn-danger" onclick=" location.href='@Url.Action("DeleteStudent", "TeacherHome", new {courseId = Model.CourseId, student = s.StudentID, dataId = s.Id})  '"><i class=" glyphicon "></i>&nbsp;Delete</button>
-                            </td>*@
-                        </tr>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudentAssignments", "TeacherHome", new {studentId = @s.Id})' ;return false; ">Assignments</button></p></td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-courseid="@Model.CourseId" data-dataid="@s.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+                       </tr>
                     }
                 </tbody>
             </table>
@@ -60,7 +59,6 @@
             </div>
             <div class="modal-body">
                 <div class="hide" id="courseid"></div>
-                <div class="hide" id="student"></div>
                 <div class="hide" id="dataid"></div>
                 <div class="hide" id="terminateLink">@Url.Action("DeleteStudent", "TeacherHome")</div>
                 <p>This student will be removed from this course only and will no longer be able to view
@@ -81,21 +79,18 @@
 @section scripts{
     <script type="text/javascript">
         $(document).on("click", ".confirm-terminate", function () {
-            var student = $(this).data('student');
             var courseid = $(this).data('courseid');
             var dataid = $(this).data('dataid');
-            $(".modal-body #student").text(student);
             $(".modal-body #courseid").text(courseid);
             $(".modal-body #dataid").text(dataid);
             return false;
         });
 
         $(document).on("click", ".terminate-user", function () {
-            var student = $(".modal-body #student").text();
             var courseid = $(".modal-body #courseid").text();
             var dataid = $(".modal-body #dataid").text();
             var url = $(".modal-body #terminateLink").text();
-            window.location.href = url + '?courseId=' + courseid + '&student=' + student + '&dataId=' + dataid;
+            window.location.href = url + '?courseId=' + courseid + '&dataId=' + dataid;
             return false;
         });
     </script>

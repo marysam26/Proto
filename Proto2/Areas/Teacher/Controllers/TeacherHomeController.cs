@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.AspNet.Identity;
@@ -11,6 +13,7 @@ using Proto2.Areas.SystemAdmin.Models;
 using Proto2.Areas.Teacher.Models;
 using Proto2.Areas.Teacher.Indexes;
 using System.Linq;
+using Raven.Abstractions.Linq;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
 using StoryView = Proto2.Areas.Teacher.Models.StoryView;
@@ -58,7 +61,7 @@ namespace Proto2.Areas.Teacher.Controllers
             var code = random.Next(1000, 9999);
             var course = new ClassModel()
             {
-                id = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 ClassName = input.ClassName,
                 teacherId = User.Identity.GetUserId(),
                 EndDate = input.EndDate,
@@ -68,7 +71,7 @@ namespace Proto2.Areas.Teacher.Controllers
             };
 
             var teacher = DocumentSession.Load<TeacherModel>("Teacher/" +User.Identity.Name);
-            teacher.Classes.Add(course.id);
+            teacher.Classes.Add(course.Id);
            
             DocumentSession.Store(course);
             DocumentSession.SaveChanges();
@@ -116,13 +119,17 @@ namespace Proto2.Areas.Teacher.Controllers
 
         }
 
-        public ActionResult ViewReviewer(string clasId)
+        public ActionResult ViewReviewer(Guid classID)
         {
-            var reviewers = DocumentSession.Query<ReviewerViewModel>()
+            var reviewerList = DocumentSession.Query<ReviewerModel>()
                 // How to make it pull based on teacherID?
-                            .Where(r => r.classID == User.Identity.GetUserId())
-                            .ToList();
-
+                              .Where(x => x.ClassIDs.Contains<Guid>(classID))// classID associated with the link from the class button
+                              .ToList();
+            var reviewers = new ReviewerViewList()
+            {
+                ReviewerList = reviewerList,
+                CourseId = classID
+            };
             return View(reviewers);
         }
         
@@ -158,7 +165,7 @@ namespace Proto2.Areas.Teacher.Controllers
         }
 
 
-        public ActionResult ViewReviews(Guid studentid)
+        public ActionResult ViewReviews(Guid courseId)
         {
             var model = new List<ReviewView>
             {
@@ -244,12 +251,12 @@ namespace Proto2.Areas.Teacher.Controllers
         }
 
        
-        public ActionResult DeleteStudent(string student, Guid courseId, string dataId)
+        public ActionResult DeleteStudent( Guid courseId, string dataId)
         {
-            var courses = DocumentSession.Query<ClassModel>().FirstOrDefault(x => x.id == courseId);
+            var courses = DocumentSession.Load<ClassModel>(courseId);
             if (courses != null)
             {
-                courses.Students.Remove(student);// = courses.Students.Where(val => val != student);  //change from array to list of students, may need to be revised
+                courses.Students.Remove(dataId);// = courses.Students.Where(val => val != student);  //change from array to list of students, may need to be revised
                 var random = new Random();
                 var code = random.Next(1000, 9999);
                 courses.ConfirmCode = code.ToString();
@@ -264,6 +271,28 @@ namespace Proto2.Areas.Teacher.Controllers
             DocumentSession.SaveChanges();
 
             return RedirectToAction("ViewStudents", new {classid = courseId});
+        }
+
+        public ActionResult DeleteReviewer(Guid courseId, string dataId)
+        {
+            var courses = DocumentSession.Load<ClassModel>(courseId);
+            if (courses != null)
+            {
+                courses.Reviewers.Remove(dataId);// = courses.Students.Where(val => val != student);  //change from array to list of students, may need to be revised
+                var random = new Random();
+                var code = random.Next(1000, 9999);
+                courses.ConfirmCode = code.ToString();
+            }
+
+            var reviewer = DocumentSession.Load<ReviewerModel>(dataId);
+            if (reviewer != null)
+            {
+                reviewer.ClassIDs.Remove(courseId);
+            }
+
+            DocumentSession.SaveChanges();
+
+            return RedirectToAction("ViewReviewer", new { classid = courseId });
         }
 
         public ActionResult RegisterAsReviewer()
@@ -286,15 +315,86 @@ namespace Proto2.Areas.Teacher.Controllers
 
             var r = new ReviewerModel()
             {
-                Id = User.Identity.GetUserName(),
+                Id = User.Identity.Name,
                 Name = User.Identity.Name,
-                ClassIDs = new List<string>(),
+                ClassIDs = new List<Guid>(),
                 Reviews = new List<PastReviewView>()
             };
             DocumentSession.Store(r);
             DocumentSession.SaveChanges();
 
             return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+        }
+
+        public ActionResult ExtendDueDate(DateTime date, Guid id)
+        {
+            ViewData.Add("CurrentDueDate", date);
+            
+            return View(new AssignmentInputView{Id = id, DueDate = date.AddDays(1)});
+        }
+
+        [HttpPost]
+        public ActionResult ExtendDueDate(AssignmentInputView assignmentInputView)
+        {
+            var assign = DocumentSession.Load<AssignmentInputView>(assignmentInputView.Id);
+                assign.DueDate = assignmentInputView.DueDate;
+
+                DocumentSession.SaveChanges();
+                return RedirectToAction("ViewAssignments", new {classId = assign.CourseId});
+        }
+
+        public ActionResult DeleteCourse(Guid courseId)
+        {
+            var classModel = DocumentSession.Load<ClassModel>(courseId);
+            foreach (var s in classModel.Students)
+            {
+                var studentName = DocumentSession.Load<StudentModel>(s);
+                if (studentName != null)
+                {
+                    studentName.ClassIDs = studentName.ClassIDs.Where(val => val != courseId).ToArray();
+                }
+
+            }
+
+            foreach (var r in classModel.Reviewers)
+            {
+                var reviewer = DocumentSession.Load<ReviewerModel>(r);
+                if (reviewer != null)
+                {
+                    reviewer.ClassIDs.Remove(courseId);
+                }
+            }
+            DocumentSession.Delete<ClassModel>(courseId);
+            DocumentSession.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ViewStudentAssignments(string studentid)
+        {
+            var userName = "StudentModels/" + User.Identity.Name;
+      
+                // Get SubmissionView that matches this assignment id and user
+                var prev = DocumentSession.Query<SubmissionView>()
+                        .Where(a => a.StudentId == studentid)
+                        .ToList();
+            return View(prev);
+                                // If first time loading write page, make a StoryInput Model and return it
+               }
+
+        public ActionResult CurrentAssignment(string story)
+        {
+            var assign = DocumentSession.Load<SubmissionView>(story);
+            assign.Story = Regex.Replace(assign.Story, @"<[^>]+>|&nbsp;", "").Trim();
+            return View(assign);
+        }
+
+        public ActionResult CurrentReview(string revId, string assId)
+        {
+            var review = DocumentSession.Query<ReviewInputDatabase>().
+                Where(x => x.SubmitId == assId && x.Username == revId).ToList().FirstOrDefault();
+
+            return View(review);
+
         }
     }
 

@@ -9,27 +9,49 @@
         background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/letters2.50.JPG);
         background-repeat: no-repeat;
         background-size: cover">
-
+    <div class="pull-right">
+        <p></p>
+        <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+            
+            @if (Model.NumReviews > 0)
+            {
+                if (Model.NumReviews == 1)
+                {
+                    <h4>You have 1 review</h4><p></p>
+                    <a onclick="location.href='@Url.Action("StoryReviewOne", "StudentHome", new {submissionId = Model.SubmissionId})' ;return false; ">Read Review</a><p></p>
+                }
+                else if (Model.NumReviews == 2)
+                {
+                    <h4>You have 2 reviews</h4><p></p>
+                    <a onclick="location.href='@Url.Action("StoryReview", "StudentHome", new {submissionId = Model.SubmissionId})' ;return false; ">Read Reviews</a><p></p>
+                }
+            }
+            else
+            {
+                <h4>You have no reviews</h4><p></p>
+            }
+            <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.classId})' ;return false; ">Course home</a><p></p>
+        
+      </div>
+    </div>
     <div class="content-wrapper">
         <div>
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="jumbotron" style="opacity: .90; margin:auto">
+                <div class="col-xs-9"><p></p>
+                    <div class="jumbotron" style="opacity: .90; margin:auto; padding-top:5px">
                         <center><h2>@Model.AssignmentName</h2></center>
-                        <p></p>
-                        <h3>@Model.Description</h3>
+                        <center><h3>@Model.Description</h3></center>
                         <table class="table">
                             <thead>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><p><button type="button" class="btn btn-primary btn-default" onclick="location.href='@Url.Action("StoryReview", "StudentHome", new {submissionId = Model.SubmissionId})' ;return false; ">Read Reviews</button></p></td>
-
+                                    <td><center><h2>@Model.StoryTitle</h2></center></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div>
-                                @Model.Story
+                             <center><div style="width:650px; height:225px; overflow: scroll">@Model.Story</div></center>
                         </div>
                     </div>
                 </div>

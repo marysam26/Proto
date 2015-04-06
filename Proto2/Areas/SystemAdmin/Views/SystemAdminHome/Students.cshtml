@@ -22,9 +22,6 @@
     {
 
         <div class="jumbotron" style="opacity: .90">
-            <div class="pull-right">
-                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("EditStudentVideos", "SystemAdminHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Edit Videos</button>
-            </div>
             <h2>@ViewBag.Title</h2>
             <table class="table">
                 <thead>
@@ -40,7 +37,7 @@
                         <tr>
                             <td><strong>@student.Name</strong></td>
                             <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{id = student.Id} )' ;return false; ">Stories</button></p></td>
-                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-student="@student.StudentID" data-dataid="@student.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal"  data-dataid="@student.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
                         </tr>
 
                     }

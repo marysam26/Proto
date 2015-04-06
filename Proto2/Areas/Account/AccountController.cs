@@ -45,11 +45,6 @@ namespace Proto2.Areas.Account
                 new UserStore<ProtoUser>(() => this.DocumentSession));
         }
 
-        //public AccountController(UserManager<ProtoUser> userManager)
-        //{
-        //    UserManager = userManager;
-        //}
-
         public UserManager<ProtoUser> UserManager { get; private set; }
 
         //
@@ -190,9 +185,10 @@ namespace Proto2.Areas.Account
                         // Make the studen't first model
                         var s = new StudentModel()
                         {
-                            StudentID = "ProtoUsers/" + user.UserName,
+                            Id = "StudentModels/" + model.Email,
                             Name = user.FirstName +" "+ user.LastName,
                             ClassIDs = new List<Guid>().ToArray(),
+                            
                             //Submissions = new List<SubmissionView>().ToArray()
                         };
                         DocumentSession.Store(s);
@@ -217,7 +213,7 @@ namespace Proto2.Areas.Account
                         {
                             Id = user.UserName,
                             Name = user.FirstName+ " " + user.LastName,
-                            ClassIDs = new List<string>(),
+                            ClassIDs = new List<Guid>(),
                             Reviews = new List<PastReviewView>()
                         };
                         DocumentSession.Store(r);

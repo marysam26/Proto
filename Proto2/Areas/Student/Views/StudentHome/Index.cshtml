@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.Teacher.Models.ClassModel>
+﻿@model List<Proto2.Areas.Student.Models.StudentClassModel>
 @{
     ViewBag.Title = "Select a Course To Work In";
 }
@@ -14,7 +14,7 @@
 
     @if (!Model.Any())
     {
-        <div class="jumbotron">
+        <div class="jumbotron" style="opacity: .90;  margin:auto">
             <h2><strong>Please enroll for a course</strong> </h2>
             <p>Once you add courses, you will be able to work on assignments.</p>
             <p>
@@ -24,35 +24,40 @@
 
 
     }
-    @if (Model.Any())
-    {
+        @if (Model.Any())
+        {
 
-        <div>
-            <div class="pull-right">
-                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("StudentAddClass", "StudentHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
-            </div>
-            <h2>@ViewBag.Title</h2>
-            <div class="row">
-                <div class="col-xs-5">
-                    <div class="jumbotron" style="opacity: .90; text-align:center; margin:auto">
-                        <table class="table">
-                            <thead>
-                            </thead>
-                            <tbody>
-                                @foreach (var course in Model)
-                                {
+            <div>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("StudentAddClass", "StudentHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+                </div>
+                <h2>@ViewBag.Title</h2>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="jumbotron" style="opacity: .90;  margin:auto">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td><p><button type="button" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.id})' ;return false; ">@course.ClassName</button></p></td>
+                                        <th>Course</th>
+                                        <th>Instructor</th>
+                                        <th>End Date</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var course in Model)
+                                    {
+                                        <tr>
+                                            <td><p><button type="button" class="btn btn-default btn-sm" onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = course.courseId})' ;return false; ">@course.ClassName</button></p></td>
+                                            <td>@course.TeacherName</td>
+                                            <td>@course.EndDate.ToShortDateString()</td>
+                                        </tr>
 
-                                }
-                            </tbody>
-                        </table>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div> 
+                </div>
             </div>
-        </div>
-
-
-    }
-</div>
+        }
+                </div>

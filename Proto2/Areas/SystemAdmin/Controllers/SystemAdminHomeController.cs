@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Proto2.Areas.Account;
 using Proto2.Areas.Reviewer.Models;
 using Proto2.Areas.Student.Models;
@@ -63,8 +65,49 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return RedirectToAction("Teachers");
         }
 
-        public ActionResult DeleteTeacher(Guid id)
+        public ActionResult DeleteTeacher(string id)
         {
+            //delete proto user, teacher model, courses associated with teacher,
+            //for each course, remove it from associated students and reviewers
+
+            var teacher = DocumentSession.Load<TeacherModel>(id);
+
+            var courses = teacher.Classes;
+            foreach (var c in courses)
+            {
+                var classModel = DocumentSession.Load<ClassModel>(c);
+                foreach (var s in classModel.Students)
+                {
+                    var studentName = DocumentSession.Load<StudentModel>(s);
+                    if (studentName != null)
+                    {
+                        studentName.ClassIDs = studentName.ClassIDs.Where(val => val != c).ToArray();
+                    }
+
+                }
+
+                foreach (var r in classModel.Reviewers)
+                {
+                    var reviewer = DocumentSession.Load<ReviewerModel>(r);
+                    if (reviewer != null)
+                    {
+                        reviewer.ClassIDs.Remove(c);
+                    }
+                }
+                DocumentSession.Delete<ClassModel>(c);
+
+
+            }
+            var teacherId = teacher.Id.Split('/');
+            var protoUser = DocumentSession.Load<ProtoUser>("ProtoUsers/" + teacherId[1]);
+            protoUser.Roles.Remove(ProtoRoles.Teacher);
+            if (!protoUser.Roles.Any())
+            {
+                DocumentSession.Delete(protoUser.Id);
+            }
+            DocumentSession.Delete(id);
+
+            DocumentSession.SaveChanges();
             return RedirectToAction("Teachers");
         }
 
@@ -159,11 +202,16 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         [HttpPost]
         public ActionResult AddReviewerVideo(AddVideoInput input)
         {
+            var splitLink = input.Link.Split('=');
+            var videoID = splitLink[1];
             var video = new VideoView()
             {
-                Link = input.Link,
+                Link = videoID,
                 Title = input.Title
             };
+
+            DocumentSession.Store(video);
+            DocumentSession.SaveChanges();
             var videos = new List<VideoView> {video};
             return View("EditReviewerVideos", videos);
         }
@@ -233,7 +281,11 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult AddPass()
         {
-            var codes = DocumentSession.Query<AddPassView>().Customize(x =>x.WaitForNonStaleResultsAsOf(DateTime.Now.AddSeconds(1))).OrderByDescending(RetrieveDate).ToList();
+            var codes =
+                DocumentSession.Query<AddPassView>()
+                    .Customize(x => x.WaitForNonStaleResultsAsOf(DateTime.Now.AddSeconds(1)))
+                    .OrderByDescending(RetrieveDate)
+                    .ToList();
             return View(codes);
         }
 
@@ -378,17 +430,60 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return input.DateAdded;
         }
 
-        public ActionResult RemoveStory(Guid id)
+        public ActionResult ViewClasess(string teacherid)
         {
+            var teacher = teacherid.Split('/');
+           teacherid = "ProtoUsers/" + teacher[1];
+            var courses = DocumentSession.Query<ClassModel>()
+                // How to make it pull based on teacherID
+                .Where(r => r.teacherId == teacherid)
+                .ToList();
 
-           //TODO: Remove story and associated reviews
-            return View();
+            return View(courses);
         }
 
-        public ActionResult RemoveReview(String id)
+        public ActionResult ViewAssignments(Guid classid)
         {
-            //TODO: Remove review
-            return View();
+            var assignments = DocumentSession.Query<AssignmentInputView>()
+                .Where(x => x.CourseId == classid).ToList();
+            var assignmentList = new AssignmentViewList()
+            {
+                Assignments = assignments,
+                CourseId = classid
+            };
+
+            return View(assignmentList);
+        }
+
+        public ActionResult ViewReviewer(Guid classID)
+        {
+            var reviewerList = DocumentSession.Query<ReviewerModel>()
+                // How to make it pull based on teacherID?
+                .Where(x => x.ClassIDs.Contains<Guid>(classID))
+                // classID associated with the link from the class button
+                .ToList();
+            var reviewers = new ReviewerViewList()
+            {
+                ReviewerList = reviewerList,
+                CourseId = classID
+            };
+            return View(reviewers);
+        }
+
+        public ActionResult ViewStudents(Guid classID)
+        {
+            var studentList = DocumentSession.Query<StudentModel>()
+                // How to make it pull based on teacherID?
+                .Where(x => x.ClassIDs.Contains<Guid>(classID))
+                // classID associated with the link from the class button
+                .ToList();
+            var students = new StudentViewList()
+            {
+                StudentList = studentList,
+                CourseId = classID
+            };
+            return View(students);
+
         }
     }
 }
