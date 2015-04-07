@@ -20,6 +20,7 @@ using ClassModel = Proto2.Areas.SystemAdmin.Models.ClassModel;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
 {
+    [Authorize(Roles=ProtoRoles.SystemAdmin)]
     public class SystemAdminHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
@@ -149,7 +150,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 .ToList();
 
 
-            return View("ViewCoursesByReviewer",courses);
+            return View(courses);
 
         }
 
