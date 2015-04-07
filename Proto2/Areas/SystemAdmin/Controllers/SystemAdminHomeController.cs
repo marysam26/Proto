@@ -153,28 +153,11 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         }
 
-        public ActionResult ViewReviewsByReviewers(string id)
+        public ActionResult ViewReviewsByReviewers(string rid)
         {
-            var reviews = new List<ReviewsView>()
-            {
-                new ReviewsView()
-                {
-                    Title = "The Best Story Ever",
-                    ReviewOne = new StoryReviewsView()
-                    {
-                        ScorePlot = 5,
-                        ScoreCharacter = 4,
-                        ScoreSetting = 5,
-                        Comments = "Develop a stronger plot and invest more thought to character development."
-                    },
-                    //ReviewTwo = new StoryReviewView(){
-                    //    ScorePlot = 6,
-                    //    ScoreCharacter = 4,
-                    //    ScoreSetting = 6,
-                    //    Comments = "Further develop the characters of your story."
-                    //}
-                }
-            };
+            var reviews = DocumentSession.Query<ReviewView>()
+                                         .Where(r => r.ReviewerName == rid)
+                                         .ToList();
             return View(reviews);
         }
 
@@ -216,10 +199,10 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return RedirectToAction("EditStudentVideos");
         }
 
-        public ActionResult ViewStoriesByStudent(string id)
+        public ActionResult ViewStoriesByStudent(string sid)
         {
-            var stories = DocumentSession.Query<SubmissionView>()
-                                        .Where(r => r.StudentId == id)
+            var stories = DocumentSession.Query<Proto2.Areas.Student.Models.SubmissionView>()
+                                        .Where(r => r.StudentId == sid)
                                         .ToList();
             return View(stories);
         }

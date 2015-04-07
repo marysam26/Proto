@@ -36,7 +36,7 @@
                     {
                         <tr>
                             <td><strong>@student.Name</strong></td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{id = student.Id} )' ;return false; ">Stories</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{sid = student.Id} )' ;return false; ">Stories</button></p></td>
                             <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal"  data-dataid="@student.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
                         </tr>
 

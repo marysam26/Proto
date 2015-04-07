@@ -33,7 +33,7 @@
                     @foreach (var reviewer in Model)
                     {
                         <tr>
-                            <td><strong>@reviewer.Name</strong></td> <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewsByReviewers", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Reviews</button></p></td>
+                            <td><strong>@reviewer.Name</strong></td> <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewsByReviewers", "SystemAdminHome", new{rid = reviewer.Id} )' ;return false; ">Reviews</button></p></td>
                             <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-code="@reviewer.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>>
                         </tr>
 
