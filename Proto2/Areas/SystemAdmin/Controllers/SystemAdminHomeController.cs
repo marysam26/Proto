@@ -435,7 +435,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         {
             var teacher = teacherid.Split('/');
            teacherid = "ProtoUsers/" + teacher[1];
-            var courses = DocumentSession.Query<ClassModel>()
+            var courses = DocumentSession.Query<Teacher.Models.ClassModel>()
                 // How to make it pull based on teacherID
                 .Where(r => r.teacherId == teacherid)
                 .ToList();
