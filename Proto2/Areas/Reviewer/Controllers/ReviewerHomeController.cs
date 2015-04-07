@@ -13,9 +13,11 @@ using Microsoft.AspNet.Identity;
 using Proto2.Areas.Teacher.Models;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
+using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
+    [Authorize(Roles=ProtoRoles.Reviewer)]
     public class ReviewerHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
@@ -36,6 +38,7 @@ namespace Proto2.Areas.Reviewer.Controllers
         //}
 
         public UserManager<ProtoUser> UserManager { get; private set; }
+
         public ActionResult Index()
         {
           

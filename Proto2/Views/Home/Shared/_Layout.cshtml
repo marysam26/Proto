@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Proto2.Areas.Account
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,10 +26,22 @@
                   <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                   @if (Request.IsAuthenticated)
                   {
-                      <li>@Html.ActionLink("Teacher", "Teacher", "Home")</li>
-                      <li>@Html.ActionLink("Reviewer", "Reviewer", "Home")</li>
-                      <li>@Html.ActionLink("Student", "Student", "Home")</li>
-                      <li>@Html.ActionLink("System Admin", "SystemAdmin", "Home")</li>
+                      if (User.IsInRole(ProtoRoles.Teacher))
+                      {
+                          <li>@Html.ActionLink("Teacher", "Teacher", "Home")</li>
+                      }
+                      if (User.IsInRole(ProtoRoles.Reviewer))
+                      {
+                          <li>@Html.ActionLink("Reviewer", "Reviewer", "Home")</li>
+                      }
+                      if (User.IsInRole(ProtoRoles.Student))
+                      {
+                          <li>@Html.ActionLink("Student", "Student", "Home")</li>
+                      }
+                      if (User.IsInRole(ProtoRoles.SystemAdmin))
+                      {
+                          <li>@Html.ActionLink("System Admin", "SystemAdmin", "Home")</li>
+                      }
                   }
                 </ul>
                 @Html.Partial("_LoginPartial")

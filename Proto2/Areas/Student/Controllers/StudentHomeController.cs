@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Proto2.Areas.Account;
 using Raven.Client;
 using Microsoft.AspNet.Identity;
 using Raven.Client.Document;
@@ -14,6 +15,7 @@ using RavenDB.AspNet.Identity;
 
 namespace Proto2.Areas.Student.Controllers
 {
+    [Authorize(Roles=ProtoRoles.Student)]
     public class StudentHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry

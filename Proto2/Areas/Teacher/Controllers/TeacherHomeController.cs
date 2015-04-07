@@ -16,6 +16,7 @@ using System.Linq;
 using Raven.Abstractions.Linq;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
+using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
 using StoryView = Proto2.Areas.Teacher.Models.StoryView;
 
 
@@ -32,13 +33,11 @@ namespace Proto2.Areas.Teacher.Controllers
                 new UserStore<ProtoUser>(() => this.DocumentSession));
         }
 
-        //public AccountController(UserManager<ProtoUser> userManager)
-        //{
-        //    UserManager = userManager;
-        //}
 
         public UserManager<ProtoUser> UserManager { get; private set; }
         // This is also the classView, the teacher home defaults to viewing their classes
+        
+        [Authorize(Roles=ProtoRoles.Teacher)]
         public ActionResult Index()
         {
             var courses = DocumentSession.Query<ClassModel>()
@@ -49,12 +48,15 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(courses);
         }
 
+                [Authorize(Roles = ProtoRoles.Teacher)]
+
         public ActionResult AddClass()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult AddClass(AddClassInput input)
         {
             var random = new Random();
@@ -104,6 +106,7 @@ namespace Proto2.Areas.Teacher.Controllers
          }*/
 
         //TODO:  Pulling data from the database using fake data until the class view for teacher is implemented
+        [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewStudents(Guid classID)
         {
             var studentList = DocumentSession.Query<StudentModel>()
@@ -118,7 +121,8 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(students);
 
         }
-
+        
+        [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewReviewer(Guid classID)
         {
             var reviewerList = DocumentSession.Query<ReviewerModel>()
@@ -132,7 +136,8 @@ namespace Proto2.Areas.Teacher.Controllers
             };
             return View(reviewers);
         }
-        
+
+       [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewClasses(string teacherId)
         {
             var courses = DocumentSession.Query<ClassModel, ViewStudentsIndex>()
@@ -144,6 +149,7 @@ namespace Proto2.Areas.Teacher.Controllers
 
         }
 
+       [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewStory(Guid studentId)
         {
             var model = new List<StoryView>
@@ -164,7 +170,7 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(model);
         }
 
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewReviews(Guid courseId)
         {
             var model = new List<ReviewView>
@@ -182,6 +188,7 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(model);
         }
 
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewAssignments(Guid classid)
         {
             var assignments = DocumentSession.Query<AssignmentInputView>()
@@ -195,6 +202,7 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(assignmentList);
         }
 
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewAddAssignments(Guid classid)
         {
            var assignments = DocumentSession.Query<AssignmentView>().ToList();
@@ -208,23 +216,27 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(assignmentAdd);
         }
 
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewAssignmentDetails(Guid classid)
         {
             throw new NotImplementedException();
         }
 
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult AddAssignment(AssignmentAddInput course)
         {
             return View();
         }
 
-    
 
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewAssignmentDetailed(AssignmentView asgn)
         {
 
             return View(asgn);
         }
+
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewAddAssignmentDetailed(Guid asgnId, Guid courseId)
         {
             var asgn = DocumentSession.Load<AssignmentView>(asgnId);
@@ -241,6 +253,7 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(addAsgn);
         }
         [HttpPost]
+        [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewAddAssignmentDetailed(AssignmentInputView asgn)
         {
             
@@ -250,7 +263,7 @@ namespace Proto2.Areas.Teacher.Controllers
             return RedirectToAction("ViewAssignments", new {classid = asgn.CourseId});
         }
 
-       
+             [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult DeleteStudent( Guid courseId, string dataId)
         {
             var courses = DocumentSession.Load<ClassModel>(courseId);
@@ -273,6 +286,7 @@ namespace Proto2.Areas.Teacher.Controllers
             return RedirectToAction("ViewStudents", new {classid = courseId});
         }
 
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult DeleteReviewer(Guid courseId, string dataId)
         {
             var courses = DocumentSession.Load<ClassModel>(courseId);
@@ -294,7 +308,7 @@ namespace Proto2.Areas.Teacher.Controllers
 
             return RedirectToAction("ViewReviewer", new { classid = courseId });
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult RegisterAsReviewer()
         {
             if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Reviewer))
@@ -308,7 +322,7 @@ namespace Proto2.Areas.Teacher.Controllers
                 return View();
             }
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult RegisterTeacherAsReviewer()
         {
             UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Reviewer);
@@ -325,14 +339,14 @@ namespace Proto2.Areas.Teacher.Controllers
 
             return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ExtendDueDate(DateTime date, Guid id)
         {
             ViewData.Add("CurrentDueDate", date);
             
             return View(new AssignmentInputView{Id = id, DueDate = date.AddDays(1)});
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         [HttpPost]
         public ActionResult ExtendDueDate(AssignmentInputView assignmentInputView)
         {
@@ -342,7 +356,7 @@ namespace Proto2.Areas.Teacher.Controllers
                 DocumentSession.SaveChanges();
                 return RedirectToAction("ViewAssignments", new {classId = assign.CourseId});
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult DeleteCourse(Guid courseId)
         {
             var classModel = DocumentSession.Load<ClassModel>(courseId);
@@ -368,7 +382,7 @@ namespace Proto2.Areas.Teacher.Controllers
             DocumentSession.SaveChanges();
             return RedirectToAction("Index");
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult ViewStudentAssignments(string studentid)
         {
             var userName = "StudentModels/" + User.Identity.Name;
@@ -380,14 +394,14 @@ namespace Proto2.Areas.Teacher.Controllers
             return View(prev);
                                 // If first time loading write page, make a StoryInput Model and return it
                }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult CurrentAssignment(string story)
         {
             var assign = DocumentSession.Load<SubmissionView>(story);
             assign.Story = Regex.Replace(assign.Story, @"<[^>]+>|&nbsp;", "").Trim();
             return View(assign);
         }
-
+              [Authorize(Roles = ProtoRoles.Teacher)]
         public ActionResult CurrentReview(string revId, string assId)
         {
             var review = DocumentSession.Query<ReviewInputDatabase>().

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +10,21 @@ namespace Proto2.Areas.SystemAdmin.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public bool Confirmed { get; set; }
+    }
+
+    public class ClassModel
+    {
+        public string Id { get; set; }
+        public string teacherId { get; set; }
+        public Guid id { get; set; }
+        public string ConfirmCode { get; set; }
+        public DateTime EndDate { get; set; }
+        //List of students
+        public List<string> Students { get; set; }
+        // List of reviewers
+        // When a reviewer agrees to review for this class it adds them to this list
+        public List<string> Reviewers { get; set; }
+        public string ClassName { get; set; }
     }
 
     public class StudentView
@@ -56,9 +72,9 @@ namespace Proto2.Areas.SystemAdmin.Models
     public class StoryView
     {
         //TODO: create a model to hold the information necessary for displaying stories
-        public string Author { get; set; }
-        public StoriesView StoryOne { get; set; }
-        public StoriesView StoryTwo { get; set; }
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+        public string Stories { get; set; }
     }
 
     public class StoriesView
