@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.SystemAdmin.Models.StoryView>
+﻿@model List<Proto2.Areas.SystemAdmin.Models.SubmissionView>
 
 @{
     ViewBag.Title = "Student Stories";
@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Stories</th>
+                        <th>Story</th>
                         <th>Number of Reviews</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -37,8 +37,28 @@
                     @foreach (var Story in Model)
                     {
                         <tr>
-                            <td>@Story.Author</td>
-                            <td><a href="~/SystemAdmin/SystemAdminHome/StoryView">Story 1</a></td>
+                            <td>@Story.StoryTitle</td>
+                            <td>@Story.Story</td>
+                            <td>@Story.NumReviews</td>
+                            @if (Story.reviewer1 != null)
+                            {
+                                <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "SystemAdminHome", new {revId = Story.reviewer1, assId = Story.Id})' ;return false; ">View</button></td>
+                            }
+
+                            else
+                            {
+                                <td><i>none</i></td>
+                            }
+                            @if (Story.reviewer2 != null)
+                            {
+                                <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "systemAdminHome", new {revId = Story.reviewer2, assId = Story.Id})' ;return false; ">View</button></td>
+                            }
+
+                            else
+                            {
+                                <td><i>none</i></td>
+                            }
+                            
                         </tr>
 
                     }
