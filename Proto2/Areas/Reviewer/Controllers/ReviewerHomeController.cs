@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Proto2.Areas.Teacher.Models;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
+using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
