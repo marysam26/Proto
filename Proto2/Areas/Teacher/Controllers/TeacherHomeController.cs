@@ -16,6 +16,7 @@ using System.Linq;
 using Raven.Abstractions.Linq;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
+using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
 using StoryView = Proto2.Areas.Teacher.Models.StoryView;
 
 
