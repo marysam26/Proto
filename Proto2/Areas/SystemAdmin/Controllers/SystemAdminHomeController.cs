@@ -17,16 +17,16 @@ using Raven.Client.Document;
 using StoryView = Proto2.Areas.SystemAdmin.Models.StoryView;
 using VideoView = Proto2.Areas.SystemAdmin.Models.VideoView;
 using ClassModel = Proto2.Areas.SystemAdmin.Models.ClassModel;
+using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
 {
-    [Authorize(Roles=ProtoRoles.SystemAdmin)]
+    //[Authorize(Roles=ProtoRoles.SystemAdmin)]
     public class SystemAdminHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
         public IDocumentSession DocumentSession { get; set; }
 
-        //TODO: Feel free to add 'fake data' anywhere an empty
         //list is being returned see Students below for an example
         //[Authorize(Roles = ProtoRoles.SystemAdmin)]
         public ActionResult Index()
@@ -42,7 +42,6 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult Teachers()
         {
-            //need to make teacher model to save data
             var teachers = DocumentSession.Query<TeacherModel>().ToList();
          
             return View(teachers);
@@ -154,37 +153,15 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         }
 
-        public ActionResult ViewReviewsByReviewers(string id)
+        public ActionResult ViewReviewsByReviewers(string rid)
         {
-            var reviews = new List<ReviewsView>()
-            {
-                new ReviewsView()
-                {
-                    Title = "The Best Story Ever",
-                    ReviewOne = new StoryReviewsView()
-                    {
-                        ScorePlot = 5,
-                        ScoreCharacter = 4,
-                        ScoreSetting = 5,
-                        Comments = "Develop a stronger plot and invest more thought to character development."
-                    },
-                    //ReviewTwo = new StoryReviewView(){
-                    //    ScorePlot = 6,
-                    //    ScoreCharacter = 4,
-                    //    ScoreSetting = 6,
-                    //    Comments = "Further develop the characters of your story."
-                    //}
-                }
-            };
+            var reviews = DocumentSession.Query<ReviewView>()
+                                         .Where(r => r.ReviewerName == rid)
+                                         .ToList();
             return View(reviews);
         }
 
         public ActionResult ConfirmReviewer(Guid id)
-        {
-            return RedirectToAction("Reviewers");
-        }
-
-        public ActionResult DeleteReviewer(Guid id)
         {
             return RedirectToAction("Reviewers");
         }
@@ -222,34 +199,19 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return RedirectToAction("EditStudentVideos");
         }
 
-       /* public ActionResult ViewStoriesByStudent(Guid id)
+        public ActionResult ViewStoriesByStudent(string sid)
         {
-            var stories = new List<StoryView>()
-            {
-                new StoryView()
-                {
-                    Author = "Alan Turing",
-                    StoryOne = new StoriesView()
-                    {
-                        Title = "The Magnificent Unicorn",
-                        Story =
-                            "The magnificent unicorn (TMU) is the rarest of all creatures on earth. This beast stands over 6 feet tall, has a mane of rainbow colored hair, eyes that shine like two amethysts, and a horn of pure gold. TMU has been spotted in regions of the world such as Atlantis, The North Pole, and Imagination Land.",
-                        Author = "Unicorn Cat"
-                    }
-                }
-            };
+            var stories = DocumentSession.Query<Proto2.Areas.Student.Models.SubmissionView>()
+                                        .Where(r => r.StudentId == sid)
+                                        .ToList();
             return View(stories);
-        }*/
+        }
 
         public ActionResult ConfirmStudent(Guid id)
         {
             return RedirectToAction("Students");
         }
 
-        public ActionResult DeleteStudent(Guid id)
-        {
-            return RedirectToAction("Students");
-        }
 
         public ActionResult EditStudentVideos()
         {
@@ -326,7 +288,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult RemoveStudent(string studentID, string dataID)
         {
-            //TODO: Test to verify reviewer and related feilds are being removed.
+            //Remove student from all courses enrolled, all submissions, and the student identity
             var random = new Random();
             var courses = DocumentSession.Query<ClassModel>()
                                         .Where(r => r.Students.Contains(studentID))
@@ -443,6 +405,15 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return View(courses);
         }
 
+        public ActionResult ViewAssignmentsByCourse(List<StudentView> students)
+        {
+            //lists the assignments defined by a given course
+            var studentlist = DocumentSession.Query<StudentView>()
+                                               .Where(r => students.Contains(r))
+                                               .ToList();
+            return View();
+        }
+
         public ActionResult ViewAssignments(Guid classid)
         {
             var assignments = DocumentSession.Query<AssignmentInputView>()
@@ -484,6 +455,15 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 CourseId = classID
             };
             return View(students);
+
+        }
+
+        public ActionResult CurrentReview(string revId, string assId)
+        {
+            var review = DocumentSession.Query<ReviewInputDatabase>().
+                Where(x => x.SubmitId == assId && x.Username == revId).ToList().FirstOrDefault();
+
+            return View(review);
 
         }
     }

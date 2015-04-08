@@ -126,5 +126,26 @@ namespace Proto2.Areas.SystemAdmin.Models
         public string Link { get; set; }
     }
 
+    public class SubmissionView
+    {
+        public string Id { get; set; }
+        public Guid classId { get; set; }
+        public Guid AssignmentId { get; set; }
+        public DateTime DueDate { get; set; }
+        public string StudentId { get; set; }
+        public string AssignmentName { get; set; }
+        public string Description { get; set; }
+        public DateTime SubmissionDate { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The story title is required, but may be changed at any time")]
+        [Display(Name = "Story Title (Required)")]
+        public string StoryTitle { get; set; }
+
+        public string Story { get; set; }
+        public int NumReviews { get; set; }
+        public string reviewer1 { get; set; }
+        public string reviewer2 { get; set; }
+    }
 
 }

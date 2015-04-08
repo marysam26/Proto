@@ -5,7 +5,7 @@
 }
 
 <body style="
-        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-image: url(/Images/grey.jpg);
         background-repeat: no-repeat;
         background-size: cover">
 </body>
@@ -35,9 +35,9 @@
                     @foreach (var course in Model)
                     {
                         <tr>
-                            <td>@course.Title</td>
+                            <td>@course.ClassName</td>
                             <td>@course.teacherId</td>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentsByCourse", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Assignments</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentsByCourse", "SystemAdminHome", new{students = course.Students} )' ;return false; ">Assignments</button></p></td>
                             @*<td>Placeholder for removal button, can copy from any other page where removal is implimented. must copy button link and scripts.<td>*@
                          </tr>
 
