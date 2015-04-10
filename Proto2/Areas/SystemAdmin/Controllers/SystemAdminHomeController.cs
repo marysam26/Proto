@@ -16,7 +16,7 @@ using Raven.Client;
 using Raven.Client.Document;
 using StoryView = Proto2.Areas.SystemAdmin.Models.StoryView;
 using VideoView = Proto2.Areas.SystemAdmin.Models.VideoView;
-using ClassModel = Proto2.Areas.SystemAdmin.Models.ClassModel;
+using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
 using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
 
 namespace Proto2.Areas.SystemAdmin.Controllers
@@ -75,7 +75,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             var courses = teacher.Classes;
             foreach (var c in courses)
             {
-                var classModel = DocumentSession.Load<ClassModel>(c);
+                var classModel = DocumentSession.Load<ClassModel>("ClassModels/" + c.ToString());
                 foreach (var s in classModel.Students)
                 {
                     var studentName = DocumentSession.Load<StudentModel>(s);
