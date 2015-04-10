@@ -22,7 +22,7 @@ namespace Proto2.DependencyResolution
 
         private IDocumentStore CreateDocumentStore()
         {
-            var store = new DocumentStore {ConnectionStringName = "RavenHQ"}.Initialize();
+            var store = new DocumentStore {ConnectionStringName = "RavenDB"}.Initialize();
             return store;
         }
     }

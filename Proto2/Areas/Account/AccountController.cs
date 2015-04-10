@@ -471,7 +471,7 @@ namespace Proto2.Areas.Account
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Account", new {area = "Account"});
             }
 
             // Sign in the user with this external login provider if the user already has a login

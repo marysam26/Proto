@@ -351,7 +351,10 @@ namespace Proto2.Areas.Reviewer.Controllers
             UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Teacher);
             DocumentSession.Delete<AddPassView>(input.TeacherCode);
             DocumentSession.SaveChanges();
-            
+            while (!User.IsInRole(ProtoRoles.Teacher))
+            {
+            }
+
             return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
         }
     }

@@ -337,6 +337,7 @@ namespace Proto2.Areas.Teacher.Controllers
             };
             DocumentSession.Store(r);
             DocumentSession.SaveChanges();
+            while (!User.IsInRole(ProtoRoles.Reviewer)) { }
 
             return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
         }
