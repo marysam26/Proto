@@ -14,7 +14,8 @@ using Proto2.Areas.Teacher.Models;
 using RavenDB.AspNet.Identity;
 using Proto2.Areas.Student.Models;
 using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
-using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
+//using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
+using SubmissionView = Proto2.Areas.Student.Models.SubmissionView;
 
 namespace Proto2.Areas.Reviewer.Controllers
 {
