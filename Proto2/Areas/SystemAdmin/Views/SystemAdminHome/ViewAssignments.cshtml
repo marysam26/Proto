@@ -19,18 +19,12 @@
     {
         <div class="jumbotron" style="opacity: .90">
             <h2>No Assignments Added</h2>
-            <p>
-                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("ViewAddAssignments", "TeacherHome", new {classId = Model.CourseId})' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Assignment</button>
-            </p>
         </div>
 
     }
     @if (Model.Assignments.Any())
     {
         <div>
-        <div class="pull-right">
-            <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("ViewAddAssignments", "TeacherHome", new {classId = Model.CourseId})' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Assignment</button>
-        </div>
         <h2>@ViewBag.Title</h2>
         <div class="jumbotron" style="opacity: .90">
             <table class="table">
