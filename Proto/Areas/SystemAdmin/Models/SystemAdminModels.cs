@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.SystemAdmin.Models
+namespace WriteItUp.Areas.SystemAdmin.Models
 {
     public class TeacherView
     {

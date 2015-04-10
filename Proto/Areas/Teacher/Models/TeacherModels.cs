@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Teacher.Models
+namespace WriteItUp.Areas.Teacher.Models
 {
  
     public class StudentViewModel

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Proto2.Areas.Reviewer.Models
+namespace WriteItUp2.Areas.Reviewer.Models
 {
     public class ReviewerModel
     {

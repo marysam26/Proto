@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Proto.Objects
+namespace WriteItUp.Objects
 {
     public class Review
     {

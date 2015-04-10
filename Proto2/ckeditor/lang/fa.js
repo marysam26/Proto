@@ -72,7 +72,7 @@ CKEDITOR.lang['fa'] =
 	{
 		browseServer	: 'فهرستنمایی سرور',
 		url				: 'URL',
-		protocol		: 'پروتکل',
+		WriteItUpcol		: 'پروتکل',
 		upload			: 'انتقال به سرور',
 		uploadSubmit	: 'به سرور بفرست',
 		image			: 'تصویر',

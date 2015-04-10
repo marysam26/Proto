@@ -3,7 +3,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-namespace Proto2
+namespace WriteItUp2
 {
     public partial class Startup
     {

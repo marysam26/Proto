@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Proto2.Startup))]
-namespace Proto2
+[assembly: OwinStartupAttribute(typeof(WriteItUp2.Startup))]
+namespace WriteItUp2
 {
     public partial class Startup
     {

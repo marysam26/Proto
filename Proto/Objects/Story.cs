@@ -1,4 +1,4 @@
-﻿namespace Proto.Objects
+﻿namespace WriteItUp.Objects
 {
     public class Story
     {

@@ -4,23 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas;
-using Proto2.Areas.Account;
+using WriteItUp2.Areas;
+using WriteItUp2.Areas.Account;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
 
-namespace Proto2.Controllers
+namespace WriteItUp2.Controllers
 {
     public class HomeController : Controller
     {
         public IDocumentSession DocumentSession { get; set; }
            public HomeController()
         {
-            this.UserManager = new UserManager<ProtoUser>(
-                new UserStore<ProtoUser>(() => this.DocumentSession));
+            this.UserManager = new UserManager<WriteItUpUser>(
+                new UserStore<WriteItUpUser>(() => this.DocumentSession));
         }
 
-        public UserManager<ProtoUser> UserManager { get; private set; }
+        public UserManager<WriteItUpUser> UserManager { get; private set; }
         public ActionResult Index()
         {
             return View();
@@ -42,7 +42,7 @@ namespace Proto2.Controllers
 
         public ActionResult Teacher()
         {
-            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Teacher))
+            if (UserManager.IsInRole(User.Identity.GetUserId(), WriteItUpRoles.Teacher))
             {
                 return RedirectToAction("Index", "TeacherHome", new {area = "Teacher"});
             }
@@ -56,7 +56,7 @@ namespace Proto2.Controllers
 
         public ActionResult Reviewer()
         {
-            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Reviewer))
+            if (UserManager.IsInRole(User.Identity.GetUserId(), WriteItUpRoles.Reviewer))
             {
                 return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
             }
@@ -73,7 +73,7 @@ namespace Proto2.Controllers
 
         public ActionResult Student()
         {
-            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Student))
+            if (UserManager.IsInRole(User.Identity.GetUserId(), WriteItUpRoles.Student))
             {
                 return RedirectToAction("Index", "StudentHome", new { area = "Student" });
             }
@@ -91,7 +91,7 @@ namespace Proto2.Controllers
         public ActionResult SystemAdmin()
         {
             //FOR NOW everyone can access the system admin page just for ease of use
-            //if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.SystemAdmin))
+            //if (UserManager.IsInRole(User.Identity.GetUserId(), WriteItUpRoles.SystemAdmin))
             //{
                 return RedirectToAction("Index", "SystemAdminHome", new { area = "SystemAdmin" });
             //}

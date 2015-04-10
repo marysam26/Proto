@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using Proto.Models;
+using WriteItUp.Models;
 
-namespace Proto
+namespace WriteItUp
 {
     public static class AuthConfig
     {

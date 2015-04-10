@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.Student.Models;
+using WriteItUp.Areas.Student.Models;
 
-namespace Proto.Areas.Student.Controllers
+namespace WriteItUp.Areas.Student.Controllers
 {
     public class StudentHomeController : Controller
     {

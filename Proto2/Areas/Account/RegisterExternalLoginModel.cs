@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Proto2.Areas.Account
+namespace WriteItUp2.Areas.Account
 {
     public class RegisterExternalLoginModel
     {

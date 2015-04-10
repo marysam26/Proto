@@ -234,15 +234,15 @@ window.Modernizr = (function( window, document, undefined ) {
     }
     else {
       hasOwnProp = function (object, property) { /* yes, this can give false positives/negatives, but most of the time we don't care about those */
-        return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
+        return ((property in object) && is(object.constructor.WriteItUptype[property], 'undefined'));
       };
     }
 
     // Adapted from ES5-shim https://github.com/kriskowal/es5-shim/blob/master/es5-shim.js
     // es5.github.com/#x15.3.4.5
 
-    if (!Function.prototype.bind) {
-      Function.prototype.bind = function bind(that) {
+    if (!Function.WriteItUptype.bind) {
+      Function.WriteItUptype.bind = function bind(that) {
 
         var target = this;
 
@@ -256,7 +256,7 @@ window.Modernizr = (function( window, document, undefined ) {
             if (this instanceof bound) {
 
               var F = function(){};
-              F.prototype = target.prototype;
+              F.WriteItUptype = target.WriteItUptype;
               var self = new F();
 
               var result = target.apply(

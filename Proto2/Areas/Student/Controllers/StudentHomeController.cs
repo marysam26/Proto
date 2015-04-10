@@ -3,19 +3,19 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto2.Areas.Account;
+using WriteItUp2.Areas.Account;
 using Raven.Client;
 using Microsoft.AspNet.Identity;
 using Raven.Client.Document;
-using Proto2.Areas.Teacher.Models;
-using Proto2.Areas.Reviewer.Models;
-using Proto2.Areas.Student.Indexes;
-using Proto2.Areas.Student.Models;
+using WriteItUp2.Areas.Teacher.Models;
+using WriteItUp2.Areas.Reviewer.Models;
+using WriteItUp2.Areas.Student.Indexes;
+using WriteItUp2.Areas.Student.Models;
 using RavenDB.AspNet.Identity;
 
-namespace Proto2.Areas.Student.Controllers
+namespace WriteItUp2.Areas.Student.Controllers
 {
-    [Authorize(Roles=ProtoRoles.Student)]
+    [Authorize(Roles=WriteItUpRoles.Student)]
     public class StudentHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
@@ -24,16 +24,16 @@ namespace Proto2.Areas.Student.Controllers
 
            public StudentHomeController()
            {
-            this.UserManager = new UserManager<ProtoUser>(
-                new UserStore<ProtoUser>(() => this.DocumentSession));
+            this.UserManager = new UserManager<WriteItUpUser>(
+                new UserStore<WriteItUpUser>(() => this.DocumentSession));
         }
 
-        //public AccountController(UserManager<ProtoUser> userManager)
+        //public AccountController(UserManager<WriteItUpUser> userManager)
         //{
         //    UserManager = userManager;
         //}
 
-        public UserManager<ProtoUser> UserManager { get; private set; }
+        public UserManager<WriteItUpUser> UserManager { get; private set; }
         //
         // GET: /Student/
         public ActionResult Index()
@@ -52,7 +52,7 @@ namespace Proto2.Areas.Student.Controllers
                     {
                         if (courses[i].Students.Contains(userName))
                         {
-                            var teacher = DocumentSession.Load<ProtoUser>(courses[i].teacherId);
+                            var teacher = DocumentSession.Load<WriteItUpUser>(courses[i].teacherId);
                             StudentClassModel sClass = new StudentClassModel()
                             {
                                 TeacherName = teacher.FirstName + " " + teacher.LastName,

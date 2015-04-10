@@ -16,7 +16,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-namespace Proto2.DependencyResolution {
+namespace WriteItUp2.DependencyResolution {
     using StructureMap;
 	
     public static class IoC {

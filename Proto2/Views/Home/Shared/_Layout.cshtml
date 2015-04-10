@@ -1,10 +1,10 @@
-﻿@using Proto2.Areas.Account
+﻿@using WriteItUp2.Areas.Account
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Proto</title>
+    <title>@ViewBag.Title - WriteItUp</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Proto", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("WriteItUp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -26,19 +26,19 @@
                   <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                   @if (Request.IsAuthenticated)
                   {
-                      if (User.IsInRole(ProtoRoles.Teacher))
+                      if (User.IsInRole(WriteItUpRoles.Teacher))
                       {
                           <li>@Html.ActionLink("Teacher", "Teacher", "Home")</li>
                       }
-                      if (User.IsInRole(ProtoRoles.Reviewer))
+                      if (User.IsInRole(WriteItUpRoles.Reviewer))
                       {
                           <li>@Html.ActionLink("Reviewer", "Reviewer", "Home")</li>
                       }
-                      if (User.IsInRole(ProtoRoles.Student))
+                      if (User.IsInRole(WriteItUpRoles.Student))
                       {
                           <li>@Html.ActionLink("Student", "Student", "Home")</li>
                       }
-                      if (User.IsInRole(ProtoRoles.SystemAdmin))
+                      if (User.IsInRole(WriteItUpRoles.SystemAdmin))
                       {
                           <li>@Html.ActionLink("System Admin", "SystemAdmin", "Home")</li>
                       }
@@ -52,7 +52,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Proto</p>
+            <p>&copy; @DateTime.Now.Year - WriteItUp</p>
         </footer>
     </div>
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Reviewer.Models
+namespace WriteItUp.Areas.Reviewer.Models
 {
     public class ViewModel
     {

@@ -15,15 +15,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Proto2.App_Start;
+using WriteItUp2.App_Start;
 using Raven.Client;
 using Raven.Client.Indexes;
 using WebActivatorEx;
 
 [assembly: PostApplicationStartMethod(typeof(CreateIndexes), "Start")]
 
-namespace Proto2.App_Start {
-	using Proto2.DependencyResolution;
+namespace WriteItUp2.App_Start {
+	using WriteItUp2.DependencyResolution;
 	public static class CreateIndexes {
         public static void Start()
         {
