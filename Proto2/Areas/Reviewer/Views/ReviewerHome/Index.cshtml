@@ -1,0 +1,68 @@
+﻿@model List<Proto2.Areas.Reviewer.Models.ViewModel>
+
+@*This screen should maybe just welcome the reviewer or
+    explain what a reviewer does*@
+
+@{
+    ViewBag.Title = "Reviewer";
+}
+
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2>Welcome Reviewer</h2>
+            <h2><strong>You currently have no reviews.</strong> </h2>
+            <p>Once you have been registered with a class, your reviews will be available.</p>
+            <p>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("ReviewerAddClass", "ReviewerHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Class</button>
+            </p>
+        </div>
+
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("ReviewerAddClass", "ReviewerHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Class</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <div class="row">
+                <div>
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Number of Reviewers for this Course</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model)
+                                {
+                                    <tr>
+                                        <td><p><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReviewStories", "ReviewerHome", new {classId = course.ClassIDs})' ;return false; ">@course.ClassName</button></p></td>
+                                        <td>@course.NumReviews</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>

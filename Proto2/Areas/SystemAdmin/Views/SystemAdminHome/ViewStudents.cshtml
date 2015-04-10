@@ -1,0 +1,49 @@
+﻿@model Proto2.Areas.Teacher.Models.StudentViewList
+
+@*This view should look like the bottom screen on the left
+    for the reviewer mockups. Look at the Index view for
+    teachers for an example*@
+
+@{
+    ViewBag.Title = "Students";
+}
+
+
+<body style="
+                                      background-image: url(/Images/letters2.50.JPG);
+                                      background-repeat: no-repeat;
+                                      background-size: cover">
+
+    @if (!Model.StudentList.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No students Enrolled</h2>
+        </div>
+
+    }
+    @if (Model.StudentList.Any())
+    {
+        <h2>@ViewBag.Title</h2>
+        <div class="jumbotron" style="opacity: .90">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model.StudentList)
+                    {
+                        <tr>
+                            <td>@s.Name</td>
+                          
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</body>

@@ -1,0 +1,19 @@
+﻿@model Proto2.Areas.Reviewer.Models.ReviewInputDatabase
+
+@{
+    ViewBag.Title = "title";
+}
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<div class="jumbotron">
+    <p><b>Setting: </b>     @Model.ScoreSetting</p>
+    <p><b>Plot: </b>        @Model.ScorePlot</p>
+    <p><b>Character: </b>   @Model.ScoreCharacter</p>
+
+    <p><b>Comments:</b><br />@Model.Comments</p>
+</div>

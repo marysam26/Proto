@@ -23,6 +23,9 @@ namespace Proto.Areas.Reviewer.Models
     public class ReviewInput
     {
         [Required]
+        public string StoryId { get; set; }
+
+        [Required]
         [Range(0, 7)]
         [Display(Name = "Score for plot")]
         public int ScorePlot { get; set; }
@@ -41,6 +44,9 @@ namespace Proto.Areas.Reviewer.Models
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Score for plot")]
         public string Comments { get; set; }
+
+        [Required]
+        public string Username { get; set; }
     }
 
     public class TrainVideoView
@@ -58,6 +64,7 @@ namespace Proto.Areas.Reviewer.Models
 
     public class PastReviewView
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Story { get; set; }
         public int ScorePlot { get; set; }
@@ -66,6 +73,8 @@ namespace Proto.Areas.Reviewer.Models
         public string Comment { get; set; }
         public string ReviewerName { get; set; }
         public string[] ReviewerNames { get; set; }
+        public string OwnerUserId { get; set; }
+        public DateTime PublishDate { get; set; }
     }
 
     public class DiscussionView
