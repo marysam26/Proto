@@ -1,4 +1,4 @@
-![Your Logo Text](http://ezekiel.vancouver.wsu.edu/~cs421/readme/logo.png)
+![Your Logo Text](http://encs.vancouver.wsu.edu/~k.gonzalez/WriteItUp!.jpg)
 
 Meeting with Dr. Dunn next week to discuss logo design options.
 He has decided to change the project name to WriteItUp!
