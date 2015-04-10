@@ -1,0 +1,70 @@
+﻿@model Proto2.Areas.Student.Models.AssignmentsView
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<h2>Welcome to @Model.className</h2>
+<div class="content-wrapper">
+        <div>
+            <h3>Current Assignments</h3>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
+                        <!--<h3>Current Assignments</h3>-->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Assignment Name</th>
+                                    <th>Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @if(Model.Current != null){
+                                        foreach(var a in Model.Current){
+                                        <tr>
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("CurrentAssignment", "StudentHome", new {Id = a.Id})' ;return false; ">@a.AssignmentName</button></td>
+                                            <td>@a.DueDate.ToShortDateString()</td>
+                                        </tr>
+                                        }
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <p></p><p></p>
+            <div class="content-wrapper">
+                <h3>Submitted Assignments</h3>
+            </div><div class="row">
+                <div class="col-xs-8">
+                    <div class="jumbotron" style="opacity: .90; margin:auto">
+                        <!--<h3>Submitted Assignments</h3>-->
+                        <table class="table">
+                            <thead>
+                               <tr>
+                                    <th>Assignment Name</th>
+                                    <th>Submission Date</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Submitted != null) {
+                                    foreach (var s in Model.Submitted) {
+                                        <tr>
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new {submitId = @s.Id, classID = s.classId})' ;return false; ">@s.AssignmentName</button></td>
+                                            <td>@s.SubmissionDate.ToShortDateString()</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

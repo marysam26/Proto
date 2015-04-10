@@ -1,0 +1,71 @@
+﻿@model List<Proto2.Areas.Student.Models.SubmissionView>
+
+@{
+    ViewBag.Title = "Student Stories";
+}
+
+<body style="
+        background-image: url(/Images/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No stories composed by this student. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Story</th>
+                        <th>Number of Reviews</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Story in Model)
+                    {
+                        <tr>
+                            <td>@Story.StoryTitle</td>
+                            <td>@Story.Story</td>
+                            <td>@Story.NumReviews</td>
+                            @if (Story.reviewer1 != null)
+                            {
+                                <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "SystemAdminHome", new {revId = Story.reviewer1, assId = Story.Id})' ;return false; ">View</button></td>
+                            }
+
+                            else
+                            {
+                                <td><i>none</i></td>
+                            }
+                            @if (Story.reviewer2 != null)
+                            {
+                                <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "systemAdminHome", new {revId = Story.reviewer2, assId = Story.Id})' ;return false; ">View</button></td>
+                            }
+
+                            else
+                            {
+                                <td><i>none</i></td>
+                            }
+                            
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

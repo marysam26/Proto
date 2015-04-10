@@ -1,0 +1,56 @@
+﻿@model List<Proto2.Areas.Reviewer.Models.Reviews>
+
+@*This view is the second from the top on the right in the mockups.
+    THe Left side that is visible will be a form that is completed,
+    see AddStudent in the Teacher view for an example*@
+
+@{
+    ViewBag.Title = "Review Story";
+}
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<h2>@ViewBag.Title</h2>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <p>There are currently no available assignments to review.</p>
+        </div>
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Published Date</th>
+                            <th>Number of Reviews</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var review in Model)
+                        {
+                            <tr>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ReviewStoryView", "ReviewerHome", new {submitId = review.SubmissionId.ToString()})' ;return false; ">@review.AssignmentName</button></p></td>
+                                <td>@review.DatePublished.ToShortDateString()</td>
+                                <td>@review.NumReviews</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }
+</div>

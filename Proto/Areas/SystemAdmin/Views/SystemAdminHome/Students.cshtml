@@ -1,0 +1,59 @@
+﻿@model List<Proto.Areas.SystemAdmin.Models.StudentView>
+
+@{
+    ViewBag.Title = "Students";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Students Currently Enrolled </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+
+        <div class="jumbotron" style="opacity: .90">
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("EditStudentVideos", "SystemAdminHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Edit Videos</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Teacher</th>
+                        <th>Stories</th>
+                        <th>Confirmed</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                        <tr>
+                            <td><strong>@student.Name</strong></td>
+                            <td>@student.Email</td>
+                            <td>@student.Teacher</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesByStudent", "SystemAdminHome", new{id = new Guid()} )' ;return false; ">Stories</button></p></td>
+                            <td>@student.Confirmed</td>
+                            <td><a style="color:red">Delete</a></td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

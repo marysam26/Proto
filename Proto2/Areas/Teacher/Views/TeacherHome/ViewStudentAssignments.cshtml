@@ -1,0 +1,74 @@
+﻿@model List<Proto2.Areas.Student.Models.SubmissionView>
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+<div class="content-wrapper">
+    <div>
+        @if (!Model.Any())
+        {
+            <h2>No Submitted Assignments</h2>
+        }
+        @if (Model.Any())
+        {
+            <h2>Current Assignments</h2>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="jumbotron" style="opacity: .90; margin: auto">
+                        <!--<h3>Current Assignments</h3>-->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Assignment Name</th>
+                                    <th>Submission Date</th>
+                                    <th>Student Submission</th>
+                                    <th>Review 1</th>
+                                    <th>Review 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                      
+                                @foreach (var a in Model)
+                                {
+                                    <tr>
+                                        <td>@a.AssignmentName</td>
+                                        <td>@a.SubmissionDate.ToShortDateString()</td>
+                                        <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href = '@Url.Action("CurrentAssignment", "TeacherHome", new {story = a.Id })';return false; ">@a.StoryTitle</button></td>
+                                        @if (a.reviewer1 != null)
+                                        {
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href = '@Url.Action("CurrentReview", "TeacherHome", new {revId = a.reviewer1, assId = a.Id})';return false; ">View</button></td>
+                                        }
+                                
+                                        else
+                                        {
+                                            <td><i>none</i></td>                                       
+                                        }
+                                        @if (a.reviewer2 != null)
+                                        {
+                                            <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href = '@Url.Action("CurrentReview", "TeacherHome", new {revId = a.reviewer2, assId = a.Id})';return false; ">View</button></td>
+                                        }
+                                
+                                        else
+                                        {
+                                            <td><i>none</i></td>
+                                        }
+                         
+                                    </tr>
+                                }
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                     
+                </div>
+            </div>
+        }
+    </div>
+</div>

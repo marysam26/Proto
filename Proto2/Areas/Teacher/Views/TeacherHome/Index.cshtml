@@ -1,0 +1,109 @@
+﻿@model List<Proto2.Areas.Teacher.Models.ClassModel>
+@{
+    ViewBag.Title = "Welcome Teacher";
+}
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2><strong>Please Add a Course</strong> </h2>
+            <p>Once you add courses, your students can begin to enroll.</p>
+            <p>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("AddClass", "TeacherHome")' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+            </p>
+        </div>
+        
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href='@Url.Action("AddClass", "TeacherHome")';return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Course</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>End Date</th>
+                            <th>Confirmation Code</th>
+                            <th>Students</th>
+                            <th>Reviewers</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var course in Model)
+                        {
+                            <tr>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignments", "TeacherHome", new {classID = course.Id})' ;return false; ">@course.ClassName</button></p></td>
+                                <td>@course.EndDate.ToShortDateString()</td>
+                                <td>@course.ConfirmCode</td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudents", "TeacherHome", new {classID = course.Id})' ;return false; ">Students</button></p></td>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewer", "TeacherHome", new {classID = course.Id})' ;return false; ">Reviewers</button></p></td>
+                                <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-courseid="@course.Id" ><i class="glyphicon glyphicon-remove"></i></button></p></td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }
+</div>
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="courseid"></div>
+                <div class="hide" id="terminateLink">@Url.Action("DeleteCourse", "TeacherHome")</div>
+                <p>
+                    This course will be removed and students and reviewers will be unenrolled. This action 
+                    CANNOT be undone.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove this course.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+            var courseid = $(this).data('courseid');
+            $(".modal-body #courseid").text(courseid);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var courseid = $(".modal-body #courseid").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?courseId=' + courseid;
+            return false;
+        });
+    </script>
+}

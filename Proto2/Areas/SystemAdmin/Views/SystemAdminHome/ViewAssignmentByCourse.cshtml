@@ -1,0 +1,51 @@
+﻿@model List<Proto2.Areas.SystemAdmin.Models.AssignmentView>
+
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No courses for this Reviewer. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Description</th>
+                        <th>Submissions</th>
+                        <th>Reviews</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var assignment in Model)
+                    {
+                        <tr>
+                            <td>@assignment.AssignmentName</td>
+                            <td>@assignment.Description</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewSubmissionsByAssignment", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Submissions</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewReviewsByAssignment", "SystemAdminHome", new{id = reviewer.Id} )' ;return false; ">Reviews</button></p></td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

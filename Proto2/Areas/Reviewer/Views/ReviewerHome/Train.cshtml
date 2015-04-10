@@ -1,0 +1,34 @@
+﻿@model Proto2.Areas.SystemAdmin.Models.VideoView
+
+@*This is the first view on the right in the mockups and can
+    display just the links or embedded videos. Whichever is
+    easiest :)*@
+
+@{
+    ViewBag.Title = "Train";
+}
+
+<center><h2>Training Videos</h2></center>
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+   
+    <center><h2>@Model.Title</h2></center>
+        <div style="text-align:center">
+            <br>
+            <asp:label runat="server">
+                <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;showinfo=0" frameborder="0"></iframe>
+            <br>
+            </asp:label>
+        </div>
+        
+    
+</body>
+</html>

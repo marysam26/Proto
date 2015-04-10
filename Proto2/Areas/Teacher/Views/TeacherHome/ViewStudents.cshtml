@@ -1,0 +1,97 @@
+﻿@model Proto2.Areas.Teacher.Models.StudentViewList
+
+@*This view should look like the bottom screen on the left
+    for the reviewer mockups. Look at the Index view for
+    teachers for an example*@
+
+@{
+    ViewBag.Title = "Students";
+}
+
+
+<body style="
+                                      background-image: url(/Images/letters2.50.JPG);
+                                      background-repeat: no-repeat;
+                                      background-size: cover">
+
+    @if (!Model.StudentList.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No students Enrolled</h2>
+        </div>
+
+    }
+    @if (Model.StudentList.Any())
+    {
+        <h2>@ViewBag.Title</h2>
+        <div class="jumbotron" style="opacity: .90">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model.StudentList)
+                    {
+                        <tr>
+                            <td>@s.Name</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStudentAssignments", "TeacherHome", new {studentId = @s.Id})' ;return false; ">Assignments</button></p></td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-courseid="@Model.CourseId" data-dataid="@s.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+                       </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</body>
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="courseid"></div>
+                <div class="hide" id="dataid"></div>
+                <div class="hide" id="terminateLink">@Url.Action("DeleteStudent", "TeacherHome")</div>
+                <p>This student will be removed from this course only and will no longer be able to view
+                or submit assignments for this course.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove student from course.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+            var courseid = $(this).data('courseid');
+            var dataid = $(this).data('dataid');
+            $(".modal-body #courseid").text(courseid);
+            $(".modal-body #dataid").text(dataid);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var courseid = $(".modal-body #courseid").text();
+            var dataid = $(".modal-body #dataid").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?courseId=' + courseid + '&dataId=' + dataid;
+            return false;
+        });
+    </script>
+}

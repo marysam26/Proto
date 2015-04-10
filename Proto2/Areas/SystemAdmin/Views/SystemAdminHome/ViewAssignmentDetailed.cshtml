@@ -1,0 +1,29 @@
+﻿@model Proto2.Areas.SystemAdmin.Models.AssignmentView
+
+@*See the bottom left/middle mockup for how this view should look*@
+
+@{
+    ViewBag.Title = "Detailed Assignment View";
+
+}
+<body style="
+                                      background-image: url(/Images/letters2.50.JPG);
+                                      background-repeat: no-repeat;
+                                      background-size: cover">
+
+    <br />
+    <div class="content-wrapper" style="background-color: white; padding-left: 50px; padding-bottom: 275px; padding-right: 50px; padding-top: 1px; opacity: 0.90; border-radius: 25px;">
+        <div>
+            <div class="pull-right">
+                <asp:label runat="server">
+                    <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
+                    <br>
+                </asp:label>
+                Click to Pause/Resume Video
+            </div>
+            <h2><b>@Model.AssignmentName</b></h2>
+            <text><b>Description:</b><br />@Model.Description</text><br>
+
+        </div>
+    </div>
+</body>

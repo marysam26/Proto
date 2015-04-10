@@ -1,0 +1,56 @@
+﻿@model List<Proto2.Areas.SystemAdmin.Models.AssignmentView>
+
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron">
+            <h2><strong>Generate an Assignment</strong> </h2>
+            <p>New Assignments are available immediatly for Teachers to assign to their classes.</p>
+            <p>
+
+                <button type="button" class="btn btn-success" onclick="location.href = '@Url.Action("AddAssignment", "SystemAdminHome")'; return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add </button>
+            </p>
+        </div>
+
+
+    }
+    @if (Model.Any())
+    {
+
+        <div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success pull-right" onclick="location.href = '@Url.Action("AddAssignment", "SystemAdminHome")'; return false;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add Assignment</button>
+            </div>
+            <h2>@ViewBag.Title</h2>
+            <div class="jumbotron" style="opacity: .90">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Assignment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var assign in Model)
+                        {
+                            <tr>
+                                <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentDetailed", "SystemAdminHome", assign)' ;return false; ">@assign.AssignmentName</button></p></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    }
+
+</body>

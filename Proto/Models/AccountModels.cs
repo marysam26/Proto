@@ -70,6 +70,12 @@ namespace Proto.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Display(Name = "Account Type")]
+        [Required]
+        public String AccountType { get; set; }
+
+        public SelectList KeyList { get; set; }
     }
 
     public class RegisterModel
@@ -107,10 +113,13 @@ namespace Proto.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Psuedonym")]
+        public string Psuedonym { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -127,7 +136,17 @@ namespace Proto.Models
         [Required]
         public string Grade { get; set; }
 
-        public SelectList KeyList { get; set; }
+        public SelectList GradeKeyList { get; set; }
+
+        [Display(Name = "Confirmation Code")]
+        [Required]
+        public int ConfirmCode { get; set; }
+
+        //[Display(Name = "Grade")]
+        //[Required]
+        //public string Grade { get; set; }
+
+        //public SelectList GradeKeyList { get; set; }
     }
 
     public class RegisterReviewerModel

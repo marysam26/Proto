@@ -1,0 +1,55 @@
+﻿@model Proto2.Areas.Teacher.Models.AssignmentInputView
+
+@*See the bottom left/middle mockup for how this view should look*@
+
+@{
+    ViewBag.Title = "Detailed Assignment View";
+
+}
+
+<body style="
+                                      background-image: url(/Images/letters2.50.JPG);
+                                      background-repeat: no-repeat;
+                                      background-size: cover">
+
+    <br/>
+    <div class="content-wrapper" style="background-color: white; padding-left: 50px; padding-bottom: 25px; padding-right: 50px; padding-top: 1px; opacity: 0.90; border-radius: 25px;">
+        <div>
+            <div class="pull-right">
+                <asp:label runat="server">
+                    <iframe width="500" height="300" src="http://www.youtube.com/embed/@Model.Link?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
+                    <br>
+                </asp:label>
+                Click to Pause/Resume Video
+            </div>
+            <h2><b>@Model.AssignmentName</b></h2>
+            <text><b>Description:</b><br/>@Model.Description</text><br>
+            @using (Html.BeginForm("ViewAddAssignmentDetailed", "TeacherHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.TextBoxFor(m => m.AssignmentName, new { @Value = Model.AssignmentName, @type = "hidden" })
+                @Html.TextBoxFor(m => m.Description, new { @Value = Model.Description, @type = "hidden" })
+                @Html.TextBoxFor(m => m.Id, new { @Value = Model.Id, @type = "hidden" })
+                @Html.TextBoxFor(m => m.Link, new { @Value = Model.Link, @type = "hidden" })
+                @Html.TextBoxFor(m => m.CourseId, new { @Value = Model.CourseId, @type = "hidden" })
+                @Html.TextBoxFor(m => m.AssignmentName, new { @Value = Model.AssignmentName, @type = "hidden" })
+
+
+                <br/>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DueDate, "Due Date", new { @class = " col-md-4" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.DueDate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DueDate)
+                            <br/>
+                            <input type="submit" value="Add Assignment" class="btn btn-primary" />
+
+                        </div>
+                    </div>
+             </div>
+            }
+
+        </div>
+    </div>
+</body>

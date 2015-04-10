@@ -1,0 +1,92 @@
+﻿@model List<Proto2.Areas.Teacher.Models.TeacherModel>
+
+@{
+    ViewBag.Title = "Teachers";
+}
+
+<body style="
+        background-image: url(/Images/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Teachers Currently Enrolled </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var teacher in Model)
+                    {
+                        <tr>
+                            <td><strong>@teacher.Name</strong></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewClasess", "SystemAdminHome" ,new {teacherid = teacher.Id} )' ;return false; ">Classes</button></p></td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-code="@teacher.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>
+
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="code"></div>
+                <div class="hide" id="terminateLink">@Url.Action("DeleteTeacher", "SystemAdminHome")</div>
+                <p>
+                    Removing this teacher will remove all associated courses and remove both students 
+                    and reviwers from the course. This CANNOT be undone.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove teacher.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+            var code = $(this).data('code');
+            $(".modal-body #code").text(code);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var code = $(".modal-body #code").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?id=' + code;
+            return false;
+        });
+    </script>
+}

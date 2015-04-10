@@ -1,0 +1,71 @@
+﻿@model Proto2.Areas.Reviewer.Models.ReviewInput
+
+@*This view is the second from the top on the right in the mockups.
+THe Left side that is visible will be a form that is completed,
+see AddStudent in the Teacher view for an example*@
+
+@{
+    ViewBag.Title = "Review Story";
+}
+
+<h2>Review Story</h2>
+<body style="
+        background-image: url(/Images/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+
+@* The drop down for the scores still needs to be implemented*@
+<div class="content-wrapper">
+    @using (Html.BeginForm("ReviewStoryView", "ReviewerHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            <center> <h2>@Model.AssignmentName</h2></center>
+            <center><h2>@Model.AssignmentDescription</h2></center>
+            <center><h3>@Model.StoryTitle</h3></center>
+            <center><h4>@Model.Story</h4></center>
+            <p></p>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScorePlot, "Score for plot", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScorePlot, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScorePlot)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreCharacter, "Score for character", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreCharacter, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreCharacter)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreSetting, "Score for setting", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreSetting, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreSetting)
+                </div>
+            </div>
+            <div>
+            @Html.TextBoxFor(model => model.SubmitId, new { @Value = Model.SubmitId, @type = "hidden" })</div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comments, "Comments", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextAreaFor(model => model.Comments, new { style = "width: 360px; height: 100px;" })
+                    @Html.ValidationMessageFor(model => model.Comments)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

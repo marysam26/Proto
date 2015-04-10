@@ -1,0 +1,63 @@
+﻿
+@model Proto2.Areas.Teacher.Models.AssignmentViewList
+
+@*This view should look like the bottom screen on the left
+    for the reviewer mockups. Look at the Index view for
+    teachers for an example*@
+
+@{
+    ViewBag.Title = "Current Active Assignments";
+}
+
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+    @if (!Model.Assignments.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No Assignments Added</h2>
+            <p>
+                <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("ViewAddAssignments", "TeacherHome", new {classId = Model.CourseId})' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Assignment</button>
+            </p>
+        </div>
+
+    }
+    @if (Model.Assignments.Any())
+    {
+        <div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-success" onclick=" location.href='@Url.Action("ViewAddAssignments", "TeacherHome", new {classId = Model.CourseId})' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Add Assignment</button>
+        </div>
+        <h2>@ViewBag.Title</h2>
+        <div class="jumbotron" style="opacity: .90">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Due Date</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.Assignments)
+                    {
+                        <tr>
+                            <td>@a.AssignmentName</td>
+                            <td>@a.DueDate</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewAssignmentDetailed", "TeacherHome", a)' ;return false; ">Assignment Details</button></p></td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ExtendDueDate", "TeacherHome", new {date = @a.DueDate, id = a.Id})' ;return false; ">Extend Due Date</button></p></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</div>
+
+    }
+</body>

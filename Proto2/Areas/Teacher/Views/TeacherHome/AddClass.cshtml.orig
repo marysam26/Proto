@@ -1,0 +1,47 @@
+﻿@model Proto2.Areas.Teacher.Models.AddClassInput
+@{
+    ViewBag.Title = "Add Class";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<div class="content-wrapper">
+    @using (Html.BeginForm("AddClass", "TeacherHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-horizontal">
+            <h4>Add a Course</h4>
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClassName, "Class Name", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+<<<<<<< HEAD
+                    @Html.TextBoxFor(model => model.className, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.className)
+=======
+                    @Html.TextBoxFor(model => model.ClassName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ClassName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, "End Date", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EndDate)
+>>>>>>> 5c98abfba143e97ecd6da5a1bdaaddea8de2144b
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Add Class" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

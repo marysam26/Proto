@@ -1,0 +1,18 @@
+﻿@model Proto2.Areas.Student.Models.SubmissionView
+
+@{
+    ViewBag.Title = "title";
+}
+
+
+<body style="
+        background-image: url(/Images/letters2.50.JPG);
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<div class="jumbotron">
+    <p><b>Title: </b><br />@Model.StoryTitle</p>
+    <p><b>Description: </b><br />@Model.Description</p>
+    <p><b>Story: </b><br />@Model.Story</p>
+</div>

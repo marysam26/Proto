@@ -1,0 +1,37 @@
+﻿@using System.Web.UI.WebControls
+@model Proto2.Areas.Teacher.Models.AssignmentInputView
+       @*background-image: url(/Images/grey.jpg);*@
+<body style="
+ 
+        background-repeat: no-repeat;
+        background-size: cover">
+
+</body>
+<div class="content-wrapper">
+    @using (Html.BeginForm("ExtendDueDate", "TeacherHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-horizontal">
+            <h4>Extend Due Date</h4>
+            @Html.ValidationSummary(true)
+   <div class="form-group">
+                <label class="control-label col-md-2">Current Due Date: </label>
+                <div class="col-md-4">
+                    <p class="form-control-static">@ViewBag.CurrentDueDate</p>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DueDate, "Due Date", new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(model => model.DueDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DueDate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Update Due Date" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

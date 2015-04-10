@@ -1,0 +1,49 @@
+﻿@model List<Proto2.Areas.SystemAdmin.Models.StoriesView>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<body style="
+        background-image: url(http://encs.vancouver.wsu.edu/~k.gonzalez/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (!Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No courses for this Reviewer. </h2>
+        </div>
+
+    }
+    @if (Model.Any())
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>Detailed View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var story in Model)
+                    {
+                        <tr>
+                            <td>@story.Author</td>
+                            <td>@story.Title</td>
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStory", "SystemAdminHome", new{id = story.Title} )' ;return false; ">Assignments</button></p></td>
+                         </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>
