@@ -16,6 +16,33 @@ see AddStudent in the Teacher view for an example*@
 
 </body>
 
+<script type="text/javascript">
+
+    function Show() {
+
+            var r = confirm("Are you sure you want to submit this review?");
+
+            if (r==true)
+
+            {
+
+                return true;
+
+            }
+
+            else
+
+            {
+
+                return false;
+
+            }
+
+
+    }
+
+</script>
+
 @* The drop down for the scores still needs to be implemented*@
 <div class="content-wrapper">
     @using (Html.BeginForm("ReviewStoryView", "ReviewerHome", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -63,7 +90,7 @@ see AddStudent in the Teacher view for an example*@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-8">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <input type="submit" value="Submit" class="btn btn-primary" onclick="javascript: return Show();" />
                 </div>
             </div>
         </div>
