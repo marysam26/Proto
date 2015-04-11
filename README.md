@@ -1,4 +1,4 @@
-![Your Logo Text](http://encs.vancouver.wsu.edu/~k.gonzalez/WriteItUp!.jpg)
+![Your Logo Text](http://encs.vancouver.wsu.edu/~k.gonzalez/Write.jpg)
 
 # WriteItUp!
 
