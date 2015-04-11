@@ -144,7 +144,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult ViewCoursesByReviewers(string id)
         {
             //Lists all of the reviewed by a given reviewer
-            var courses = DocumentSession.Query<ClassModel>()
+            var courses = DocumentSession.Query<Proto2.Areas.Teacher.Models.ClassModel>()
                 .Where(r => r.Reviewers.Contains(id))
                 .ToList();
 

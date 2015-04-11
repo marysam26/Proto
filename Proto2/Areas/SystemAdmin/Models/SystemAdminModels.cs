@@ -12,20 +12,7 @@ namespace Proto2.Areas.SystemAdmin.Models
         public bool Confirmed { get; set; }
     }
 
-    public class ClassModel
-    {
-        public string Id { get; set; }
-        public string teacherId { get; set; }
-        public Guid id { get; set; }
-        public string ConfirmCode { get; set; }
-        public DateTime EndDate { get; set; }
-        //List of students
-        public List<string> Students { get; set; }
-        // List of reviewers
-        // When a reviewer agrees to review for this class it adds them to this list
-        public List<string> Reviewers { get; set; }
-        public string ClassName { get; set; }
-    }
+ 
 
     public class StudentView
     {
