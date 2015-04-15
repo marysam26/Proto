@@ -30,21 +30,21 @@ WriteItUp! is an interactive educational application designed to improve student
 ### Teachers
 <!--description of Teacher role here
 ...-->
-** ### Use Cases
+  ### Use Cases
 *
 *
 
 ### Students
 <!--description of Student role here
 ...-->
-** ### Use Cases
+  ### Use Cases
 *
 *
 
 ### Reviewers
 <!--description of Reviewer role here
 ...-->
-** ### Use Cases
+  ### Use Cases
 *
 *
 
