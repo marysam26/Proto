@@ -18,6 +18,36 @@ WriteItUp! is an interactive educational application designed to improve student
 
 [Tina Roper](mailto:troper17@comcast.net)
 
+## User Roles
+
+### System Administrator
+<!--description of Admin role here
+...-->
+** ### Use Cases
+*
+*
+
+### Teachers
+<!--description of Teacher role here
+...-->
+** ### Use Cases
+*
+*
+
+### Students
+<!--description of Student role here
+...-->
+** ### Use Cases
+*
+*
+
+### Reviewers
+<!--description of Reviewer role here
+...-->
+** ### Use Cases
+*
+*
+
 ## Current Status
 
 The project has a front end that is mostly finished. There are still some features and models/controllers that need implemented. Some tweaking to align with design mockups needs to be done as well.
@@ -31,6 +61,8 @@ There are no build or install instructions at this time.
 * Platform and System Dependencies: ...
 
 * Needed Tools: CKEditor, ...
+
+* Raven DB:
 
 ## Configuration and Run Info
 
@@ -50,6 +82,7 @@ Centralized
 * Use of Microsoft Azure for deployment
 * RavenHQ
 * RavenDB
+* CKEditor
 
 ### Git access
 
@@ -57,12 +90,7 @@ Centralized
 
 ## Known Bugs / Caveats
 
-* Discovered a bug in Teacher where after adding a course, the page relaods as if they had no course. If they go to the TeacherHome tab, it then appears but it should show up immediately on redirect.
 
 
 ## TODO
 
-* Implement database dependent functionalities.
-* Implement timer for planning pages.
-* Confirmation email if possible to let Dr. Dunn know when he needs to approve a request.
-* Admin page is implemented but needs to be linked to UI.
