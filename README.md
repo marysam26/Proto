@@ -62,7 +62,9 @@ There are no build or install instructions at this time.
 
 * Needed Tools: CKEditor, ...
 
-* Raven DB:
+* RavenDB:
+* * Download and install [a link](http://ravendb.net/downloads/builds)
+* * RavenDB documentation [a link](http://ravendb.net/docs/article-page/2.0/csharp/client-api/connecting-to-a-ravendb-datastore)
 
 ## Configuration and Run Info
 
