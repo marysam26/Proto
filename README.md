@@ -37,9 +37,21 @@ WriteItUp! is an interactive educational application designed to improve student
 ### Students
 <!--description of Student role here
 ...-->
+* Once a student registers an account with WriteItUp! they are able to login and enroll in any courses that a teacher has given them an access code for. Upon enrolling for a course, the student may enter the course and choose to work on any available assignments. Once assignments have been submitted, the student may view their submission and any reviews given to their submitted assignment.
+
 #### Use Cases
-*
-*
+* Register
+* Login
+* Enroll
+* Enter course
+* View current assignments
+* Choose to work on a current assignment
+* Watch assignment strategy video
+* Brainstorm using embedded drawing tool
+* Write assignment
+* View submitted assignments
+* View submitted assignment details
+* View reviews of a submitted assignment
 
 ### Reviewers
 <!--description of Reviewer role here
@@ -50,9 +62,6 @@ WriteItUp! is an interactive educational application designed to improve student
 
 ## Current Status
 
-The project has a front end that is mostly finished. There are still some features and models/controllers that need implemented. Some tweaking to align with design mockups needs to be done as well.
-
-The project is ready for database implementation in order to utilize the functionality of the front end. Once the database is connected, phase 1 of testing begins where we are looking for major flaws in design & programming.
 
 ## Build / Install
 
@@ -60,19 +69,15 @@ There are no build or install instructions at this time.
 
 * Platform and System Dependencies: ...
 
-* Needed Tools: CKEditor, ...
+* Needed Tools: CKEditor:
 
 * RavenDB:
-    [Download and Install](http://ravendb.net/downloads/builds)
+    [Download and Install](http://ravendb.net/downloads/builds), 
     [Documentation](http://ravendb.net/docs/article-page/2.0/csharp/client-api/connecting-to-a-ravendb-datastore)
 
 ## Configuration and Run Info
 
 There are no configuration or run instructions at this time.
-
-### Structure of repo
-
-Centralized
 
 ### Main components
 
@@ -88,7 +93,7 @@ Centralized
 
 ### Git access
 
-* Everyone is able to check out and push to the development branch. Marysa manages any merge conflicts.
+* 
 
 ## Known Bugs / Caveats
 
