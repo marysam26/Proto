@@ -569,3 +569,4 @@ C:\Users\Katie\Source\Repos\ProtoDev\Proto2\obj\Debug\Proto2.csprojResolveAssemb
 C:\Users\Katie\Source\Repos\ProtoDev\Proto2\obj\Debug\Proto2.dll
 C:\Users\Katie\Source\Repos\ProtoDev\Proto2\obj\Debug\Proto2.pdb
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll
+C:\Users\Smartie\Source\Repos\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll

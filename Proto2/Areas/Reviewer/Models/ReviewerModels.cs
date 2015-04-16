@@ -57,6 +57,7 @@ namespace Proto2.Areas.Reviewer.Models
     }
     public class ReviewInputDatabase
     {
+        public string Id { get; set; }
         public string SubmitId { get; set; }
         public int ScorePlot { get; set; }
         public int ScoreCharacter { get; set; }

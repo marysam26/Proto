@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.SystemAdmin.Models.ReviewsView>
+﻿@model List<Proto2.Areas.Reviewer.Models.ReviewInputDatabase>
 
 @{
     ViewBag.Title = "Reviews";
@@ -25,21 +25,24 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Reviews</th>
-                        <th>Number of Reviews</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th>Submission</th>
+                        <th>Plot Score</th>
+                        <th>Character Score</th>
+                        <th>Setting Score</th>
+                        <th>Comments</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var student in Model)
+                    @foreach (var submission in Model)
                     {
                         <tr>
-                            <td>@student.Title</td>
-                            @*This is fudged right now to just link to the review page for demo purposes, not dynamic yet*@
-                            <td><a href="~/SystemAdmin/SystemAdminHome/StoryReviewsView">Review 1</a></td>
-                            @*<td><a href="@student.ReviewOne">Review 1</a></td>*@
+                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesFromReview", "SystemAdminHome" ,new {sid = submission.SubmitId} )' ;return false; ">Submission</button></p></td>    
+                            <td>@submission.ScorePlot</td>
+                            <td>@submission.ScoreCharacter</td>
+                            <td>@submission.ScoreSetting</td>
+                            <td>@submission.Comments</td>
+                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-code="@submission.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
                         </tr>
 
                     }
@@ -50,3 +53,43 @@
 
     }
 </div>
+
+<div class="modal fade" id="terminateUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><strong>Are you sure?</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hide" id="code"></div>
+                <div class="hide" id="terminateLink">@Url.Action("DeleteReview", "SystemAdminHome")</div>
+                <p>
+                    This will remove the review and allow other reviews to be done on the assignment.
+                    @*<span id="userName"></span> will no longer be able to login or interact with the venue.*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">
+                    <button type="button" class="btn btn-danger terminate-user">Yes, remove teacher.</button>
+                </p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).on("click", ".confirm-terminate", function () {
+            var code = $(this).data('code');
+            $(".modal-body #code").text(code);
+            return false;
+        });
+
+        $(document).on("click", ".terminate-user", function () {
+            var code = $(".modal-body #code").text();
+            var url = $(".modal-body #terminateLink").text();
+            window.location.href = url + '?id=' + code;
+            return false;
+        });
+    </script>
+}
