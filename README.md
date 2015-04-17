@@ -56,9 +56,16 @@ WriteItUp! is an interactive educational application designed to improve student
 ### Reviewers
 <!--description of Reviewer role here
 ...-->
+* Once a reviewer registers an account with WriteItUp! they are able to login and review for any course that a teacher has granted them access to. Upon gaining access to a course for the first time, the reviewer will watch a short trianing video to familarize themselves with the procedure for reviewing stories.  Once this task has been performed, they can select a story from of list of submitted stories to review. 
+
 #### Use Cases
-*
-*
+* Register
+* Login
+* Enroll
+* Enter course
+* Watch training video
+* View current stories to review
+* Choose story to review
 
 ## Current Status
 
