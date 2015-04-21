@@ -58,14 +58,3 @@ There are no configuration or run instructions at this time.
 
 
 
-## Version 2.0
-
-* Voice recording for the planning page
-* Implementation of a timer for the planning page
-* Implementation of a timer for the text page
-* Viewing past reviews
-* Discussion between two reviewers
-* Comparing conflicting scores between two reviewers
-* Commenting on score discrepancies
-* Final conflict resolution for review
-
