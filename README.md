@@ -21,6 +21,7 @@ WriteItUp! is an interactive educational application designed to improve student
 
 ## Current Status
 
+Version 1.0 is complete and testing phase has been completed.
 
 ## Build / Install
 
@@ -28,7 +29,7 @@ There are no build or install instructions at this time.
 
 * Platform and System Dependencies: ...
 
-* Needed Tools: CKEditor:
+* Needed Tools: CKEditor which is included in the project
 
 * RavenDB:
     [Download and Install](http://ravendb.net/downloads/builds), 
@@ -36,12 +37,13 @@ There are no build or install instructions at this time.
 
 ## Configuration and Run Info
 
-There are no configuration or run instructions at this time.
+
 
 ### Main components
 
 * Model View Controller
-* ASP .NET
+* ASP.NET
+* HTML5
 
 ### Dependencies, Tools, Libraries needed
 
@@ -49,10 +51,6 @@ There are no configuration or run instructions at this time.
 * RavenHQ
 * RavenDB
 * CKEditor
-
-### Git access
-
-* 
 
 ## Known Bugs / Caveats
 
