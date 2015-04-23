@@ -382,6 +382,7 @@ D:\dev\CapstoneProject\Proto\Proto2\bin\Proto2.dll.config
 D:\dev\CapstoneProject\Proto\Proto2\bin\Proto2.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\Proto2.pdb
 D:\dev\CapstoneProject\Proto\Proto2\bin\Antlr3.Runtime.dll
+D:\dev\CapstoneProject\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\DotNetOpenAuth.AspNet.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\DotNetOpenAuth.Core.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\DotNetOpenAuth.OAuth.Consumer.dll

@@ -46,7 +46,11 @@
                                         @Html.ValidationMessageFor(s => s.StoryTitle)
                                     </div><br /><br /><br />
                                 </div>
-                                <input type="submit" value="Submit" class="btn btn-primary" /><div style="font:x-small">May be submitted any number of times before the due date</div>
+                                <input type="submit" value="Submit" class="btn btn-primary" />&nbsp;
+                                @if(!Model.SubmissionDate.ToString().Equals("1/1/0001 12:00:00 AM")){<div style="font:x-small">May be submitted any number of times before the due date &nbsp;&nbsp; <div style="font:medium; color:crimson"> Most Recent Submit: @Model.SubmissionDate.ToString()</div></div>}
+                                @if (Model.SubmissionDate.ToString().Equals("1/1/0001 12:00:00 AM"))
+                                {                                                                                                                                                                                                                                                                          
+                                <div style="font:x-small">May be submitted any number of times before the due date</div>}
                         @Html.TextAreaFor(s => s.Story, new { @id = "editor1", @value = Model.Story })
                         @Html.TextBoxFor(s => s.Id, new { @Value = Model.Id, @type = "hidden" })
                         <!--<textarea style="text-align:center" cols="80" id="editor1" name="editor1" rows="10"></textarea>-->
@@ -58,7 +62,7 @@
                                 contentsCss: "body{background: url(/Images/paper.jpg) no-repeat; background-size: cover;}",
                                 toolbar: [
                                     // Removed save
-                                    { name: 'document', groups: ['mode', 'document', 'doctools'], items: ['NewPage'] },
+                                    { name: 'document', groups: ['mode', 'document', 'doctools'], items: [] },
                                     { name: 'clipboard', groups: ['clipboard', 'undo'], items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
                                     { name: 'editing', groups: ['find', 'selection'], items: ['Find', '-', 'SelectAll', '-'] },
                                     // Removed insertable tools

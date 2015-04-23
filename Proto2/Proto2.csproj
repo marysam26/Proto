@@ -760,6 +760,8 @@
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewReviewer.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStudents.cshtml" />
     <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewCoursesByReviewers.cshtml" />
+    <Content Include="Areas\Reviewer\Views\ReviewerHome\Success.cshtml" />
+    <Content Include="Areas\SystemAdmin\Views\SystemAdminHome\ViewStoriesFromReview.cshtml" />
     <None Include="Properties\PublishProfiles\writeitup.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

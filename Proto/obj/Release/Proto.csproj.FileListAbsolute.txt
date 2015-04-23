@@ -1,3 +1,4 @@
 C:\Users\troper\Source\Repos\Proto\Proto\obj\Release\Proto.csprojResolveAssemblyReference.cache
 C:\Users\Tulio\Documents\Capstone\Proto\Proto\obj\Release\Proto.csprojResolveAssemblyReference.cache
 D:\dev\CapstoneProject\Proto\Proto\obj\Release\Proto.csprojResolveAssemblyReference.cache
+C:\Users\Smartie\Source\Repos\Proto\Proto\obj\Release\Proto.csprojResolveAssemblyReference.cache

@@ -18,7 +18,7 @@ using StoryView = WriteItUp2.Areas.SystemAdmin.Models.StoryView;
 using VideoView = WriteItUp2.Areas.SystemAdmin.Models.VideoView;
 using ClassModel = WriteItUp2.Areas.Teacher.Models.ClassModel;
 using SubmissionView = WriteItUp2.Areas.SystemAdmin.Models.SubmissionView;
-
+using ReviewInputDatabases = WriteItUp2.Areas.Reviewer.Models.ReviewInputDatabase;
 namespace WriteItUp2.Areas.SystemAdmin.Controllers
 {
     //[Authorize(Roles=WriteItUpRoles.SystemAdmin)]
@@ -144,7 +144,7 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
         public ActionResult ViewCoursesByReviewers(string id)
         {
             //Lists all of the reviewed by a given reviewer
-            var courses = DocumentSession.Query<Proto2.Areas.Teacher.Models.ClassModel>()
+            var courses = DocumentSession.Query<ClassModel>()
                 .Where(r => r.Reviewers.Contains(id))
                 .ToList();
 
@@ -159,6 +159,27 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
                                          .Where(r => r.ReviewerName == rid)
                                          .ToList();
             return View(reviews);
+        }
+
+        public ActionResult DeleteReview(string id){
+            //removes the review from the and modifies the submission the decrement the number of reviews and open up that review slot.
+            var sub = DocumentSession.Load<ReviewInputDatabases>(id);
+            DocumentSession.Delete(sub);
+            var story = DocumentSession.Load<SubmissionView>(sub.SubmitId);
+            story.NumReviews = story.NumReviews-1;
+            if(story.reviewer1 == sub.Username){
+                if (story.reviewer2 != null) {
+                    story.reviewer1 = story.reviewer2;
+                    story.reviewer2 = null;
+                }
+            else{
+                story.reviewer1 = null;
+                }
+            }
+            else{
+                story.reviewer2 = null;
+            }
+            return RedirectToAction("Reviwers");
         }
 
         public ActionResult ConfirmReviewer(Guid id)
@@ -204,6 +225,12 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
             var stories = DocumentSession.Query<WriteItUp2.Areas.Student.Models.SubmissionView>()
                                         .Where(r => r.StudentId == sid)
                                         .ToList();
+            return View(stories);
+        }
+
+        public ActionResult ViewStoriesFromReview(string sid)
+        {
+            var stories = DocumentSession.Load<Proto2.Areas.Student.Models.SubmissionView>(sid);
             return View(stories);
         }
 
@@ -304,12 +331,13 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
             {
                 DocumentSession.Delete(sub);
             }
-
+            
             DocumentSession.Delete(dataID);
             DocumentSession.SaveChanges();
             return RedirectToAction("Students");
         }
 
+        //TODO: Remove reviewer is not remoing it from the databases. Need to fix.
         public ActionResult RemoveReviewer(string reviewerID)
         {
             var random = new Random();
