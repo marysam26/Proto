@@ -12,13 +12,13 @@
     @*@if (!Request.IsAuthenticated)
     {*@
     <div class="jumbotron" style="opacity: .90">
-        <h2><strong>Welcome to Proto</strong> </h2>
+        <h2><strong>Welcome to WriteItUp</strong> </h2>
         <p>
-            Here at Proto, we're inviting <strong>Teachers</strong>, <strong>Students</strong>, and <strong>Reviewers</strong>
+            Here at WriteItUp, we're inviting <strong>Teachers</strong>, <strong>Students</strong>, and <strong>Reviewers</strong>
             to collaborate and utilize our website in an effort to encourage improved student reading and writing skills.
         </p>
         <p>
-            <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("Register", "Account", new { area = "Account" })' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Join Proto</button>
+            <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("Register", "Account", new { area = "Account" })' ;return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Join WriteItUp</button>
         </p>
     </div>
 
@@ -26,9 +26,9 @@
 @*@if (Request.IsAuthenticated)
 {
     <div class="jumbotron">
-        <h2><strong>Thanks for Joining Proto!</strong> </h2>
+        <h2><strong>Thanks for Joining WriteItUp!</strong> </h2>
         <p>
-            <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("About", "Home")';return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Learn About Proto</button>
+            <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("About", "Home")';return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Learn About WriteItUp</button>
             <button type="button" class="btn btn-success" onclick=" location.href = '@Url.Action("Contact", "Home")';return false; "><i class=" glyphicon glyphicon-plus"></i>&nbsp;Contact Us</button>
 
         </p>

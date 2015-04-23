@@ -8,10 +8,10 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using Proto.Filters;
-using Proto.Models;
+using WriteItUp.Filters;
+using WriteItUp.Models;
 
-namespace Proto.Controllers
+namespace WriteItUp.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]

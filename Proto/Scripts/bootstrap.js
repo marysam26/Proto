@@ -107,7 +107,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     $(el).on('click', dismiss, this.close)
   }
 
-  Alert.prototype.close = function (e) {
+  Alert.WriteItUptype.close = function (e) {
     var $this    = $(this)
     var selector = $this.attr('data-target')
 
@@ -172,7 +172,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   // ALERT DATA-API
   // ==============
 
-  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
+  $(document).on('click.bs.alert.data-api', dismiss, Alert.WriteItUptype.close)
 
 }(window.jQuery);
 
@@ -210,7 +210,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     loadingText: 'loading...'
   }
 
-  Button.prototype.setState = function (state) {
+  Button.WriteItUptype.setState = function (state) {
     var d    = 'disabled'
     var $el  = this.$element
     var val  = $el.is('input') ? 'val' : 'html'
@@ -230,7 +230,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }, 0)
   }
 
-  Button.prototype.toggle = function () {
+  Button.WriteItUptype.toggle = function () {
     var $parent = this.$element.closest('[data-toggle="buttons"]')
 
     if ($parent.length) {
@@ -332,7 +332,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   , wrap: true
   }
 
-  Carousel.prototype.cycle =  function (e) {
+  Carousel.WriteItUptype.cycle =  function (e) {
     e || (this.paused = false)
 
     this.interval && clearInterval(this.interval)
@@ -344,14 +344,14 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return this
   }
 
-  Carousel.prototype.getActiveIndex = function () {
+  Carousel.WriteItUptype.getActiveIndex = function () {
     this.$active = this.$element.find('.item.active')
     this.$items  = this.$active.parent().children()
 
     return this.$items.index(this.$active)
   }
 
-  Carousel.prototype.to = function (pos) {
+  Carousel.WriteItUptype.to = function (pos) {
     var that        = this
     var activeIndex = this.getActiveIndex()
 
@@ -363,7 +363,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return this.slide(pos > activeIndex ? 'next' : 'prev', $(this.$items[pos]))
   }
 
-  Carousel.prototype.pause = function (e) {
+  Carousel.WriteItUptype.pause = function (e) {
     e || (this.paused = true)
 
     if (this.$element.find('.next, .prev').length && $.support.transition.end) {
@@ -376,17 +376,17 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return this
   }
 
-  Carousel.prototype.next = function () {
+  Carousel.WriteItUptype.next = function () {
     if (this.sliding) return
     return this.slide('next')
   }
 
-  Carousel.prototype.prev = function () {
+  Carousel.WriteItUptype.prev = function () {
     if (this.sliding) return
     return this.slide('prev')
   }
 
-  Carousel.prototype.slide = function (type, next) {
+  Carousel.WriteItUptype.slide = function (type, next) {
     var $active   = this.$element.find('.item.active')
     var $next     = next || $active[type]()
     var isCycling = this.interval
@@ -542,12 +542,12 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     toggle: true
   }
 
-  Collapse.prototype.dimension = function () {
+  Collapse.WriteItUptype.dimension = function () {
     var hasWidth = this.$element.hasClass('width')
     return hasWidth ? 'width' : 'height'
   }
 
-  Collapse.prototype.show = function () {
+  Collapse.WriteItUptype.show = function () {
     if (this.transitioning || this.$element.hasClass('in')) return
 
     var startEvent = $.Event('show.bs.collapse')
@@ -591,7 +591,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       [dimension](this.$element[0][scrollSize])
   }
 
-  Collapse.prototype.hide = function () {
+  Collapse.WriteItUptype.hide = function () {
     if (this.transitioning || !this.$element.hasClass('in')) return
 
     var startEvent = $.Event('hide.bs.collapse')
@@ -627,7 +627,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       .emulateTransitionEnd(350)
   }
 
-  Collapse.prototype.toggle = function () {
+  Collapse.WriteItUptype.toggle = function () {
     this[this.$element.hasClass('in') ? 'hide' : 'show']()
   }
 
@@ -715,7 +715,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     var $el = $(element).on('click.bs.dropdown', this.toggle)
   }
 
-  Dropdown.prototype.toggle = function (e) {
+  Dropdown.WriteItUptype.toggle = function (e) {
     var $this = $(this)
 
     if ($this.is('.disabled, :disabled')) return
@@ -745,7 +745,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return false
   }
 
-  Dropdown.prototype.keydown = function (e) {
+  Dropdown.WriteItUptype.keydown = function (e) {
     if (!/(38|40|27)/.test(e.keyCode)) return
 
     var $this = $(this)
@@ -834,8 +834,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   $(document)
     .on('click.bs.dropdown.data-api', clearMenus)
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api'  , toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
+    .on('click.bs.dropdown.data-api'  , toggle, Dropdown.WriteItUptype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.WriteItUptype.keydown)
 
 }(window.jQuery);
 
@@ -879,11 +879,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     , show: true
   }
 
-  Modal.prototype.toggle = function (_relatedTarget) {
+  Modal.WriteItUptype.toggle = function (_relatedTarget) {
     return this[!this.isShown ? 'show' : 'hide'](_relatedTarget)
   }
 
-  Modal.prototype.show = function (_relatedTarget) {
+  Modal.WriteItUptype.show = function (_relatedTarget) {
     var that = this
     var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
 
@@ -928,7 +928,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     })
   }
 
-  Modal.prototype.hide = function (e) {
+  Modal.WriteItUptype.hide = function (e) {
     if (e) e.preventDefault()
 
     e = $.Event('hide.bs.modal')
@@ -955,7 +955,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       this.hideModal()
   }
 
-  Modal.prototype.enforceFocus = function () {
+  Modal.WriteItUptype.enforceFocus = function () {
     $(document)
       .off('focusin.bs.modal') // guard against infinite focus loop
       .on('focusin.bs.modal', $.proxy(function (e) {
@@ -965,7 +965,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       }, this))
   }
 
-  Modal.prototype.escape = function () {
+  Modal.WriteItUptype.escape = function () {
     if (this.isShown && this.options.keyboard) {
       this.$element.on('keyup.dismiss.bs.modal', $.proxy(function (e) {
         e.which == 27 && this.hide()
@@ -975,7 +975,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }
   }
 
-  Modal.prototype.hideModal = function () {
+  Modal.WriteItUptype.hideModal = function () {
     var that = this
     this.$element.hide()
     this.backdrop(function () {
@@ -984,12 +984,12 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     })
   }
 
-  Modal.prototype.removeBackdrop = function () {
+  Modal.WriteItUptype.removeBackdrop = function () {
     this.$backdrop && this.$backdrop.remove()
     this.$backdrop = null
   }
 
-  Modal.prototype.backdrop = function (callback) {
+  Modal.WriteItUptype.backdrop = function (callback) {
     var that    = this
     var animate = this.$element.hasClass('fade') ? 'fade' : ''
 
@@ -1135,7 +1135,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   , container: false
   }
 
-  Tooltip.prototype.init = function (type, element, options) {
+  Tooltip.WriteItUptype.init = function (type, element, options) {
     this.enabled  = true
     this.type     = type
     this.$element = $(element)
@@ -1162,11 +1162,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       this.fixTitle()
   }
 
-  Tooltip.prototype.getDefaults = function () {
+  Tooltip.WriteItUptype.getDefaults = function () {
     return Tooltip.DEFAULTS
   }
 
-  Tooltip.prototype.getOptions = function (options) {
+  Tooltip.WriteItUptype.getOptions = function (options) {
     options = $.extend({}, this.getDefaults(), this.$element.data(), options)
 
     if (options.delay && typeof options.delay == 'number') {
@@ -1179,7 +1179,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return options
   }
 
-  Tooltip.prototype.getDelegateOptions = function () {
+  Tooltip.WriteItUptype.getDelegateOptions = function () {
     var options  = {}
     var defaults = this.getDefaults()
 
@@ -1190,7 +1190,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return options
   }
 
-  Tooltip.prototype.enter = function (obj) {
+  Tooltip.WriteItUptype.enter = function (obj) {
     var self = obj instanceof this.constructor ?
       obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
 
@@ -1205,7 +1205,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }, self.options.delay.show)
   }
 
-  Tooltip.prototype.leave = function (obj) {
+  Tooltip.WriteItUptype.leave = function (obj) {
     var self = obj instanceof this.constructor ?
       obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
 
@@ -1220,7 +1220,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }, self.options.delay.hide)
   }
 
-  Tooltip.prototype.show = function () {
+  Tooltip.WriteItUptype.show = function () {
     var e = $.Event('show.bs.'+ this.type)
 
     if (this.hasContent() && this.enabled) {
@@ -1280,7 +1280,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }
   }
 
-  Tooltip.prototype.applyPlacement = function(offset, placement) {
+  Tooltip.WriteItUptype.applyPlacement = function(offset, placement) {
     var replace
     var $tip   = this.tip()
     var width  = $tip[0].offsetWidth
@@ -1331,11 +1331,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     if (replace) $tip.offset(offset)
   }
 
-  Tooltip.prototype.replaceArrow = function(delta, dimension, position) {
+  Tooltip.WriteItUptype.replaceArrow = function(delta, dimension, position) {
     this.arrow().css(position, delta ? (50 * (1 - delta / dimension) + "%") : '')
   }
 
-  Tooltip.prototype.setContent = function () {
+  Tooltip.WriteItUptype.setContent = function () {
     var $tip  = this.tip()
     var title = this.getTitle()
 
@@ -1343,7 +1343,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     $tip.removeClass('fade in top bottom left right')
   }
 
-  Tooltip.prototype.hide = function () {
+  Tooltip.WriteItUptype.hide = function () {
     var that = this
     var $tip = this.tip()
     var e    = $.Event('hide.bs.' + this.type)
@@ -1369,18 +1369,18 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return this
   }
 
-  Tooltip.prototype.fixTitle = function () {
+  Tooltip.WriteItUptype.fixTitle = function () {
     var $e = this.$element
     if ($e.attr('title') || typeof($e.attr('data-original-title')) != 'string') {
       $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
     }
   }
 
-  Tooltip.prototype.hasContent = function () {
+  Tooltip.WriteItUptype.hasContent = function () {
     return this.getTitle()
   }
 
-  Tooltip.prototype.getPosition = function () {
+  Tooltip.WriteItUptype.getPosition = function () {
     var el = this.$element[0]
     return $.extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
       width: el.offsetWidth
@@ -1388,14 +1388,14 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }, this.$element.offset())
   }
 
-  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
+  Tooltip.WriteItUptype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
     return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2  } :
            placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2  } :
            placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
         /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width   }
   }
 
-  Tooltip.prototype.getTitle = function () {
+  Tooltip.WriteItUptype.getTitle = function () {
     var title
     var $e = this.$element
     var o  = this.options
@@ -1406,15 +1406,15 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return title
   }
 
-  Tooltip.prototype.tip = function () {
+  Tooltip.WriteItUptype.tip = function () {
     return this.$tip = this.$tip || $(this.options.template)
   }
 
-  Tooltip.prototype.arrow = function () {
+  Tooltip.WriteItUptype.arrow = function () {
     return this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow')
   }
 
-  Tooltip.prototype.validate = function () {
+  Tooltip.WriteItUptype.validate = function () {
     if (!this.$element[0].parentNode) {
       this.hide()
       this.$element = null
@@ -1422,24 +1422,24 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }
   }
 
-  Tooltip.prototype.enable = function () {
+  Tooltip.WriteItUptype.enable = function () {
     this.enabled = true
   }
 
-  Tooltip.prototype.disable = function () {
+  Tooltip.WriteItUptype.disable = function () {
     this.enabled = false
   }
 
-  Tooltip.prototype.toggleEnabled = function () {
+  Tooltip.WriteItUptype.toggleEnabled = function () {
     this.enabled = !this.enabled
   }
 
-  Tooltip.prototype.toggle = function (e) {
+  Tooltip.WriteItUptype.toggle = function (e) {
     var self = e ? $(e.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type) : this
     self.tip().hasClass('in') ? self.leave(self) : self.enter(self)
   }
 
-  Tooltip.prototype.destroy = function () {
+  Tooltip.WriteItUptype.destroy = function () {
     this.hide().$element.off('.' + this.type).removeData('bs.' + this.type)
   }
 
@@ -1515,15 +1515,15 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   // NOTE: POPOVER EXTENDS tooltip.js
   // ================================
 
-  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
+  Popover.WriteItUptype = $.extend({}, $.fn.tooltip.Constructor.WriteItUptype)
 
-  Popover.prototype.constructor = Popover
+  Popover.WriteItUptype.constructor = Popover
 
-  Popover.prototype.getDefaults = function () {
+  Popover.WriteItUptype.getDefaults = function () {
     return Popover.DEFAULTS
   }
 
-  Popover.prototype.setContent = function () {
+  Popover.WriteItUptype.setContent = function () {
     var $tip    = this.tip()
     var title   = this.getTitle()
     var content = this.getContent()
@@ -1538,11 +1538,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
   }
 
-  Popover.prototype.hasContent = function () {
+  Popover.WriteItUptype.hasContent = function () {
     return this.getTitle() || this.getContent()
   }
 
-  Popover.prototype.getContent = function () {
+  Popover.WriteItUptype.getContent = function () {
     var $e = this.$element
     var o  = this.options
 
@@ -1552,11 +1552,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
             o.content)
   }
 
-  Popover.prototype.arrow = function () {
+  Popover.WriteItUptype.arrow = function () {
     return this.$arrow = this.$arrow || this.tip().find('.arrow')
   }
 
-  Popover.prototype.tip = function () {
+  Popover.WriteItUptype.tip = function () {
     if (!this.$tip) this.$tip = $(this.options.template)
     return this.$tip
   }
@@ -1639,7 +1639,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     offset: 10
   }
 
-  ScrollSpy.prototype.refresh = function () {
+  ScrollSpy.WriteItUptype.refresh = function () {
     var offsetMethod = this.$element[0] == window ? 'offset' : 'position'
 
     this.offsets = $([])
@@ -1664,7 +1664,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       })
   }
 
-  ScrollSpy.prototype.process = function () {
+  ScrollSpy.WriteItUptype.process = function () {
     var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
     var scrollHeight = this.$scrollElement[0].scrollHeight || this.$body[0].scrollHeight
     var maxScroll    = scrollHeight - this.$scrollElement.height()
@@ -1685,7 +1685,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }
   }
 
-  ScrollSpy.prototype.activate = function (target) {
+  ScrollSpy.WriteItUptype.activate = function (target) {
     this.activeTarget = target
 
     $(this.selector)
@@ -1779,7 +1779,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     this.element = $(element)
   }
 
-  Tab.prototype.show = function () {
+  Tab.WriteItUptype.show = function () {
     var $this    = this.element
     var $ul      = $this.closest('ul:not(.dropdown-menu)')
     var selector = $this.attr('data-target')
@@ -1811,7 +1811,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     })
   }
 
-  Tab.prototype.activate = function (element, container, callback) {
+  Tab.WriteItUptype.activate = function (element, container, callback) {
     var $active    = container.find('> .active')
     var transition = callback
       && $.support.transition
@@ -1930,11 +1930,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     offset: 0
   }
 
-  Affix.prototype.checkPositionWithEventLoop = function () {
+  Affix.WriteItUptype.checkPositionWithEventLoop = function () {
     setTimeout($.proxy(this.checkPosition, this), 1)
   }
 
-  Affix.prototype.checkPosition = function () {
+  Affix.WriteItUptype.checkPosition = function () {
     if (!this.$element.is(':visible')) return
 
     var scrollHeight = $(document).height()

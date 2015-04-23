@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Areas.Teacher
+namespace WriteItUp.Areas.Teacher
 {
     public class TeacherAreaRegistration : AreaRegistration
     {

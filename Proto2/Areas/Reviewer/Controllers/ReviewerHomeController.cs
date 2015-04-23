@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web;
-using Proto2.Areas.Account;
-using Proto2.Areas.Reviewer.Indexes;
-using Proto2.Areas.Reviewer.Models;
-using Proto2.Areas.SystemAdmin.Models;
+using WriteItUp2.Areas.Account;
+using WriteItUp2.Areas.Reviewer.Indexes;
+using WriteItUp2.Areas.Reviewer.Models;
+using WriteItUp2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas.Teacher.Models;
+using WriteItUp2.Areas.Teacher.Models;
 using RavenDB.AspNet.Identity;
-using Proto2.Areas.Student.Models;
-using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
-//using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
-using SubmissionView = Proto2.Areas.Student.Models.SubmissionView;
+using WriteItUp2.Areas.Student.Models;
+using ClassModel = WriteItUp2.Areas.Teacher.Models.ClassModel;
+//using SubmissionView = WriteItUp2.Areas.SystemAdmin.Models.SubmissionView;
+using SubmissionView = WriteItUp2.Areas.Student.Models.SubmissionView;
 
-namespace Proto2.Areas.Reviewer.Controllers
+namespace WriteItUp2.Areas.Reviewer.Controllers
 {
-    [Authorize(Roles=ProtoRoles.Reviewer)]
+    [Authorize(Roles=WriteItUpRoles.Reviewer)]
     public class ReviewerHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
@@ -29,17 +29,17 @@ namespace Proto2.Areas.Reviewer.Controllers
 
            public ReviewerHomeController()
         {
-            this.UserManager = new UserManager<ProtoUser>(
-                new UserStore<ProtoUser>(() => this.DocumentSession));
+            this.UserManager = new UserManager<WriteItUpUser>(
+                new UserStore<WriteItUpUser>(() => this.DocumentSession));
                
         }
 
-        //public AccountController(UserManager<ProtoUser> userManager)
+        //public AccountController(UserManager<WriteItUpUser> userManager)
         //{
         //    UserManager = userManager;
         //}
 
-        public UserManager<ProtoUser> UserManager { get; private set; }
+        public UserManager<WriteItUpUser> UserManager { get; private set; }
 
         public ActionResult Index()
         {
@@ -319,7 +319,7 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult RegisterasTeacher()
         {
-            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Teacher))
+            if (UserManager.IsInRole(User.Identity.GetUserId(), WriteItUpRoles.Teacher))
             {
                 return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
 
@@ -348,10 +348,10 @@ namespace Proto2.Areas.Reviewer.Controllers
                 Classes = new List<Guid>()
             };
             DocumentSession.Store(teacher);
-            UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Teacher);
+            UserManager.AddToRole(User.Identity.GetUserId(), WriteItUpRoles.Teacher);
             DocumentSession.Delete<AddPassView>(input.TeacherCode);
             DocumentSession.SaveChanges();
-            while (!User.IsInRole(ProtoRoles.Teacher))
+            while (!User.IsInRole(WriteItUpRoles.Teacher))
             {
             }
 

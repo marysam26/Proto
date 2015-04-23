@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Areas.Reviewer
+namespace WriteItUp.Areas.Reviewer
 {
     public class ReviewerAreaRegistration : AreaRegistration
     {

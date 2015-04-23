@@ -1,7 +1,7 @@
-namespace Proto2.DependencyResolution {
+namespace WriteItUp2.DependencyResolution {
     using System.Web;
 
-    using Proto2.App_Start;
+    using WriteItUp2.App_Start;
 
     using StructureMap.Web.Pipeline;
 

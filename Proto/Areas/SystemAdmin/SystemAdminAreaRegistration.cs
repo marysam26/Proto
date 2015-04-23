@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Proto.Areas.SystemAdmin
+namespace WriteItUp.Areas.SystemAdmin
 {
     public class SystemAdminAreaRegistration : AreaRegistration
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Raven.Client;
 
-namespace Proto2.Areas.Reviewer.Controllers
+namespace WriteItUp2.Areas.Reviewer.Controllers
 {
     public class ReviewerHomeController : Controller
     {

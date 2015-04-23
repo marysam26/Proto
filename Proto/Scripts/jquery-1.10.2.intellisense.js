@@ -639,7 +639,7 @@ return _object;
 };
 intellisense.redirectDefinition(jQuery.Callbacks, _731531622);
 
-intellisense.annotate(jQuery.Event.prototype, {
+intellisense.annotate(jQuery.Event.WriteItUptype, {
   'currentTarget': function() {
     /// <summary>The current DOM element within the event bubbling phase.</summary>
     /// <returns type="Element" />

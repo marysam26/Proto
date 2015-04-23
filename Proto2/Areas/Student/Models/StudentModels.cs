@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Proto2.Areas.Teacher.Models;
+using WriteItUp2.Areas.Teacher.Models;
 
 
-namespace Proto2.Areas.Student.Models
+namespace WriteItUp2.Areas.Student.Models
 {
 
     public class StudentModel

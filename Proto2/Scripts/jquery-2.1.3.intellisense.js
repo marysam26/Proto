@@ -123,8 +123,8 @@ intellisense.annotate(jQuery, {
   },
   'fn.extend': function() {
     /// <signature>
-    ///   <summary>Merge the contents of an object onto the jQuery prototype to provide new jQuery instance methods.</summary>
-    ///   <param name="object" type="Object">An object to merge onto the jQuery prototype.</param>
+    ///   <summary>Merge the contents of an object onto the jQuery WriteItUptype to provide new jQuery instance methods.</summary>
+    ///   <param name="object" type="Object">An object to merge onto the jQuery WriteItUptype.</param>
     ///   <returns type="Object" />
     /// </signature>
   },
@@ -632,7 +632,7 @@ return _object;
 };
 intellisense.redirectDefinition(jQuery.Callbacks, _731531622);
 
-intellisense.annotate(jQuery.Event.prototype, {
+intellisense.annotate(jQuery.Event.WriteItUptype, {
   'currentTarget': function() {
     /// <summary>The current DOM element within the event bubbling phase.</summary>
     /// <returns type="Element" />

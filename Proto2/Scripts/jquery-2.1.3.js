@@ -89,7 +89,7 @@ var
 		return letter.toUpperCase();
 	};
 
-jQuery.fn = jQuery.prototype = {
+jQuery.fn = jQuery.WriteItUptype = {
 	// The current version of jQuery being used
 	jquery: version,
 
@@ -280,7 +280,7 @@ jQuery.extend({
 		}
 
 		if ( obj.constructor &&
-				!hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
+				!hasOwn.call( obj.constructor.WriteItUptype, "isWriteItUptypeOf" ) ) {
 			return false;
 		}
 
@@ -860,7 +860,7 @@ function createCache() {
 	var keys = [];
 
 	function cache( key, value ) {
-		// Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
+		// Use (key + " ") to avoid collision with native WriteItUptype properties (see Issue #157)
 		if ( keys.push( key + " " ) > Expr.cacheLength ) {
 			// Only keep the most recent entries
 			delete cache[ keys.shift() ];
@@ -1435,7 +1435,7 @@ Sizzle.attr = function( elem, name ) {
 	}
 
 	var fn = Expr.attrHandle[ name.toLowerCase() ],
-		// Don't get fooled by Object.prototype properties (jQuery #13807)
+		// Don't get fooled by Object.WriteItUptype properties (jQuery #13807)
 		val = fn && hasOwn.call( Expr.attrHandle, name.toLowerCase() ) ?
 			fn( elem, name, !documentIsHTML ) :
 			undefined;
@@ -2002,7 +2002,7 @@ for ( i in { submit: true, reset: true } ) {
 
 // Easy API for creating new setFilters
 function setFilters() {}
-setFilters.prototype = Expr.filters = Expr.pseudos;
+setFilters.WriteItUptype = Expr.filters = Expr.pseudos;
 Expr.setFilters = new setFilters();
 
 tokenize = Sizzle.tokenize = function( selector, parseOnly ) {
@@ -2826,8 +2826,8 @@ var rootjQuery,
 		return jQuery.makeArray( selector, this );
 	};
 
-// Give the init function the jQuery prototype for later instantiation
-init.prototype = jQuery.fn;
+// Give the init function the jQuery WriteItUptype for later instantiation
+init.WriteItUptype = jQuery.fn;
 
 // Initialize central reference
 rootjQuery = jQuery( document );
@@ -3543,7 +3543,7 @@ function Data() {
 Data.uid = 1;
 Data.accepts = jQuery.acceptData;
 
-Data.prototype = {
+Data.WriteItUptype = {
 	key: function( owner ) {
 		// We can accept data for non-element nodes in modern browsers,
 		// but we should not, see #8335.
@@ -4466,7 +4466,7 @@ jQuery.event = {
 					for ( i = 0; i < delegateCount; i++ ) {
 						handleObj = handlers[ i ];
 
-						// Don't conflict with Object.prototype properties (#13203)
+						// Don't conflict with Object.WriteItUptype properties (#13203)
 						sel = handleObj.selector + " ";
 
 						if ( matches[ sel ] === undefined ) {
@@ -4699,7 +4699,7 @@ jQuery.Event = function( src, props ) {
 
 // jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
 // http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
-jQuery.Event.prototype = {
+jQuery.Event.WriteItUptype = {
 	isDefaultPrevented: returnFalse,
 	isPropagationStopped: returnFalse,
 	isImmediatePropagationStopped: returnFalse,
@@ -6150,11 +6150,11 @@ jQuery.fn.extend({
 
 
 function Tween( elem, options, prop, end, easing ) {
-	return new Tween.prototype.init( elem, options, prop, end, easing );
+	return new Tween.WriteItUptype.init( elem, options, prop, end, easing );
 }
 jQuery.Tween = Tween;
 
-Tween.prototype = {
+Tween.WriteItUptype = {
 	constructor: Tween,
 	init: function( elem, options, prop, end, easing, unit ) {
 		this.elem = elem;
@@ -6198,7 +6198,7 @@ Tween.prototype = {
 	}
 };
 
-Tween.prototype.init.prototype = Tween.prototype;
+Tween.WriteItUptype.init.WriteItUptype = Tween.WriteItUptype;
 
 Tween.propHooks = {
 	_default: {
@@ -6252,7 +6252,7 @@ jQuery.easing = {
 	}
 };
 
-jQuery.fx = Tween.prototype.init;
+jQuery.fx = Tween.WriteItUptype.init;
 
 // Back Compat <1.8 extension point
 jQuery.fx.step = {};
@@ -7544,10 +7544,10 @@ var
 	rhash = /#.*$/,
 	rts = /([?&])_=[^&]*/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg,
-	// #7653, #8125, #8152: local protocol detection
-	rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
+	// #7653, #8125, #8152: local WriteItUpcol detection
+	rlocalWriteItUpcol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
 	rnoContent = /^(?:GET|HEAD)$/,
-	rprotocol = /^\/\//,
+	rWriteItUpcol = /^\/\//,
 	rurl = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/,
 
 	/* Prefilters
@@ -7816,7 +7816,7 @@ jQuery.extend({
 	ajaxSettings: {
 		url: ajaxLocation,
 		type: "GET",
-		isLocal: rlocalProtocol.test( ajaxLocParts[ 1 ] ),
+		isLocal: rlocalWriteItUpcol.test( ajaxLocParts[ 1 ] ),
 		global: true,
 		processData: true,
 		async: true,
@@ -8018,11 +8018,11 @@ jQuery.extend({
 		jqXHR.error = jqXHR.fail;
 
 		// Remove hash character (#7531: and string promotion)
-		// Add protocol if not provided (prefilters might expect it)
+		// Add WriteItUpcol if not provided (prefilters might expect it)
 		// Handle falsy url in the settings object (#10093: consistency with old signature)
 		// We also use the url parameter if available
 		s.url = ( ( url || s.url || ajaxLocation ) + "" ).replace( rhash, "" )
-			.replace( rprotocol, ajaxLocParts[ 1 ] + "//" );
+			.replace( rWriteItUpcol, ajaxLocParts[ 1 ] + "//" );
 
 		// Alias method option to type as per ticket #12004
 		s.type = options.method || options.type || s.method || s.type;
@@ -8030,7 +8030,7 @@ jQuery.extend({
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().match( rnotwhite ) || [ "" ];
 
-		// A cross-domain request is in order when we have a protocol:host:port mismatch
+		// A cross-domain request is in order when we have a WriteItUpcol:host:port mismatch
 		if ( s.crossDomain == null ) {
 			parts = rurl.exec( s.url.toLowerCase() );
 			s.crossDomain = !!( parts &&
@@ -8520,7 +8520,7 @@ jQuery.ajaxSettings.xhr = function() {
 var xhrId = 0,
 	xhrCallbacks = {},
 	xhrSuccessStatus = {
-		// file protocol always yields status code 0, assume 200
+		// file WriteItUpcol always yields status code 0, assume 200
 		0: 200,
 		// Support: IE9
 		// #1450: sometimes IE returns 1223 when it should be 204
@@ -8592,7 +8592,7 @@ jQuery.ajaxTransport(function( options ) {
 								xhr.abort();
 							} else if ( type === "error" ) {
 								complete(
-									// file: protocol always yields status 0; see #8605, #14207
+									// file: WriteItUpcol always yields status 0; see #8605, #14207
 									xhr.status,
 									xhr.statusText
 								);

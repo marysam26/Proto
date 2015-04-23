@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.SystemAdmin.Models;
+using WriteItUp.Areas.SystemAdmin.Models;
 
-namespace Proto.Areas.SystemAdmin.Controllers
+namespace WriteItUp.Areas.SystemAdmin.Controllers
 {
     public class SystemAdminHomeController : Controller
     {
