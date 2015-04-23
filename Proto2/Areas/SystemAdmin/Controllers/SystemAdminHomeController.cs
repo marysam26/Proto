@@ -179,7 +179,7 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
             else{
                 story.reviewer2 = null;
             }
-            return RedirectToAction("Reviwers");
+            return RedirectToAction("Reviewers");
         }
 
         public ActionResult ConfirmReviewer(Guid id)
@@ -230,7 +230,7 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
 
         public ActionResult ViewStoriesFromReview(string sid)
         {
-            var stories = DocumentSession.Load<Proto2.Areas.Student.Models.SubmissionView>(sid);
+            var stories = DocumentSession.Load<WriteItUp2.Areas.Student.Models.SubmissionView>(sid);
             return View(stories);
         }
 
@@ -433,7 +433,7 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
             return View(courses);
         }
 
-        public ActionResult ViewAssignmentsByCourse(List<StudentView> students)
+        public ActionResult ViewAssignmentByCourse(List<StudentView> students)
         {
             //lists the assignments defined by a given course
             var studentlist = DocumentSession.Query<StudentView>()
