@@ -21,13 +21,15 @@ WriteItUp! is an interactive educational application designed to improve student
 
 ## Current Status
 
-Version 1.0 is complete and testing phase has been completed.
+Version 1.0 is complete and the testing phase has been completed.
 
 ## Build / Install
 
 There are no build or install instructions at this time.
 
-* Platform and System Dependencies: ...
+* Platform and System Dependencies: 
+    WriteItUp! operates on both Windows and Mac operating systems. 
+    Testing has been completed for Windows 7 and above and Mac Mavericks and above.
 
 * Needed Tools: CKEditor which is included in the project
 
