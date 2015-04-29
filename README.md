@@ -34,7 +34,7 @@ The current implimentation deploys on Microsoft Azure using RavenHQ as the datab
 * Needed Tools: CKEditor which is included in the project
 
 * RavenDB:
-    [Download and Install](http://ravendb.net/downloads/builds), 
+    Install instructions can be found here:[Download and Install](http://ravendb.net/downloads/builds) and API documentation can be found here:
     [Documentation](http://ravendb.net/docs/article-page/2.0/csharp/client-api/connecting-to-a-ravendb-datastore)
 
 ## Configuration and Run Info
