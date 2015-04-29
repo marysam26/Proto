@@ -144,20 +144,6 @@ namespace WriteItUp2.Areas.Reviewer.Controllers
             //Return a view to review a story
             var Submission = DocumentSession.Load<SubmissionView>(SubmitId);
 
-           if (Submission.reviewer1 == null)
-            {
-                Submission.reviewer1 = User.Identity.GetUserId();
-                Submission.NumReviews = Submission.NumReviews + 1;
-            }
-            else
-            {
-                Submission.reviewer2 = User.Identity.GetUserId();
-                Submission.NumReviews = Submission.NumReviews + 1;
-            }
-
-            DocumentSession.Store(Submission);
-
-            DocumentSession.SaveChanges();
             ReviewInput input = new ReviewInput()
             {
                 AssignmentName = Submission.AssignmentName,
@@ -166,6 +152,11 @@ namespace WriteItUp2.Areas.Reviewer.Controllers
                 StoryTitle = Submission.StoryTitle,
                 Story = new HtmlString(Submission.Story),
                 KeyList = new List<SelectListItem>()
+                {
+                            new SelectListItem() {Text = "0", Value = "0"},
+                            new SelectListItem() {Text = "1", Value = "1"},
+                 },
+                 KeyList2 = new List<SelectListItem>()
                 {
                             new SelectListItem() {Text = "0", Value = "0"},
                             new SelectListItem() {Text = "1", Value = "1"},
@@ -191,14 +182,35 @@ namespace WriteItUp2.Areas.Reviewer.Controllers
                 //AssignmentName = input.AssignmentName,
                 //AssignmentDescription = input.AssignmentDescription,
                 SubmitId = input.SubmitId,
-                ScorePlot = input.ScorePlot,
+                ScoreWhoStory = input.ScoreWhoStory,
                 Comments = input.Comments,
-                ScoreCharacter = input.ScoreCharacter,
-                ScoreSetting = input.ScoreSetting,
+                ScoreWhatStory = input.ScoreWhatStory,
+                ScoreWhenStory = input.ScoreWhenStory,
+                ScoreWhereStory = input.ScoreWhereStory,
+                ScoreWhatNext = input.ScoreWhatNext,
+                ScoreHowStory = input.ScoreHowStory,
+                ScoreCharacterFeel = input.ScoreCharacterFeel,
+                ScoreOverall = input.ScoreOverall,
                 Username = User.Identity.GetUserId(),               
             };
 
             DocumentSession.Store(newReview);
+
+            DocumentSession.SaveChanges();
+            var Submission = DocumentSession.Load<SubmissionView>(input.SubmitId);
+
+            if (Submission.reviewer1 == null)
+            {
+                Submission.reviewer1 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
+            }
+            else
+            {
+                Submission.reviewer2 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
+            }
+
+            DocumentSession.Store(Submission);
 
             DocumentSession.SaveChanges();
 
@@ -261,9 +273,9 @@ namespace WriteItUp2.Areas.Reviewer.Controllers
                 //ReviewerName = "Uidentfied reviewer",
                 //ReviewerNames = new string[] { "Dr. Pompus" },
                 Comment = input.Comments,
-                ScoreCharacter = input.ScoreCharacter,
-                ScorePlot = input.ScorePlot,
-                ScoreSetting = input.ScoreSetting,
+               // ScoreCharacter = input.ScoreCharacter,
+                //ScorePlot = input.ScorePlot,
+                //ScoreSetting = input.ScoreSetting,
                 //  OwnerUserId = input.OwnerUserId,
                 PublishDate = DateTime.UtcNow
             };

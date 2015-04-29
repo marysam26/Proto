@@ -80,9 +80,14 @@ namespace WriteItUp2.Areas.Student.Models
         public Guid classId { get; set; }
         public string submitId { get; set; }
         public string AssignmentName { get; set; }
-        public int ScorePlot { get; set; }
-        public int ScoreCharacter { get; set; }
-        public int ScoreSetting { get; set; }
+        public int ScoreWhoStory { get; set; }
+        public int ScoreWhereStory { get; set; }
+        public int ScoreWhenStory { get; set; }
+        public int ScoreWhatStory { get; set; }
+        public int ScoreWhatNext { get; set; }
+        public int ScoreHowStory { get; set; }
+        public int ScoreCharacterFeel { get; set; }
+        public int ScoreOverall { get; set; }
         public string Comments { get; set; }
         public int reviewNum { get; set; }
     }

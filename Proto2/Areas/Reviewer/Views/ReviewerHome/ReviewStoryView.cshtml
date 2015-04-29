@@ -54,34 +54,77 @@ see AddStudent in the Teacher view for an example*@
             <center><h3>@Model.StoryTitle</h3></center>
             <center><h4>@Model.Story</h4></center>
             <p></p>
+            <br><br><br>
+            <center><font size="2" color="red">For scoring purposes only: 0=No, 1=Yes</font></center>
             <div class="form-group">
-                @Html.LabelFor(model => model.ScorePlot, "Score for plot", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ScoreWhoStory, "Who is in the story?", new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    @Html.DropDownListFor(model => model.ScorePlot, Model.KeyList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ScorePlot)
+                    @Html.DropDownListFor(model => model.ScoreWhoStory, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreWhoStory)
                 </div>
             </div>
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ScoreCharacter, "Score for character", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ScoreWhereStory, "Where does the story take place?", new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    @Html.DropDownListFor(model => model.ScoreCharacter, Model.KeyList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ScoreCharacter)
+                    @Html.DropDownListFor(model => model.ScoreWhereStory, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreWhereStory)
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ScoreSetting, "Score for setting", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ScoreWhenStory, "When does the story take place?", new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
-                    @Html.DropDownListFor(model => model.ScoreSetting, Model.KeyList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ScoreSetting)
+                    @Html.DropDownListFor(model => model.ScoreWhenStory, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreWhenStory)
                 </div>
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreWhatStory, "What happens in the story?", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreWhatStory, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreWhatStory)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreWhatNext, "What happens next?", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreWhatNext, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreWhatNext)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreHowStory, "How does the story end?", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreHowStory, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreHowStory)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreCharacterFeel, "How does the main/other character(s) feel?", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreCharacterFeel, Model.KeyList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreCharacterFeel)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScoreOverall, "Overall Story score", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.ScoreOverall, Model.KeyList2, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ScoreOverall)
+                </div>
+            </div>
+
             <div>
             @Html.TextBoxFor(model => model.SubmitId, new { @Value = Model.SubmitId, @type = "hidden" })</div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Comments, "Comments", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Comments, "Comments", new { @class = "control-label col-md-4" })
                 <div class="col-md-4">
                     @Html.TextAreaFor(model => model.Comments, new { style = "width: 360px; height: 100px;" })
                     @Html.ValidationMessageFor(model => model.Comments)
@@ -89,7 +132,7 @@ see AddStudent in the Teacher view for an example*@
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-4 col-md-8">
                     <input type="submit" value="Submit" class="btn btn-primary" onclick="javascript: return Show();" />
                 </div>
             </div>

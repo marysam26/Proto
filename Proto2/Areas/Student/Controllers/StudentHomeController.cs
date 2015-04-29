@@ -316,11 +316,16 @@ namespace WriteItUp2.Areas.Student.Controllers
                     classId = sv.classId,
                     submitId = r.SubmitId,
                     AssignmentName = sv.AssignmentName,
-                    ScorePlot = r.ScorePlot,
-                    ScoreCharacter = r.ScoreCharacter,
-                    ScoreSetting = r.ScoreSetting,
+                    ScoreWhoStory = r.ScoreWhoStory,
+                    ScoreWhatStory = r.ScoreWhatStory,
+                    ScoreWhenStory = r.ScoreWhenStory,
+                    ScoreCharacterFeel = r.ScoreCharacterFeel,
+                    ScoreHowStory = r.ScoreHowStory,
+                    ScoreWhatNext = r.ScoreWhatNext,
+                    ScoreWhereStory = r.ScoreWhereStory,
+                    ScoreOverall = r.ScoreOverall,
                     Comments = r.Comments,
-                    reviewNum = num + 1
+                    reviewNum = ++num
                 });
             }
             return View(StoryReviewsList);
@@ -354,9 +359,14 @@ namespace WriteItUp2.Areas.Student.Controllers
                         classId = sv.classId,
                         submitId = r.SubmitId,
                         AssignmentName = sv.AssignmentName,
-                        ScorePlot = r.ScorePlot,
-                        ScoreCharacter = r.ScoreCharacter,
-                        ScoreSetting = r.ScoreSetting,
+                        ScoreWhoStory = r.ScoreWhoStory,
+                        ScoreWhereStory = r.ScoreWhereStory,
+                        ScoreWhenStory = r.ScoreWhenStory,
+                        ScoreWhatStory = r.ScoreWhatStory,
+                        ScoreWhatNext = r.ScoreWhatNext,
+                        ScoreHowStory = r.ScoreHowStory,
+                        ScoreCharacterFeel = r.ScoreCharacterFeel,
+                        ScoreOverall = r.ScoreOverall,
                         Comments = r.Comments,
                         reviewNum = 1
                     });
