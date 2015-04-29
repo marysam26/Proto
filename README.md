@@ -25,7 +25,7 @@ Version 1.0 is complete and the testing phase has been completed.
 
 ## Build / Install
 
-The current implimentation deploys on Microsoft Azure using RavenHQ as the database back end. First, ensure the connection string for ravenHQ exists in the web.xml file. If no connection string exists copy one from your RavenHQ account into that file, and modify the RavenAuthorization Dependency to use RavenHQ. Then, from the solution explorer right click the package and select publish. Publish to Azure Websites using your account information. Follow the prompts. When the prompts are finished the website will be available at <Given Name>.azurewebsites.net.
+The current implementation deploys on Microsoft Azure using RavenHQ as the database back end. First, ensure the connection string for ravenHQ exists in the web.xml file. If no connection string exists copy one from your RavenHQ account into that file, and modify the Raven Authorization Dependency to use RavenHQ. Then, from the solution explorer right click the package and select publish. Publish to Azure Websites using your account information. Follow the prompts. When the prompts are finished the website will be available at <Given Name>.azurewebsites.net.
 
 * Platform and System Dependencies: 
     WriteItUp! operates on both Windows and Mac operating systems. 
