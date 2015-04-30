@@ -55,6 +55,7 @@ The current implementation deploys on Microsoft Azure using RavenHQ as the datab
 * CKEditor
 
 ## Known Bugs / Caveats
+* Reviewers use the same code as students in order to enlist in a class (the classroom code). This will not prevent a student from having the ability to register as a reviewer. This was discovered after the most recent testing phase and a fix has not yet been implemented. A possible fix is to have teachers generate a reviewer code for reviewers, similar to the one the system administrator generates for teachers. The reviewer can then use the course code and the given reviewer code to enlist in a course.
 
 
 
