@@ -1,5 +1,4 @@
 C:\Users\Katie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csproj.App.config
-C:\Users\Katie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
 C:\Users\Katie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.dll
 C:\Users\Katie\Source\Repos\Proto\Proto2\obj\Debug\Proto2.pdb
 C:\Users\Katie\Source\Repos\Proto\Proto2\bin\Proto2.dll.config
