@@ -161,6 +161,7 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
             return View(reviews);
         }
 
+
         public ActionResult DeleteReview(string id){
             //removes the review from the and modifies the submission the decrement the number of reviews and open up that review slot.
             var sub = DocumentSession.Load<ReviewInputDatabases>(id);
@@ -491,6 +492,10 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
             var review = DocumentSession.Query<ReviewInputDatabase>().
                 Where(x => x.SubmitId == assId && x.Username == revId).ToList().FirstOrDefault();
 
+            {
+                var assignment = DocumentSession.Load<Student.Models.SubmissionView>(review.SubmitId);
+                ViewData.Add("AssignmentName", assignment.AssignmentName);
+            }
             return View(review);
 
         }

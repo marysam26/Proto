@@ -416,6 +416,13 @@ namespace WriteItUp2.Areas.Teacher.Controllers
         {
             var review = DocumentSession.Query<ReviewInputDatabase>().
                 Where(x => x.SubmitId == assId && x.Username == revId).ToList().FirstOrDefault();
+                  if (review != null)
+                  {
+                      var assignment = DocumentSession.Load<SubmissionView>(review.SubmitId);
+                          ViewData.Add("AssignmentName", assignment.AssignmentName);
+                  }
+
+              
 
             return View(review);
 
