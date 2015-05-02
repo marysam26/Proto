@@ -337,9 +337,17 @@ namespace WriteItUp2.Areas.Teacher.Controllers
             };
             DocumentSession.Store(r);
             DocumentSession.SaveChanges();
-            while (!User.IsInRole(WriteItUpRoles.Reviewer)) { }
+            while (true)
+            {
+                var tmpUser = DocumentSession.Load<WriteItUpUser>(User.Identity.GetUserId());
+                if (tmpUser.Roles.Contains(WriteItUpRoles.Reviewer))
+                    break;
+            }
 
-            return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
+            return RedirectToAction("LogOff", "Account", new { area = "Account" });
+          //  while (!User.IsInRole(WriteItUpRoles.Reviewer)) { }
+
+           // return RedirectToAction("Index", "ReviewerHome", new { area = "Reviewer" });
         }
               [Authorize(Roles = WriteItUpRoles.Teacher)]
         public ActionResult ExtendDueDate(DateTime date, Guid id)

@@ -591,6 +591,7 @@ namespace WriteItUp2.Areas.Account
             base.Dispose(disposing);
         }
 
+    
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -676,6 +677,9 @@ namespace WriteItUp2.Areas.Account
             }
         }
         #endregion
+
+  
+        }
     }
 
     public class WriteItUpRoles
@@ -685,4 +689,3 @@ namespace WriteItUp2.Areas.Account
         public const string Reviewer = "WriteItUp/Reviewer";
         public const string SystemAdmin = "WriteItUp/SystemAdmin";
     }
-}

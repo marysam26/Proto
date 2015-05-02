@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using System.Web;
+using System.Web.Routing;
 using WriteItUp2.Areas.Account;
 using WriteItUp2.Areas.Reviewer.Indexes;
 using WriteItUp2.Areas.Reviewer.Models;
@@ -351,11 +354,17 @@ namespace WriteItUp2.Areas.Reviewer.Controllers
             UserManager.AddToRole(User.Identity.GetUserId(), WriteItUpRoles.Teacher);
             DocumentSession.Delete<AddPassView>(input.TeacherCode);
             DocumentSession.SaveChanges();
-            while (!User.IsInRole(WriteItUpRoles.Teacher))
+
+          
+            while (true)
             {
+                var tmpUser = DocumentSession.Load<WriteItUpUser>(User.Identity.GetUserId());
+                if (tmpUser.Roles.Contains(WriteItUpRoles.Teacher))
+                    break;
             }
 
-            return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+            return RedirectToAction("LogOff", "Account", new {area = "Account"});
+            // return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
         }
     }
 }
