@@ -639,7 +639,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\grey.jpg" />
     <Content Include="Images\letters2.50.JPG" />
-    <Content Include="Images\paper.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="font-awesome-4.1.0\fonts\fontawesome-webfont.eot" />

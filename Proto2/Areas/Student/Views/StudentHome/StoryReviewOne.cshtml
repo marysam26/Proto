@@ -1,58 +1,85 @@
 ﻿@model List<WriteItUp2.Areas.Student.Models.StoryReviewView>
 
 
-    @{
-        ViewBag.Title = "Review";
+@{
+    ViewBag.Title = "Review";
 
-    }
+}
 
-    <body style="
+<body style="
         background-image: url(/Images/letters2.50.JPG);
         background-repeat: no-repeat;
         background-size: cover">
 
     @if (!Model.Any())
-        {
+    {
         <div class="jumbotron">
             <h2>No Reviews</h2>
         </div>
 
-        }
+    }
     @if (Model.Any())
-        {
-    <p></p>
-    <div class="content-wrapper">
-        <div class="pull-right">
-            <p></p><p></p>
-            <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+    {
+        <p></p>
+        <div class="content-wrapper">
+            <div class="pull-right">
+                <p></p><p></p>
+                <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:30px; padding-left:30px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
 
-                <a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new { submitId = @Model.First().submitId, classID = Model.First().classId })' ;return false; ">Submission</a><p></p>
-                <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.First().classId})' ;return false; ">Course home</a><p></p>
-            </div>
-        </div>
-    </div>
-    <div class="content-wrapper">
-        <div>
-            <div class="row">
-                <div class="col-xs-9">
-                    <p></p><p></p>
-                    <center><h2>Review for @Model.First().AssignmentName</h2></center>
-                    @foreach (var review in Model)
-                    {
-                        <div class="jumbotron" style="opacity: .90">
-                            <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;@review.ScorePlot
-                            <br><br>
-                            <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>
-                            <b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreSetting<br><br>
-                            <b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.Comments<br><br>
-                        </div>
-                        <p></p>
-                    }
+                    <a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new { submitId = @Model.First().submitId, classID = Model.First().classId })' ;return false; ">Submission</a><p></p>
+                    <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.First().classId})' ;return false; ">Course home</a><p></p>
                 </div>
             </div>
         </div>
-    </div>
-        }
+        <div class="content-wrapper">
+            <div>
+                <div class="row">
+                    <div class="col-xs-10">
+                        <p></p><p></p>
+                        <center><h2>Review for @Model.First().AssignmentName</h2></center>
+                        @foreach (var review in Model)
+                        {
+                            <div class="jumbotron" style="opacity: .90">
+                                <center><font size="2" color="red">Were the following questions answered in your story? 0=No, 1=Yes</font></center>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-size:small">Who is in the story?</th>
+                                            <th style="font-size:small">Where does the story take place?</th>
+                                            <th style="font-size:small">When does the story take place?</th>
+                                            <th style="font-size:small">What happens in the story?</th>
+                                            <th style="font-size:small">What happens next?</th>
+                                            <th style="font-size:small">How does the story end?</th>
+                                            <th style="font-size:small">How does the main/other character(s) feel?</th>
+                                            <th style="font-size:small; color:darkslateblue">Overall score out of 7</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@review.ScoreWhoStory</td>
+                                            <td>@review.ScoreWhereStory</td>
+                                            <td>@review.ScoreWhenStory</td>
+                                            <td>@review.ScoreWhatStory</td>
+                                            <td>@review.ScoreWhatNext</td>
+                                            <td>@review.ScoreHowStory</td>
+                                            <td>@review.ScoreCharacterFeel</td>
+                                            <td style="color:darkslateblue">@review.ScoreOverall</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="9" style="color:darkslateblue; border-width:0px">Comments:</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="9" style="border-width:0px">@review.Comments</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p></p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
-    </body>
+</body>
