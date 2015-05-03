@@ -56,6 +56,8 @@ The current implementation deploys on Microsoft Azure using RavenHQ as the datab
 
 ## Known Bugs / Caveats
 * Reviewers use the same code as students in order to enlist in a class (the classroom code). This will not prevent a student from having the ability to register as a reviewer. This was discovered after the most recent testing phase and a fix has not yet been implemented. A possible fix is to have teachers generate a reviewer code for reviewers, similar to the one the system administrator generates for teachers. The reviewer can then use the course code and the given reviewer code to enlist in a course.
+* Currently, when a teacher tries to register as a reviewer from the teacher page or the reviewer tries the register as a teacher from their page, the user is redirected to a not found webpage. This is due to a race condition and an authentication condition using roles that has yet to be rectified. If the users logs off of WriteItUp and then signs back in, they will have permission to access both the reviewer and the teacher page.
+* Currently, our delete buttons are not functioning correctly due to a JQuery issues. The issue seems related to either not locating the JQuery class or a problem in one of our JQuery scripts. This error may have to do with refactoring WriteItUp as it may have unintentionally changed part script code. Once the JQuery is corrected and the buttons are responsive, they should correctly delete the item they are associated with as the backend code is still correct and functioning.
 
 
 
