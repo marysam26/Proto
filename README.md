@@ -25,7 +25,6 @@ Version 1.0 is complete and the testing phase has been completed.
 
 ## Build / Install
 
-The current implementation deploys on Microsoft Azure using RavenHQ as the database back end. First, ensure the connection string for ravenHQ exists in the web.xml file. If no connection string exists copy one from your RavenHQ account into that file, and modify the Raven Authorization Dependency to use RavenHQ. Then, from the solution explorer right click the package and select publish. Publish to Azure Websites using your account information. Follow the prompts. When the prompts are finished the website will be available at <Given Name>.azurewebsites.net.
 
 * Platform and System Dependencies: 
     WriteItUp! operates on both Windows and Mac operating systems. 
@@ -38,6 +37,16 @@ The current implementation deploys on Microsoft Azure using RavenHQ as the datab
     [Documentation](http://ravendb.net/docs/article-page/2.0/csharp/client-api/connecting-to-a-ravendb-datastore)
 
 ## Configuration and Run Info
+
+* Deployment Locally
+    For teseting, WriteItUp can be deployted locally though an emulator within Visual Studio. Ensure RavenDB is running on port 8080 locally and the conecction string exists in the Web.config file. If no connection string exists for RavenDB for localhost:8080 obtain one by using the native RavenDB UI. Make sure that the document store in RavenRegistry.cs under Dependency Resoultion has the ConnectionStringName set to "RavenDB", or whatever you had named it in the connection string. Clicking run will build and deploy the project locally.
+
+* Deployment on Azure:
+    This project can be deployed on Microsoft Azure using RavenHQ as the database back end. First, ensure the connection string for ravenHQ exists in the Web.config file. If no connection string exists copy one from your     RavenHQ account into that file, and modify the RavenRegistry to use RavenHQ. Then, from the solution explorer right click the package and select publish. Publish to Azure Websites using your account  information.Follow the prompts. When the prompts are finished the website will be available at <Given>.azurewebsites.net
+
+* Deployment on WSU servers.
+    For deployment on the appropriated WSU server follow these steps. On a windows machine on campus using remote desktop, remote into van-capstone.vancouver.wsu.edu. Credentails can be obtained by speaking to Chuck Harrsh. Ensure IIS8. Ensure RavenDB is installed and running on port 8080, with connection string and RavenRegistry settings set similarily to deploying locally. In the server manager, select manage, then add roles and features. Under server roles select Web Server(IIS). On the next screen, ensure .Net framework 4.5 is included. Next, Select all Application Development features and add them. Comfirm these and allow the features to install. Refresh the manager. Select tools and open IIS. Copy WriteItUP into the c://...inetpub//wwwroot folder. Permissions will be automatically reassigned. Right click Sites and select Add Websites. Pick a site name and point the phyisical path to the directory in the wwwroot folder. Under host name enter "van-capstone.vancouver.wsu.edu". Select browse to see if the site is working properly at this point. The ip of the address will be 69.166.34.2
+
 
 
 
