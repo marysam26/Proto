@@ -155,9 +155,11 @@ namespace WriteItUp2.Areas.SystemAdmin.Controllers
 
         public ActionResult ViewReviewsByReviewers(string rid)
         {
-            var reviews = DocumentSession.Query<ReviewView>()
-                                         .Where(r => r.ReviewerName == rid)
+            var actualid = "WriteItUpUsers/" + rid;
+            var reviews = DocumentSession.Query<WriteItUp2.Areas.Student.Models.SubmissionView>()
+                                         .Where(r => r.reviewer1 == actualid || r.reviewer2 == actualid )
                                          .ToList();
+            ViewData.Add("ReviewerName", actualid);
             return View(reviews);
         }
 

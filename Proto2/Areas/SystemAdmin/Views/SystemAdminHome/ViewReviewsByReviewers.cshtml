@@ -1,4 +1,4 @@
-﻿@model List<WriteItUp2.Areas.Teacher.Models.ReviewView>
+﻿@model List<WriteItUp2.Areas.Student.Models.SubmissionView>
 
 @{
     ViewBag.Title = "Reviews";
@@ -25,24 +25,24 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Submission</th>
-                        <th>Plot Score</th>
-                        <th>Character Score</th>
-                        <th>Setting Score</th>
-                        <th>Comments</th>
-                        <th>Remove</th>
+                        <th>Assignment</th>
+                        <th>Student Name</th>
+                        <th>Story Title</th>
+                        <th>Submission Date</th>
+                        <th>Full Review</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var submission in Model)
                     {
                         <tr>
-                            <td><p><button type="button" class="btn btn-sm btn-default" onclick="location.href='@Url.Action("ViewStoriesFromReview", "SystemAdminHome" ,new {sid = submission.SubmitId} )' ;return false; ">Submission</button></p></td>    
-                            <td>@submission.ScorePlot</td>
-                            <td>@submission.ScoreCharacter</td>
-                            <td>@submission.ScoreSetting</td>
-                            <td>@submission.Comments</td>
-                            <td><p class="text-right"><button type="button" class="btn btn-xs btn-danger confirm-terminate" data-toggle="modal" data-target="#terminateUserModal" data-code="@submission.Id"><i class="glyphicon glyphicon-remove"></i></button></p></td>
+                            <td>@submission.AssignmentName</td>
+                            <td>@submission.StudentId</td>
+                            <td>@submission.StoryTitle</td>
+                            <td>@submission.SubmissionDate</td>
+                        
+                            <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "SystemAdminHome", new {revId = @ViewBag.ReviewerName, assId = submission.Id})' ;return false; ">View</button></td>
+
                         </tr>
 
                     }
