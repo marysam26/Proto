@@ -30,7 +30,7 @@ Version 1.0 is complete and the testing phase has been completed.
     WriteItUp! operates on both Windows and Mac operating systems. 
     Testing has been completed for Windows 7 and above and Mac Mavericks and above.
 
-* Needed Tools: CKEditor which is included in the project
+* Needed Tools: CKEditor which is included in the project. Documentation can be found here: [CKEditor Documentation](http://docs.cksource.com/Main_Page)
 
 * RavenDB:
     Install instructions can be found here:[Download and Install](http://ravendb.net/downloads/builds) and API documentation can be found here:
