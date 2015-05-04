@@ -1,0 +1,70 @@
+﻿@model WriteItUp2.Areas.Student.Models.SubmissionView
+
+@{
+    ViewBag.Title = "Student Stories";
+}
+
+<body style="
+        background-image: url(/Images/grey.jpg);
+        background-repeat: no-repeat;
+        background-size: cover">
+</body>
+<div class="content-wrapper">
+
+    @if (Model==null)
+    {
+        <div class="jumbotron" style="opacity: .90">
+            <h2>No stories composed by this student. </h2>
+        </div>
+
+    }
+    @if (Model!=null)
+    {
+
+        <div class="jumbotron" style="opacity: .90">
+            <h2>@ViewBag.Title</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Story</th>
+                        <th>Number of Reviews</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                        <tr>
+                            <td>Model.StoryTitle</td>
+                            <td>@Model.Story</td>
+                            <td>@Model.NumReviews</td>
+                            @if (Model.reviewer1 != null)
+                            {
+                                <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "SystemAdminHome", new {revId = Model.reviewer1, assId = Model.Id})' ;return false; ">View</button></td>
+                            }
+
+                            else
+                            {
+                                <td><i>none</i></td>
+                            }
+                            @if (Model.reviewer2 != null)
+                            {
+                                <td><button type="button" class="btn btn-sm btn-default" onclick=" location.href='@Url.Action("CurrentReview", "systemAdminHome", new {revId = Model.reviewer2, assId =Model.Id})' ;return false; ">View</button></td>
+                            }
+
+                            else
+                            {
+                                <td><i>none</i></td>
+                            }
+                            
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    }
+</div>

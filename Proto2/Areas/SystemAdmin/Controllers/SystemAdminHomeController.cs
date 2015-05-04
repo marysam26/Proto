@@ -7,28 +7,28 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas.Account;
-using Proto2.Areas.Reviewer.Models;
-using Proto2.Areas.Student.Models;
-using Proto2.Areas.SystemAdmin.Models;
-using Proto2.Areas.Teacher.Models;
+using WriteItUp2.Areas.Account;
+using WriteItUp2.Areas.Reviewer.Models;
+using WriteItUp2.Areas.Student.Models;
+using WriteItUp2.Areas.SystemAdmin.Models;
+using WriteItUp2.Areas.Teacher.Models;
 using Raven.Client;
 using Raven.Client.Document;
-using StoryView = Proto2.Areas.SystemAdmin.Models.StoryView;
-using VideoView = Proto2.Areas.SystemAdmin.Models.VideoView;
-using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
-using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
-
-namespace Proto2.Areas.SystemAdmin.Controllers
+using StoryView = WriteItUp2.Areas.SystemAdmin.Models.StoryView;
+using VideoView = WriteItUp2.Areas.SystemAdmin.Models.VideoView;
+using ClassModel = WriteItUp2.Areas.Teacher.Models.ClassModel;
+using SubmissionView = WriteItUp2.Areas.SystemAdmin.Models.SubmissionView;
+using ReviewInputDatabases = WriteItUp2.Areas.Reviewer.Models.ReviewInputDatabase;
+namespace WriteItUp2.Areas.SystemAdmin.Controllers
 {
-    //[Authorize(Roles=ProtoRoles.SystemAdmin)]
+    //[Authorize(Roles=WriteItUpRoles.SystemAdmin)]
     public class SystemAdminHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
         public IDocumentSession DocumentSession { get; set; }
 
         //list is being returned see Students below for an example
-        //[Authorize(Roles = ProtoRoles.SystemAdmin)]
+        //[Authorize(Roles = WriteItUpRoles.SystemAdmin)]
         public ActionResult Index()
         {
             return View();
@@ -67,7 +67,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult DeleteTeacher(string id)
         {
-            //delete proto user, teacher model, courses associated with teacher,
+            //delete WriteItUp user, teacher model, courses associated with teacher,
             //for each course, remove it from associated students and reviewers
 
             var teacher = DocumentSession.Load<TeacherModel>(id);
@@ -99,11 +99,11 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
             }
             var teacherId = teacher.Id.Split('/');
-            var protoUser = DocumentSession.Load<ProtoUser>("ProtoUsers/" + teacherId[1]);
-            protoUser.Roles.Remove(ProtoRoles.Teacher);
-            if (!protoUser.Roles.Any())
+            var WriteItUpUser = DocumentSession.Load<WriteItUpUser>("WriteItUpUsers/" + teacherId[1]);
+            WriteItUpUser.Roles.Remove(WriteItUpRoles.Teacher);
+            if (!WriteItUpUser.Roles.Any())
             {
-                DocumentSession.Delete(protoUser.Id);
+                DocumentSession.Delete(WriteItUpUser.Id);
             }
             DocumentSession.Delete(id);
 
@@ -155,10 +155,34 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult ViewReviewsByReviewers(string rid)
         {
-            var reviews = DocumentSession.Query<ReviewView>()
-                                         .Where(r => r.ReviewerName == rid)
+            var actualid = "WriteItUpUsers/" + rid;
+            var reviews = DocumentSession.Query<WriteItUp2.Areas.Student.Models.SubmissionView>()
+                                         .Where(r => r.reviewer1 == actualid || r.reviewer2 == actualid )
                                          .ToList();
+            ViewData.Add("ReviewerName", actualid);
             return View(reviews);
+        }
+
+
+        public ActionResult DeleteReview(string id){
+            //removes the review from the and modifies the submission the decrement the number of reviews and open up that review slot.
+            var sub = DocumentSession.Load<ReviewInputDatabases>(id);
+            DocumentSession.Delete(sub);
+            var story = DocumentSession.Load<SubmissionView>(sub.SubmitId);
+            story.NumReviews = story.NumReviews-1;
+            if(story.reviewer1 == sub.Username){
+                if (story.reviewer2 != null) {
+                    story.reviewer1 = story.reviewer2;
+                    story.reviewer2 = null;
+                }
+            else{
+                story.reviewer1 = null;
+                }
+            }
+            else{
+                story.reviewer2 = null;
+            }
+            return RedirectToAction("Reviewers");
         }
 
         public ActionResult ConfirmReviewer(Guid id)
@@ -201,9 +225,15 @@ namespace Proto2.Areas.SystemAdmin.Controllers
 
         public ActionResult ViewStoriesByStudent(string sid)
         {
-            var stories = DocumentSession.Query<Proto2.Areas.Student.Models.SubmissionView>()
+            var stories = DocumentSession.Query<WriteItUp2.Areas.Student.Models.SubmissionView>()
                                         .Where(r => r.StudentId == sid)
                                         .ToList();
+            return View(stories);
+        }
+
+        public ActionResult ViewStoriesFromReview(string sid)
+        {
+            var stories = DocumentSession.Load<WriteItUp2.Areas.Student.Models.SubmissionView>(sid);
             return View(stories);
         }
 
@@ -304,12 +334,13 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             {
                 DocumentSession.Delete(sub);
             }
-
+            
             DocumentSession.Delete(dataID);
             DocumentSession.SaveChanges();
             return RedirectToAction("Students");
         }
 
+        //TODO: Remove reviewer is not remoing it from the databases. Need to fix.
         public ActionResult RemoveReviewer(string reviewerID)
         {
             var random = new Random();
@@ -322,13 +353,13 @@ namespace Proto2.Areas.SystemAdmin.Controllers
                 course.Reviewers.Remove(reviewerID);
             }
             DocumentSession.SaveChanges();
-            var idents = DocumentSession.Query<ProtoUser>()
+            var idents = DocumentSession.Query<WriteItUpUser>()
                                         .Where(r => r.Id == reviewerID)
                                         .ToList();
-            foreach (ProtoUser reviewer in idents)
+            foreach (WriteItUpUser reviewer in idents)
             {
                 //if the only role the user has is a reviwer than the entire account is removed
-                if (reviewer.Roles.Contains("Proto/Student") || reviewer.Roles.Contains("Proto/Teacher") || reviewer.Roles.Contains("Proto/Admin"))
+                if (reviewer.Roles.Contains("WriteItUp/Student") || reviewer.Roles.Contains("WriteItUp/Teacher") || reviewer.Roles.Contains("WriteItUp/Admin"))
                 {
                     Roles.RemoveUserFromRole(reviewerID,"Reviewer");
                 }
@@ -396,7 +427,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
         public ActionResult ViewClasess(string teacherid)
         {
             var teacher = teacherid.Split('/');
-           teacherid = "ProtoUsers/" + teacher[1];
+           teacherid = "WriteItUpUsers/" + teacher[1];
             var courses = DocumentSession.Query<Teacher.Models.ClassModel>()
                 // How to make it pull based on teacherID
                 .Where(r => r.teacherId == teacherid)
@@ -405,7 +436,7 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             return View(courses);
         }
 
-        public ActionResult ViewAssignmentsByCourse(List<StudentView> students)
+        public ActionResult ViewAssignmentByCourse(List<StudentView> students)
         {
             //lists the assignments defined by a given course
             var studentlist = DocumentSession.Query<StudentView>()
@@ -463,6 +494,10 @@ namespace Proto2.Areas.SystemAdmin.Controllers
             var review = DocumentSession.Query<ReviewInputDatabase>().
                 Where(x => x.SubmitId == assId && x.Username == revId).ToList().FirstOrDefault();
 
+            {
+                var assignment = DocumentSession.Load<Student.Models.SubmissionView>(review.SubmitId);
+                ViewData.Add("AssignmentName", assignment.AssignmentName);
+            }
             return View(review);
 
         }

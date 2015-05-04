@@ -287,6 +287,7 @@ C:\Users\troper\Source\Repos\Proto\Proto2\bin\Proto2.dll.config
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\Proto2.dll
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\Proto2.pdb
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\Antlr3.Runtime.dll
+C:\Users\troper\Source\Repos\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\DotNetOpenAuth.AspNet.dll
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\DotNetOpenAuth.Core.dll
 C:\Users\troper\Source\Repos\Proto\Proto2\bin\DotNetOpenAuth.OAuth.Consumer.dll
@@ -378,10 +379,12 @@ C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csproj.App.config
 C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.dll
 C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.pdb
 C:\Users\troper\Source\Repos\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
+C:\Users\Katie\Source\Repos\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\Proto2.dll.config
 D:\dev\CapstoneProject\Proto\Proto2\bin\Proto2.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\Proto2.pdb
 D:\dev\CapstoneProject\Proto\Proto2\bin\Antlr3.Runtime.dll
+D:\dev\CapstoneProject\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\DotNetOpenAuth.AspNet.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\DotNetOpenAuth.Core.dll
 D:\dev\CapstoneProject\Proto\Proto2\bin\DotNetOpenAuth.OAuth.Consumer.dll
@@ -470,6 +473,7 @@ D:\dev\CapstoneProject\Proto\Proto2\bin\WebMatrix.WebData.xml
 D:\dev\CapstoneProject\Proto\Proto2\bin\Org.Mentalis.Security.Cryptography.xml
 D:\dev\CapstoneProject\Proto\Proto2\bin\Mono.Math.xml
 D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.csproj.App.config
+D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
 D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.dll
 D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.pdb
-D:\dev\CapstoneProject\Proto\Proto2\obj\Debug\Proto2.csprojResolveAssemblyReference.cache
+C:\Users\Tulio\Documents\Capstone\Proto\Proto2\bin\CB.Web.Security.GenericDbRoleProvider.dll

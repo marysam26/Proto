@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Proto.Areas.Student.Models
+namespace WriteItUp.Areas.Student.Models
 {
     public class VideoView
     {

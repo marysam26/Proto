@@ -7,17 +7,17 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Proto2.Areas.SystemAdmin.Models;
-using Proto2.Areas.Teacher.Models;
+using WriteItUp2.Areas.SystemAdmin.Models;
+using WriteItUp2.Areas.Teacher.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Linq;
 using RavenDB.AspNet.Identity;
-using Proto2.Areas.Student.Models;
+using WriteItUp2.Areas.Student.Models;
 using StructureMap.Pipeline;
-using Proto2.Areas.Reviewer.Models;
+using WriteItUp2.Areas.Reviewer.Models;
 
-namespace Proto2.Areas.Account
+namespace WriteItUp2.Areas.Account
 {
     [Authorize]
     public class AccountController : Controller
@@ -41,11 +41,11 @@ namespace Proto2.Areas.Account
 
         public AccountController()
         {
-            this.UserManager = new UserManager<ProtoUser>(
-                new UserStore<ProtoUser>(() => this.DocumentSession));
+            this.UserManager = new UserManager<WriteItUpUser>(
+                new UserStore<WriteItUpUser>(() => this.DocumentSession));
         }
 
-        public UserManager<ProtoUser> UserManager { get; private set; }
+        public UserManager<WriteItUpUser> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
@@ -80,16 +80,16 @@ namespace Proto2.Areas.Account
 
                 await SignInAsync(user, model.RememberMe);
               
-                if (user.Roles.Contains(ProtoRoles.Teacher))
+                if (user.Roles.Contains(WriteItUpRoles.Teacher))
                     return RedirectToAction("Index", "TeacherHome", new {area = "Teacher"});
 
-                if (user.Roles.Contains(ProtoRoles.Reviewer))
+                if (user.Roles.Contains(WriteItUpRoles.Reviewer))
                     return RedirectToAction("Index", "ReviewerHome", new {area = "Reviewer"});
 
-                if (user.Roles.Contains(ProtoRoles.SystemAdmin))
+                if (user.Roles.Contains(WriteItUpRoles.SystemAdmin))
                     return RedirectToAction("Index", "SystemAdminHome", new {area = "SystemAdmin"});
 
-                if (user.Roles.Contains(ProtoRoles.Student))
+                if (user.Roles.Contains(WriteItUpRoles.Student))
                 {
                     return RedirectToAction("Index", "StudentHome", new {area = "Student"});
                 }
@@ -153,10 +153,10 @@ namespace Proto2.Areas.Account
                         return View(model);
                     }
                 }
-                var user = new ProtoUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName};
+                var user = new WriteItUpUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName};
                 if (model.AccountType == "Teacher")
                 {
-                    user.Roles.Add(ProtoRoles.Teacher);
+                    user.Roles.Add(WriteItUpRoles.Teacher);
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -177,7 +177,7 @@ namespace Proto2.Areas.Account
                     }
                 }
                 if (model.AccountType == "Student"){
-                    user.Roles.Add(ProtoRoles.Student);
+                    user.Roles.Add(WriteItUpRoles.Student);
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -203,7 +203,7 @@ namespace Proto2.Areas.Account
                 }
                 if (model.AccountType == "Reviewer")
                 {
-                    user.Roles.Add(ProtoRoles.Reviewer);
+                    user.Roles.Add(WriteItUpRoles.Reviewer);
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -228,7 +228,7 @@ namespace Proto2.Areas.Account
                 }                  
                /* else
                 {
-                    user.Roles.Add(ProtoRoles.Reviewer);
+                    user.Roles.Add(WriteItUpRoles.Reviewer);
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -285,8 +285,8 @@ namespace Proto2.Areas.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ProtoUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName };
-                user.Roles.Add(ProtoRoles.Teacher);
+                var user = new WriteItUpUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                user.Roles.Add(WriteItUpRoles.Teacher);
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -320,7 +320,7 @@ namespace Proto2.Areas.Account
         {
             if (ModelState.IsValid)
             {
-                var user = new ProtoUser() { UserName = model.FirstName };
+                var user = new WriteItUpUser() { UserName = model.FirstName };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -350,7 +350,7 @@ namespace Proto2.Areas.Account
         {
             if (ModelState.IsValid)
             {
-                var user = new ProtoUser() { UserName = model.FirstName };
+                var user = new WriteItUpUser() { UserName = model.FirstName };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -537,7 +537,7 @@ namespace Proto2.Areas.Account
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ProtoUser() { UserName = model.UserName };
+                var user = new WriteItUpUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -591,6 +591,7 @@ namespace Proto2.Areas.Account
             base.Dispose(disposing);
         }
 
+    
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -603,7 +604,7 @@ namespace Proto2.Areas.Account
             }
         }
 
-        private async Task SignInAsync(ProtoUser user, bool isPersistent)
+        private async Task SignInAsync(WriteItUpUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
@@ -676,13 +677,15 @@ namespace Proto2.Areas.Account
             }
         }
         #endregion
+
+  
+        }
     }
 
-    public class ProtoRoles
+    public class WriteItUpRoles
     {
-        public const string Teacher = "Proto/Teacher";
-        public const string Student = "Proto/Student";
-        public const string Reviewer = "Proto/Reviewer";
-        public const string SystemAdmin = "Proto/SystemAdmin";
+        public const string Teacher = "WriteItUp/Teacher";
+        public const string Student = "WriteItUp/Student";
+        public const string Reviewer = "WriteItUp/Reviewer";
+        public const string SystemAdmin = "WriteItUp/SystemAdmin";
     }
-}

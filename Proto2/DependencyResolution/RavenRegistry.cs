@@ -4,7 +4,7 @@ using Raven.Client.Indexes;
 using StructureMap.Configuration.DSL;
 using StructureMap.Web.Pipeline;
 
-namespace Proto2.DependencyResolution
+namespace WriteItUp2.DependencyResolution
 {
     public class RavenRegistry : Registry
     {

@@ -350,7 +350,7 @@ $.extend($.validator, {
 	
 	autoCreateRanges: false,
 	
-	prototype: {
+	WriteItUptype: {
 		
 		init: function() {
 			this.labelContainer = $(this.settings.errorLabelContainer);

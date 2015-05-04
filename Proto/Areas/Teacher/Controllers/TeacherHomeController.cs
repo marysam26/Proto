@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Proto.Areas.Teacher.Models;
+using WriteItUp.Areas.Teacher.Models;
 
 
-namespace Proto.Areas.Teacher.Controllers
+namespace WriteItUp.Areas.Teacher.Controllers
 {
     public class TeacherHomeController : Controller
     {

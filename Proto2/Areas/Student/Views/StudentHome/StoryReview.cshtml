@@ -1,4 +1,4 @@
-﻿@model List<Proto2.Areas.Student.Models.StoryReviewView>
+﻿@model List<WriteItUp2.Areas.Student.Models.StoryReviewView>
 
 
 @{
@@ -24,7 +24,7 @@
         <div class="content-wrapper">
             <div class="pull-right">
                 <p></p><p></p>
-                <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+                <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:30px; padding-left:30px; padding-bottom:45px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
 
                     <a onclick="location.href='@Url.Action("PastSubmission", "StudentHome", new { submitId = @Model.First().submitId, classID = Model.First().classId })' ;return false; ">Submission</a><p></p>
                     <a onclick="location.href='@Url.Action("ViewAssignments", "StudentHome", new {classID = Model.First().classId})' ;return false; ">Course home</a><p></p>
@@ -34,23 +34,51 @@
     <div class="content-wrapper">
         <div>
             <div class="row">
-                <div class="col-xs-9">
+                <div class="col-xs-10">
                     <center><h2>Reviews for @Model.First().AssignmentName</h2></center>
-                    @foreach (var review in Model)
-                    {
-                        <h2>Review @review.reviewNum</h2>
-                        <div class="jumbotron" style="opacity: .90">
-                            <b>Plot:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;@review.ScorePlot
-                            <br><br>
-                            <b>Character:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreCharacter<br><br>
-                            <b>Setting:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.ScoreSetting<br><br>
-                            <b>Comments:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@review.Comments<br><br>
-                        </div>
+                    <div class=" = jumbotron" style="opacity:.90">
+                        <center><font size="2" color="red">Were the following questions answered in your story? 0=No, 1=Yes</font></center><p></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="font-size:small">Who is in the story?</th>
+                                    <th style="font-size:small">Where does the story take place?</th>
+                                    <th style="font-size:small">When does the story take place?</th>
+                                    <th style="font-size:small">What happens in the story?</th>
+                                    <th style="font-size:small">What happens next?</th>
+                                    <th style="font-size:small">How does the story end?</th>
+                                    <th style="font-size:small">How does the main/other character(s) feel?</th>
+                                    <th style="font-size:small; color:darkslateblue">Overall score out of 7</th>
+                                </tr>
+                            </thead>
+                            @foreach (var review in Model)
+                            {
+                                <tbody style="border-color:darkgray">
+                                    <tr>
+                                        <td style="color:maroon; font-weight:bold;">Review @review.reviewNum</td>
+                                        <td>@review.ScoreWhoStory</td>
+                                        <td>@review.ScoreWhereStory</td>
+                                        <td>@review.ScoreWhenStory</td>
+                                        <td>@review.ScoreWhatStory</td>
+                                        <td>@review.ScoreWhatNext</td>
+                                        <td>@review.ScoreHowStory</td>
+                                        <td>@review.ScoreCharacterFeel</td>
+                                        <td style="color:darkslateblue">@review.ScoreOverall</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="9" style="color:darkslateblue; border-width:0px">Comments:</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="9" style="border-width:0px">@review.Comments</th>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
                         <p></p>
-                    }
-                </div>
+</div>
             </div>
+        </div>
         </div>
     </div>
     }

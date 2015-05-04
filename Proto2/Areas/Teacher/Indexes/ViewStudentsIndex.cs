@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Proto2.Areas.Teacher.Models;
+using WriteItUp2.Areas.Teacher.Models;
 using Raven.Client.Indexes;
 
-namespace Proto2.Areas.Teacher.Indexes
+namespace WriteItUp2.Areas.Teacher.Indexes
 {
     public class ViewStudentsIndex : AbstractIndexCreationTask<StudentViewModel>
     {

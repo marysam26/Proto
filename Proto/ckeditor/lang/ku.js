@@ -71,7 +71,7 @@ CKEDITOR.lang['ku'] =
 	{
 		browseServer	: 'هێنانی ڕاژە',
 		url				: 'ناونیشانی بەستەر',
-		protocol		: 'پڕۆتۆکۆڵ',
+		WriteItUpcol		: 'پڕۆتۆکۆڵ',
 		upload			: 'بارکردن',
 		uploadSubmit	: 'ناردنی بۆ ڕاژە',
 		image			: 'وێنە',

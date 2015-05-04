@@ -1,4 +1,4 @@
-﻿@model Proto2.Areas.Teacher.Models.AssignmentInputView
+﻿@model WriteItUp2.Areas.Teacher.Models.AssignmentInputView
 <!DOCTYPE html>
 
 @{
@@ -18,7 +18,7 @@
     <div class="content-wrapper">
         <div class="pull-right">
             <p></p>
-            <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:50px; padding-left:50px; padding-bottom:35px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
+            <div class="content-wrapper" style="align-content:center; background-color: whitesmoke; padding-right:30px; padding-left:30px; padding-bottom:35px; padding-top:50px ;opacity: 0.90; border-radius: 7px;">
 
                 <a onclick="location.href='@Url.Action("Train", "StudentHome", new {Id = Model.Id})' ;return false; ">Watch strategy video</a><p></p>
                 <a onclick="location.href='@Url.Action("Write", "StudentHome", new {Id = Model.Id})' ;return false; ">Writing</a><p></p>

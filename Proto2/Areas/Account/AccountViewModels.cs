@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace Proto2.Areas.Account
+namespace WriteItUp2.Areas.Account
 {
     public class ManageUserViewModel
     {

@@ -1,8 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Proto2.Areas.Account;
+using WriteItUp2.Areas.Account;
 
-namespace Proto2
+namespace WriteItUp2
 {
     public class FilterConfig
     {
@@ -11,8 +11,8 @@ namespace Proto2
             filters.Add(new HandleErrorAttribute());
             //filters.Add(new AuthorizeAttribute
             //{
-            //    Roles = ProtoRoles.SystemAdmin + "," + ProtoRoles.Teacher + "," + ProtoRoles.Student
-            //            + "," + ProtoRoles.Reviewer
+            //    Roles = WriteItUpRoles.SystemAdmin + "," + WriteItUpRoles.Teacher + "," + WriteItUpRoles.Student
+            //            + "," + WriteItUpRoles.Reviewer
             //});
         }
     }

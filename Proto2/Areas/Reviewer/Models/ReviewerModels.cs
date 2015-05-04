@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Proto2.Areas.Reviewer.Models
+namespace WriteItUp2.Areas.Reviewer.Models
 {
     public class ReviewerModel
     {
@@ -57,10 +57,16 @@ namespace Proto2.Areas.Reviewer.Models
     }
     public class ReviewInputDatabase
     {
+        public string Id { get; set; }
         public string SubmitId { get; set; }
-        public int ScorePlot { get; set; }
-        public int ScoreCharacter { get; set; }
-        public int ScoreSetting { get; set; }
+        public int ScoreWhoStory { get; set; }
+        public int ScoreWhereStory { get; set; }
+        public int ScoreWhenStory { get; set; }
+        public int ScoreWhatStory { get; set; }
+        public int ScoreWhatNext { get; set; }
+        public int ScoreHowStory { get; set; }
+        public int ScoreCharacterFeel { get; set; }
+        public int ScoreOverall { get; set; }
         public string Comments { get; set; }
         public string Username { get; set; }
 
@@ -75,21 +81,47 @@ namespace Proto2.Areas.Reviewer.Models
         public string StoryTitle { get; set; }
 
         public List<SelectListItem> KeyList { get; set; }
+        public List<SelectListItem> KeyList2 { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "Who is in the story?")]
+        public int ScoreWhoStory { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "Where does the story take place?")]
+        public int ScoreWhereStory { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "When does the story take place?")]
+        public int ScoreWhenStory { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "What happens in the story?")]
+        public int ScoreWhatStory { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "What happens next?")]
+        public int ScoreWhatNext { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "How does the story end?")]
+        public int ScoreHowStory { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        [Display(Name = "How does the main character(s) feel?  How does the other character(s) feel?")]
+        public int ScoreCharacterFeel { get; set; }
 
         [Required]
         [Range(0, 7)]
-        [Display(Name = "Score for plot")]
-        public int ScorePlot { get; set; }
-
-        [Required]
-        [Range(0, 7)]
-        [Display(Name = "Score for character")]
-        public int ScoreCharacter { get; set; }
-
-        [Required]
-        [Range(0, 7)]
-        [Display(Name = "Score for setting")]
-        public int ScoreSetting { get; set; }
+        [Display(Name = "Overall story score.")]
+        public int ScoreOverall { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

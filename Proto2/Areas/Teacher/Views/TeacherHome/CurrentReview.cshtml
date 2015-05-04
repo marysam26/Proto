@@ -1,7 +1,9 @@
-﻿@model Proto2.Areas.Reviewer.Models.ReviewInputDatabase
+﻿@model WriteItUp2.Areas.Reviewer.Models.ReviewInputDatabase
+
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Reviews";
+
 }
 
 <body style="
@@ -9,11 +11,64 @@
         background-repeat: no-repeat;
         background-size: cover">
 
-</body>
-<div class="jumbotron">
-    <p><b>Setting: </b>     @Model.ScoreSetting</p>
-    <p><b>Plot: </b>        @Model.ScorePlot</p>
-    <p><b>Character: </b>   @Model.ScoreCharacter</p>
+    @if (Model == null)
+    {
+        <div class="jumbotron">
+            <h2>No Reviews</h2>
+        </div>
 
-    <p><b>Comments:</b><br />@Model.Comments</p>
-</div>
+    }
+    @if (Model != null)
+    {
+        <p></p>
+
+        <div class="content-wrapper">
+            <div>
+                <div class="row">
+                    <div class="col-xs-10">
+                        <center><h2>Reviews for @ViewBag.AssignmentName</h2></center>
+                        <div class=" = jumbotron" style="opacity:.90">
+                            <center><font size="2" color="red">Were the following questions answered in your story? 0=No, 1=Yes</font></center><p></p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size:small">Who is in the story?</th>
+                                        <th style="font-size:small">Where does the story take place?</th>
+                                        <th style="font-size:small">When does the story take place?</th>
+                                        <th style="font-size:small">What happens in the story?</th>
+                                        <th style="font-size:small">What happens next?</th>
+                                        <th style="font-size:small">How does the story end?</th>
+                                        <th style="font-size:small">How does the main/other character(s) feel?</th>
+                                        <th style="font-size:small; color:darkslateblue">Overall score out of 7</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody style="border-color:darkgray">
+                                    <tr>
+                                        <td>@Model.ScoreWhoStory</td>
+                                        <td>@Model.ScoreWhereStory</td>
+                                        <td>@Model.ScoreWhenStory</td>
+                                        <td>@Model.ScoreWhatStory</td>
+                                        <td>@Model.ScoreWhatNext</td>
+                                        <td>@Model.ScoreHowStory</td>
+                                        <td>@Model.ScoreCharacterFeel</td>
+                                        <td style="color:darkslateblue">@Model.ScoreOverall</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="9" style="color:darkslateblue; border-width:0px">Comments:</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="9" style="border-width:0px">@Model.Comments</th>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>

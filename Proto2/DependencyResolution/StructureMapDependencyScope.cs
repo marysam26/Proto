@@ -15,7 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Proto2.DependencyResolution {
+namespace WriteItUp2.DependencyResolution {
     using System;
     using System.Collections.Generic;
     using System.Linq;

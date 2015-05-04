@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using System.Web;
-using Proto2.Areas.Account;
-using Proto2.Areas.Reviewer.Indexes;
-using Proto2.Areas.Reviewer.Models;
-using Proto2.Areas.SystemAdmin.Models;
+using System.Web.Routing;
+using WriteItUp2.Areas.Account;
+using WriteItUp2.Areas.Reviewer.Indexes;
+using WriteItUp2.Areas.Reviewer.Models;
+using WriteItUp2.Areas.SystemAdmin.Models;
 using Raven.Client;
 using Raven.Client.Document;
 using Microsoft.AspNet.Identity;
-using Proto2.Areas.Teacher.Models;
+using WriteItUp2.Areas.Teacher.Models;
 using RavenDB.AspNet.Identity;
-using Proto2.Areas.Student.Models;
-using ClassModel = Proto2.Areas.Teacher.Models.ClassModel;
-//using SubmissionView = Proto2.Areas.SystemAdmin.Models.SubmissionView;
-using SubmissionView = Proto2.Areas.Student.Models.SubmissionView;
+using WriteItUp2.Areas.Student.Models;
+using ClassModel = WriteItUp2.Areas.Teacher.Models.ClassModel;
+//using SubmissionView = WriteItUp2.Areas.SystemAdmin.Models.SubmissionView;
+using SubmissionView = WriteItUp2.Areas.Student.Models.SubmissionView;
 
-namespace Proto2.Areas.Reviewer.Controllers
+namespace WriteItUp2.Areas.Reviewer.Controllers
 {
-    [Authorize(Roles=ProtoRoles.Reviewer)]
+    [Authorize(Roles=WriteItUpRoles.Reviewer)]
     public class ReviewerHomeController : Controller
     {
         //This will get set by dependency injection. Look at DependencyResolution\RavenRegistry
@@ -29,17 +32,17 @@ namespace Proto2.Areas.Reviewer.Controllers
 
            public ReviewerHomeController()
         {
-            this.UserManager = new UserManager<ProtoUser>(
-                new UserStore<ProtoUser>(() => this.DocumentSession));
+            this.UserManager = new UserManager<WriteItUpUser>(
+                new UserStore<WriteItUpUser>(() => this.DocumentSession));
                
         }
 
-        //public AccountController(UserManager<ProtoUser> userManager)
+        //public AccountController(UserManager<WriteItUpUser> userManager)
         //{
         //    UserManager = userManager;
         //}
 
-        public UserManager<ProtoUser> UserManager { get; private set; }
+        public UserManager<WriteItUpUser> UserManager { get; private set; }
 
         public ActionResult Index()
         {
@@ -144,20 +147,6 @@ namespace Proto2.Areas.Reviewer.Controllers
             //Return a view to review a story
             var Submission = DocumentSession.Load<SubmissionView>(SubmitId);
 
-           if (Submission.reviewer1 == null)
-            {
-                Submission.reviewer1 = User.Identity.GetUserId();
-                Submission.NumReviews = Submission.NumReviews + 1;
-            }
-            else
-            {
-                Submission.reviewer2 = User.Identity.GetUserId();
-                Submission.NumReviews = Submission.NumReviews + 1;
-            }
-
-            DocumentSession.Store(Submission);
-
-            DocumentSession.SaveChanges();
             ReviewInput input = new ReviewInput()
             {
                 AssignmentName = Submission.AssignmentName,
@@ -166,6 +155,11 @@ namespace Proto2.Areas.Reviewer.Controllers
                 StoryTitle = Submission.StoryTitle,
                 Story = new HtmlString(Submission.Story),
                 KeyList = new List<SelectListItem>()
+                {
+                            new SelectListItem() {Text = "0", Value = "0"},
+                            new SelectListItem() {Text = "1", Value = "1"},
+                 },
+                 KeyList2 = new List<SelectListItem>()
                 {
                             new SelectListItem() {Text = "0", Value = "0"},
                             new SelectListItem() {Text = "1", Value = "1"},
@@ -191,19 +185,40 @@ namespace Proto2.Areas.Reviewer.Controllers
                 //AssignmentName = input.AssignmentName,
                 //AssignmentDescription = input.AssignmentDescription,
                 SubmitId = input.SubmitId,
-                ScorePlot = input.ScorePlot,
+                ScoreWhoStory = input.ScoreWhoStory,
                 Comments = input.Comments,
-                ScoreCharacter = input.ScoreCharacter,
-                ScoreSetting = input.ScoreSetting,
+                ScoreWhatStory = input.ScoreWhatStory,
+                ScoreWhenStory = input.ScoreWhenStory,
+                ScoreWhereStory = input.ScoreWhereStory,
+                ScoreWhatNext = input.ScoreWhatNext,
+                ScoreHowStory = input.ScoreHowStory,
+                ScoreCharacterFeel = input.ScoreCharacterFeel,
+                ScoreOverall = input.ScoreOverall,
                 Username = User.Identity.GetUserId(),               
             };
 
             DocumentSession.Store(newReview);
 
             DocumentSession.SaveChanges();
+            var Submission = DocumentSession.Load<SubmissionView>(input.SubmitId);
+
+            if (Submission.reviewer1 == null)
+            {
+                Submission.reviewer1 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
+            }
+            else
+            {
+                Submission.reviewer2 = User.Identity.GetUserId();
+                Submission.NumReviews = Submission.NumReviews + 1;
+            }
+
+            DocumentSession.Store(Submission);
+
+            DocumentSession.SaveChanges();
 
             // Return to the page to choose another review, or return to class
-            return RedirectToAction("Index");
+            return View("Success");
             //This will respond to a fom being completed and will eventually be saved to a database
             //This could return a view of all past reviews which would then include the submitted review
             //Or take them to a reviewer conformation page, I will assume the former for now.
@@ -261,9 +276,9 @@ namespace Proto2.Areas.Reviewer.Controllers
                 //ReviewerName = "Uidentfied reviewer",
                 //ReviewerNames = new string[] { "Dr. Pompus" },
                 Comment = input.Comments,
-                ScoreCharacter = input.ScoreCharacter,
-                ScorePlot = input.ScorePlot,
-                ScoreSetting = input.ScoreSetting,
+               // ScoreCharacter = input.ScoreCharacter,
+                //ScorePlot = input.ScorePlot,
+                //ScoreSetting = input.ScoreSetting,
                 //  OwnerUserId = input.OwnerUserId,
                 PublishDate = DateTime.UtcNow
             };
@@ -319,7 +334,7 @@ namespace Proto2.Areas.Reviewer.Controllers
 
         public ActionResult RegisterasTeacher()
         {
-            if (UserManager.IsInRole(User.Identity.GetUserId(), ProtoRoles.Teacher))
+            if (UserManager.IsInRole(User.Identity.GetUserId(), WriteItUpRoles.Teacher))
             {
                 return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
 
@@ -348,14 +363,20 @@ namespace Proto2.Areas.Reviewer.Controllers
                 Classes = new List<Guid>()
             };
             DocumentSession.Store(teacher);
-            UserManager.AddToRole(User.Identity.GetUserId(), ProtoRoles.Teacher);
+            UserManager.AddToRole(User.Identity.GetUserId(), WriteItUpRoles.Teacher);
             DocumentSession.Delete<AddPassView>(input.TeacherCode);
             DocumentSession.SaveChanges();
-            while (!User.IsInRole(ProtoRoles.Teacher))
+
+          
+            while (true)
             {
+                var tmpUser = DocumentSession.Load<WriteItUpUser>(User.Identity.GetUserId());
+                if (tmpUser.Roles.Contains(WriteItUpRoles.Teacher))
+                    break;
             }
 
-            return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
+            return RedirectToAction("LogOff", "Account", new {area = "Account"});
+            // return RedirectToAction("Index", "TeacherHome", new { area = "Teacher" });
         }
     }
 }

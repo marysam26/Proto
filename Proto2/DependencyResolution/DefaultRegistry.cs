@@ -15,7 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Proto2.DependencyResolution {
+namespace WriteItUp2.DependencyResolution {
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
 	
